@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:layout_editor_absoluteY="81dp">
+
+    <TextView
+        android:gravity="center_horizontal|center_vertical"
+        android:id="@+id/ticketPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ticketPrice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/fromStation"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/trainCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/trainCode"
+        app:layout_constraintBottom_toTopOf="@+id/needTime"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/startTime"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="25" />
+
+
+    <TextView
+        android:id="@+id/startTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/startTime"
+        app:layout_constraintLeft_toRightOf="@+id/trainCode"
+        app:layout_constraintRight_toLeftOf="@+id/fromStation"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="25" />
+
+    <TextView
+        android:id="@+id/fromStation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/fromStation"
+        app:layout_constraintLeft_toRightOf="@+id/startTime"
+        app:layout_constraintRight_toLeftOf="@+id/ticketPrice"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="25" />
+
+
+    <TextView
+        android:id="@+id/needTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/needTime"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trainCode"
+        app:layout_constraintVertical_weight="25" />
+
+    <TextView
+        android:id="@+id/endTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/startTime"
+        app:layout_constraintLeft_toRightOf="@+id/trainCode"
+        app:layout_constraintRight_toLeftOf="@+id/fromStation"
+        app:layout_constraintTop_toBottomOf="@+id/trainCode"
+        app:layout_constraintVertical_weight="25" />
+
+    <TextView
+        android:id="@+id/toStation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/fromStation"
+        app:layout_constraintLeft_toRightOf="@+id/endTime"
+        app:layout_constraintRight_toLeftOf="@+id/ticketPrice"
+        app:layout_constraintTop_toBottomOf="@+id/trainCode"
+        app:layout_constraintVertical_weight="25" />
+
+
+</android.support.constraint.ConstraintLayout>

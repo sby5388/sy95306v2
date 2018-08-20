@@ -1,0 +1,65 @@
+package com.by5388.sy95306v2.fragment.shanghai.number.presenter;
+
+import com.by5388.sy95306v2.bean.shanghai.InfoBeanTrainNo;
+import com.by5388.sy95306v2.bean.shanghai.ShanghaiTrainNumber;
+import com.by5388.sy95306v2.fragment.shanghai.number.model.INumberModel;
+import com.by5388.sy95306v2.fragment.shanghai.number.model.NumberModel;
+import com.by5388.sy95306v2.fragment.shanghai.number.view.INumberView;
+
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
+/**
+ * @author by5388  on 2018/8/9.
+ */
+
+public class NumberPresenter implements INumberPresenter {
+
+    private INumberModel model;
+    private INumberView view;
+    private Consumer<List<ShanghaiTrainNumber>> consumer;
+    private Consumer<Throwable> throwableConsumer;
+    private Disposable disposable;
+
+    public NumberPresenter(INumberView view) {
+        this.view = view;
+        this.model = new NumberModel();
+        consumer = new Consumer<List<ShanghaiTrainNumber>>() {
+            @Override
+            public void accept(List<ShanghaiTrainNumber> numbers) {
+                if (null == numbers || numbers.isEmpty()) {
+                    view.showError("未查到相关信息");
+                } else {
+                    view.updateList(numbers);
+                }
+                view.finishQuery();
+            }
+        };
+        throwableConsumer = new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) {
+                view.showError(throwable.getMessage());
+            }
+        };
+    }
+
+    @Override
+    public void search(String trainCode, String trainDate) {
+        view.startQuery();
+        disposable = model.getTrainNumber(new InfoBeanTrainNo(trainCode, trainDate))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(consumer, throwableConsumer);
+    }
+
+    @Override
+    public void unSubscribe() {
+        if (null != disposable) {
+            disposable.dispose();
+        }
+    }
+}
