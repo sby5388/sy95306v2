@@ -7,7 +7,7 @@ import java.util.List;
  * @author by5388  on 2018/7/28.
  */
 
-public class StaticData {
+class StaticData {
     static final Integer[] number = {
             1, 2, 3, 4, 5, 6, 7, 8, 9
     };

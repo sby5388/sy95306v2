@@ -42,7 +42,6 @@ public class StartActivity extends BaseActivity implements IStartView {
      */
 
     private IStartPresenter presenter;
-    private ConstraintLayout startProgressBar;
     private AlertDialog updateAlertDialog;
 
     private TextView textViewAllCount, textViewCurrentCount;
@@ -58,7 +57,7 @@ public class StartActivity extends BaseActivity implements IStartView {
     @Override
     protected void initView() {
         // TODO: 2018/8/9  启动页面不好看
-        startProgressBar = findViewById(R.id.lly_progress_bar);
+        ConstraintLayout startProgressBar = findViewById(R.id.lly_progress_bar);
     }
 
     @Override
@@ -157,14 +156,11 @@ public class StartActivity extends BaseActivity implements IStartView {
                 .create();
         //设置对话框外点击不起作用：保持对话框存在
         updateAlertDialog.setCancelable(false);
-        updateAlertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                Button positionButton = updateAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                Button negativeButton = updateAlertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-                positionButton.setEnabled(false);
-                negativeButton.setEnabled(false);
-            }
+        updateAlertDialog.setOnShowListener(dialog -> {
+            Button positionButton = updateAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            Button negativeButton = updateAlertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+            positionButton.setEnabled(false);
+            negativeButton.setEnabled(false);
         });
         updateAlertDialog.show();
 
@@ -196,22 +192,19 @@ public class StartActivity extends BaseActivity implements IStartView {
                 .create();
         //设置对话框外点击不起作用：保持对话框存在
         updateAlertDialog.setCancelable(false);
-        updateAlertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                Button positionButton = updateAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                Button negativeButton = updateAlertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-                positionButton.setOnClickListener(v -> {
-                    presenter.startUpdate();
-                    positionButton.setEnabled(false);
+        updateAlertDialog.setOnShowListener(dialog -> {
+            Button positionButton = updateAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            Button negativeButton = updateAlertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+            positionButton.setOnClickListener(v -> {
+                presenter.startUpdate();
+                positionButton.setEnabled(false);
 
-                });
-                negativeButton.setOnClickListener(v -> {
-                    updateAlertDialog.dismiss();
+            });
+            negativeButton.setOnClickListener(v -> {
+                updateAlertDialog.dismiss();
 
-                    toMainActivity();
-                });
-            }
+                toMainActivity();
+            });
         });
 
         updateAlertDialog.show();

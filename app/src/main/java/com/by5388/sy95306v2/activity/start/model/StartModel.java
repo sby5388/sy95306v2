@@ -52,8 +52,8 @@ public class StartModel implements IStartModel {
      */
     private static String defaultStationVersion = "0.0";
     private String getVersion = "";
-    private SettingSharedPreferences preferences;
-    private IShenYangStationDb service;
+    private final SettingSharedPreferences preferences;
+    private final IShenYangStationDb service;
 
 
     public StartModel() {
@@ -132,21 +132,18 @@ public class StartModel implements IStartModel {
 
     @Override
     public Observable<Integer> insertProgressBar() {
-        return Observable.create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(ObservableEmitter<Integer> emitter) {
-                if (!emitter.isDisposed()) {
-                    List<Station> stations = getCityList(stationListFile);
-                    for (Station station : stations) {
-                        service.addStation(station);
-                        currentUpdateCount++;
-                        if (currentUpdateCount % 100 == 0) {
-                            emitter.onNext(currentUpdateCount);
-                        }
+        return Observable.create(emitter -> {
+            if (!emitter.isDisposed()) {
+                List<Station> stations = getCityList(stationListFile);
+                for (Station station : stations) {
+                    service.addStation(station);
+                    currentUpdateCount++;
+                    if (currentUpdateCount % 100 == 0) {
+                        emitter.onNext(currentUpdateCount);
                     }
-                    emitter.onNext(currentUpdateCount);
-                    emitter.onComplete();
                 }
+                emitter.onNext(currentUpdateCount);
+                emitter.onComplete();
             }
         });
     }
@@ -155,24 +152,21 @@ public class StartModel implements IStartModel {
     public Observable<Integer> getStationCount() {
         final String serverPath = "https://kyfw.12306.cn";
         final String stationVersionPath = FILE_NAME + getVersion;
-        return Observable.create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
-                if (!emitter.isDisposed()) {
-                    URL url = new URL(serverPath + stationVersionPath);
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setConnectTimeout(TIME_OUT);
-                    connection.setRequestMethod("GET");
-                    if (successCode == connection.getResponseCode()) {
-                        InputStream inputStream = connection.getInputStream();
-                        String stationVersionName = getCityList(inputStream);
-                        int count = getStationCount2(stationVersionName);
-                        emitter.onNext(count);
-                    } else {
-                        emitter.onError(new NetworkErrorException());
-                    }
-                    emitter.onComplete();
+        return Observable.create(emitter -> {
+            if (!emitter.isDisposed()) {
+                URL url = new URL(serverPath + stationVersionPath);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setConnectTimeout(TIME_OUT);
+                connection.setRequestMethod("GET");
+                if (successCode == connection.getResponseCode()) {
+                    InputStream inputStream = connection.getInputStream();
+                    String stationVersionName = getCityList(inputStream);
+                    int count = getStationCount2(stationVersionName);
+                    emitter.onNext(count);
+                } else {
+                    emitter.onError(new NetworkErrorException());
                 }
+                emitter.onComplete();
             }
         });
     }
@@ -181,34 +175,28 @@ public class StartModel implements IStartModel {
     public Observable<Boolean> isNeedUpdate() {
         double currentVersion = getCurrentVersion();
         Log.d(TAG, "isNeedUpdate: 当前版本：" + currentVersion);
-        return Observable.create(new ObservableOnSubscribe<Double>() {
-            @Override
-            public void subscribe(ObservableEmitter<Double> emitter) throws Exception {
-                if (!emitter.isDisposed()) {
-                    URL url = new URL(path);
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setConnectTimeout(TIME_OUT);
-                    connection.setRequestMethod("GET");
-                    if (successCode == connection.getResponseCode()) {
-                        InputStream inputStream = connection.getInputStream();
-                        String stationVersion = jsonToString(inputStream);
-                        getVersion = stationVersion;
-                        emitter.onNext(Double.parseDouble(stationVersion));
-                    } else {
-                        emitter.onNext(currentVersion);
-                    }
-                    emitter.onComplete();
+        return Observable.create((ObservableOnSubscribe<Double>) emitter -> {
+            if (!emitter.isDisposed()) {
+                URL url = new URL(path);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setConnectTimeout(TIME_OUT);
+                connection.setRequestMethod("GET");
+                if (successCode == connection.getResponseCode()) {
+                    InputStream inputStream = connection.getInputStream();
+                    String stationVersion = jsonToString(inputStream);
+                    getVersion = stationVersion;
+                    emitter.onNext(Double.parseDouble(stationVersion));
+                } else {
+                    emitter.onNext(currentVersion);
                 }
+                emitter.onComplete();
             }
-        }).map(new Function<Double, Boolean>() {
-            @Override
-            public Boolean apply(Double aDouble) {
-                Log.d(TAG, "apply: 新的版本：" + aDouble);
-                if (aDouble > currentVersion) {
-                    defaultStationVersion = String.valueOf(aDouble);
-                }
-                return aDouble > currentVersion;
+        }).map(aDouble -> {
+            Log.d(TAG, "apply: 新的版本：" + aDouble);
+            if (aDouble > currentVersion) {
+                defaultStationVersion = String.valueOf(aDouble);
             }
+            return aDouble > currentVersion;
         });
 
 

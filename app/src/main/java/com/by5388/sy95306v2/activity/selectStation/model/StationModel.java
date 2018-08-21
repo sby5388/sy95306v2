@@ -31,7 +31,7 @@ public class StationModel implements IStationModel {
      */
     private final static String REG_ABC = "^[a-zA-Z]*$";
 
-    private IShenYangStationDb dataBaseService;
+    private final IShenYangStationDb dataBaseService;
 
     public StationModel() {
         this.dataBaseService = DataBaseTempAction.getInstance();
@@ -65,8 +65,7 @@ public class StationModel implements IStationModel {
             stations.addAll(nameFirst);
             stations.addAll(nameEn);
             stations.addAll(nameLower);
-            List<Station> back = new ArrayList<>();
-            back.addAll(stations);
+            List<Station> back = new ArrayList<>(stations);
             return Observable.just(back);
         }
         //中文

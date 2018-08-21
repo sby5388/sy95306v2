@@ -29,7 +29,7 @@ public class StationAdapter extends BaseAdapter {
      * 车站列表
      */
     private List<Station> stations;
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
     public StationAdapter(Context context, List<Station> stations) {
         this.stations = stations;

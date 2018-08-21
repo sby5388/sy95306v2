@@ -20,13 +20,13 @@ import java.util.List;
  */
 public class YpAdapter extends BaseAdapter {
 
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     private List<IYp> yuPiaoData;
-    private String rw;
-    private String yw;
-    private String rz;
-    private String yz;
-    private String wz;
+    private final String rw;
+    private final String yw;
+    private final String rz;
+    private final String yz;
+    private final String wz;
     private final static String EMPTY = "--";
     private final static String EMPTY2 = "无";
 
@@ -111,19 +111,23 @@ public class YpAdapter extends BaseAdapter {
         } else {
             holder.wz.setText(String.format(wz, mWz));
         }
-
-
-//        holder.rw.setText(data.getRw());
-//        holder.yw.setText(data.getYw());
-//        holder.rz.setText(data.getRz());
-//        holder.yz.setText(data.getYz());
-//        holder.wz.setText(data.getWz());
         holder.qt.setText(data.getQt());
         return convertView;
     }
 
     private static class ViewHolder {
-        TextView code, fromStation, toStation, startTime, endTime, speedTime, rw, yw, rz, yz, qt, wz;
+        final TextView code;
+        final TextView fromStation;
+        final TextView toStation;
+        final TextView startTime;
+        final TextView endTime;
+        final TextView speedTime;
+        final TextView rw;
+        final TextView yw;
+        final TextView rz;
+        final TextView yz;
+        final TextView qt;
+        final TextView wz;
 
         ViewHolder(View view) {
             this.code = view.findViewById(R.id.code);

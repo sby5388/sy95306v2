@@ -20,7 +20,7 @@ public class DataBaseTempAction implements IShenYangStationDb, ICdScreenStationD
     private static final int SUCCESS = 1;
     private static final int FAIL = 0;
 
-    private SQLiteDatabase db;
+    private final SQLiteDatabase db;
 
     private DataBaseTempAction() {
         MyDataBaseHelper helper = new MyDataBaseHelper(App.getInstance());
@@ -203,6 +203,6 @@ public class DataBaseTempAction implements IShenYangStationDb, ICdScreenStationD
     }
 
     private static class SingletonHandler {
-        private static DataBaseTempAction instance = new DataBaseTempAction();
+        private static final DataBaseTempAction instance = new DataBaseTempAction();
     }
 }

@@ -105,7 +105,7 @@ public class Tools {
         return stopTime + "分";
     }
 
-    public static int calculatorTime(String time) {
+    private static int calculatorTime(String time) {
         int hour = Integer.parseInt(time.substring(0, 2));
         int minute = Integer.parseInt(time.substring(2, 4));
         return hour * MINUTE_OF_HOUR + minute;

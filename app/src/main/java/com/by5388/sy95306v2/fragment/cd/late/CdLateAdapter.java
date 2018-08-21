@@ -15,11 +15,11 @@ import java.util.List;
 /**
  * @author by5388  on 2018/8/19.
  */
-public class CdLateAdapter extends BaseAdapter {
+class CdLateAdapter extends BaseAdapter {
     private static final String START_STATION = "0";
 
     private List<CdTrainAllNodeBean> beans;
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
 
     CdLateAdapter(Context context, List<CdTrainAllNodeBean> beans) {
@@ -67,7 +67,11 @@ public class CdLateAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        TextView stayTime, stationName, arriveTime, leaveTime, showStatus;
+        final TextView stayTime;
+        final TextView stationName;
+        final TextView arriveTime;
+        final TextView leaveTime;
+        final TextView showStatus;
 
         ViewHolder(View view) {
             stayTime = view.findViewById(R.id.stayTime);

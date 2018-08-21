@@ -8,7 +8,7 @@ import android.widget.DatePicker;
  */
 
 public class MyListener implements DatePickerDialog.OnDateSetListener {
-    private UpdateDate updateDate;
+    private final UpdateDate updateDate;
 
     public MyListener(UpdateDate updateDate) {
         this.updateDate = updateDate;

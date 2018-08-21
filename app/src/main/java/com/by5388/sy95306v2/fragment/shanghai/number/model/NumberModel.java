@@ -17,7 +17,7 @@ import retrofit2.Retrofit;
 
 public class NumberModel implements INumberModel {
 
-    private ShanghaiService shanghaiService;
+    private final ShanghaiService shanghaiService;
 
 
     public NumberModel() {

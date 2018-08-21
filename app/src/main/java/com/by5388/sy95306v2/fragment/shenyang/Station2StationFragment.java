@@ -34,19 +34,19 @@ public class Station2StationFragment extends BaseShenYangFragment implements Upd
     public static final String DATA_BUNDLE = "bundle";
 
     public static final String DATA_STATION_CODE = "code";
-    public static final int START_STATION_CODE = 1;
-    public static final int END_STATION_CODE = 2;
+    private static final int START_STATION_CODE = 1;
+    private static final int END_STATION_CODE = 2;
 
-    public static final String FIRST_CITY = "北京";
-    public static final String SECOND_CITY = "上海";
+    private static final String FIRST_CITY = "北京";
+    private static final String SECOND_CITY = "上海";
 
     /**
      * 请求成功
      */
     public static final int SUCCESS_CODE = 100;
     public static final String DIALOG_TITLE = "列车车型";
-    Calendar calendar;
-    MyListener dateListener;
+    private Calendar calendar;
+    private MyListener dateListener;
     private TextView startCity, endCity;
     private Button buttonSelectType, buttonSelectDate;
     private Station fromStation, toStation;

@@ -4,8 +4,8 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.by5388.sy95306v2.bean.shenyang.TrainDetail;
-import com.by5388.sy95306v2.net.shenYang.SyNetTools;
-import com.by5388.sy95306v2.net.shenYang.SyService;
+import com.by5388.sy95306v2.net.sy.SyNetTools;
+import com.by5388.sy95306v2.net.sy.SyService;
 
 import java.util.HashSet;
 import java.util.List;
@@ -19,7 +19,7 @@ import retrofit2.Retrofit;
  */
 
 public class DetailModel implements IDetailModel {
-    private SyService trainNumberService;
+    private final SyService trainNumberService;
 
     public DetailModel() {
         Retrofit retrofit = new SyNetTools().getRetrofit();

@@ -27,14 +27,14 @@ import static android.widget.AbsListView.CHOICE_MODE_MULTIPLE;
 
 public class TrainFilterDialog implements ITrainFilterView {
 
-    private Context context;
-    private AlertDialog dialog;
+    private final Context context;
+    private final AlertDialog dialog;
     private View mainView;
     private ListView listView;
     private List<FilterBean> beans;
     private ArrayAdapter<FilterBean> arrayAdapter;
     private List<Integer> selected;
-    private UpdateFilterDataCallBack callBack;
+    private final UpdateFilterDataCallBack callBack;
 
 
     public TrainFilterDialog(Context context, UpdateFilterDataCallBack callBack) {
@@ -47,12 +47,7 @@ public class TrainFilterDialog implements ITrainFilterView {
                 .setTitle(R.string.title_train_type)
                 .setView(mainView)
                 .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        isSingle();
-                    }
-                })
+                .setPositiveButton(R.string.ok, (dialog, which) -> isSingle())
                 .create();
     }
 

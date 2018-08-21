@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class SettingSharedPreferences implements ISettingSharedPreferences {
     private static final String FILE_NAME = "by5388";
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     private SettingSharedPreferences() {
         sharedPreferences = App.getInstance().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
@@ -87,6 +87,6 @@ public class SettingSharedPreferences implements ISettingSharedPreferences {
     }
 
     private static class SingletonHandler {
-        private static SettingSharedPreferences instance = new SettingSharedPreferences();
+        private static final SettingSharedPreferences instance = new SettingSharedPreferences();
     }
 }

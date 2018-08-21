@@ -71,7 +71,7 @@
     <string name="all_price">%1$s %2$s %3$s %4$s</string>
     <string name="delay_status">状态：暂无正晚点信息</string>
     <string name="stationNum">序号</string>
-    <string name="stationName">车站名</string>
+    <string name="stationName">车站</string>
     <string name="endTime">到时</string>
     <string name="startTime">发车</string>
     <string name="stayTime">停留</string>
@@ -103,6 +103,9 @@
     <string name="expect_leave">图定发站</string>
     <string name="cd_late">正晚点</string>
     <string name="check">校验</string>
+    <string name="zhengDian">正点</string>
+    <string name="expect_arrive_time">预计到达时间</string>
+    <string name="wan_dian">晚点</string>
 
 
 </resources>

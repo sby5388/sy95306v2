@@ -19,11 +19,11 @@ import java.util.Map;
  * @author by5388  on 2018/8/10.
  */
 
-public class P2pAdapter extends BaseAdapter {
+class P2pAdapter extends BaseAdapter {
     public static final String TAG = "P2pAdapter";
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     private List<ShanghaiTrainP2P> trainP2PS;
-    private Map<String, String> priceCache;
+    private final Map<String, String> priceCache;
 
     P2pAdapter(Context context, List<ShanghaiTrainP2P> trainP2PS) {
         this.inflater = LayoutInflater.from(context);
@@ -99,13 +99,13 @@ public class P2pAdapter extends BaseAdapter {
     }
 
     private static class P2pViewHolder {
-        private TextView trainCode;
-        private TextView fromStation;
-        private TextView startTime;
-        private TextView toStation;
-        private TextView endTime;
-        private TextView needTime;
-        private TextView ticketPrice;
+        private final TextView trainCode;
+        private final TextView fromStation;
+        private final TextView startTime;
+        private final TextView toStation;
+        private final TextView endTime;
+        private final TextView needTime;
+        private final TextView ticketPrice;
 
         P2pViewHolder(View view) {
             trainCode = view.findViewById(R.id.trainCode);

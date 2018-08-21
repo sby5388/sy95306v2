@@ -3,11 +3,12 @@ package com.by5388.sy95306v2.net.cd.screen;
 import com.by5388.sy95306v2.bean.cd.screen.ScreenArriveDetail;
 import com.by5388.sy95306v2.bean.cd.screen.ScreenLeaveDetail;
 import com.by5388.sy95306v2.bean.cd.screen.ScreenStation;
+
+import java.util.List;
+
 import io.reactivex.Observable;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-
-import java.util.List;
 
 /**
  * 车站大屏幕
@@ -27,7 +28,7 @@ public interface CdScreenService {
      */
     String CODE = "code";
     /**
-     * 车次+日期，String[]
+     * 车次+日期、等多个组合，非固定，String[]
      */
     String SQL = "sql";
     /**

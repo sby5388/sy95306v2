@@ -18,7 +18,7 @@ import okhttp3.ResponseBody;
  * @author by5388  on 2018/8/14.
  */
 public class TzQuery {
-    private static LateService service = new LateNetTools().getRetrofit().create(LateService.class);
+    private static final LateService service = new LateNetTools().getRetrofit().create(LateService.class);
     /**
      * 到达
      */
@@ -43,20 +43,17 @@ public class TzQuery {
         }
         String stationCode = getCode(stationName);
         return service.queryLate(stationName, code, queryType, date, stationCode, System.currentTimeMillis())
-                .flatMap(new Function<ResponseBody, ObservableSource<String>>() {
-                    @Override
-                    public ObservableSource<String> apply(ResponseBody responseBody) {
-                        // TODO: 2018/8/14 对字符串进行解析:早点、晚点、始发、终到等情况
-                        String message = "";
-                        try {
-                            message = responseBody.string();
-                            message = getRealMessage(message.trim());
-                        } catch (IOException e) {
-                            message = "";
-                        }
-
-                        return Observable.just(message);
+                .flatMap((Function<ResponseBody, ObservableSource<String>>) responseBody -> {
+                    // TODO: 2018/8/14 对字符串进行解析:早点、晚点、始发、终到等情况
+                    String message = "";
+                    try {
+                        message = responseBody.string();
+                        message = getRealMessage(message.trim());
+                    } catch (IOException e) {
+                        message = "";
                     }
+
+                    return Observable.just(message);
                 });
     }
 

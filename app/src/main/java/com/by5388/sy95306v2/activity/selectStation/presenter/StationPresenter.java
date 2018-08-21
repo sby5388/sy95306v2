@@ -21,14 +21,13 @@ import io.reactivex.schedulers.Schedulers;
 
 public class StationPresenter implements IStationPresenter {
 
-    private IStationView view;
-    private IStationModel model;
+    private final IStationModel model;
     private Disposable disposable;
-    private Consumer<List<Station>> consumer;
-    private Consumer<Throwable> throwableConsumer;
+    private final Consumer<List<Station>> consumer;
+    private final Consumer<Throwable> throwableConsumer;
 
     public StationPresenter(IStationView view) {
-        this.view = view;
+        IStationView view1 = view;
         this.model = new StationModel();
         consumer = stations -> {
             if (stations == null || stations.isEmpty()) {
@@ -37,9 +36,7 @@ public class StationPresenter implements IStationPresenter {
             }
             view.setStations(stations);
         };
-        throwableConsumer = throwable -> {
-            view.showErrorMessage(throwable.getLocalizedMessage());
-        };
+        throwableConsumer = throwable -> view.showErrorMessage(throwable.getLocalizedMessage());
 
     }
 

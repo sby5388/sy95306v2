@@ -1,6 +1,7 @@
 package com.by5388.sy95306v2.net.gz;
 
-import com.by5388.sy95306v2.bean.guangzhou.ResultData;
+import com.by5388.sy95306v2.bean.guangzhou.GzResultData;
+import com.by5388.sy95306v2.bean.guangzhou.late.GzLateDataBean;
 import com.by5388.sy95306v2.bean.guangzhou.station.DataBeanP2P;
 import com.by5388.sy95306v2.bean.guangzhou.station.TrainsBean;
 
@@ -26,6 +27,10 @@ public interface GzService {
      * 车次查询接口
      */
     String GET_TRAIN_BY_NO = "getTrainByNo";
+    /**
+     * 车次正晚点
+     */
+    String GET_TRAIN_LATE = "getTrainZwd";
 
     /**
      * 查询车次
@@ -56,7 +61,7 @@ public interface GzService {
      * @return 停站信息
      */
     @GET(GET_TRAIN_BY_NO)
-    Observable<ResultData<List<TrainsBean>>> getTrainByNo(@Query(TRAIN_NO) String trainNo, @Query(DATE) String date);
+    Observable<GzResultData<List<TrainsBean>>> getTrainByNo(@Query(TRAIN_NO) String trainNo, @Query(DATE) String date);
 
     /**
      * 站站查询
@@ -68,8 +73,17 @@ public interface GzService {
      * @return 车次信息
      */
     @GET(GET_TRAIN_BY_STATION)
-    Observable<ResultData<DataBeanP2P>> getTrainByStation(@Query(FROM_STATION) String fromStation,
-                                                          @Query(TO_STATION) String toStation,
-                                                          @Query(DATE) String date);
+    Observable<GzResultData<DataBeanP2P>> getTrainByStation(@Query(FROM_STATION) String fromStation,
+                                                            @Query(TO_STATION) String toStation,
+                                                            @Query(DATE) String date);
+
+    /**
+     * 管内车次正晚点
+     *
+     * @param trainNo 车次
+     * @return 数据
+     */
+    @GET(GET_TRAIN_LATE)
+    Observable<GzResultData<List<GzLateDataBean>>> getTrainLate(@Query(TRAIN_NO) String trainNo);
 
 }

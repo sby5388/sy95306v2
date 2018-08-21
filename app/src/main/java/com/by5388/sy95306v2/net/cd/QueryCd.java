@@ -1,6 +1,8 @@
 package com.by5388.sy95306v2.net.cd;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.by5388.sy95306v2.bean.cd.late.CdLateDetail;
 import com.by5388.sy95306v2.bean.cd.late.CdLateResultTop;
@@ -20,7 +22,6 @@ import com.by5388.sy95306v2.net.cd.yp.CdYpNetTools;
 import com.by5388.sy95306v2.net.cd.yp.CdYpService;
 import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,10 +38,11 @@ import okhttp3.ResponseBody;
  * @date 2018/8/16 11:12
  */
 public class QueryCd implements ICdQuery {
+    private static final String TAG = "QueryCd";
     private CdYpService yPService;
     private CdLateService lateService;
     private CdScreenService screenService;
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
     private static final String[] LOGIN_PARAM = {"10.192.111.79", "hhs", "hhs"};
     private final String userMessage = gson.toJson(Arrays.asList(LOGIN_PARAM));
     private final String emptyJson = gson.toJson(new ArrayList<>());
@@ -96,26 +98,27 @@ public class QueryCd implements ICdQuery {
         }
         final String queryType = "QB";
         return yPService.queryYp(fromStation, toStation, date, queryType)
-                .flatMap(new Function<CdYpTop, ObservableSource<List<CdYpDetailBean>>>() {
-                    @Override
-                    public ObservableSource<List<CdYpDetailBean>> apply(CdYpTop cdYpTop) {
-                        if (null == cdYpTop) {
-                            System.err.println("cdYpTop");
-                            return Observable.just(new ArrayList<>());
-                        }
-                        CdAllResultDataBean dataBean = cdYpTop.getData();
-                        if (null == dataBean) {
-                            System.err.println("dataBean");
-                            return Observable.just(new ArrayList<>());
-                        }
-                        List<CdYpDetailBean> list = dataBean.getDatas();
-                        if (null == list || list.isEmpty()) {
-                            System.err.println("list");
-                            return Observable.just(new ArrayList<>());
-                        }
-                        return Observable.just(list);
+                .flatMap((Function<CdYpTop, ObservableSource<List<CdYpDetailBean>>>) cdYpTop -> {
+                    if (null == cdYpTop) {
+                        println("cdYpTop");
+                        return Observable.just(new ArrayList<>());
                     }
+                    CdAllResultDataBean dataBean = cdYpTop.getData();
+                    if (null == dataBean) {
+                        println("dataBean");
+                        return Observable.just(new ArrayList<>());
+                    }
+                    List<CdYpDetailBean> list = dataBean.getDatas();
+                    if (null == list || list.isEmpty()) {
+                        println("list");
+                        return Observable.just(new ArrayList<>());
+                    }
+                    return Observable.just(list);
                 });
+    }
+
+    private static void println(String tip) {
+        Log.e(TAG, "println: " + tip);
     }
 
     @Override
@@ -129,18 +132,13 @@ public class QueryCd implements ICdQuery {
         final List<String> params = Arrays.asList(trainCode, date);
         return lateService
                 .lateTimeCCStation(typeCode, gson.toJson(params), emptyJson, emptyJson, userMessage)
-                .flatMap(new Function<ResponseBody, ObservableSource<List<CdLateStation>>>() {
-                    @Override
-                    public ObservableSource<List<CdLateStation>> apply(ResponseBody responseBody) throws IOException {
-                        String result = responseBody.string().trim();
-                        //TODO 使用TextUtils.isEmpty()
-                        if (result.length() == 0) {
-                            return Observable.just(new ArrayList<>());
-                        }
-                        return Observable.just(getCdStationList(result));
+                .flatMap((Function<ResponseBody, ObservableSource<List<CdLateStation>>>) responseBody -> {
+                    String result = responseBody.string().trim();
+                    if (TextUtils.isEmpty(result)) {
+                        return Observable.just(new ArrayList<>());
                     }
+                    return Observable.just(getCdStationList(result));
                 });
-
     }
 
     @Override
@@ -157,25 +155,20 @@ public class QueryCd implements ICdQuery {
         params.add(stationName);
         return lateService
                 .lateTimeCCDetail(typeCode, gson.toJson(params), emptyJson, emptyJson, userMessage)
-                .flatMap(new Function<CdLateResultTop, ObservableSource<List<CdTrainAllNodeBean>>>() {
-                    @Override
-                    public ObservableSource<List<CdTrainAllNodeBean>> apply(CdLateResultTop top) throws Exception {
-                        if (null == top || !top.isStatus()) {
-                            //TODO loge
+                .flatMap((Function<CdLateResultTop, ObservableSource<List<CdTrainAllNodeBean>>>) top -> {
+                    if (null == top || !top.isStatus()) {
+                        println("empty");
+                        return Observable.just(new ArrayList<>());
+                    }
+                    try {
+                        CdLateDetail detail = gson.fromJson(top.getData(), CdLateDetail.class);
+                        if (!detail.isStatus()) {
                             return Observable.just(new ArrayList<>());
                         }
-                        try {
-                            CdLateDetail detail = gson.fromJson(top.getData(), CdLateDetail.class);
-                            if (!detail.isStatus()) {
-                                return Observable.just(new ArrayList<>());
-                            }
-                            return Observable.just(detail.getTrainAllNode());
-                        } catch (ClassCastException e) {
-                            return Observable.just(new ArrayList<>());
-                        } catch (Exception e) {
-                            System.err.println(e.getLocalizedMessage());
-                            return Observable.just(new ArrayList<>());
-                        }
+                        return Observable.just(detail.getTrainAllNode());
+                    } catch (Exception e) {
+                        println(e.getLocalizedMessage());
+                        return Observable.just(new ArrayList<>());
                     }
                 });
     }
@@ -189,8 +182,14 @@ public class QueryCd implements ICdQuery {
         return screenService.getScreenStationList(typeCode, userMessage, emptyJson, emptyJson, emptyJson);
     }
 
-    //候乘：code=C50101&login=["10.192.111.79","hhs","hhs"]&sql=["20180817","GIW"]&where=[]&order=[]
-    //接站：code=C5054&login=["10.192.111.79","hhs","hhs"]&sql=["20180817","GIW"]&where=[]&order=[]
+    /**
+     * 候乘：code=C50101&login=["10.192.111.79","hhs","hhs"]&sql=["20180817","GIW"]&where=[]&order=[]
+     *
+     * @param stationCode 车站电报码
+     * @param date        日期
+     * @return 数据
+     */
+
     @Override
     public Observable<List<ScreenLeaveDetail>> getLeaveDetail(String stationCode, String date) {
         if (null == screenService) {
@@ -203,6 +202,13 @@ public class QueryCd implements ICdQuery {
         return screenService.getLeaveDetail(typeCode, userMessage, gson.toJson(params), emptyJson, emptyJson);
     }
 
+    /**
+     * 接站：code=C5054&login=["10.192.111.79","hhs","hhs"]&sql=["20180817","GIW"]&where=[]&order=[]
+     *
+     * @param stationCode 车站电报码
+     * @param date        日期
+     * @return 数据
+     */
     @Override
     public Observable<List<ScreenArriveDetail>> getArriveDetail(String stationCode, String date) {
         if (null == screenService) {

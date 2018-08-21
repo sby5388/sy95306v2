@@ -17,7 +17,7 @@ import retrofit2.Retrofit;
 
 public class P2pModel implements IP2pModel {
 
-    private ShanghaiService shanghaiService;
+    private final ShanghaiService shanghaiService;
 
 
     public P2pModel() {

@@ -11,28 +11,24 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.bean.tzyp.TzYpData;
+import com.by5388.sy95306v2.bean.IYp;
 import com.by5388.sy95306v2.fragment.MyListener;
 import com.by5388.sy95306v2.fragment.tz.BaseTzFragment;
-import com.by5388.sy95306v2.fragment.tz.api.GetPassCode;
-import com.by5388.sy95306v2.fragment.tz.api.IGetPassCodeService;
+import com.by5388.sy95306v2.fragment.tz.yupiao.temp.YpAdapter;
+import com.by5388.sy95306v2.fragment.tz.zzcx.persenter.ITzZzCxPresenter;
+import com.by5388.sy95306v2.fragment.tz.zzcx.persenter.TzZzCxPresenter;
+import com.by5388.sy95306v2.fragment.tz.zzcx.view.ITzZzCxView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
-
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author by5388  on 2018/8/17.
  */
-public class ZzCxFragment extends BaseTzFragment {
+public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
 
-    public static final String TAG = "GetTrainByStation";
+    private static final String TAG = "GetTrainByStation";
     private TextInputEditText fromStation, toStation, passCode;
     /**
      * 图片验证码
@@ -40,12 +36,11 @@ public class ZzCxFragment extends BaseTzFragment {
     private ImageView imageViewPassCode;
     private Button buttonSearch, buttonDate, buttonCheck;
     private ListView listView;
-    private final static List<TzYpData> EMPTY_LIST = new ArrayList<>();
-    MyListener dateListener;
-    Calendar calendar;
-    Random random;
-
-    IGetPassCodeService service;
+    private YpAdapter adapter;
+    private final static List<IYp> EMPTY_LIST = new ArrayList<>();
+    private MyListener dateListener;
+    private Calendar calendar;
+    private ITzZzCxPresenter presenter;
 
     public static ZzCxFragment newInstance() {
         ZzCxFragment fragment = new ZzCxFragment();
@@ -56,14 +51,16 @@ public class ZzCxFragment extends BaseTzFragment {
 
     @Override
     protected void initData() {
+        presenter = new TzZzCxPresenter(this);
         dateListener = new MyListener(this);
         calendar = Calendar.getInstance();
-        random = new Random();
+        adapter = new YpAdapter(getContext(), EMPTY_LIST);
     }
 
     @Override
     protected void loadData() {
         buttonDate.setText(getData(calendar));
+        listView.setAdapter(adapter);
     }
 
     @Override
@@ -93,7 +90,15 @@ public class ZzCxFragment extends BaseTzFragment {
      * 校验验证码
      */
     private void checkPassCode() {
-
+        final int codeLength = 4;
+        String code = passCode.getText().toString().trim();
+        Log.d(TAG, "checkPassCode: " + code);
+        if (codeLength != code.length()) {
+            passCode.setError("格式不对");
+            return;
+        }
+        buttonCheck.setEnabled(false);
+        presenter.checkPassCode(code);
     }
 
     /**
@@ -101,43 +106,7 @@ public class ZzCxFragment extends BaseTzFragment {
      */
     private void refreshPassCode() {
         imageViewPassCode.setEnabled(false);
-        // TODO: 2018/8/17
-        if (null == service) {
-            service = new GetPassCode();
-        }
-
-        double value = random.nextDouble();
-        Log.d(TAG, "refreshPassCode: " + value);
-        service.getBitmap(value)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Bitmap>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Bitmap bitmap) {
-                        if (null == bitmap) {
-                            return;
-                        }
-                        imageViewPassCode.setImageBitmap(bitmap);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(getContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        imageViewPassCode.setEnabled(true);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        imageViewPassCode.setEnabled(true);
-                    }
-                });
-
-
+        presenter.refreshPassCodeBitmap();
     }
 
     private void switchStations() {
@@ -147,13 +116,71 @@ public class ZzCxFragment extends BaseTzFragment {
     }
 
     private void searchTrainNumber() {
-
+        String date = buttonDate.getText().toString().trim();
+        String fromStation = this.fromStation.getText().toString().trim();
+        String toStation = this.toStation.getText().toString().trim();
+        String randCode = passCode.getText().toString().trim();
+        presenter.getTrainList(date, fromStation, toStation, randCode);
+        adapter.setYuPiaoData(EMPTY_LIST);
     }
 
     @Override
     public void updateView(int year, int month, int dayOfMonth) {
         calendar = Calendar.getInstance();
         calendar.set(year, month, dayOfMonth);
-        buttonDate.setText(String.valueOf(getData(calendar)));
+        buttonDate.setText(getData(calendar));
+    }
+
+    @Override
+    public void startQuery() {
+        imageViewPassCode.setEnabled(false);
+        //buttonSearch.setEnabled(false);
+        buttonCheck.setEnabled(false);
+    }
+
+    @Override
+    public void finishQuery() {
+        imageViewPassCode.setEnabled(true);
+        buttonCheck.setEnabled(true);
+    }
+
+    @Override
+    public void showError(String tip) {
+        Toast.makeText(getContext(), tip, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void updateList(List<IYp> dataBeans) {
+        if (null == dataBeans || dataBeans.isEmpty()) {
+            return;
+        }
+        adapter.setYuPiaoData(dataBeans);
+    }
+
+    @Override
+    public void updateCheckCodeBitmap(Bitmap bitmap) {
+        if (null == bitmap) {
+            return;
+        }
+        imageViewPassCode.setImageBitmap(bitmap);
+        imageViewPassCode.setEnabled(true);
+    }
+
+    @Override
+    public void checkPassCode(boolean isChecked) {
+        String show = "输入不正确";
+        if (isChecked) {
+            show = "输入正确";
+            buttonSearch.setEnabled(true);
+        }
+        Toast.makeText(getContext(), show, Toast.LENGTH_SHORT).show();
+        buttonCheck.setEnabled(true);
+        imageViewPassCode.setEnabled(true);
+    }
+
+    @Override
+    public void onDestroy() {
+        presenter.unSubscribe();
+        super.onDestroy();
     }
 }

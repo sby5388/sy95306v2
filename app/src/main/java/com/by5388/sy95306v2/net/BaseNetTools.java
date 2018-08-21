@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public abstract class BaseNetTools {
 
-    private Retrofit retrofit;
+    protected Retrofit retrofit;
 
     public Retrofit getRetrofit() {
         if (retrofit == null) {

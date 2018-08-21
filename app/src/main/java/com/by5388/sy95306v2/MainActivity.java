@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
     private static final String TITLE_SHANG_HAI = "上海12306";
 
 
-    Toolbar toolbar;
+    private Toolbar toolbar;
     private List<Fragment> fragments;
     private List<String> titles;
     private FragmentManager fragmentManager;
@@ -69,10 +69,8 @@ public class MainActivity extends AppCompatActivity
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        });
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
         mainView = findViewById(R.id.container_main);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -165,18 +163,27 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_shen_yang) {
-            changeShenYang();
-        } else if (id == R.id.nav_guang_tie) {
-            changeGuangzhou();
-        } else if (id == R.id.nav_shang_hai) {
-            changeShanghai();
-        } else if (id == R.id.nav_tz_12306) {
-            changeYuPiao();
-        } else if (id == R.id.nav_cd_12306) {
-            changeChengdu();
-        } else if (id == R.id.nav_send) {
+        switch (id) {
+            case R.id.nav_shen_yang:
+                changeShenYang();
+                break;
+            case R.id.nav_guang_tie:
+                changeGuangzhou();
+                break;
+            case R.id.nav_shang_hai:
+                changeShanghai();
+                break;
+            case R.id.nav_tz_12306:
+                changeYuPiao();
+                break;
+            case R.id.nav_cd_12306:
+                changeChengdu();
+                break;
+            case R.id.nav_send:
 
+                break;
+            default:
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

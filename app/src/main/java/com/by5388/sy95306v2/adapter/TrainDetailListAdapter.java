@@ -24,7 +24,7 @@ import java.util.List;
 public class TrainDetailListAdapter extends RecyclerView.Adapter<TrainDetailListAdapter.ViewHolder> implements View.OnClickListener {
 
     private List<TrainDetail> details;
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
     public TrainDetailListAdapter(Context context, List<TrainDetail> details) {
         this.details = details;
@@ -74,23 +74,23 @@ public class TrainDetailListAdapter extends RecyclerView.Adapter<TrainDetailList
         /**
          * 序号
          */
-        TextView textViewNumber;
+        final TextView textViewNumber;
         /**
          * 站名
          */
-        TextView stationName;
+        final TextView stationName;
         /**
          * 到达时间
          */
-        TextView arriveTime;
+        final TextView arriveTime;
         /**
          * 出发时间
          */
-        TextView leaveTime;
+        final TextView leaveTime;
         /**
          * 停站时间
          */
-        TextView remainTime;
+        final TextView remainTime;
 
         ViewHolder(View itemView) {
             super(itemView);

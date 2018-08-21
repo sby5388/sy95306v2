@@ -18,7 +18,7 @@ import com.by5388.sy95306v2.activity.trainDetail.presenter.IDetailPresenter;
 import com.by5388.sy95306v2.activity.trainDetail.view.IDetailView;
 import com.by5388.sy95306v2.adapter.TrainDetailListAdapter;
 import com.by5388.sy95306v2.bean.shenyang.TrainDetail;
-import com.by5388.sy95306v2.net.shenYang.SyService;
+import com.by5388.sy95306v2.net.sy.SyService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,16 +32,21 @@ import butterknife.ButterKnife;
 
 public class TrainDetailActivity extends BaseActivity implements IDetailView {
     public static final String TAG = "TrainDetailActivity";
-    TrainDetailListAdapter listAdapter;
+    private TrainDetailListAdapter listAdapter;
     @BindView(R.id.textView_train_code)
+
     TextView trainCode;
     @BindView(R.id.textView_train_stations)
+
     TextView trainStation;
     @BindView(R.id.textView_train_date)
+
     TextView trainDate;
     @BindView(R.id.recyclerView_train_detail)
+
     RecyclerView recyclerView;
     @BindView(R.id.lly_progress_bar)
+
     ConstraintLayout progressBar;
     private IDetailPresenter presenter;
     /**

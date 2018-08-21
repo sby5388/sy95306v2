@@ -19,7 +19,7 @@ import java.util.Calendar;
  */
 
 public abstract class BaseFragment extends Fragment {
-    OnFragmentListener listener;
+    private OnFragmentListener listener;
 
     @Override
     public final void onCreate(@Nullable Bundle savedInstanceState) {

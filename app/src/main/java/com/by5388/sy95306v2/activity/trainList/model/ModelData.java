@@ -7,7 +7,7 @@ import java.util.List;
  * @author by5388  on 2018/8/9.
  */
 
-public class ModelData {
+class ModelData {
     private static List<String> type;
 
     private static List<String> getTrainType() {

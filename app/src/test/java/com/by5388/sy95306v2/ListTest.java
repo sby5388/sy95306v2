@@ -29,7 +29,7 @@ public class ListTest {
         assertEquals(4, 2 + 2);
     }
 
-    public String getData(@NonNull List<String> strings, int position) {
+    private String getData(@NonNull List<String> strings, int position) {
         String s = strings.get(position);
         if (null == s) {
             s = getData(position);
@@ -38,7 +38,7 @@ public class ListTest {
         return s;
     }
 
-    public String getData(int position) {
+    private String getData(int position) {
         sout("获取数据：" + position);
         String s = "";
         switch (position) {
@@ -61,7 +61,7 @@ public class ListTest {
     }
 
 
-    public void sout(Object o) {
+    private void sout(Object o) {
         System.out.println(o.toString());
     }
 }

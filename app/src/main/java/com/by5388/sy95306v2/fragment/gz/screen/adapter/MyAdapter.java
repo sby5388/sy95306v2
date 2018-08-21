@@ -18,9 +18,9 @@ import java.util.List;
  */
 
 public class MyAdapter extends RecyclerView.Adapter implements View.OnClickListener {
-    private List<String> stationNames;
-    private LayoutInflater inflater;
-    private IScreenView view;
+    private final List<String> stationNames;
+    private final LayoutInflater inflater;
+    private final IScreenView view;
 
     public MyAdapter(@NonNull Context context, @NonNull List<String> stationNames, @NonNull IScreenView view) {
         this.view = view;
@@ -51,7 +51,7 @@ public class MyAdapter extends RecyclerView.Adapter implements View.OnClickListe
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        Button name;
+        final Button name;
 
         MyViewHolder(View itemView) {
             super(itemView);

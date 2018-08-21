@@ -26,14 +26,13 @@ import java.util.List;
  *
  * @author by5388  on 2018/6/7.
  */
-//@SuppressWarnings("unused")
 public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.ViewHolder> implements View.OnClickListener {
     private final static String TAG = "TrainListAdapter";
     private List<TrainNumber> trainNumbers;
-    private List<Station> stations = new ArrayList<>();
-    private IShenYangStationDb dataBaseService;
-    private Context context;
-    private TrainOnClickListener listener;
+    private final List<Station> stations = new ArrayList<>();
+    private final IShenYangStationDb dataBaseService;
+    private final Context context;
+    private final TrainOnClickListener listener;
 
 
     public TrainListAdapter(@NonNull List<TrainNumber> trainNumbers, Context context, TrainOnClickListener listener) {
@@ -95,16 +94,20 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        View rootView;
-        TextView imageViewStart, imageViewEnd;
-        TextView startStationName, endStationName;
-        TextView startStationTime, endStationTime;
-        TextView spendTime, trainNumberName;
-        TextView description;
+        final View rootView;
+        final TextView imageViewStart;
+        final TextView imageViewEnd;
+        final TextView startStationName;
+        final TextView endStationName;
+        final TextView startStationTime;
+        final TextView endStationTime;
+        final TextView spendTime;
+        final TextView trainNumberName;
+        final TextView description;
         /**
          * 四种价格
          */
-        TextView price;
+        final TextView price;
 
 
         ViewHolder(View itemView) {

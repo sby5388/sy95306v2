@@ -15,9 +15,9 @@ import java.util.List;
  * @author by5388  on  2018/8/18
  */
 
-public class CdScreenAdapter extends BaseAdapter {
+class CdScreenAdapter extends BaseAdapter {
     private List<CdScreenItem> screenItems;
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
     CdScreenAdapter(Context context, List<CdScreenItem> screenItems) {
         this.inflater = LayoutInflater.from(context);
@@ -65,7 +65,12 @@ public class CdScreenAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        TextView code, from, to, time, place, status;
+        final TextView code;
+        final TextView from;
+        final TextView to;
+        final TextView time;
+        final TextView place;
+        final TextView status;
 
         ViewHolder(View v) {
             code = v.findViewById(R.id.trainCode);

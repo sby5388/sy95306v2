@@ -25,7 +25,7 @@ public abstract class BaseShenYangFragment extends BaseFragment implements MyLis
      * @param calendar 日期
      * @return 格式转化后的日期
      */
-    protected int getData(Calendar calendar) {
+    int getData(Calendar calendar) {
         Locale locale = Locale.getDefault();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", locale);
         Date date = calendar.getTime();

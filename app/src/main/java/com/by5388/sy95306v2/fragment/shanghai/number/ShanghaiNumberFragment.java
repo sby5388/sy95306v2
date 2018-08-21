@@ -36,8 +36,8 @@ public class ShanghaiNumberFragment extends BaseShangHaiFragment implements INum
     private Button buttonSearch, buttonDate;
     private ProgressBar progressBar;
     private TextInputEditText trainCode;
-    MyListener dateListener;
-    Calendar calendar;
+    private MyListener dateListener;
+    private Calendar calendar;
 
     @Override
     protected void initView(View view) {

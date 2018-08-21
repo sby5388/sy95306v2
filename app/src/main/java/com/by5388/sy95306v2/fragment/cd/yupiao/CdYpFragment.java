@@ -29,15 +29,15 @@ import java.util.Locale;
  * @author by5388  on 2018/8/18.
  */
 public class CdYpFragment extends BaseCdFragment implements ICdYpView {
-    public static final String TAG = "CdYpFragment";
+    private static final String TAG = "CdYpFragment";
     private TextInputEditText fromStation, toStation;
     private Button buttonSearch, buttonDate;
     private ListView listView;
     private YpAdapter adapter;
     private ICdYpPresenter presenter;
     private final static List<IYp> EMPTY_LIST = new ArrayList<>();
-    MyListener dateListener;
-    Calendar calendar;
+    private MyListener dateListener;
+    private Calendar calendar;
 
 
     public static CdYpFragment newInstance() {
@@ -151,7 +151,7 @@ public class CdYpFragment extends BaseCdFragment implements ICdYpView {
      * @param calendar 日期
      * @return 格式转化后的日期
      */
-    protected String getData(Calendar calendar) {
+    private String getData(Calendar calendar) {
         Locale locale = Locale.getDefault();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", locale);
         Date date = calendar.getTime();

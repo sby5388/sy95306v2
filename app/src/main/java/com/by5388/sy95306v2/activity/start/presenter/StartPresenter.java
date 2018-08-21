@@ -50,7 +50,7 @@ public class StartPresenter implements IStartPresenter {
                 view.toMainActivity();
             }
         };
-        progressConsumer = integer -> view.updateProgress(integer);
+        progressConsumer = view::updateProgress;
         throwableConsumer = throwable -> view.showErrorMessage(throwable.getLocalizedMessage());
         clearDataConsumer = integer -> {
             if (0 == integer) {

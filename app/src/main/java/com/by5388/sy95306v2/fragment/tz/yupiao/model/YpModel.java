@@ -22,8 +22,8 @@ import retrofit2.Retrofit;
  * @author by5388  on 2018/8/13.
  */
 public class YpModel implements IYpModel {
-    public static final String TAG = "CdYpModel";
-    private YpService service;
+    private static final String TAG = "CdYpModel";
+    private final YpService service;
 
     public YpModel() {
         Retrofit retrofit = new YpNetTools().getRetrofit();
@@ -33,22 +33,15 @@ public class YpModel implements IYpModel {
     @Override
     public Observable<List<IYp>> getYuPiaoData(@NonNull QueryParam param) {
         return service.getYpMessage(param.toString(), param.getDate())
-                .flatMap(new Function<YpResult, ObservableSource<List<TzYpData>>>() {
-                    @Override
-                    public ObservableSource<List<TzYpData>> apply(YpResult result) throws Exception {
-                        if (null == result) {
-                            Log.e(TAG, "apply: " + "empty");
-                            return Observable.just(new ArrayList<>());
-                        }
-                        return Observable.just(getYuPiaoData(result.getData()));
+                .flatMap((Function<YpResult, ObservableSource<List<TzYpData>>>) result -> {
+                    if (null == result) {
+                        Log.e(TAG, "apply: " + "empty");
+                        return Observable.just(new ArrayList<>());
                     }
-                }).flatMap(new Function<List<TzYpData>, ObservableSource<List<IYp>>>() {
-                    @Override
-                    public ObservableSource<List<IYp>> apply(List<TzYpData> tzYpData) throws Exception {
-                        List<IYp> list = new ArrayList<>();
-                        list.addAll(tzYpData);
-                        return Observable.just(list);
-                    }
+                    return Observable.just(getYuPiaoData(result.getData()));
+                }).flatMap((Function<List<TzYpData>, ObservableSource<List<IYp>>>) tzYpData -> {
+                    List<IYp> list = new ArrayList<>(tzYpData);
+                    return Observable.just(list);
                 });
     }
 

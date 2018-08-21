@@ -20,11 +20,11 @@ import io.reactivex.schedulers.Schedulers;
 public class DetailPresenter implements IDetailPresenter {
 
 
-    private IDetailView view;
-    private IDetailModel model;
+    private final IDetailView view;
+    private final IDetailModel model;
     private Disposable disposable;
-    private Consumer<List<TrainDetail>> consumer;
-    private Consumer<Throwable> throwableConsumer;
+    private final Consumer<List<TrainDetail>> consumer;
+    private final Consumer<Throwable> throwableConsumer;
 
     public DetailPresenter(IDetailView view) {
         this.view = view;
@@ -36,9 +36,7 @@ public class DetailPresenter implements IDetailPresenter {
             view.updateTopView(trainName, code);
             view.finishLoading();
         };
-        throwableConsumer = throwable -> {
-            view.showErrorMessage(throwable.getLocalizedMessage());
-        };
+        throwableConsumer = throwable -> view.showErrorMessage(throwable.getLocalizedMessage());
     }
 
     @Override

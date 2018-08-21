@@ -17,25 +17,15 @@ public class ObservableTest {
     @Test
     public void test() {
         Observable<List<String>> observable = Observable.fromArray(StaticData.number)
-                .map(new Function<Integer, String>() {
-                    @Override
-                    public String apply(Integer integer) {
-                        String string = String.valueOf(integer);
-                        StaticData.names.add(string);
-                        return string;
-                    }
+                .map(integer -> {
+                    String string = String.valueOf(integer);
+                    StaticData.names.add(string);
+                    return string;
                 })
-                .flatMap(new Function<String, ObservableSource<List<String>>>() {
-                    public ObservableSource<List<String>> apply(String s) {
-                        return Observable.just(StaticData.names);
-                    }
-                });
-        observable.subscribe(new Consumer<List<String>>() {
-            @Override
-            public void accept(List<String> strings) {
-                for (String s : strings) {
-                    System.out.println(s);
-                }
+                .flatMap((Function<String, ObservableSource<List<String>>>) s -> Observable.just(StaticData.names));
+        observable.subscribe(strings -> {
+            for (String s : strings) {
+                System.out.println(s);
             }
         });
 //        assertEquals(4, 2 + 2);

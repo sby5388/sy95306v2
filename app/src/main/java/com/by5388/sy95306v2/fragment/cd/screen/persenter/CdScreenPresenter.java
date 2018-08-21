@@ -17,12 +17,12 @@ import io.reactivex.schedulers.Schedulers;
  * @author by5388  on 2018/8/18.
  */
 public class CdScreenPresenter implements ICdScreenPresenter {
-    private ICdScreenModel model;
-    private ICdScreenView view;
+    private final ICdScreenModel model;
+    private final ICdScreenView view;
 
-    private Consumer<Throwable> throwableConsumer;
-    private Consumer<List<CdScreenItem>> itemConsumer;
-    private Consumer<List<ScreenStation>> stationConsumer;
+    private final Consumer<Throwable> throwableConsumer;
+    private final Consumer<List<CdScreenItem>> itemConsumer;
+    private final Consumer<List<ScreenStation>> stationConsumer;
 
     private Disposable disposableItem, disposableStation;
 

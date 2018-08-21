@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.fragment.gz.p2p.presenter;
 
-import com.by5388.sy95306v2.bean.guangzhou.ResultData;
+import com.by5388.sy95306v2.bean.guangzhou.GzResultData;
 import com.by5388.sy95306v2.bean.guangzhou.station.DataBeanP2P;
 import com.by5388.sy95306v2.fragment.gz.p2p.model.GzP2pModel;
 import com.by5388.sy95306v2.fragment.gz.p2p.model.IGzP2pModel;
@@ -17,34 +17,27 @@ import io.reactivex.schedulers.Schedulers;
 
 public class GzP2pPresenter implements IGzP2pPresenter {
 
-    private IGzP2pView view;
-    private IGzP2pModel model;
+    private final IGzP2pView view;
+    private final IGzP2pModel model;
     private Disposable disposable;
-    private Consumer<ResultData<DataBeanP2P>> consumer;
-    private Consumer<Throwable> throwableConsumer;
+    private final Consumer<GzResultData<DataBeanP2P>> consumer;
+    private final Consumer<Throwable> throwableConsumer;
 
 
     public GzP2pPresenter(IGzP2pView view) {
         this.view = view;
         this.model = new GzP2pModel();
-        this.consumer = new Consumer<ResultData<DataBeanP2P>>() {
-            @Override
-            public void accept(ResultData<DataBeanP2P> dataBeanP2PResultData) {
-                DataBeanP2P dataBean = dataBeanP2PResultData.getData();
-                if (null != dataBean) {
-                    view.updateDate(dataBean);
-                } else {
-                    view.showError("没有相关的车次");
-                }
-                view.finishQuery();
+        this.consumer = dataBeanP2PResultData -> {
+            view.finishQuery();
+            DataBeanP2P dataBean = dataBeanP2PResultData.getData();
+            if (null == dataBean) {
+                view.showError("没有相关的车次");
+                return;
             }
+            view.updateDate(dataBean);view.updateDate(dataBean);
+
         };
-        this.throwableConsumer = new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) {
-                view.showError(throwable.getLocalizedMessage());
-            }
-        };
+        this.throwableConsumer = throwable -> view.showError(throwable.getLocalizedMessage());
 
     }
 

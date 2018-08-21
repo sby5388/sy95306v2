@@ -23,13 +23,13 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class CdLatePresenter implements ICdLatePresenter {
     public static final String TAG = "CdLatePresenter";
-    private ICdLateModel model;
-    private ICdLateView view;
+    private final ICdLateModel model;
+    private final ICdLateView view;
 
     private Disposable disposableStation, disposableDetail;
-    private Consumer<Throwable> throwableConsumer;
-    private Consumer<List<CdTrainAllNodeBean>> consumerDetail;
-    private Consumer<List<CdLateStation>> consumerStation;
+    private final Consumer<Throwable> throwableConsumer;
+    private final Consumer<List<CdTrainAllNodeBean>> consumerDetail;
+    private final Consumer<List<CdLateStation>> consumerStation;
 
     public CdLatePresenter(ICdLateView view) {
         this.view = view;
@@ -43,29 +43,26 @@ public class CdLatePresenter implements ICdLatePresenter {
             }
             view.finishQuery();
         };
-        this.consumerStation = new Consumer<List<CdLateStation>>() {
-            @Override
-            public void accept(List<CdLateStation> stations) throws Exception {
-                view.finishQuery();
-                // TODO: 2018/8/18
-                if (null == stations || stations.isEmpty()) {
-                    view.showError("请重试");
-                    return;
-                }
-
-                Set<String> dates = new HashSet<>();
-                for (CdLateStation station : stations) {
-                    dates.add(station.getDateDistance());
-                }
-                if (1 == dates.size()) {
-                    view.getLateDetail();
-                    return;
-                }
-                List<String> result = new ArrayList<>();
-                result.add("号从" + stations.get(0).getStationName() + "出发");
-                result.add("号到达" + stations.get(stations.size() - 1).getStationName());
-                view.showDialog(result);
+        this.consumerStation = stations -> {
+            view.finishQuery();
+            // TODO: 2018/8/18
+            if (null == stations || stations.isEmpty()) {
+                view.showError("请重试");
+                return;
             }
+
+            Set<String> dates = new HashSet<>();
+            for (CdLateStation station : stations) {
+                dates.add(station.getDateDistance());
+            }
+            if (1 == dates.size()) {
+                view.getLateDetail();
+                return;
+            }
+            List<String> result = new ArrayList<>();
+            result.add("号从" + stations.get(0).getStationName() + "出发");
+            result.add("号到达" + stations.get(stations.size() - 1).getStationName());
+            view.showDialog(result);
         };
     }
 

@@ -14,7 +14,7 @@ import io.reactivex.Observable;
  */
 public class CdLateModel implements ICdLateModel {
     public static final String TAG = "CdLateModel";
-    private ICdQuery query;
+    private final ICdQuery query;
 
     public CdLateModel() {
         query = new QueryCd();

@@ -21,13 +21,12 @@ import java.util.ArrayList;
  */
 
 public class TrainDetailDialog implements ITrainDetailView {
-    private DetailAdapter adapter;
-    private Context context;
-    private AlertDialog dialog;
+    private final DetailAdapter adapter;
+    private final Context context;
+    private final AlertDialog dialog;
     private View dialogView;
     private View dialogTitleView;
-    private ListView dialogListView;
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     private TextView titleName, titleTime;
 
     public TrainDetailDialog(Context context) {
@@ -39,17 +38,12 @@ public class TrainDetailDialog implements ITrainDetailView {
         dialog = new AlertDialog.Builder(context)
                 .setCustomTitle(dialogTitleView)
                 .setView(dialogView)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).create();
+                .setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss()).create();
     }
 
     private void initMainView() {
         dialogView = inflater.inflate(R.layout.custom_dialog_main_view, new LinearLayout(context), false);
-        dialogListView = dialogView.findViewById(R.id.listView_detail);
+        ListView dialogListView = dialogView.findViewById(R.id.listView_detail);
         dialogListView.setAdapter(adapter);
     }
 

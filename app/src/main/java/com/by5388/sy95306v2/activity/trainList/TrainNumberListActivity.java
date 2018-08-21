@@ -24,7 +24,7 @@ import com.by5388.sy95306v2.bean.Station;
 import com.by5388.sy95306v2.bean.shenyang.TrainNumber;
 import com.by5388.sy95306v2.dialog.TrainFilterDialog;
 import com.by5388.sy95306v2.dialog.TrainFilterDialog.UpdateFilterDataCallBack;
-import com.by5388.sy95306v2.net.shenYang.SyService;
+import com.by5388.sy95306v2.net.sy.SyService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,27 +40,36 @@ import butterknife.OnClick;
  */
 
 public class TrainNumberListActivity extends BaseActivity implements ITrainListView, UpdateFilterDataCallBack {
-    TrainFilterDialog dialog;
-    TrainOnClickListener listener;
+    private TrainFilterDialog dialog;
+    private TrainOnClickListener listener;
     @BindView(R.id.lly_progress_bar)
+
     ConstraintLayout progressBar;
     @BindViews({R.id.image_view_1, R.id.image_view_2, R.id.image_view_3})
+
     List<ImageView> imageViews;
     @BindView(R.id.textView_show_time)
+
     TextView textViewDate;
     @BindViews({R.id.lly_menu_start_time, R.id.lly_menu_spend_time, R.id.lly_menu_end_time, R.id.lly_menu_filter})
+
     List<ConstraintLayout> constraintLayouts;
     @BindView(R.id.textView_train_count)
+
     TextView textViewCount;
     @BindView(R.id.recycler_View_train_list)
+
     RecyclerView recyclerView;
 //            ListView recyclerView;
     @BindBitmap(R.drawable.ic_up)
 
-    Bitmap bitmapUp;
+
+Bitmap bitmapUp;
     @BindBitmap(R.drawable.ic_down)
+
     Bitmap bitmapDown;
     @BindView(R.id.textView_show_city)
+
     TextView stationNames;
     /**
      * 默认起始车站：沈阳北站
@@ -74,7 +83,6 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
      * 默认选择日期：待优化：应当为当日
      */
     private int selectedDate;
-//    private TrainListAdapter2 adapter;
     private TrainListAdapter adapter;
     private ITrainListPresenter presenter;
     /**
@@ -121,15 +129,12 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
         }
         presenter = new TrainListPresenter(this);
 
-        listener = new TrainOnClickListener() {
-            @Override
-            public void onItemClickListener(View view, int position) {
-                TrainNumber number = adapter.getItem(position);
-                if (null == number) {
-                    return;
-                }
-                startActivity(TrainDetailActivity.startActivity(TrainNumberListActivity.this, selectedDate, number.getSTCODE()));
+        listener = (view, position) -> {
+            TrainNumber number = adapter.getItem(position);
+            if (null == number) {
+                return;
             }
+            startActivity(TrainDetailActivity.startActivity(TrainNumberListActivity.this, selectedDate, number.getSTCODE()));
         };
 
         adapter = new TrainListAdapter(new ArrayList<>(), this, listener);
@@ -151,7 +156,7 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
      *
      * @param position 位置
      */
-    public void sortTrainNumber(int position) {
+    private void sortTrainNumber(int position) {
         ImageView view = imageViews.get(position);
         if (defaultPosition == position) {
             if (isUp) {

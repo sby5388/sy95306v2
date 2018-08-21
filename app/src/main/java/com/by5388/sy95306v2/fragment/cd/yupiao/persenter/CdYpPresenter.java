@@ -17,10 +17,10 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class CdYpPresenter implements ICdYpPresenter {
 
-    private ICdYpView view;
-    private ICdYpModel model;
+    private final ICdYpView view;
+    private final ICdYpModel model;
     private Disposable disposable;
-    private Consumer<Throwable> throwableConsumer;
+    private final Consumer<Throwable> throwableConsumer;
     private final Consumer<List<IYp>> consumer;
 
     public CdYpPresenter(ICdYpView view) {

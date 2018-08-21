@@ -3,6 +3,7 @@ package com.by5388.sy95306v2.fragment.gz.p2p;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,7 +16,7 @@ import com.by5388.sy95306v2.bean.guangzhou.station.TrainsBean;
 import com.by5388.sy95306v2.dialog.ITrainDetailView;
 import com.by5388.sy95306v2.dialog.TrainDetailDialog;
 import com.by5388.sy95306v2.fragment.MyListener;
-import com.by5388.sy95306v2.fragment.gz.BaseGuangZhouFragment;
+import com.by5388.sy95306v2.fragment.gz.BaseGzFragment;
 import com.by5388.sy95306v2.fragment.gz.p2p.presenter.GzP2pPresenter;
 import com.by5388.sy95306v2.fragment.gz.p2p.presenter.IGzP2pPresenter;
 import com.by5388.sy95306v2.fragment.gz.p2p.view.IGzP2pView;
@@ -30,8 +31,8 @@ import java.util.List;
  * @author by5388  on 2018/8/1.
  */
 
-public class GzP2pFragment extends BaseGuangZhouFragment implements IGzP2pView {
-    public static final String TAG = "GetTrainByStation";
+public class GzP2pFragment extends BaseGzFragment implements IGzP2pView {
+    private static final String TAG = "GetTrainByStation";
     private TextInputEditText fromStation, toStation;
     private Button buttonSearch, buttonDate;
     private ListView listView;
@@ -41,8 +42,8 @@ public class GzP2pFragment extends BaseGuangZhouFragment implements IGzP2pView {
     private IGzP2pPresenter presenter;
 
     private final static List<StationsBean> EMPTY_LIST = new ArrayList<>();
-    MyListener dateListener;
-    Calendar calendar;
+    private MyListener dateListener;
+    private Calendar calendar;
 
     public static GzP2pFragment newInstance() {
         GzP2pFragment fragment = new GzP2pFragment();
@@ -149,12 +150,14 @@ public class GzP2pFragment extends BaseGuangZhouFragment implements IGzP2pView {
     @Override
     public void updateDate(DataBeanP2P dataBean) {
         if (dataBean == null) {
+            Log.e(TAG, "updateDate: 没有数据" );
             Toast.makeText(getContext(), "没有数据", Toast.LENGTH_SHORT).show();
             return;
         }
         trainsBeans = dataBean.getTrains();
         List<StationsBean> stations = dataBean.getStations();
         if (stations == null) {
+            Log.e(TAG, "updateDate: " );
             Toast.makeText(getContext(), "发生错误", Toast.LENGTH_SHORT).show();
             return;
         }

@@ -30,10 +30,10 @@ import retrofit2.Retrofit;
  */
 
 public class ShNumberAdapter extends RecyclerView.Adapter {
-    public static final String TAG = "ShNumberAdapter";
+    private static final String TAG = "ShNumberAdapter";
     private List<ShanghaiTrainNumber> numbers;
-    private LayoutInflater inflater;
-    private ShanghaiService shanghaiService;
+    private final LayoutInflater inflater;
+    private final ShanghaiService shanghaiService;
 
     public ShNumberAdapter(Context context, List<ShanghaiTrainNumber> numbers) {
         this.numbers = numbers;
@@ -76,29 +76,27 @@ public class ShNumberAdapter extends RecyclerView.Adapter {
         Disposable disposable = shanghaiService.queryTrainDelay(new QueryMethod<>(new InfoBeanDelay(number.getStationName(), number.getTrainCode())))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<ShanghaiTrainDelay>>() {
-                    @Override
-                    public void accept(List<ShanghaiTrainDelay> delays) throws Exception {
-                        if (null == delays || delays.isEmpty()) {
-                            Log.d(TAG, "accept: 空值");
-                            return;
-                        }
-                        String arrive = delays.get(0).getArrive();
-                        Log.d(TAG, "accept: " + number.getStationName() + ":::" + arrive);
-                        holder.arrive.setText(arrive);
+                .subscribe(delays -> {
+                    if (null == delays || delays.isEmpty()) {
+                        Log.d(TAG, "accept: 空值");
+                        return;
                     }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        holder.arrive.setText("未知1");
-                    }
-                });
+                    String arrive = delays.get(0).getArrive();
+                    Log.d(TAG, "accept: " + number.getStationName() + ":::" + arrive);
+                    holder.arrive.setText(arrive);
+                }, throwable -> holder.arrive.setText("未知1"));
 
     }
 
     static class NumberViewHolder extends RecyclerView.ViewHolder {
-        TextView stationName, stayTime, stationNum, arrive, endTime, startTime, delay;
-        ProgressBar progressBar;
+        final TextView stationName;
+        final TextView stayTime;
+        final TextView stationNum;
+        final TextView arrive;
+        final TextView endTime;
+        final TextView startTime;
+        final TextView delay;
+        final ProgressBar progressBar;
 
         NumberViewHolder(View view) {
             super(view);

@@ -37,10 +37,10 @@ public class DetailAdapter extends BaseAdapter {
     private static final int LEAVE = TzQuery.LEAVE;
 
     private List<StationInfosBean> infosBeans;
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     private String trainCode = "";
     private String date = "";
-    private Consumer<Throwable> throwableConsumer;
+    private final Consumer<Throwable> throwableConsumer;
     private String[][] status;
 
     public DetailAdapter(@NonNull Context context, @NonNull List<StationInfosBean> infosBeans) {
@@ -62,7 +62,7 @@ public class DetailAdapter extends BaseAdapter {
     }
 
     private static String getDate(String arrDate) {
-        // FIXME: 2018/8/15
+        // FIXME: 2018/8/20 
         return "2018-08-15";
     }
 
@@ -124,7 +124,11 @@ public class DetailAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        TextView name, arrive, leave, realArrive, realLeave;
+        final TextView name;
+        final TextView arrive;
+        final TextView leave;
+        final TextView realArrive;
+        final TextView realLeave;
 
         ViewHolder(View view) {
             name = view.findViewById(R.id.textView_name);

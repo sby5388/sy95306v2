@@ -19,12 +19,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class TrainListPresenter implements ITrainListPresenter {
 
-    private ITrainListView view;
-    private ITrainListModel model;
+    private final ITrainListView view;
+    private final ITrainListModel model;
 
     private Disposable disposable;
-    private Consumer<List<TrainNumber>> consumer;
-    private Consumer<Throwable> throwableConsumer;
+    private final Consumer<List<TrainNumber>> consumer;
+    private final Consumer<Throwable> throwableConsumer;
     /**
      * 全部的车次信息，未过滤
      */

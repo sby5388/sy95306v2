@@ -47,6 +47,7 @@ public interface ISettingSharedPreferences {
     boolean contains(String key);
 
     /**
+     * 所有的键值对
      * @return 返回所有的键值对
      */
     Map<String, ?> getAll();

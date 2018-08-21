@@ -16,7 +16,7 @@ import io.reactivex.functions.Function;
  * @author by5388  on 2018/8/18.
  */
 public class CdYpModel implements ICdYpModel {
-    private ICdQuery query;
+    private final ICdQuery query;
 
     public CdYpModel() {
         query = new QueryCd();
@@ -25,13 +25,9 @@ public class CdYpModel implements ICdYpModel {
     @Override
     public Observable<List<IYp>> getCdYp(String fromStation, String toStation, String date) {
         return query.getCdYp(fromStation, toStation, date)
-                .flatMap(new Function<List<CdYpDetailBean>, ObservableSource<List<IYp>>>() {
-                    @Override
-                    public ObservableSource<List<IYp>> apply(List<CdYpDetailBean> cdYpDetailBeans) throws Exception {
-                        List<IYp> list = new ArrayList<>();
-                        list.addAll(cdYpDetailBeans);
-                        return Observable.just(list);
-                    }
+                .flatMap((Function<List<CdYpDetailBean>, ObservableSource<List<IYp>>>) cdYpDetailBeans -> {
+                    List<IYp> list = new ArrayList<>(cdYpDetailBeans);
+                    return Observable.just(list);
                 });
     }
 }

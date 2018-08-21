@@ -16,11 +16,11 @@ import java.util.List;
  * @author by5388  on 2018/8/2.
  */
 
-public class TempStationAdapter extends BaseAdapter {
+class TempStationAdapter extends BaseAdapter {
     private List<StationsBean> stationsBeans;
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
-    public TempStationAdapter(Context context, List<StationsBean> stationsBeans) {
+    TempStationAdapter(Context context, List<StationsBean> stationsBeans) {
         this.inflater = LayoutInflater.from(context);
         this.stationsBeans = stationsBeans;
     }
@@ -66,7 +66,12 @@ public class TempStationAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        TextView code, from, to, spend, start, end;
+        final TextView code;
+        final TextView from;
+        final TextView to;
+        final TextView spend;
+        final TextView start;
+        final TextView end;
 
         ViewHolder(View v) {
             code = v.findViewById(R.id.temp_code);

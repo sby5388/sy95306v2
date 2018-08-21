@@ -34,8 +34,8 @@ public class YuPiaoFragment extends BaseTzFragment implements IYpView {
     private YpAdapter adapter;
     private IYpPresenter presenter;
     private final static List<IYp> EMPTY_LIST = new ArrayList<>();
-    MyListener dateListener;
-    Calendar calendar;
+    private MyListener dateListener;
+    private Calendar calendar;
 
     public static YuPiaoFragment newInstance() {
         YuPiaoFragment fragment = new YuPiaoFragment();

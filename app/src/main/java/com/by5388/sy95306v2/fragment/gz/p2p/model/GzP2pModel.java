@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.fragment.gz.p2p.model;
 
-import com.by5388.sy95306v2.bean.guangzhou.ResultData;
+import com.by5388.sy95306v2.bean.guangzhou.GzResultData;
 import com.by5388.sy95306v2.bean.guangzhou.station.DataBeanP2P;
 import com.by5388.sy95306v2.net.gz.GzNetTools;
 import com.by5388.sy95306v2.net.gz.GzService;
@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 
 public class GzP2pModel implements IGzP2pModel {
 
-    private GzService service;
+    private final GzService service;
 
     public GzP2pModel() {
         Retrofit retrofit = new GzNetTools().getRetrofit();
@@ -22,7 +22,7 @@ public class GzP2pModel implements IGzP2pModel {
     }
 
     @Override
-    public Observable<ResultData<DataBeanP2P>> getTrainByStation(String fromStation, String toStation, String date) {
+    public Observable<GzResultData<DataBeanP2P>> getTrainByStation(String fromStation, String toStation, String date) {
         return service.getTrainByStation(fromStation, toStation, date);
     }
 }

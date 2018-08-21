@@ -5,11 +5,16 @@ package com.by5388.sy95306v2.bean.tz.check;
  * @date 2018/8/17 15:28
  */
 public class PassCodeDataBean {
+    private static final String RIGHT_CODE = "1";
     /**
      * result : 1
      * msg : randCodeRight
      */
 
+    /**
+     * "0":不正确
+     * "1":正确
+     */
     private String result;
     private String msg;
 
@@ -28,4 +33,10 @@ public class PassCodeDataBean {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    public boolean isRight() {
+        return RIGHT_CODE.equals(result);
+    }
+
+
 }

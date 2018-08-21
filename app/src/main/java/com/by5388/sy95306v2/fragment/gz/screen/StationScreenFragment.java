@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.fragment.gz.BaseGuangZhouFragment;
+import com.by5388.sy95306v2.fragment.gz.BaseGzFragment;
 import com.by5388.sy95306v2.fragment.gz.screen.adapter.MyAdapter;
 import com.by5388.sy95306v2.fragment.gz.screen.view.IScreenView;
 
@@ -23,7 +23,7 @@ import java.util.List;
  * @author by5388  on 2018/8/3.
  */
 
-public class StationScreenFragment extends BaseGuangZhouFragment implements IScreenView {
+public class StationScreenFragment extends BaseGzFragment implements IScreenView {
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private WebView webView;
@@ -66,6 +66,7 @@ public class StationScreenFragment extends BaseGuangZhouFragment implements IScr
         recyclerView.setAdapter(adapter);
         //TODO   WebSettings
         WebSettings settings = webView.getSettings();
+        // FIXME: 2018/8/22 security
         settings.setJavaScriptEnabled(true);
         settings.setDisplayZoomControls(false);
         settings.setLoadWithOverviewMode(true);
@@ -86,7 +87,7 @@ public class StationScreenFragment extends BaseGuangZhouFragment implements IScr
     @Override
     public void showStationScreen(int position) {
         final String baseUrl = "http://www.gtbyxx.com/wxg/station/";
-        String url = "";
+        String url;
         int changShaNan = 5;
         if (changShaNan == position) {
             url = "http://123.56.101.72/tky/cfdp";
@@ -95,6 +96,7 @@ public class StationScreenFragment extends BaseGuangZhouFragment implements IScr
         }
         webView.loadUrl(url);
         webView.setWebViewClient(new WebViewClient() {
+            // TODO: 2018/8/22 过时方法
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -109,5 +111,18 @@ public class StationScreenFragment extends BaseGuangZhouFragment implements IScr
 
     }
 
+    @Override
+    public void startQuery() {
 
+    }
+
+    @Override
+    public void finishQuery() {
+
+    }
+
+    @Override
+    public void showError(String tip) {
+
+    }
 }

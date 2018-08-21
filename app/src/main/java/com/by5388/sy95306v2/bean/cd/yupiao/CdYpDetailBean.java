@@ -153,26 +153,7 @@ public class CdYpDetailBean implements IYp {
     public void setFzx(String fzx) {
         this.fzx = fzx;
     }
-
-    @Override
-    public String toString() {
-        return
-                station_train_code
-                        + " : " + start_station_name
-                        + " : " + to_station_name
-                        + " : " + start_time
-                        + " : " + arrive_time
-                        + " : " + lishi
-                        //+ " : " + fzx
-                        + " : " + zy_num
-                        + " : " + ze_num
-                        + " : " + yz_num
-                        + " : " + yw_num
-                        + " : " + rz_num
-                        + " : " + rw_num
-                        + " : " + wz_num
-                ;
-    }
+    
 
     @Override
     public String getCode() {
@@ -222,34 +203,14 @@ public class CdYpDetailBean implements IYp {
 
     @Override
     public String getRz() {
-        if (EMPTY.equals(rz_num)) {
-            if (!EMPTY.equals(zy_num)) {
-                return zy_num;
-            }
-        }
-
-        if (EMPTY.equals(zy_num)) {
-            if (!EMPTY.equals(rz_num)) {
-                return rz_num;
-            }
-        }
-
-        return RESULT_EMPTY;
+        String result = zy_num + rz_num;
+        return result.replaceAll("[^0-9]", "");
     }
 
     @Override
     public String getYz() {
-        if (EMPTY.equals(yz_num)) {
-            if (!EMPTY.equals(ze_num)) {
-                return ze_num;
-            }
-        }
-        if (EMPTY.equals(ze_num)) {
-            if (!EMPTY.equals(yz_num)) {
-                return yz_num;
-            }
-        }
-        return RESULT_EMPTY;
+        String result = ze_num + yz_num;
+        return result.replaceAll("[^0-9]", "");
     }
 
     @Override

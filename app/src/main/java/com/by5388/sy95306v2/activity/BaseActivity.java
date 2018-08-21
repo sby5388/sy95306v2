@@ -12,7 +12,7 @@ import android.view.MenuItem;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-    public static final String DATA_BUNDLE = "bundle";
+    protected static final String DATA_BUNDLE = "bundle";
 
     public static final String DATA_STATION_CODE = "code";
 

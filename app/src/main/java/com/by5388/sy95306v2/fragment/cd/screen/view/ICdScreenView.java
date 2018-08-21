@@ -1,5 +1,6 @@
 package com.by5388.sy95306v2.fragment.cd.screen.view;
 
+import com.by5388.sy95306v2.base.view.IBaseView;
 import com.by5388.sy95306v2.bean.cd.screen.ScreenStation;
 import com.by5388.sy95306v2.fragment.cd.screen.CdScreenItem;
 
@@ -8,24 +9,7 @@ import java.util.List;
 /**
  * @author by5388  on 2018/8/18.
  */
-public interface ICdScreenView {
-    /**
-     * 开始查询
-     */
-    void startQuery();
-
-    /**
-     * 结束查询
-     */
-    void finishQuery();
-
-    /**
-     * 错误提示
-     *
-     * @param tip 提示
-     */
-    void showError(String tip);
-
+public interface ICdScreenView extends IBaseView {
     /**
      * 更新数据
      *

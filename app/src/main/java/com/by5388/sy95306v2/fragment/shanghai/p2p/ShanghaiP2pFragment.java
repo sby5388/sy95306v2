@@ -36,8 +36,8 @@ public class ShanghaiP2pFragment extends BaseShangHaiFragment implements IP2pVie
     private IShNumberDialogView detailDialog;
 
     private final static List<ShanghaiTrainP2P> EMPTY_LIST = new ArrayList<>();
-    MyListener dateListener;
-    Calendar calendar;
+    private MyListener dateListener;
+    private Calendar calendar;
 
     private IP2pPresenter presenter;
 

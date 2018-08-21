@@ -17,7 +17,7 @@ import java.util.List;
  * @date 20180727
  */
 public class MyViewPagerAdapter extends FragmentPagerAdapter {
-    private List<MyViewPager> viewPagers;
+    private final List<MyViewPager> viewPagers;
 
 
     public MyViewPagerAdapter(@NonNull FragmentManager manager) {

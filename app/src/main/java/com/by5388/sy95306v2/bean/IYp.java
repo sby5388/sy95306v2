@@ -7,7 +7,7 @@ package com.by5388.sy95306v2.bean;
  */
 public interface IYp {
 
-
+    // FIXME: 2018/8/22
     String getCode();
 
     String getFromStation();

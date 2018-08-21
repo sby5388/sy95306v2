@@ -27,13 +27,13 @@ import java.util.List;
  * // TODO: 2018/8/15 简单再简单
  */
 //@SuppressWarnings("unused")
-public class TrainListAdapter2 extends BaseAdapter {
+class TrainListAdapter2 extends BaseAdapter {
     private final static String TAG = "TrainListAdapter2";
     private List<TrainNumber> trainNumbers;
-    private List<Station> stations = new ArrayList<>();
-    private IShenYangStationDb dataBaseService;
-    private Context context;
-    private LayoutInflater inflater;
+    private final List<Station> stations = new ArrayList<>();
+    private final IShenYangStationDb dataBaseService;
+    private final Context context;
+    private final LayoutInflater inflater;
 
 
     @Override
@@ -88,15 +88,19 @@ public class TrainListAdapter2 extends BaseAdapter {
     }
 
     static class ViewHolder {
-        TextView imageViewStart, imageViewEnd;
-        TextView startStationName, endStationName;
-        TextView startStationTime, endStationTime;
-        TextView spendTime, trainNumberName;
-        TextView description;
+        final TextView imageViewStart;
+        final TextView imageViewEnd;
+        final TextView startStationName;
+        final TextView endStationName;
+        final TextView startStationTime;
+        final TextView endStationTime;
+        final TextView spendTime;
+        final TextView trainNumberName;
+        final TextView description;
         /**
          * 四种价格
          */
-        TextView price;
+        final TextView price;
 
         ViewHolder(View itemView) {
             imageViewStart = itemView.findViewById(R.id.textView_start_station);

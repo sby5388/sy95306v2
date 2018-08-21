@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -13,7 +14,6 @@ import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.cd.late.CdTrainAllNodeBean;
-import com.by5388.sy95306v2.fragment.MyListener;
 import com.by5388.sy95306v2.fragment.cd.BaseCdFragment;
 import com.by5388.sy95306v2.fragment.cd.late.persenter.CdLatePresenter;
 import com.by5388.sy95306v2.fragment.cd.late.persenter.ICdLatePresenter;
@@ -30,15 +30,14 @@ import java.util.Locale;
  * @author by5388  on 2018/8/19.
  */
 public class CdLateFragment extends BaseCdFragment implements ICdLateView {
-    public static final String TAG = "CdLateFragment";
+    private static final String TAG = "CdLateFragment";
     private Button buttonSearch;
     private ListView listView;
     private TextInputEditText trainCode;
     private CdLateAdapter adapter;
     private ICdLatePresenter presenter;
     private AlertDialog dialog;
-    MyListener dateListener;
-    Calendar calendar;
+    private Calendar calendar;
 
     public static CdLateFragment newInstance() {
         CdLateFragment fragment = new CdLateFragment();
@@ -49,7 +48,6 @@ public class CdLateFragment extends BaseCdFragment implements ICdLateView {
 
     @Override
     protected void initData() {
-        dateListener = new MyListener(this);
         calendar = Calendar.getInstance();
         presenter = new CdLatePresenter(this);
         adapter = new CdLateAdapter(getContext(), new ArrayList<>());
@@ -107,7 +105,6 @@ public class CdLateFragment extends BaseCdFragment implements ICdLateView {
 
     @Override
     public void showDialog(@NonNull List<String> trainDetail) {
-        // TODO: 2018/8/19
         int length = trainDetail.size();
         final String trainNo = trainCode.getText().toString().trim();
 
@@ -124,15 +121,12 @@ public class CdLateFragment extends BaseCdFragment implements ICdLateView {
 
         dialog = new AlertDialog.Builder(getContext())
                 .setTitle("请选择车次")
-                .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Calendar newCalendar = Calendar.getInstance();
-                        newCalendar.add(Calendar.DATE, (0 - which));
-                        String date = getData(newCalendar);
-                        dialog.dismiss();
-                        presenter.getLateDetail(trainNo, date, "");
-                    }
+                .setSingleChoiceItems(items, 0, (dialog, which) -> {
+                    Calendar newCalendar = Calendar.getInstance();
+                    newCalendar.add(Calendar.DATE, (0 - which));
+                    String date = getData(newCalendar);
+                    dialog.dismiss();
+                    presenter.getLateDetail(trainNo, date, "");
                 }).create();
         dialog.show();
     }
@@ -141,6 +135,7 @@ public class CdLateFragment extends BaseCdFragment implements ICdLateView {
     public void updateDetailData(List<CdTrainAllNodeBean> beans) {
         if (null == beans || beans.isEmpty()) {
             Toast.makeText(getContext(), "没有数据", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "updateDetailData:没有数据 ");
             return;
         }
         adapter.setBeans(beans);

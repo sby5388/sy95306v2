@@ -79,7 +79,7 @@ public class CdScreenFragment extends BaseCdFragment implements ICdScreenView {
         buttonSearch.setOnClickListener(v -> query());
     }
 
-    public void setTextView(boolean isChecked) {
+    private void setTextView(boolean isChecked) {
         if (isChecked) {
             showTime.setText(R.string.show_time_arrive);
             showPlace.setText(R.string.show_place_arrive);
@@ -167,7 +167,7 @@ public class CdScreenFragment extends BaseCdFragment implements ICdScreenView {
      * @param calendar 日期
      * @return 格式转化后的日期
      */
-    protected String getData(Calendar calendar) {
+    private String getData(Calendar calendar) {
         Locale locale = Locale.getDefault();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", locale);
         Date date = calendar.getTime();

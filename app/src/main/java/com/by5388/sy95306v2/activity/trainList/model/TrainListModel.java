@@ -2,11 +2,11 @@ package com.by5388.sy95306v2.activity.trainList.model;
 
 import com.by5388.sy95306v2.bean.Station;
 import com.by5388.sy95306v2.bean.shenyang.TrainNumber;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
 import com.by5388.sy95306v2.database.DataBaseTempAction;
+import com.by5388.sy95306v2.database.IShenYangStationDb;
 import com.by5388.sy95306v2.dialog.bean.FilterBean;
-import com.by5388.sy95306v2.net.shenYang.SyNetTools;
-import com.by5388.sy95306v2.net.shenYang.SyService;
+import com.by5388.sy95306v2.net.sy.SyNetTools;
+import com.by5388.sy95306v2.net.sy.SyService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,8 +14,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import retrofit2.Retrofit;
 
 import static com.by5388.sy95306v2.activity.trainList.model.ModelData.getSelectedType;
@@ -26,10 +24,10 @@ import static com.by5388.sy95306v2.dialog.bean.FilterData.getFilterItems;
  */
 
 public class TrainListModel implements ITrainListModel {
-    private SyService trainNumberService;
-    private TrainNumberSort sort;
-    private List<Integer> selected;
-    private IShenYangStationDb dataBaseService;
+    private final SyService trainNumberService;
+    private final TrainNumberSort sort;
+    private final List<Integer> selected;
+    private final IShenYangStationDb dataBaseService;
 
     public TrainListModel() {
         Retrofit retrofit = new SyNetTools().getRetrofit();
@@ -47,17 +45,14 @@ public class TrainListModel implements ITrainListModel {
     @Override
     public Observable<List<TrainNumber>> sortTrainNumber(List<TrainNumber> trainNumbers, int position, boolean isUp) {
         sort.setPosition(position).setUp(isUp);
-        return Observable.create(new ObservableOnSubscribe<List<TrainNumber>>() {
-            @Override
-            public void subscribe(ObservableEmitter<List<TrainNumber>> emitter) {
-                if (!(emitter.isDisposed())) {
-                    //TODO 过滤
-                    List<TrainNumber> nextTrainNumbers = getFilterTrainNumber(trainNumbers);
-                    //排序
-                    Collections.sort(nextTrainNumbers, sort);
-                    emitter.onNext(nextTrainNumbers);
-                    emitter.onComplete();
-                }
+        return Observable.create(emitter -> {
+            if (!(emitter.isDisposed())) {
+                //TODO 过滤
+                List<TrainNumber> nextTrainNumbers = getFilterTrainNumber(trainNumbers);
+                //排序
+                Collections.sort(nextTrainNumbers, sort);
+                emitter.onNext(nextTrainNumbers);
+                emitter.onComplete();
             }
         });
     }
@@ -80,7 +75,6 @@ public class TrainListModel implements ITrainListModel {
         }
         return nextTrainNumbers;
     }
-
 
 
     private void refreshSelected() {
@@ -119,7 +113,7 @@ public class TrainListModel implements ITrainListModel {
             this.position = 0;
         }
 
-        public TrainNumberSort setPosition(int position) {
+        TrainNumberSort setPosition(int position) {
             this.position = position;
             return this;
         }
@@ -132,24 +126,27 @@ public class TrainListModel implements ITrainListModel {
         @Override
         public int compare(TrainNumber o1, TrainNumber o2) {
             try {
-                if (position == 0) {
-                    if (isUp) {
-                        return o1.getStartTime() - o2.getStartTime();
-                    } else {
-                        return o2.getStartTime() - o1.getStartTime();
-                    }
-                } else if (position == 1) {
-                    if (isUp) {
-                        return o1.getSpendTime() - o2.getSpendTime();
-                    } else {
-                        return o2.getSpendTime() - o1.getSpendTime();
-                    }
-                } else if (position == 2) {
-                    if (isUp) {
-                        return o1.getArriveTime() - o2.getArriveTime();
-                    } else {
-                        return o2.getArriveTime() - o1.getArriveTime();
-                    }
+                switch (position) {
+                    case 0:
+                        if (isUp) {
+                            return o1.getStartTime() - o2.getStartTime();
+                        } else {
+                            return o2.getStartTime() - o1.getStartTime();
+                        }
+                    case 1:
+                        if (isUp) {
+                            return o1.getSpendTime() - o2.getSpendTime();
+                        } else {
+                            return o2.getSpendTime() - o1.getSpendTime();
+                        }
+                    case 2:
+                        if (isUp) {
+                            return o1.getArriveTime() - o2.getArriveTime();
+                        } else {
+                            return o2.getArriveTime() - o1.getArriveTime();
+                        }
+                    default:
+                        break;
                 }
             } catch (NumberFormatException e) {
                 return 0;

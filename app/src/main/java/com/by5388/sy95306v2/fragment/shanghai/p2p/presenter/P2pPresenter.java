@@ -18,32 +18,26 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class P2pPresenter implements IP2pPresenter {
-    private IP2pModel model;
-    private IP2pView view;
-    private Consumer<List<ShanghaiTrainP2P>> consumer;
-    private Consumer<Throwable> throwableConsumer;
+    private final IP2pModel model;
+    private final IP2pView view;
+    private final Consumer<List<ShanghaiTrainP2P>> consumer;
+    private final Consumer<Throwable> throwableConsumer;
     private Disposable disposable;
 
     public P2pPresenter(IP2pView view) {
         this.view = view;
         this.model = new P2pModel();
-        this.consumer = new Consumer<List<ShanghaiTrainP2P>>() {
-            @Override
-            public void accept(List<ShanghaiTrainP2P> trainP2PS) {
-                if (null == trainP2PS || trainP2PS.isEmpty()) {
-                    view.showError("未查到相关信息");
-                } else {
-                    view.updateList(trainP2PS);
-                }
-                view.finishQuery();
+        this.consumer = trainP2PS -> {
+            if (null == trainP2PS || trainP2PS.isEmpty()) {
+                view.showError("未查到相关信息");
+            } else {
+                view.updateList(trainP2PS);
             }
+            view.finishQuery();
         };
-        this.throwableConsumer = new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) {
-                view.showError(throwable.getLocalizedMessage());
-                view.finishQuery();
-            }
+        this.throwableConsumer = throwable -> {
+            view.showError(throwable.getLocalizedMessage());
+            view.finishQuery();
         };
     }
 

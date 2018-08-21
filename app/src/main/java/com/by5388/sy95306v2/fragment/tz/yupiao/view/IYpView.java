@@ -1,5 +1,6 @@
 package com.by5388.sy95306v2.fragment.tz.yupiao.view;
 
+import com.by5388.sy95306v2.base.view.IBaseView;
 import com.by5388.sy95306v2.bean.IYp;
 
 import java.util.List;
@@ -9,12 +10,7 @@ import java.util.List;
  *
  * @author by5388  on 2018/8/13.
  */
-public interface IYpView {
-    void startQuery();
-
-    void finishQuery();
-
-    void showError(String tip);
+public interface IYpView extends IBaseView {
 
     void updateDate(List<IYp> yuPiaoData);
 }

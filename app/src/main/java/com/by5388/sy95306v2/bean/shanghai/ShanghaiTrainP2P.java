@@ -4,6 +4,7 @@ package com.by5388.sy95306v2.bean.shanghai;
  * @author by5388
  * @date 2018/8/8 16:56
  */
+@SuppressWarnings("all")
 public class ShanghaiTrainP2P {
     /**
      * ticketPrice :

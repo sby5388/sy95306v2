@@ -30,17 +30,17 @@ import java.util.List;
 
 public class ShNumberDialog implements IShNumberDialogView {
     public static final String TAG = "ShNumberDialog";
-    private ShNumberAdapter adapter;
-    private Context context;
-    private AlertDialog dialog;
+    private final ShNumberAdapter adapter;
+    private final Context context;
+    private final AlertDialog dialog;
     private View dialogView;
     private View dialogTitleView;
     private RecyclerView recyclerView;
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     private TextView trainCode, date, trainName, startTime, endTime;
-    private INumberPresenter presenter;
+    private final INumberPresenter presenter;
     private ProgressBar progressBar;
-    private List<ShanghaiTrainNumber> empty;
+    private final List<ShanghaiTrainNumber> empty;
 
     public ShNumberDialog(Context context) {
         this.context = context;

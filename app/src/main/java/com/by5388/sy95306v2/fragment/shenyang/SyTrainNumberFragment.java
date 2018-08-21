@@ -20,11 +20,10 @@ import java.util.Calendar;
 
 public final class SyTrainNumberFragment extends BaseShenYangFragment {
     public static final String TAG = "GetTrainByTrain";
-    private Button buttonSearch, buttonDate;
-    private ListView listView;
+    private Button buttonDate;
     private TextInputEditText trainCode;
-    MyListener dateListener;
-    Calendar calendar;
+    private MyListener dateListener;
+    private Calendar calendar;
     private int selectedDate = 20180606;
 
     public static SyTrainNumberFragment newInstance() {
@@ -56,8 +55,8 @@ public final class SyTrainNumberFragment extends BaseShenYangFragment {
         trainCode = view.findViewById(R.id.textView_train_code);
         buttonDate = view.findViewById(R.id.button_query_date);
         buttonDate.setOnClickListener(v -> selectDate(dateListener, calendar));
-        listView = view.findViewById(R.id.listView_train_code);
-        buttonSearch = view.findViewById(R.id.button_search);
+        ListView listView = view.findViewById(R.id.listView_train_code);
+        Button buttonSearch = view.findViewById(R.id.button_search);
         buttonSearch.setOnClickListener(v -> search());
 
     }

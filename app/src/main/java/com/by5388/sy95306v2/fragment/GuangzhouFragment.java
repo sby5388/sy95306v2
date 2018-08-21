@@ -8,9 +8,10 @@ import android.view.View;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.adapter.MyViewPagerAdapter;
 import com.by5388.sy95306v2.bean.MyViewPager;
+import com.by5388.sy95306v2.fragment.gz.late.GzLateFragment;
 import com.by5388.sy95306v2.fragment.gz.p2p.GzP2pFragment;
 import com.by5388.sy95306v2.fragment.gz.screen.StationScreenFragment;
-import com.by5388.sy95306v2.fragment.gz.trainNumber.GzTrainNumberFragment;
+import com.by5388.sy95306v2.fragment.gz.number.GzTrainNumberFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class GuangzhouFragment extends BaseFragment {
         viewPagers.add(new MyViewPager(GzP2pFragment.newInstance(), "站站查询"));
         viewPagers.add(new MyViewPager(GzTrainNumberFragment.newInstance(), "车次查询"));
         viewPagers.add(new MyViewPager(StationScreenFragment.newInstance(), "车站大屏幕"));
+        viewPagers.add(new MyViewPager(GzLateFragment.newInstance(), "正晚点查询"));
 
         adapter = new MyViewPagerAdapter(getChildFragmentManager(), viewPagers);
     }

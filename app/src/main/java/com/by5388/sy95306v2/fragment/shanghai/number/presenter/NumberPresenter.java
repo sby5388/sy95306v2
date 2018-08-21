@@ -19,32 +19,24 @@ import io.reactivex.schedulers.Schedulers;
 
 public class NumberPresenter implements INumberPresenter {
 
-    private INumberModel model;
-    private INumberView view;
-    private Consumer<List<ShanghaiTrainNumber>> consumer;
-    private Consumer<Throwable> throwableConsumer;
+    private final INumberModel model;
+    private final INumberView view;
+    private final Consumer<List<ShanghaiTrainNumber>> consumer;
+    private final Consumer<Throwable> throwableConsumer;
     private Disposable disposable;
 
     public NumberPresenter(INumberView view) {
         this.view = view;
         this.model = new NumberModel();
-        consumer = new Consumer<List<ShanghaiTrainNumber>>() {
-            @Override
-            public void accept(List<ShanghaiTrainNumber> numbers) {
-                if (null == numbers || numbers.isEmpty()) {
-                    view.showError("未查到相关信息");
-                } else {
-                    view.updateList(numbers);
-                }
-                view.finishQuery();
+        consumer = numbers -> {
+            if (null == numbers || numbers.isEmpty()) {
+                view.showError("未查到相关信息");
+            } else {
+                view.updateList(numbers);
             }
+            view.finishQuery();
         };
-        throwableConsumer = new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) {
-                view.showError(throwable.getMessage());
-            }
-        };
+        throwableConsumer = throwable -> view.showError(throwable.getMessage());
     }
 
     @Override

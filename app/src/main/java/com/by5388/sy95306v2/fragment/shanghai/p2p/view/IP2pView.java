@@ -1,5 +1,6 @@
 package com.by5388.sy95306v2.fragment.shanghai.p2p.view;
 
+import com.by5388.sy95306v2.base.view.IBaseView;
 import com.by5388.sy95306v2.bean.shanghai.ShanghaiTrainP2P;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
  * @author by5388  on 2018/8/10.
  */
 
-public interface IP2pView {
+public interface IP2pView extends IBaseView {
 
     /**
      * 刷新数据
@@ -17,9 +18,4 @@ public interface IP2pView {
      */
     void updateList(List<ShanghaiTrainP2P> trainP2PS);
 
-    void startQuery();
-
-    void finishQuery();
-
-    void showError(String tip);
 }
