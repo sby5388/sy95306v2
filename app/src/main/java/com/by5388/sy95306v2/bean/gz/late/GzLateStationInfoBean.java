@@ -1,4 +1,4 @@
-package com.by5388.sy95306v2.bean.guangzhou.late;
+package com.by5388.sy95306v2.bean.gz.late;
 
 /**
  * @author by5388  on 2018/8/20.

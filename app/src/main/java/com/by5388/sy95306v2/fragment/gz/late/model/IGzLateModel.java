@@ -1,7 +1,6 @@
 package com.by5388.sy95306v2.fragment.gz.late.model;
 
-import com.by5388.sy95306v2.bean.guangzhou.late.GzLateDataBean;
-import com.by5388.sy95306v2.bean.guangzhou.late.GzLateStationInfoBean;
+import com.by5388.sy95306v2.bean.gz.late.GzLateDataBean;
 
 import java.util.List;
 

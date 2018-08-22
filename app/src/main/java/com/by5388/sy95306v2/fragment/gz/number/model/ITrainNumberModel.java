@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2.fragment.gz.number.model;
 
-import com.by5388.sy95306v2.bean.guangzhou.GzResultData;
-import com.by5388.sy95306v2.bean.guangzhou.station.TrainsBean;
+import com.by5388.sy95306v2.bean.gz.GzResultData;
+import com.by5388.sy95306v2.bean.gz.station.TrainsBean;
 
 import java.util.List;
 

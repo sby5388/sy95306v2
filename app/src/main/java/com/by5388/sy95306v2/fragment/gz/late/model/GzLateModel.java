@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2.fragment.gz.late.model;
 
-import com.by5388.sy95306v2.bean.guangzhou.GzResultData;
-import com.by5388.sy95306v2.bean.guangzhou.late.GzLateDataBean;
+import com.by5388.sy95306v2.bean.gz.GzResultData;
+import com.by5388.sy95306v2.bean.gz.late.GzLateDataBean;
 import com.by5388.sy95306v2.net.gz.GzNetTools;
 import com.by5388.sy95306v2.net.gz.GzService;
 

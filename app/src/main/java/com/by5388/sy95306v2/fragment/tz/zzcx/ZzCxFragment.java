@@ -11,10 +11,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.fragment.MyListener;
 import com.by5388.sy95306v2.fragment.tz.BaseTzFragment;
-import com.by5388.sy95306v2.fragment.tz.yupiao.temp.YpAdapter;
+import com.by5388.sy95306v2.fragment.tz.remainticket.temp.YpAdapter;
 import com.by5388.sy95306v2.fragment.tz.zzcx.persenter.ITzZzCxPresenter;
 import com.by5388.sy95306v2.fragment.tz.zzcx.persenter.TzZzCxPresenter;
 import com.by5388.sy95306v2.fragment.tz.zzcx.view.ITzZzCxView;
@@ -37,7 +37,7 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
     private Button buttonSearch, buttonDate, buttonCheck;
     private ListView listView;
     private YpAdapter adapter;
-    private final static List<IYp> EMPTY_LIST = new ArrayList<>();
+    private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
     private MyListener dateListener;
     private Calendar calendar;
     private ITzZzCxPresenter presenter;
@@ -150,7 +150,7 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
     }
 
     @Override
-    public void updateList(List<IYp> dataBeans) {
+    public void updateList(List<IRemainingTicket> dataBeans) {
         if (null == dataBeans || dataBeans.isEmpty()) {
             return;
         }

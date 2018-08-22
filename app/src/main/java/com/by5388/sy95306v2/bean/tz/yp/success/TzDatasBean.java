@@ -2,7 +2,7 @@ package com.by5388.sy95306v2.bean.tz.yp.success;
 
 import android.text.TextUtils;
 
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 
 /**
  * @author by5388
@@ -10,7 +10,7 @@ import com.by5388.sy95306v2.bean.IYp;
  * 车次属性
  */
 @SuppressWarnings("all")
-public class TzDatasBean implements IYp {
+public class TzDatasBean implements IRemainingTicket {
     private final static String EMPTY = "--";
     private final static String RESULT_EMPTY = "-";
     private final static String NO_NUMBER = "无";

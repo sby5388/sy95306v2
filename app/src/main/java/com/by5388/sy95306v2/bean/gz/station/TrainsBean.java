@@ -1,6 +1,6 @@
-package com.by5388.sy95306v2.bean.guangzhou.station;
+package com.by5388.sy95306v2.bean.gz.station;
 
-import com.by5388.sy95306v2.bean.guangzhou.StationInfosBean;
+import com.by5388.sy95306v2.bean.gz.StationInfosBean;
 
 import java.util.List;
 

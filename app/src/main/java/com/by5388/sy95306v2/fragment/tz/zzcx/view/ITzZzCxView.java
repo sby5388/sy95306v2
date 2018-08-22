@@ -3,7 +3,7 @@ package com.by5388.sy95306v2.fragment.tz.zzcx.view;
 import android.graphics.Bitmap;
 
 import com.by5388.sy95306v2.base.view.IBaseView;
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface ITzZzCxView extends IBaseView {
      *
      * @param dataBeans 车次列表
      */
-    void updateList(List<IYp> dataBeans);
+    void updateList(List<IRemainingTicket> dataBeans);
 
     /**
      * 更新验证码图片

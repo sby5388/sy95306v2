@@ -1,12 +1,12 @@
 package com.by5388.sy95306v2.bean.tzyp;
 
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 
 /**
  * @author by5388
  * @date 2018/8/13 16:07
  */
-public class TzYpData implements IYp {
+public class TzYpData implements IRemainingTicket {
 
 
     //2018-08-13,1,D672,深圳北,饶平,16:14,18:56,02:42,--,--,无,无,,无,;

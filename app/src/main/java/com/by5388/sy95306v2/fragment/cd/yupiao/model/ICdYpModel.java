@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.fragment.cd.yupiao.model;
 
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public interface ICdYpModel {
      * @param date        日期
      * @return 余票数据
      */
-    Observable<List<IYp>> getCdYp(String fromStation, String toStation, String date);
+    Observable<List<IRemainingTicket>> getCdYp(String fromStation, String toStation, String date);
 }

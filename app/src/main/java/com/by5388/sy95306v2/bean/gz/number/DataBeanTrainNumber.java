@@ -1,6 +1,6 @@
-package com.by5388.sy95306v2.bean.guangzhou.number;
+package com.by5388.sy95306v2.bean.gz.number;
 
-import com.by5388.sy95306v2.bean.guangzhou.station.TrainsBean;
+import com.by5388.sy95306v2.bean.gz.station.TrainsBean;
 
 import java.util.List;
 

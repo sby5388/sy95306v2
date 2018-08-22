@@ -1,4 +1,4 @@
-package com.by5388.sy95306v2.fragment.tz.yupiao;
+package com.by5388.sy95306v2.fragment.tz.remainticket;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
@@ -9,14 +9,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.bean.IYp;
-import com.by5388.sy95306v2.bean.tzyp.TzYpData;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.fragment.MyListener;
 import com.by5388.sy95306v2.fragment.tz.BaseTzFragment;
-import com.by5388.sy95306v2.fragment.tz.yupiao.presenter.IYpPresenter;
-import com.by5388.sy95306v2.fragment.tz.yupiao.presenter.YpPresenter;
-import com.by5388.sy95306v2.fragment.tz.yupiao.temp.YpAdapter;
-import com.by5388.sy95306v2.fragment.tz.yupiao.view.IYpView;
+import com.by5388.sy95306v2.fragment.tz.remainticket.presenter.IYpPresenter;
+import com.by5388.sy95306v2.fragment.tz.remainticket.presenter.YpPresenter;
+import com.by5388.sy95306v2.fragment.tz.remainticket.temp.YpAdapter;
+import com.by5388.sy95306v2.fragment.tz.remainticket.view.IYpView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,7 +32,7 @@ public class YuPiaoFragment extends BaseTzFragment implements IYpView {
     private ListView listView;
     private YpAdapter adapter;
     private IYpPresenter presenter;
-    private final static List<IYp> EMPTY_LIST = new ArrayList<>();
+    private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
     private MyListener dateListener;
     private Calendar calendar;
 
@@ -116,7 +115,7 @@ public class YuPiaoFragment extends BaseTzFragment implements IYpView {
     }
 
     @Override
-    public void updateDate(List<IYp> yuPiaoData) {
+    public void updateDate(List<IRemainingTicket> yuPiaoData) {
         if (null != yuPiaoData) {
             adapter.setYuPiaoData(yuPiaoData);
         }

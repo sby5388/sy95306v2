@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.fragment.gz.late.persenter;
 
-import com.by5388.sy95306v2.bean.guangzhou.late.GzLateDataBean;
+import com.by5388.sy95306v2.bean.gz.late.GzLateDataBean;
 import com.by5388.sy95306v2.fragment.gz.late.model.GzLateModel;
 import com.by5388.sy95306v2.fragment.gz.late.model.IGzLateModel;
 import com.by5388.sy95306v2.fragment.gz.late.view.IGzLateView;

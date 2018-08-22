@@ -1,13 +1,13 @@
 package com.by5388.sy95306v2.bean.cd.yupiao;
 
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 
 /**
  * @author by5388
  * @date 2018/8/13 11:19
  */
 @SuppressWarnings("all")
-public class CdYpDetailBean implements IYp {
+public class CdYpDetailBean implements IRemainingTicket {
     private final static String EMPTY = "0";
     private final static String RESULT_EMPTY = "-";
     /**

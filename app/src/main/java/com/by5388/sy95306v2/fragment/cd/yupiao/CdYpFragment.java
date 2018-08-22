@@ -10,13 +10,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.fragment.MyListener;
 import com.by5388.sy95306v2.fragment.cd.BaseCdFragment;
 import com.by5388.sy95306v2.fragment.cd.yupiao.persenter.CdYpPresenter;
 import com.by5388.sy95306v2.fragment.cd.yupiao.persenter.ICdYpPresenter;
 import com.by5388.sy95306v2.fragment.cd.yupiao.view.ICdYpView;
-import com.by5388.sy95306v2.fragment.tz.yupiao.temp.YpAdapter;
+import com.by5388.sy95306v2.fragment.tz.remainticket.temp.YpAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class CdYpFragment extends BaseCdFragment implements ICdYpView {
     private ListView listView;
     private YpAdapter adapter;
     private ICdYpPresenter presenter;
-    private final static List<IYp> EMPTY_LIST = new ArrayList<>();
+    private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
     private MyListener dateListener;
     private Calendar calendar;
 
@@ -123,7 +123,7 @@ public class CdYpFragment extends BaseCdFragment implements ICdYpView {
     }
 
     @Override
-    public void updateDate(List<IYp> yuPiaoData) {
+    public void updateDate(List<IRemainingTicket> yuPiaoData) {
         if (null != yuPiaoData) {
             adapter.setYuPiaoData(yuPiaoData);
         }

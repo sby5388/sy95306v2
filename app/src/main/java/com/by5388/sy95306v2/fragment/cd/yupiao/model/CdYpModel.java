@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.fragment.cd.yupiao.model;
 
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.bean.cd.yupiao.CdYpDetailBean;
 import com.by5388.sy95306v2.net.cd.ICdQuery;
 import com.by5388.sy95306v2.net.cd.QueryCd;
@@ -23,10 +23,10 @@ public class CdYpModel implements ICdYpModel {
     }
 
     @Override
-    public Observable<List<IYp>> getCdYp(String fromStation, String toStation, String date) {
+    public Observable<List<IRemainingTicket>> getCdYp(String fromStation, String toStation, String date) {
         return query.getCdYp(fromStation, toStation, date)
-                .flatMap((Function<List<CdYpDetailBean>, ObservableSource<List<IYp>>>) cdYpDetailBeans -> {
-                    List<IYp> list = new ArrayList<>(cdYpDetailBeans);
+                .flatMap((Function<List<CdYpDetailBean>, ObservableSource<List<IRemainingTicket>>>) cdYpDetailBeans -> {
+                    List<IRemainingTicket> list = new ArrayList<>(cdYpDetailBeans);
                     return Observable.just(list);
                 });
     }

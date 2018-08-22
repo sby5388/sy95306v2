@@ -1,4 +1,4 @@
-package com.by5388.sy95306v2.fragment.tz.yupiao.temp;
+package com.by5388.sy95306v2.fragment.tz.remainticket.temp;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,8 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.bean.IYp;
-import com.by5388.sy95306v2.bean.tzyp.TzYpData;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ import java.util.List;
 public class YpAdapter extends BaseAdapter {
 
     private final LayoutInflater inflater;
-    private List<IYp> yuPiaoData;
+    private List<IRemainingTicket> yuPiaoData;
     private final String rw;
     private final String yw;
     private final String rz;
@@ -30,7 +29,7 @@ public class YpAdapter extends BaseAdapter {
     private final static String EMPTY = "--";
     private final static String EMPTY2 = "无";
 
-    public YpAdapter(@NonNull Context context, @NonNull List<IYp> yuPiaoData) {
+    public YpAdapter(@NonNull Context context, @NonNull List<IRemainingTicket> yuPiaoData) {
         this.inflater = LayoutInflater.from(context);
         this.yuPiaoData = yuPiaoData;
         rw = context.getString(R.string.rw);
@@ -40,7 +39,7 @@ public class YpAdapter extends BaseAdapter {
         wz = context.getString(R.string.wz);
     }
 
-    public void setYuPiaoData(@NonNull List<IYp> yuPiaoData) {
+    public void setYuPiaoData(@NonNull List<IRemainingTicket> yuPiaoData) {
         this.yuPiaoData = yuPiaoData;
         notifyDataSetChanged();
     }
@@ -51,7 +50,7 @@ public class YpAdapter extends BaseAdapter {
     }
 
     @Override
-    public IYp getItem(int position) {
+    public IRemainingTicket getItem(int position) {
         return yuPiaoData.get(position);
     }
 
@@ -62,7 +61,7 @@ public class YpAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        IYp data = getItem(position);
+        IRemainingTicket data = getItem(position);
         ViewHolder holder;
         if (null == convertView) {
             convertView = inflater.inflate(R.layout.item_temp_yp, parent, false);

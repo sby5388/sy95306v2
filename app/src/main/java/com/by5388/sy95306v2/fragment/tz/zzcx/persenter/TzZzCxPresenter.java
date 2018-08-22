@@ -2,7 +2,7 @@ package com.by5388.sy95306v2.fragment.tz.zzcx.persenter;
 
 import android.graphics.Bitmap;
 
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.bean.tz.yp.success.SuccessDataBean;
 import com.by5388.sy95306v2.bean.tz.yp.success.TzDatasBean;
 import com.by5388.sy95306v2.fragment.tz.zzcx.model.ITzZzCxModel;
@@ -74,7 +74,7 @@ public class TzZzCxPresenter implements ITzZzCxPresenter {
             if (null == beans || beans.isEmpty()) {
                 return;
             }
-            List<IYp> yps = new ArrayList<>(beans);
+            List<IRemainingTicket> yps = new ArrayList<>(beans);
             view.updateList(yps);
         };
     }

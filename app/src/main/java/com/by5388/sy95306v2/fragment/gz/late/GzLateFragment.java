@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.bean.guangzhou.late.GzLateStationInfoBean;
+import com.by5388.sy95306v2.bean.gz.late.GzLateStationInfoBean;
 import com.by5388.sy95306v2.fragment.MyListener;
 import com.by5388.sy95306v2.fragment.gz.BaseGzFragment;
 import com.by5388.sy95306v2.fragment.gz.late.persenter.GzLatePresenter;

@@ -1,7 +1,6 @@
 package com.by5388.sy95306v2.dialog;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -11,7 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.bean.guangzhou.station.TrainsBean;
+import com.by5388.sy95306v2.bean.gz.station.TrainsBean;
 import com.by5388.sy95306v2.dialog.adapter.DetailAdapter;
 
 import java.util.ArrayList;

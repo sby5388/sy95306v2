@@ -1,4 +1,4 @@
-package com.by5388.sy95306v2.fragment.tz.yupiao.presenter;
+package com.by5388.sy95306v2.fragment.tz.remainticket.presenter;
 
 /**
  * @author by5388  on 2018/8/13.

@@ -1,11 +1,10 @@
-package com.by5388.sy95306v2.fragment.tz.yupiao.presenter;
+package com.by5388.sy95306v2.fragment.tz.remainticket.presenter;
 
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.bean.tzyp.QueryParam;
-import com.by5388.sy95306v2.bean.tzyp.TzYpData;
-import com.by5388.sy95306v2.fragment.tz.yupiao.model.IYpModel;
-import com.by5388.sy95306v2.fragment.tz.yupiao.model.YpModel;
-import com.by5388.sy95306v2.fragment.tz.yupiao.view.IYpView;
+import com.by5388.sy95306v2.fragment.tz.remainticket.model.IYpModel;
+import com.by5388.sy95306v2.fragment.tz.remainticket.model.YpModel;
+import com.by5388.sy95306v2.fragment.tz.remainticket.view.IYpView;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class YpPresenter implements IYpPresenter {
     private final IYpModel model;
     private final IYpView view;
     private Disposable disposable;
-    private final Consumer<List<IYp>> consumer;
+    private final Consumer<List<IRemainingTicket>> consumer;
     private final Consumer<Throwable> throwableConsumer;
 
     public YpPresenter(IYpView view) {

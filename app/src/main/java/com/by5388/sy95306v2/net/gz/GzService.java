@@ -1,9 +1,9 @@
 package com.by5388.sy95306v2.net.gz;
 
-import com.by5388.sy95306v2.bean.guangzhou.GzResultData;
-import com.by5388.sy95306v2.bean.guangzhou.late.GzLateDataBean;
-import com.by5388.sy95306v2.bean.guangzhou.station.DataBeanP2P;
-import com.by5388.sy95306v2.bean.guangzhou.station.TrainsBean;
+import com.by5388.sy95306v2.bean.gz.GzResultData;
+import com.by5388.sy95306v2.bean.gz.late.GzLateDataBean;
+import com.by5388.sy95306v2.bean.gz.station.DataBeanP2P;
+import com.by5388.sy95306v2.bean.gz.station.TrainsBean;
 
 import java.util.List;
 

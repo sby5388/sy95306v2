@@ -1,7 +1,7 @@
-package com.by5388.sy95306v2.fragment.tz.yupiao.view;
+package com.by5388.sy95306v2.fragment.tz.remainticket.view;
 
 import com.by5388.sy95306v2.base.view.IBaseView;
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface IYpView extends IBaseView {
 
-    void updateDate(List<IYp> yuPiaoData);
+    void updateDate(List<IRemainingTicket> yuPiaoData);
 }

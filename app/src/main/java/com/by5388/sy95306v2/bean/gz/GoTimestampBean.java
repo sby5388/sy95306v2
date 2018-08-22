@@ -1,11 +1,11 @@
-package com.by5388.sy95306v2.bean.guangzhou;
+package com.by5388.sy95306v2.bean.gz;
 
 /**
  * @author by5388  on 2018/8/1.
  */
 
 
-public class ArrTimestampBean {
+public class GoTimestampBean {
     /**
      * date : 26
      * day : 4

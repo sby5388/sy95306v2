@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.bean.guangzhou.station.TrainsBean;
+import com.by5388.sy95306v2.bean.gz.station.TrainsBean;
 import com.by5388.sy95306v2.dialog.ITrainDetailView;
 import com.by5388.sy95306v2.dialog.TrainDetailDialog;
 import com.by5388.sy95306v2.fragment.MyListener;

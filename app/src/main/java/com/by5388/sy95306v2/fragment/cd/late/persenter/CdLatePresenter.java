@@ -45,7 +45,6 @@ public class CdLatePresenter implements ICdLatePresenter {
         };
         this.consumerStation = stations -> {
             view.finishQuery();
-            // TODO: 2018/8/18
             if (null == stations || stations.isEmpty()) {
                 view.showError("请重试");
                 return;
@@ -94,6 +93,5 @@ public class CdLatePresenter implements ICdLatePresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(consumerDetail, throwableConsumer);
-
     }
 }

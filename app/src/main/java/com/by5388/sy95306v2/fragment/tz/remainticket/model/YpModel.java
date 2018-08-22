@@ -1,9 +1,9 @@
-package com.by5388.sy95306v2.fragment.tz.yupiao.model;
+package com.by5388.sy95306v2.fragment.tz.remainticket.model;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.bean.tzyp.QueryParam;
 import com.by5388.sy95306v2.bean.tzyp.TzYpData;
 import com.by5388.sy95306v2.bean.tzyp.YpResult;
@@ -31,7 +31,7 @@ public class YpModel implements IYpModel {
     }
 
     @Override
-    public Observable<List<IYp>> getYuPiaoData(@NonNull QueryParam param) {
+    public Observable<List<IRemainingTicket>> getYuPiaoData(@NonNull QueryParam param) {
         return service.getYpMessage(param.toString(), param.getDate())
                 .flatMap((Function<YpResult, ObservableSource<List<TzYpData>>>) result -> {
                     if (null == result) {
@@ -39,8 +39,8 @@ public class YpModel implements IYpModel {
                         return Observable.just(new ArrayList<>());
                     }
                     return Observable.just(getYuPiaoData(result.getData()));
-                }).flatMap((Function<List<TzYpData>, ObservableSource<List<IYp>>>) tzYpData -> {
-                    List<IYp> list = new ArrayList<>(tzYpData);
+                }).flatMap((Function<List<TzYpData>, ObservableSource<List<IRemainingTicket>>>) tzYpData -> {
+                    List<IRemainingTicket> list = new ArrayList<>(tzYpData);
                     return Observable.just(list);
                 });
     }

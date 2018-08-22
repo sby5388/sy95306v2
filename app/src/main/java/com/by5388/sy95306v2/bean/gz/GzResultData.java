@@ -1,4 +1,4 @@
-package com.by5388.sy95306v2.bean.guangzhou;
+package com.by5388.sy95306v2.bean.gz;
 
 /**
  * @author by5388  on 2018/8/1.
@@ -7,8 +7,8 @@ package com.by5388.sy95306v2.bean.guangzhou;
 public class GzResultData<T> {
     /**
      * 数据类型
-     * 1.站到站查询的返回类型是：@see {@link com.by5388.sy95306v2.bean.guangzhou.station.DataBeanP2P}
-     * 2.车次查询的返回结果是：@see {@link com.by5388.sy95306v2.bean.guangzhou.number.DataBeanTrainNumber}
+     * 1.站到站查询的返回类型是：@see {@link com.by5388.sy95306v2.bean.gz.station.DataBeanP2P}
+     * 2.车次查询的返回结果是：@see {@link com.by5388.sy95306v2.bean.gz.number.DataBeanTrainNumber}
      * ,实际上就是List<TrainsBean>
      */
     private T data;

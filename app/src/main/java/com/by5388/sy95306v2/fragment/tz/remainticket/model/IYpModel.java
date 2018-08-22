@@ -1,10 +1,9 @@
-package com.by5388.sy95306v2.fragment.tz.yupiao.model;
+package com.by5388.sy95306v2.fragment.tz.remainticket.model;
 
 import android.support.annotation.NonNull;
 
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.bean.tzyp.QueryParam;
-import com.by5388.sy95306v2.bean.tzyp.TzYpData;
 
 import java.util.List;
 
@@ -20,5 +19,5 @@ public interface IYpModel {
      * @param param 参数
      * @return 车次+余票信息
      */
-    Observable<List<IYp>> getYuPiaoData(@NonNull QueryParam param);
+    Observable<List<IRemainingTicket>> getYuPiaoData(@NonNull QueryParam param);
 }

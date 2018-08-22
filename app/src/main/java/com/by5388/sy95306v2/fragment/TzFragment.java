@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.adapter.MyViewPagerAdapter;
-import com.by5388.sy95306v2.fragment.tz.yupiao.YuPiaoFragment;
+import com.by5388.sy95306v2.fragment.tz.remainticket.YuPiaoFragment;
 import com.by5388.sy95306v2.fragment.tz.zzcx.ZzCxFragment;
 
 /**

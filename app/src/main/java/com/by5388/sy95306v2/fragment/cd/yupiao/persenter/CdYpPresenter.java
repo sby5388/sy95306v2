@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.fragment.cd.yupiao.persenter;
 
-import com.by5388.sy95306v2.bean.IYp;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.fragment.cd.yupiao.model.CdYpModel;
 import com.by5388.sy95306v2.fragment.cd.yupiao.model.ICdYpModel;
 import com.by5388.sy95306v2.fragment.cd.yupiao.view.ICdYpView;
@@ -21,7 +21,7 @@ public class CdYpPresenter implements ICdYpPresenter {
     private final ICdYpModel model;
     private Disposable disposable;
     private final Consumer<Throwable> throwableConsumer;
-    private final Consumer<List<IYp>> consumer;
+    private final Consumer<List<IRemainingTicket>> consumer;
 
     public CdYpPresenter(ICdYpView view) {
         this.view = view;

@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2.fragment.gz.late.view;
 
 import com.by5388.sy95306v2.base.view.IBaseView;
-import com.by5388.sy95306v2.bean.guangzhou.late.GzLateStationInfoBean;
+import com.by5388.sy95306v2.bean.gz.late.GzLateStationInfoBean;
 
 import java.util.List;
 

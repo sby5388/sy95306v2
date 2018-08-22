@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.bean.guangzhou.station.StationsBean;
+import com.by5388.sy95306v2.bean.gz.station.StationsBean;
 
 import java.util.List;
 

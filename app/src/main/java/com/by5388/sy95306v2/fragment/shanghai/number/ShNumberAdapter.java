@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.shanghai.InfoBeanDelay;
 import com.by5388.sy95306v2.bean.shanghai.QueryMethod;
-import com.by5388.sy95306v2.bean.shanghai.ShanghaiTrainDelay;
 import com.by5388.sy95306v2.bean.shanghai.ShanghaiTrainNumber;
 import com.by5388.sy95306v2.net.shanghai.ShangHaiNetTools;
 import com.by5388.sy95306v2.net.shanghai.ShanghaiService;
@@ -21,7 +20,6 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
@@ -72,6 +70,7 @@ public class ShNumberAdapter extends RecyclerView.Adapter {
         holder.endTime.setText(number.getEndTime());
         holder.stationName.setText(number.getStationName());
         //TODO 测试方法
+        //TODO 对字符串判断，特定值时才取值，否则不处理，避免重复调用
         //String stationName, String trainCode
         Disposable disposable = shanghaiService.queryTrainDelay(new QueryMethod<>(new InfoBeanDelay(number.getStationName(), number.getTrainCode())))
                 .subscribeOn(Schedulers.io())

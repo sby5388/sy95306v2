@@ -1,7 +1,4 @@
-package com.by5388.sy95306v2.bean.guangzhou;
-
-import com.by5388.sy95306v2.bean.guangzhou.ArrTimestampBean;
-import com.by5388.sy95306v2.bean.guangzhou.GoTimestampBean;
+package com.by5388.sy95306v2.bean.gz;
 
 /**
  * @author by5388  on 2018/8/1.

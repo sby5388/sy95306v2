@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.bean.guangzhou.late.GzLateStationInfoBean;
+import com.by5388.sy95306v2.bean.gz.late.GzLateStationInfoBean;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2.fragment.gz.p2p.presenter;
 
-import com.by5388.sy95306v2.bean.guangzhou.GzResultData;
-import com.by5388.sy95306v2.bean.guangzhou.station.DataBeanP2P;
+import com.by5388.sy95306v2.bean.gz.GzResultData;
+import com.by5388.sy95306v2.bean.gz.station.DataBeanP2P;
 import com.by5388.sy95306v2.fragment.gz.p2p.model.GzP2pModel;
 import com.by5388.sy95306v2.fragment.gz.p2p.model.IGzP2pModel;
 import com.by5388.sy95306v2.fragment.gz.p2p.view.IGzP2pView;
