@@ -1,33 +1,18 @@
 package com.by5388.sy95306v2.fragment;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.view.View;
 
-import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.adapter.MyViewPagerAdapter;
-import com.by5388.sy95306v2.bean.MyViewPager;
 import com.by5388.sy95306v2.fragment.shanghai.number.ShanghaiNumberFragment;
 import com.by5388.sy95306v2.fragment.shanghai.p2p.ShanghaiP2pFragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * 广铁集团的查询页面：2个
+ * 上海集团的查询页面：2个
  *
  * @author by5388  on 2018/7/28.
  */
 
-public class ShanghaiFragment extends BaseFragment {
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private MyViewPagerAdapter adapter;
-
-    public ShanghaiFragment() {
-    }
-
+public class ShanghaiFragment extends BaseTopFragment {
     public static ShanghaiFragment newInstance() {
         ShanghaiFragment fragment = new ShanghaiFragment();
         Bundle args = new Bundle();
@@ -36,28 +21,9 @@ public class ShanghaiFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData() {
-        List<MyViewPager> viewPagers = new ArrayList<>();
-        viewPagers.add(new MyViewPager(ShanghaiP2pFragment.newInstance(), "车次查询"));
-        viewPagers.add(new MyViewPager(ShanghaiNumberFragment.newInstance(), "车次查询"));
-        //TODO getChildFragmentManager
-        adapter = new MyViewPagerAdapter(getChildFragmentManager(), viewPagers);
+    protected void initFragments(MyViewPagerAdapter adapter) {
+        adapter.addFragment(ShanghaiP2pFragment.newInstance(), "车次查询");
+        adapter.addFragment(ShanghaiNumberFragment.newInstance(), "车次查询");
     }
 
-    @Override
-    protected void loadData() {
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-    }
-
-    @Override
-    protected int getLayoutID() {
-        return R.layout.fragment_guang_zhou;
-    }
-
-    @Override
-    protected void initView(View view) {
-        viewPager = view.findViewById(R.id.view_pager_guang_zhou);
-        tabLayout = view.findViewById(R.id.tab_layout_guang_zhou);
-    }
 }

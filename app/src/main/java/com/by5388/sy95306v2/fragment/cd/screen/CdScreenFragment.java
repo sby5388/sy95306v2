@@ -1,6 +1,7 @@
 package com.by5388.sy95306v2.fragment.cd.screen;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,6 +32,7 @@ import java.util.Locale;
  * @author by5388  on 2018/8/18.
  */
 public class CdScreenFragment extends BaseCdFragment implements ICdScreenView {
+    private static final String TAG = "CdScreenFragment";
     private ICdScreenPresenter presenter;
     private CdScreenAdapter adapter;
     private Button buttonSearch;
@@ -77,6 +79,11 @@ public class CdScreenFragment extends BaseCdFragment implements ICdScreenView {
         spinner.setAdapter(arrayAdapter);
         toggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> setTextView(isChecked));
         buttonSearch.setOnClickListener(v -> query());
+        Log.d(TAG, "loadData: isAdded: " + isAdded());
+        //TODO  重复
+//        if (isAdded()) {
+//            presenter.getScreenStation();
+//        }
     }
 
     private void setTextView(boolean isChecked) {

@@ -74,13 +74,11 @@ public class CdLateFragment extends BaseCdFragment implements ICdLateView {
     private void query() {
         final String trainNo = trainCode.getText().toString().trim();
         if (TextUtils.isEmpty(trainNo)) {
-            //设置错误提示内容
             trainCode.setError("请输入车次");
             trainCode.requestFocus();
             return;
         }
         String date = getData(calendar);
-
         presenter.getLateStationList(trainNo, date);
     }
 

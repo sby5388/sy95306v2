@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.fragment.shanghai.p2p.view;
 
-import com.by5388.sy95306v2.base.view.IBaseView;
+import com.by5388.sy95306v2.base.IBaseView;
 import com.by5388.sy95306v2.bean.shanghai.ShanghaiTrainP2P;
 
 import java.util.List;

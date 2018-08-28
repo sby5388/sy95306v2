@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.bean.tz.yp.success.SuccessDataBean;
-import com.by5388.sy95306v2.bean.tz.yp.success.TzDatasBean;
+import com.by5388.sy95306v2.bean.tz.yp.success.TzDataBean;
 import com.by5388.sy95306v2.fragment.tz.zzcx.model.ITzZzCxModel;
 import com.by5388.sy95306v2.fragment.tz.zzcx.model.TzZzCxModel;
 import com.by5388.sy95306v2.fragment.tz.zzcx.view.ITzZzCxView;
@@ -38,7 +38,7 @@ public class TzZzCxPresenter implements ITzZzCxPresenter {
     /**
      * 最大错误数
      */
-    private static final int MAX_ERROR_COUNT = 2;
+    private static final int MAX_ERROR_COUNT = 1;
 
     public TzZzCxPresenter(ITzZzCxView view) {
         this.view = view;
@@ -59,6 +59,7 @@ public class TzZzCxPresenter implements ITzZzCxPresenter {
                 errorCount++;
                 if (errorCount > MAX_ERROR_COUNT) {
                     model.clearCookie();
+                    refreshPassCodeBitmap();
                     errorCount = 0;
                 }
             }
@@ -70,7 +71,7 @@ public class TzZzCxPresenter implements ITzZzCxPresenter {
                 view.showError("没有相关数据");
                 return;
             }
-            List<TzDatasBean> beans = successDataBean.getDatas();
+            List<TzDataBean> beans = successDataBean.getDatas();
             if (null == beans || beans.isEmpty()) {
                 return;
             }
@@ -82,6 +83,7 @@ public class TzZzCxPresenter implements ITzZzCxPresenter {
 
     @Override
     public void refreshPassCodeBitmap() {
+        view.clearPassCode();
         view.startQuery();
         bitmapDisposable = model.getPassCodeBitmap()
                 .subscribeOn(Schedulers.io())
@@ -105,9 +107,9 @@ public class TzZzCxPresenter implements ITzZzCxPresenter {
                 .subscribe(booleanConsumer
                         , throwableConsumer
                 );
-
-
     }
+
+
 
     @Override
     public void getTrainList(String date, String fromStation, String toStation, String randCode) {

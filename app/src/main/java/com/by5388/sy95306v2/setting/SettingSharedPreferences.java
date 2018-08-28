@@ -21,7 +21,7 @@ public class SettingSharedPreferences implements ISettingSharedPreferences {
     }
 
     public static SettingSharedPreferences getInstance() {
-        return SingletonHandler.instance;
+        return SingletonHandler.INSTANCE;
     }
 
     @Override
@@ -87,6 +87,6 @@ public class SettingSharedPreferences implements ISettingSharedPreferences {
     }
 
     private static class SingletonHandler {
-        private static final SettingSharedPreferences instance = new SettingSharedPreferences();
+        private static final SettingSharedPreferences INSTANCE = new SettingSharedPreferences();
     }
 }

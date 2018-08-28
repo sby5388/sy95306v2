@@ -65,7 +65,7 @@ public class TrainDetailDialog implements ITrainDetailView {
     @Override
     public TrainDetailDialog setData(@NonNull TrainsBean trainsBean) {
         // TODO: 2018/8/3 修改->显示
-        adapter.setInfosBeans(trainsBean);
+        adapter.setInfoBeans(trainsBean);
         String name = String.format(context.getString(R.string.show_title), trainsBean.getTrainNo(), trainsBean.getSfStation(), trainsBean.getZdStation());
         String time = String.format(context.getString(R.string.show_time), trainsBean.getSfTime(), trainsBean.getZdTime(), trainsBean.getSpendTime());
         titleName.setText(name);

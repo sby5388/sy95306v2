@@ -230,15 +230,5 @@ public class ShanghaiTrainP2P {
         this.needTime = needTime;
     }
 
-    @Override
-    public String toString() {
-        return "ShanghaiTrainP2P{" +
-                "trainCode='" + trainCode + '\'' +
-                ", fromStation='" + fromStation + '\'' +
-                ", startTime='" + startTime + '\'' +
-                ", toStation='" + toStation + '\'' +
-                ", endTime='" + endTime + '\'' +
-                ", needTime='" + needTime + '\'' +
-                '}';
-    }
+
 }

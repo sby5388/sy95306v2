@@ -10,13 +10,14 @@ import java.util.List;
 @SuppressWarnings("all")
 public class SuccessDataBean {
 
-    private String isThrough;
-    private List<TzDatasBean> datas;
+
     /**
      * 标记：true:有数据(成功)
      * false:无数据(无数据、异常)
      */
     protected boolean flag;
+    private String isThrough;
+    private List<TzDataBean> datas;
 
     public final boolean isFlag() {
         return flag;
@@ -34,11 +35,11 @@ public class SuccessDataBean {
         this.isThrough = isThrough;
     }
 
-    public List<TzDatasBean> getDatas() {
+    public List<TzDataBean> getDatas() {
         return datas;
     }
 
-    public void setDatas(List<TzDatasBean> datas) {
+    public void setDatas(List<TzDataBean> datas) {
         this.datas = datas;
     }
 

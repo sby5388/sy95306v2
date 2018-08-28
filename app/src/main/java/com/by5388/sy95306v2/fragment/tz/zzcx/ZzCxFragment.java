@@ -14,7 +14,7 @@ import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.fragment.MyListener;
 import com.by5388.sy95306v2.fragment.tz.BaseTzFragment;
-import com.by5388.sy95306v2.fragment.tz.remainticket.temp.YpAdapter;
+import com.by5388.sy95306v2.fragment.tz.remainticket.temp.RemainTicketAdapter;
 import com.by5388.sy95306v2.fragment.tz.zzcx.persenter.ITzZzCxPresenter;
 import com.by5388.sy95306v2.fragment.tz.zzcx.persenter.TzZzCxPresenter;
 import com.by5388.sy95306v2.fragment.tz.zzcx.view.ITzZzCxView;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
 
-    private static final String TAG = "GetTrainByStation";
+    private static final String TAG = "ZzCxFragment";
     private TextInputEditText fromStation, toStation, passCode;
     /**
      * 图片验证码
@@ -36,7 +36,7 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
     private ImageView imageViewPassCode;
     private Button buttonSearch, buttonDate, buttonCheck;
     private ListView listView;
-    private YpAdapter adapter;
+    private RemainTicketAdapter adapter;
     private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
     private MyListener dateListener;
     private Calendar calendar;
@@ -49,12 +49,14 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
         return fragment;
     }
 
+    // FIXME: 2018/8/25  gson  解析泛型
+    //  https://www.cnblogs.com/qq78292959/p/3781808.html
     @Override
     protected void initData() {
         presenter = new TzZzCxPresenter(this);
         dateListener = new MyListener(this);
         calendar = Calendar.getInstance();
-        adapter = new YpAdapter(getContext(), EMPTY_LIST);
+        adapter = new RemainTicketAdapter(getContext(), EMPTY_LIST);
     }
 
     @Override
@@ -121,7 +123,12 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
         String toStation = this.toStation.getText().toString().trim();
         String randCode = passCode.getText().toString().trim();
         presenter.getTrainList(date, fromStation, toStation, randCode);
-        adapter.setYuPiaoData(EMPTY_LIST);
+        adapter.setTickets(EMPTY_LIST);
+    }
+
+    @Override
+    public void clearPassCode() {
+        passCode.setText("");
     }
 
     @Override
@@ -134,7 +141,6 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
     @Override
     public void startQuery() {
         imageViewPassCode.setEnabled(false);
-        //buttonSearch.setEnabled(false);
         buttonCheck.setEnabled(false);
     }
 
@@ -154,7 +160,7 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
         if (null == dataBeans || dataBeans.isEmpty()) {
             return;
         }
-        adapter.setYuPiaoData(dataBeans);
+        adapter.setTickets(dataBeans);
     }
 
     @Override

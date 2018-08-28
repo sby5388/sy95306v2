@@ -7,7 +7,8 @@ import android.view.View;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.adapter.MyViewPagerAdapter;
-import com.by5388.sy95306v2.fragment.tz.remainticket.YuPiaoFragment;
+import com.by5388.sy95306v2.fragment.tz.combination.CombinationFragment;
+import com.by5388.sy95306v2.fragment.tz.remainticket.RemainTicketFragment;
 import com.by5388.sy95306v2.fragment.tz.zzcx.ZzCxFragment;
 
 /**
@@ -37,7 +38,8 @@ public class TzFragment extends BaseFragment {
     protected void initData() {
         adapter = new MyViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(ZzCxFragment.newInstance(), "中转查询");
-        adapter.addFragment(YuPiaoFragment.newInstance(), "余票查询2");
+        adapter.addFragment(RemainTicketFragment.newInstance(), "余票查询2");
+        adapter.addFragment(CombinationFragment.newInstance(), "联合查询");
     }
 
     @Override

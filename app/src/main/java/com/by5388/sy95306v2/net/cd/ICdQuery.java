@@ -5,7 +5,7 @@ import com.by5388.sy95306v2.bean.cd.late.CdTrainAllNodeBean;
 import com.by5388.sy95306v2.bean.cd.screen.ScreenArriveDetail;
 import com.by5388.sy95306v2.bean.cd.screen.ScreenLeaveDetail;
 import com.by5388.sy95306v2.bean.cd.screen.ScreenStation;
-import com.by5388.sy95306v2.bean.cd.yupiao.CdYpDetailBean;
+import com.by5388.sy95306v2.bean.cd.yupiao.CdRemainTicketDetailBean;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public interface ICdQuery {
      * @param date        日期
      * @return 余票数据
      */
-    Observable<List<CdYpDetailBean>> getCdYp(String fromStation, String toStation, String date);
+    Observable<List<CdRemainTicketDetailBean>> getCdRemainTicket(String fromStation, String toStation, String date);
 
     /**
      * 正晚点查询：返回车次所对应的车站列表,详细信息

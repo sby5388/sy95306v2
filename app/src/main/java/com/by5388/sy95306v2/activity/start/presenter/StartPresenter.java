@@ -21,6 +21,11 @@ public class StartPresenter implements IStartPresenter {
     private final IStartModel model;
     private Disposable isNeedUpdateDisposable, updateProgressDisposable, getStationCountDisposable, insertStationCountDisposable;
 
+    // FIXME: 2018/8/26 那如果有多个 Disposable 该怎么办呢,
+    // RxJava中已经内置了一个容器 CompositeDisposable , 每当
+    //我们得到一个 Disposable 时就调用 CompositeDisposable.add() 将它添加到容器中, 在退出的时
+    //候, 调用 CompositeDisposable.clear() 即可切断所有的水管
+
     /**
      * 是否需要更新
      */

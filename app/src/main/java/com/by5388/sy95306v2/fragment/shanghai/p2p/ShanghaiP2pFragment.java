@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.shanghai.ShanghaiTrainP2P;
 import com.by5388.sy95306v2.fragment.MyListener;
-import com.by5388.sy95306v2.fragment.shanghai.BaseShangHaiFragment;
+import com.by5388.sy95306v2.fragment.shanghai.BaseShFragment;
 import com.by5388.sy95306v2.fragment.shanghai.dialog.ShNumberDialog;
 import com.by5388.sy95306v2.fragment.shanghai.dialog.view.IShNumberDialogView;
 import com.by5388.sy95306v2.fragment.shanghai.p2p.presenter.IP2pPresenter;
@@ -26,7 +26,7 @@ import java.util.List;
  * @author by5388  on 2018/8/10.
  */
 
-public class ShanghaiP2pFragment extends BaseShangHaiFragment implements IP2pView {
+public class ShanghaiP2pFragment extends BaseShFragment implements IP2pView {
 
     public static final String TAG = "ShanghaiP2pFragment";
     private TextInputEditText fromStation, toStation;

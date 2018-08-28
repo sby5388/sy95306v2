@@ -8,8 +8,8 @@ import android.util.Log;
 
 import com.by5388.sy95306v2.App;
 import com.by5388.sy95306v2.bean.Station;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
 import com.by5388.sy95306v2.database.DataBaseTempAction;
+import com.by5388.sy95306v2.database.IShenYangStationDb;
 import com.by5388.sy95306v2.setting.SettingSharedPreferences;
 
 import java.io.BufferedReader;
@@ -22,9 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.functions.Function;
 
 /**
  * @author by5388  on 2018/7/30.
@@ -208,15 +206,11 @@ public class StartModel implements IStartModel {
      * @return 版本号
      */
     private double getCurrentVersion() {
-        Log.d(TAG, "getCurrentVersion: 1");
         if (!preferences.contains(START_NAME_SHARED_PREFERENCES)) {
-            Log.d(TAG, "getCurrentVersion: 2");
             preferences.put(START_NAME_SHARED_PREFERENCES, defaultStationVersion);
         } else {
-            Log.d(TAG, "getCurrentVersion: 3");
             defaultStationVersion = (String) preferences.getSharedPreference(START_NAME_SHARED_PREFERENCES, defaultStationVersion);
         }
-        Log.d(TAG, "getCurrentVersion: 4");
         return Double.parseDouble(defaultStationVersion);
     }
 
@@ -256,19 +250,5 @@ public class StartModel implements IStartModel {
     public void finishUpdate() {
         Log.d(TAG, "finishUpdate: 写入数据库：：" + defaultStationVersion);
         preferences.put(START_NAME_SHARED_PREFERENCES, defaultStationVersion);
-//        Observable.create(new ObservableOnSubscribe<Integer>() {
-//            @Override
-//            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
-//                preferences.put(START_NAME_SHARED_PREFERENCES, defaultStationVersion);
-//                emitter.onNext(0);
-//            }
-//        }).subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Integer>() {
-//            @Override
-//            public void accept(Integer integer) throws Exception {
-//
-//            }
-//        });
-
     }
 }

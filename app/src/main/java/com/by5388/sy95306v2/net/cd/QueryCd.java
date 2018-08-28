@@ -1,6 +1,5 @@
 package com.by5388.sy95306v2.net.cd;
 
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -12,7 +11,7 @@ import com.by5388.sy95306v2.bean.cd.screen.ScreenArriveDetail;
 import com.by5388.sy95306v2.bean.cd.screen.ScreenLeaveDetail;
 import com.by5388.sy95306v2.bean.cd.screen.ScreenStation;
 import com.by5388.sy95306v2.bean.cd.yupiao.CdAllResultDataBean;
-import com.by5388.sy95306v2.bean.cd.yupiao.CdYpDetailBean;
+import com.by5388.sy95306v2.bean.cd.yupiao.CdRemainTicketDetailBean;
 import com.by5388.sy95306v2.bean.cd.yupiao.CdYpTop;
 import com.by5388.sy95306v2.net.cd.late.CdLateNetTools;
 import com.by5388.sy95306v2.net.cd.late.CdLateService;
@@ -81,36 +80,32 @@ public class QueryCd implements ICdQuery {
      * @param cd 参数
      * @return 车站
      */
-    @Nullable
     private static CdLateStation getCdStation(final String cd) {
         String[] params = cd.split(",");
-        if (PARAM_CD_STATION == params.length) {
-            return new CdLateStation(params);
-        }
-        return null;
+        return CdLateStation.getStation(params);
     }
 
 
     @Override
-    public Observable<List<CdYpDetailBean>> getCdYp(String fromStation, String toStation, String date) {
+    public Observable<List<CdRemainTicketDetailBean>> getCdRemainTicket(String fromStation, String toStation, String date) {
         if (null == yPService) {
             yPService = new CdYpNetTools().getRetrofit().create(CdYpService.class);
         }
         final String queryType = "QB";
         return yPService.queryYp(fromStation, toStation, date, queryType)
-                .flatMap((Function<CdYpTop, ObservableSource<List<CdYpDetailBean>>>) cdYpTop -> {
+                .flatMap((Function<CdYpTop, ObservableSource<List<CdRemainTicketDetailBean>>>) cdYpTop -> {
                     if (null == cdYpTop) {
-                        println("cdYpTop");
+                        Log.e(TAG, "getCdRemainTicket: cdYpTop");
                         return Observable.just(new ArrayList<>());
                     }
                     CdAllResultDataBean dataBean = cdYpTop.getData();
                     if (null == dataBean) {
-                        println("dataBean");
+                        Log.e(TAG, "getCdRemainTicket: dataBean");
                         return Observable.just(new ArrayList<>());
                     }
-                    List<CdYpDetailBean> list = dataBean.getDatas();
+                    List<CdRemainTicketDetailBean> list = dataBean.getDatas();
                     if (null == list || list.isEmpty()) {
-                        println("list");
+                        Log.e(TAG, "getCdRemainTicket: list");
                         return Observable.just(new ArrayList<>());
                     }
                     return Observable.just(list);

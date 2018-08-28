@@ -1,11 +1,14 @@
 package com.by5388.sy95306v2.activity;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.view.MenuItem;
+import android.view.View;
 
 /**
  * @author by5388  on 2018/7/28.
@@ -31,7 +34,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
         loadData();
     }
-
 
     /**
      * 是否显示 actionBar

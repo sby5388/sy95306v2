@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2.adapter;
 
 import android.content.Context;
-import android.graphics.Typeface;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,19 +10,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.activity.trainList.TrainOnClickListener;
+import com.by5388.sy95306v2.activity.sy.list.TrainOnClickListener;
 import com.by5388.sy95306v2.bean.Station;
 import com.by5388.sy95306v2.bean.shenyang.TrainNumber;
 import com.by5388.sy95306v2.common.Tools;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
 import com.by5388.sy95306v2.database.DataBaseTempAction;
+import com.by5388.sy95306v2.database.IShenYangStationDb;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 车次
- * todo 出现了内存不足的现象，oom
  *
  * @author by5388  on 2018/6/7.
  */
@@ -42,9 +41,8 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
         this.listener = listener;
     }
 
-
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TrainNumber trainNumber = trainNumbers.get(position);
 
         holder.trainNumberName.setText(trainNumber.getSTCODE());
@@ -74,7 +72,8 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.item_train_number_list2, parent, false);
         RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         itemView.setLayoutParams(layoutParams);
@@ -114,23 +113,14 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
             super(itemView);
             this.rootView = itemView.findViewById(R.id.lly_item_all);
             this.imageViewStart = itemView.findViewById(R.id.textView_start_station);
-            this.imageViewStart.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
             this.imageViewEnd = itemView.findViewById(R.id.textView_end_station);
-            this.imageViewEnd.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
             this.startStationName = itemView.findViewById(R.id.textView_start_station_name);
-            this.startStationName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
             this.endStationName = itemView.findViewById(R.id.textView_end_station_name);
-            this.endStationName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
             this.startStationTime = itemView.findViewById(R.id.textView_start_station_time);
-            this.startStationTime.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
             this.endStationTime = itemView.findViewById(R.id.textView_end_station_time);
-            this.endStationTime.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
             this.spendTime = itemView.findViewById(R.id.textView_spend_time);
-            this.spendTime.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
             this.trainNumberName = itemView.findViewById(R.id.textView_train_number_name);
-            this.trainNumberName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
             this.description = itemView.findViewById(R.id.textView_train_description);
-            this.description.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
             this.price = itemView.findViewById(R.id.textView_price);
         }
     }
@@ -147,7 +137,11 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
         if (trainNumber.isFirstStation()) {
             textView.setText(R.string.station_start);
             // TODO: 2018/7/15 过时方法
-            textView.setBackgroundColor(context.getResources().getColor(R.color.detail_top_lly_bg));
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+                textView.setBackgroundColor(context.getColor(R.color.detail_top_lly_bg));
+            } else {
+                textView.setBackgroundColor(context.getResources().getColor(R.color.detail_top_lly_bg));
+            }
         } else {
             textView.setText(R.string.station_pass);
             textView.setBackgroundColor(context.getResources().getColor(R.color.station_time));

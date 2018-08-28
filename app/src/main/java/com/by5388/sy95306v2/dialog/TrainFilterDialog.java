@@ -111,7 +111,7 @@ public class TrainFilterDialog implements ITrainFilterView {
      */
     private void isSingle() {
         //通过listView对象获取到当前listView中被选择的条目position;
-        //以下方法实现会对返回一个SparseBooleanArray集合，其中对listview的触发过点击事件的每个条目进行
+        //以下方法实现会对返回一个SparseBooleanArray集合，其中对listView的触发过点击事件的每个条目进行
         // 标记（键值对）键==position/值==boolean，若该条目被选中则显示true，否则显示false;
         //TODO
         SparseBooleanArray checkedItemPositions = listView.getCheckedItemPositions();

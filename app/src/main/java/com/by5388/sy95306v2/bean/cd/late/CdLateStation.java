@@ -7,6 +7,7 @@ package com.by5388.sy95306v2.bean.cd.late;
  * @date 2018/8/12 17:06
  */
 public class CdLateStation {
+    private final static String EMPTY = "";
 
     //["6c000D186801","02","佛山西","FOQ","1209","1211","0","33"]
 
@@ -108,22 +109,15 @@ public class CdLateStation {
         this.mileage = mileage;
     }
 
-
-    public CdLateStation(String trainCode, String serialNumber, String stationName, String stationCode, String arriveTime, String leaveTime, String dateDistance, String mileage) {
-        this.trainCode = trainCode;
-        this.serialNumber = serialNumber;
-        this.stationName = stationName;
-        this.stationCode = stationCode;
-        this.arriveTime = arriveTime;
-        this.leaveTime = leaveTime;
-        this.dateDistance = dateDistance;
-        this.mileage = mileage;
+    public static CdLateStation getStation(String[] params) {
+        if (null == params || params.length != 8) {
+            return new CdLateStation();
+        }
+        return new CdLateStation(params);
     }
 
-    public CdLateStation(String[] params) {
-        if (null == params || params.length != 8) {
-            throw new RuntimeException();
-        }
+
+    private CdLateStation(String[] params) {
         this.trainCode = params[0];
         this.serialNumber = params[1];
         this.stationName = params[2];
@@ -132,6 +126,18 @@ public class CdLateStation {
         this.leaveTime = params[5];
         this.dateDistance = params[6];
         this.mileage = params[7];
+    }
+
+
+    CdLateStation() {
+        this.trainCode = EMPTY;
+        this.serialNumber = EMPTY;
+        this.stationName = EMPTY;
+        this.stationCode = EMPTY;
+        this.arriveTime = EMPTY;
+        this.leaveTime = EMPTY;
+        this.dateDistance = EMPTY;
+        this.mileage = EMPTY;
     }
 
     @Override

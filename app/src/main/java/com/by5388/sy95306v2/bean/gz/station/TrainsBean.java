@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.bean.gz.station;
 
-import com.by5388.sy95306v2.bean.gz.StationInfosBean;
+import com.by5388.sy95306v2.bean.gz.StationInfoBean;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * @author by5388  on 2018/8/1.
  */
 
-
+@SuppressWarnings("all")
 public class TrainsBean {
     /**
      * sfStation : 深圳北
@@ -28,7 +28,7 @@ public class TrainsBean {
     private String trainNo;
     private String zdStation;
     private String zdTime;
-    private List<StationInfosBean> stationInfos;
+    private List<StationInfoBean> stationInfos;
 
 
     public String getSfStation() {
@@ -87,11 +87,11 @@ public class TrainsBean {
         this.zdTime = zdTime;
     }
 
-    public List<StationInfosBean> getStationInfos() {
+    public List<StationInfoBean> getStationInfos() {
         return stationInfos;
     }
 
-    public void setStationInfos(List<StationInfosBean> stationInfos) {
+    public void setStationInfos(List<StationInfoBean> stationInfos) {
         this.stationInfos = stationInfos;
     }
 

@@ -8,8 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.activity.selectStation.SelectStationActivity;
-import com.by5388.sy95306v2.activity.trainList.TrainNumberListActivity;
+import com.by5388.sy95306v2.activity.sy.select.SelectStationActivity;
+import com.by5388.sy95306v2.activity.sy.list.TrainNumberListActivity;
 import com.by5388.sy95306v2.bean.Station;
 import com.by5388.sy95306v2.database.IShenYangStationDb;
 import com.by5388.sy95306v2.database.DataBaseTempAction;

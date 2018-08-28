@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.fragment.gz.number.view;
 
-import com.by5388.sy95306v2.base.view.IBaseView;
+import com.by5388.sy95306v2.base.IBaseView;
 import com.by5388.sy95306v2.bean.gz.station.TrainsBean;
 
 import java.util.List;

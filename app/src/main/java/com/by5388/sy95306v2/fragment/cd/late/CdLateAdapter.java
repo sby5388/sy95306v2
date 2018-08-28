@@ -1,6 +1,7 @@
 package com.by5388.sy95306v2.fragment.cd.late;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +16,14 @@ import java.util.List;
 /**
  * @author by5388  on 2018/8/19.
  */
-class CdLateAdapter extends BaseAdapter {
+final class CdLateAdapter extends BaseAdapter {
     private static final String START_STATION = "0";
 
     private List<CdTrainAllNodeBean> beans;
     private final LayoutInflater inflater;
 
 
-    CdLateAdapter(Context context, List<CdTrainAllNodeBean> beans) {
+    CdLateAdapter(@NonNull Context context, @NonNull List<CdTrainAllNodeBean> beans) {
         this.inflater = LayoutInflater.from(context);
         this.beans = beans;
     }
@@ -58,11 +59,7 @@ class CdLateAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.stayTime.setText(String.valueOf(bean.getTlsj()));
-        holder.stationName.setText(bean.getStation());
-        holder.arriveTime.setText(bean.getTdddsj().split(" ")[1]);
-        holder.leaveTime.setText(bean.getTdcfsj().split(" ")[1]);
-        holder.showStatus.setText(bean.getDdwd());
+        holder.bindData(bean);
         return convertView;
     }
 
@@ -79,6 +76,14 @@ class CdLateAdapter extends BaseAdapter {
             arriveTime = view.findViewById(R.id.arriveTime);
             leaveTime = view.findViewById(R.id.leaveTime);
             showStatus = view.findViewById(R.id.showStatus);
+        }
+
+        void bindData(CdTrainAllNodeBean bean) {
+            stayTime.setText(String.valueOf(bean.getTlsj()));
+            stationName.setText(bean.getStation());
+            arriveTime.setText(bean.getTdddsj().split(" ")[1]);
+            leaveTime.setText(bean.getTdcfsj().split(" ")[1]);
+            showStatus.setText(bean.getDdwd());
         }
     }
 }

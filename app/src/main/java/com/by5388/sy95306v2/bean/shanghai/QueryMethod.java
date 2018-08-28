@@ -49,11 +49,4 @@ public class QueryMethod<T> {
         this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-                "info=" + info +
-                ", user=" + user +
-                '}';
-    }
 }

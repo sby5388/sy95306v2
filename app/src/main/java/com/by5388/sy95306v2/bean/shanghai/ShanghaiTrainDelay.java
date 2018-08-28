@@ -22,17 +22,6 @@ public class ShanghaiTrainDelay {
     private String order;
     private String station;
 
-    @Override
-    public String toString() {
-        return "ShanghaiTrainDelay{" +
-                "arrive='" + arrive + '\'' +
-                ", expectArriveTime='" + expectArriveTime + '\'' +
-                ", message='" + message + '\'' +
-                ", order='" + order + '\'' +
-                ", station='" + station + '\'' +
-                '}';
-    }
-
     public String getArrive() {
         return arrive;
     }

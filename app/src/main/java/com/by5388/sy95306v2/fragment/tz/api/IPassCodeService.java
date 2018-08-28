@@ -2,6 +2,7 @@ package com.by5388.sy95306v2.fragment.tz.api;
 
 import com.by5388.sy95306v2.bean.tz.TzResult;
 import com.by5388.sy95306v2.bean.tz.check.PassCodeDataBean;
+import com.by5388.sy95306v2.bean.tz.number.NumberListDataBean;
 import com.by5388.sy95306v2.bean.tz.yp.success.SuccessDataBean;
 
 import io.reactivex.Observable;
@@ -19,12 +20,15 @@ public interface IPassCodeService {
     //    https://kyfw.12306.cn/otn/zzzcx/
     //    https://kyfw.12306.cn/otn/passcodeNew/checkRandCodeAnsyn
     //    https://kyfw.12306.cn/otn/passcodeNew/getPassCodeNew
+    //    https://kyfw.12306.cn/otn/czxx/queryByTrainNo
 
     String MODULE = "module";
     String RAND = "rand";
     String RAND_CODE = "randCode";
     String VALUE = "";
-    ////////////
+    /**
+     * 日期
+     */
     String QUERY_DATA = "queryDate";
     String FROM_STATION = "from_station";
     String TO_STATION = "to_station";
@@ -95,8 +99,21 @@ public interface IPassCodeService {
     );
 
     /**
-     * 清除数据(cookie)
+     * 车次查询：
+     *
+     * @param trainNo         车次的全称，6k0000D92200
+     * @param fromStationCOde 出发站电报码，估计没啥用，待验证
+     * @param toStationCOde   目的站电报码，估计没啥用，待验证
+     * @param date            日期，格式yyyy-MM-dd
+     * @return 数据， {@link NumberListDataBean}
      */
-    void clearData();
+    @GET("czxx/queryByTrainNo")
+    Observable<TzResult<NumberListDataBean>> getNumberList(
+            @Query("train_no") String trainNo,
+            @Query("from_station_telecode") String fromStationCOde,
+            @Query("to_station_telecode") String toStationCOde,
+            @Query("depart_date") String date
+
+    );
 
 }

@@ -5,7 +5,7 @@ package com.by5388.sy95306v2.bean.shanghai;
  * @date 2018/8/8 16:30
  */
 public class UserBean {
-    public UserBean() {
+    UserBean() {
         this.mac = "";
         this.version = "";
         this.phone = "";

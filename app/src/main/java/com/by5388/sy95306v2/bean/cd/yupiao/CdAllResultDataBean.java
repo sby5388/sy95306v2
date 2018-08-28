@@ -13,7 +13,7 @@ public class CdAllResultDataBean {
      */
 
     private String flag;
-    private List<CdYpDetailBean> datas;
+    private List<CdRemainTicketDetailBean> datas;
 
     public String getFlag() {
         return flag;
@@ -23,11 +23,11 @@ public class CdAllResultDataBean {
         this.flag = flag;
     }
 
-    public List<CdYpDetailBean> getDatas() {
+    public List<CdRemainTicketDetailBean> getDatas() {
         return datas;
     }
 
-    public void setDatas(List<CdYpDetailBean> datas) {
+    public void setDatas(List<CdRemainTicketDetailBean> datas) {
         this.datas = datas;
     }
 }

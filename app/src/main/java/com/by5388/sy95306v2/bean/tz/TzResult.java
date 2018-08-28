@@ -21,6 +21,7 @@ public class TzResult<T> {
      * @see com.by5388.sy95306v2.bean.tz.check.PassCodeDataBean 包括图片验证码校验、
      * @see com.by5388.sy95306v2.bean.tz.yp.success.SuccessDataBean 中转查询中的得到直达车次,为成功
      * @see com.by5388.sy95306v2.bean.tz.yp.fail.FailDataBean 没有直达车次为失败的
+     * @see com.by5388.sy95306v2.bean.tz.number.NumberListDataBean 车次查询结果
      */
 
     private String validateMessagesShowId;

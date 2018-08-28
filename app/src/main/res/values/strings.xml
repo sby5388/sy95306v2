@@ -62,7 +62,7 @@
     <string name="current_station_count">已更新数量：%1$d</string>
     <string name="finish_update">更新完成</string>
     <string name="query_date">日期:</string>
-    <string name="from_station">出发站：</string>
+    <string name="from_station">出发站</string>
     <string name="to_station">目的站</string>
     <string name="query">查询</string>
     <string name="show_title">%1$s %2$s-%3$s</string>

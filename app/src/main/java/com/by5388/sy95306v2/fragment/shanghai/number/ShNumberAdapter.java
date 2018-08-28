@@ -13,7 +13,7 @@ import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.shanghai.InfoBeanDelay;
 import com.by5388.sy95306v2.bean.shanghai.QueryMethod;
 import com.by5388.sy95306v2.bean.shanghai.ShanghaiTrainNumber;
-import com.by5388.sy95306v2.net.shanghai.ShangHaiNetTools;
+import com.by5388.sy95306v2.net.shanghai.ShNetTools;
 import com.by5388.sy95306v2.net.shanghai.ShanghaiService;
 
 import java.util.List;
@@ -36,7 +36,7 @@ public class ShNumberAdapter extends RecyclerView.Adapter {
     public ShNumberAdapter(Context context, List<ShanghaiTrainNumber> numbers) {
         this.numbers = numbers;
         this.inflater = LayoutInflater.from(context);
-        Retrofit retrofit = new ShangHaiNetTools().getRetrofit();
+        Retrofit retrofit = new ShNetTools().getRetrofit();
         shanghaiService = retrofit.create(ShanghaiService.class);
     }
 

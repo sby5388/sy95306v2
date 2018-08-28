@@ -30,9 +30,10 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".activity.selectStation.SelectStationActivity" />
-        <activity android:name=".activity.trainDetail.TrainDetailActivity" />
-        <activity android:name=".activity.trainList.TrainNumberListActivity" />
+        <activity android:name=".activity.sy.select.SelectStationActivity" />
+        <activity android:name=".activity.sy.detail.TrainDetailActivity" />
+        <activity android:name=".activity.sy.list.TrainNumberListActivity" />
+        <activity android:name=".activity.tz.TzRemainTicketActivity" />
     </application>
 
 </manifest>

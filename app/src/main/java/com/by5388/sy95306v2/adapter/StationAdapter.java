@@ -1,7 +1,6 @@
 package com.by5388.sy95306v2.adapter;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,9 +74,9 @@ public class StationAdapter extends BaseAdapter {
     static class ViewHolder {
         @BindView(R.id.textView_city_name)
         TextView textView;
+
         ViewHolder(View convertView) {
             ButterKnife.bind(this, convertView);
-            textView.setTypeface(Typeface.DEFAULT, 0);
         }
     }
 }

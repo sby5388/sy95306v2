@@ -28,7 +28,7 @@ public class DataBaseTempAction implements IShenYangStationDb, ICdScreenStationD
     }
 
     public static DataBaseTempAction getInstance() {
-        return SingletonHandler.instance;
+        return SingletonHandler.INSTANCE;
     }
 
 
@@ -203,6 +203,6 @@ public class DataBaseTempAction implements IShenYangStationDb, ICdScreenStationD
     }
 
     private static class SingletonHandler {
-        private static final DataBaseTempAction instance = new DataBaseTempAction();
+        private static final DataBaseTempAction INSTANCE = new DataBaseTempAction();
     }
 }

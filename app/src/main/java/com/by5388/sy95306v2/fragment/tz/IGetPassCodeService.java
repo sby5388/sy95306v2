@@ -3,7 +3,11 @@ package com.by5388.sy95306v2.fragment.tz;
 import android.graphics.Bitmap;
 
 import com.by5388.sy95306v2.bean.tz.TzResult;
+import com.by5388.sy95306v2.bean.tz.number.NumberDataBean;
+import com.by5388.sy95306v2.bean.tz.number.NumberListDataBean;
 import com.by5388.sy95306v2.bean.tz.yp.success.SuccessDataBean;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -48,6 +52,21 @@ public interface IGetPassCodeService {
             String toStationName,
             String randCode
     );
+
+
+    /**
+     * 车次查询：
+     *
+     * @param trainNo         车次的全称，6k0000D92200
+     * @param fromStationCOde 出发站电报码，估计没啥用，待验证
+     * @param toStationCOde   目的站电报码，估计没啥用，待验证
+     * @param date            日期，格式yyyy-MM-dd
+     * @return 数据， {@link NumberListDataBean}
+     */
+    Observable<List<NumberDataBean>> getListNumberDataBean(String trainNo,
+                                                           String fromStationCOde,
+                                                           String toStationCOde,
+                                                           String date);
 
 
 }

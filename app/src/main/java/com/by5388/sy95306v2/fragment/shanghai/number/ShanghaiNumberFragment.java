@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.shanghai.ShanghaiTrainNumber;
 import com.by5388.sy95306v2.fragment.MyListener;
-import com.by5388.sy95306v2.fragment.shanghai.BaseShangHaiFragment;
+import com.by5388.sy95306v2.fragment.shanghai.BaseShFragment;
 import com.by5388.sy95306v2.fragment.shanghai.number.presenter.INumberPresenter;
 import com.by5388.sy95306v2.fragment.shanghai.number.presenter.NumberPresenter;
 import com.by5388.sy95306v2.fragment.shanghai.number.view.INumberView;
@@ -28,7 +28,7 @@ import java.util.List;
  * @author by5388  on 2018/8/9.
  */
 
-public class ShanghaiNumberFragment extends BaseShangHaiFragment implements INumberView, MyListener.UpdateDate {
+public class ShanghaiNumberFragment extends BaseShFragment implements INumberView, MyListener.UpdateDate {
     public static final String TAG = "SH-NumberFragment";
     private ShNumberAdapter adapter;
     private INumberPresenter presenter;

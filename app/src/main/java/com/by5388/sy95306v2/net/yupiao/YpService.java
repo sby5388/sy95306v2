@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.net.yupiao;
 
-import com.by5388.sy95306v2.bean.tzyp.YpResult;
+import com.by5388.sy95306v2.bean.second.SecondResult;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -33,7 +33,7 @@ public interface YpService {
      * @return 余票查询 ，结果需要手动解析
      */
     @GET("yp/{params}/{date}")
-    Observable<YpResult> getYpMessage(@Path(PARAMS) String params, @Path(DATE) String date);
+    Observable<SecondResult> getYpMessage(@Path(PARAMS) String params, @Path(DATE) String date);
 
 
 }

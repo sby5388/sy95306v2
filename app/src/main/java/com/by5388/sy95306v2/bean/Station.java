@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
  *
  * @author by5388
  */
+@SuppressWarnings("all")
 public class Station {
     public final static int EMPTY_ID = -1;
     /**

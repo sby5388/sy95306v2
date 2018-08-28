@@ -47,7 +47,7 @@ public class TrainDetailListAdapter extends RecyclerView.Adapter<TrainDetailList
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TrainDetail detail = details.get(position);
         holder.textViewNumber.setText(detail.getSTNO());
         holder.stationName.setText(detail.getSNAME());
@@ -62,7 +62,8 @@ public class TrainDetailListAdapter extends RecyclerView.Adapter<TrainDetailList
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.item_train_detail, parent, false);
         RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         itemView.setLayoutParams(layoutParams);
@@ -99,11 +100,6 @@ public class TrainDetailListAdapter extends RecyclerView.Adapter<TrainDetailList
             arriveTime = itemView.findViewById(R.id.arrive_time);
             leaveTime = itemView.findViewById(R.id.leave_time);
             remainTime = itemView.findViewById(R.id.remain_time);
-            textViewNumber.setTypeface(Typeface.DEFAULT, 0);
-            stationName.setTypeface(Typeface.DEFAULT, 0);
-            arriveTime.setTypeface(Typeface.DEFAULT, 0);
-            leaveTime.setTypeface(Typeface.DEFAULT, 0);
-            remainTime.setTypeface(Typeface.DEFAULT, 0);
         }
     }
 }

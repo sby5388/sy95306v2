@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity
     private static final String TITLE_SHEN_YANG = "沈阳12306";
     private static final String TITLE_TZ = "铁总12306";
     private static final String TITLE_CD = "成都12306";
-    private static final String TITLE_GUANG_ZHOU = "广铁12306";
-    private static final String TITLE_SHANG_HAI = "上海12306";
+    private static final String TITLE_GZ = "广铁12306";
+    private static final String TITLE_SH = "上海12306";
 
 
     private Toolbar toolbar;
@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity
         fragments.add(ChengduFragment.newInstance());
         titles = new ArrayList<>();
         titles.add(TITLE_SHEN_YANG);
-        titles.add(TITLE_GUANG_ZHOU);
-        titles.add(TITLE_SHANG_HAI);
+        titles.add(TITLE_GZ);
+        titles.add(TITLE_SH);
         titles.add(TITLE_TZ);
         titles.add(TITLE_CD);
 
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity
                 changeShanghai();
                 break;
             case R.id.nav_tz_12306:
-                changeYuPiao();
+                changeTz();
                 break;
             case R.id.nav_cd_12306:
                 changeChengdu();
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity
         changeFragment(4);
     }
 
-    private void changeYuPiao() {
+    private void changeTz() {
         changeFragment(3);
     }
 

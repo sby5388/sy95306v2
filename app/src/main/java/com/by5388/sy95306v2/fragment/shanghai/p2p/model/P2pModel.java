@@ -3,7 +3,7 @@ package com.by5388.sy95306v2.fragment.shanghai.p2p.model;
 import com.by5388.sy95306v2.bean.shanghai.InfoBeanP2P;
 import com.by5388.sy95306v2.bean.shanghai.QueryMethod;
 import com.by5388.sy95306v2.bean.shanghai.ShanghaiTrainP2P;
-import com.by5388.sy95306v2.net.shanghai.ShangHaiNetTools;
+import com.by5388.sy95306v2.net.shanghai.ShNetTools;
 import com.by5388.sy95306v2.net.shanghai.ShanghaiService;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class P2pModel implements IP2pModel {
 
 
     public P2pModel() {
-        Retrofit retrofit = new ShangHaiNetTools().getRetrofit();
+        Retrofit retrofit = new ShNetTools().getRetrofit();
         shanghaiService = retrofit.create(ShanghaiService.class);
     }
 

@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.activity.trainDetail.TrainDetailActivity;
+import com.by5388.sy95306v2.activity.sy.detail.TrainDetailActivity;
 import com.by5388.sy95306v2.fragment.MyListener;
 
 import java.util.Calendar;

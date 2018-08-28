@@ -23,7 +23,7 @@ public interface LateService {
     /**
      * 查询类型：0：到达，1：出发
      */
-    String CXLX = "cxlx";
+    String QUERY_TYPE = "cxlx";
     /**
      * 日期
      */
@@ -55,10 +55,12 @@ public interface LateService {
     Observable<ResponseBody> queryLate(
             @Query(CZ) String stationName,
             @Query(CC) String code,
-            @Query(CXLX) int queryType,
+            @Query(QUERY_TYPE) int queryType,
             @Query(RQ) String date,
             @Query(CZ_EN) String czEn,
             @Query(TP) long time
     );
+
+
 
 }

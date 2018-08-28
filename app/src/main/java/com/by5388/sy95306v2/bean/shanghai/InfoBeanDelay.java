@@ -5,20 +5,16 @@ package com.by5388.sy95306v2.bean.shanghai;
  * @date 2018/8/8 18:47
  */
 public class InfoBeanDelay {
-
-    public InfoBeanDelay(String stationName, String trainCode) {
-        this.stationName = stationName;
-        this.trainCode = trainCode;
-    }
-
     /**
      * stationName : 上海虹桥
      * trainCode : G104
      */
-
-
     private String stationName;
     private String trainCode;
+    public InfoBeanDelay(String stationName, String trainCode) {
+        this.stationName = stationName;
+        this.trainCode = trainCode;
+    }
 
     public String getStationName() {
         return stationName;

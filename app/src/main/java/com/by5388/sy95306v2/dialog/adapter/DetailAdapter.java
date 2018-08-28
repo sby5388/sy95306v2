@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.bean.gz.StationInfosBean;
+import com.by5388.sy95306v2.bean.gz.StationInfoBean;
 import com.by5388.sy95306v2.bean.gz.station.TrainsBean;
 import com.by5388.sy95306v2.net.tz.TzQuery;
 
@@ -36,24 +36,24 @@ public class DetailAdapter extends BaseAdapter {
      */
     private static final int LEAVE = TzQuery.LEAVE;
 
-    private List<StationInfosBean> infosBeans;
+    private List<StationInfoBean> infoBeans;
     private final LayoutInflater inflater;
     private String trainCode = "";
     private String date = "";
     private final Consumer<Throwable> throwableConsumer;
     private String[][] status;
 
-    public DetailAdapter(@NonNull Context context, @NonNull List<StationInfosBean> infosBeans) {
-        this.infosBeans = infosBeans;
+    public DetailAdapter(@NonNull Context context, @NonNull List<StationInfoBean> infoBeans) {
+        this.infoBeans = infoBeans;
         this.inflater = LayoutInflater.from(context);
         throwableConsumer = throwable -> Toast.makeText(context, throwable.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        status = new String[infosBeans.size()][2];
+        status = new String[infoBeans.size()][2];
     }
 
-    public void setInfosBeans(@NonNull TrainsBean trainsBean) {
-        List<StationInfosBean> infosBeans = trainsBean.getStationInfos();
+    public void setInfoBeans(@NonNull TrainsBean trainsBean) {
+        List<StationInfoBean> infosBeans = trainsBean.getStationInfos();
         if (infosBeans != null) {
-            this.infosBeans = infosBeans;
+            this.infoBeans = infosBeans;
             trainCode = trainsBean.getTrainNo().split("/")[0];
             date = getDate(infosBeans.get(0).getArrDate());
             status = new String[infosBeans.size()][2];
@@ -69,12 +69,12 @@ public class DetailAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return infosBeans.size();
+        return infoBeans.size();
     }
 
     @Override
-    public StationInfosBean getItem(int position) {
-        return infosBeans.get(position);
+    public StationInfoBean getItem(int position) {
+        return infoBeans.get(position);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class DetailAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        StationInfosBean infosBean = getItem(position);
+        StationInfoBean infosBean = getItem(position);
         ViewHolder holder;
         if (null == convertView) {
             convertView = inflater.inflate(R.layout.item_detail_simple, parent, false);
