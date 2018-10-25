@@ -6,8 +6,11 @@ import com.by5388.sy95306v2.activity.start.model.IStartModel;
 import com.by5388.sy95306v2.activity.start.model.StartModel;
 import com.by5388.sy95306v2.activity.start.view.IStartView;
 
+import java.lang.reflect.Type;
+
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -19,7 +22,7 @@ public class StartPresenter implements IStartPresenter {
     private final static String TAG = "StartPresenter";
     private final IStartView view;
     private final IStartModel model;
-    private Disposable isNeedUpdateDisposable, updateProgressDisposable, getStationCountDisposable, insertStationCountDisposable;
+    private final CompositeDisposable compositeDisposable;
 
     // FIXME: 2018/8/26 那如果有多个 Disposable 该怎么办呢,
     // RxJava中已经内置了一个容器 CompositeDisposable , 每当
@@ -46,6 +49,7 @@ public class StartPresenter implements IStartPresenter {
     public StartPresenter(IStartView view) {
         this.view = view;
         this.model = new StartModel();
+        compositeDisposable = new CompositeDisposable();
 
         updateConsumer = aBoolean -> {
             Log.d(TAG, "是否需要更新数据库？ " + aBoolean);
@@ -67,36 +71,33 @@ public class StartPresenter implements IStartPresenter {
 
     }
 
-    private static void closeConsumer(Disposable disposable) {
-        if (disposable != null && !disposable.isDisposed()) {
-            disposable.dispose();
-        }
-    }
 
     @Override
     public void checkStationListVersion() {
-        isNeedUpdateDisposable =
+        compositeDisposable.add(
                 model.isNeedUpdate()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(updateConsumer);
+                        .subscribe(updateConsumer, throwableConsumer));
 
     }
 
     @Override
     public void clearData() {
-        insertStationCountDisposable = model.clearData()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(clearDataConsumer);
+        compositeDisposable.add(
+                model.clearData()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(clearDataConsumer, throwableConsumer));
     }
 
     @Override
     public void insertData() {
-        updateProgressDisposable = model.insertProgressBar()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(progressConsumer, throwableConsumer);
+        compositeDisposable.add(
+                model.insertProgressBar()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(progressConsumer, throwableConsumer));
     }
 
     @Override
@@ -109,21 +110,28 @@ public class StartPresenter implements IStartPresenter {
             //可用-->下一步
             view.checkNeedUpdate();
         }
-
-
     }
 
     @Override
     public void startUpdate() {
-        getStationCountDisposable = model.getStationCount()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(integer -> {
-                    Log.d(TAG, "count:accept: " + integer);
-                    view.updateAllCount(integer);
-                    view.clearData();
-                }, throwableConsumer);
+        compositeDisposable.add(
+                model.getStationCount()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(integer -> {
+                            Log.d(TAG, "count:accept: " + integer);
+                            view.updateAllCount(integer);
+                            view.clearData();
+                        }, throwableConsumer));
 
+    }
+
+    private void addDisposable(Observable<Type> observable, Consumer<Type> consumer) {
+        compositeDisposable.add(
+                observable
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(consumer, throwableConsumer));
     }
 
     @Override
@@ -135,9 +143,6 @@ public class StartPresenter implements IStartPresenter {
 
     @Override
     public void unSubscribe() {
-        closeConsumer(isNeedUpdateDisposable);
-        closeConsumer(updateProgressDisposable);
-        closeConsumer(getStationCountDisposable);
-        closeConsumer(insertStationCountDisposable);
+        compositeDisposable.clear();
     }
 }

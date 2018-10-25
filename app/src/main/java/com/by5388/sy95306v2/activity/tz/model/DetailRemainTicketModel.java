@@ -29,7 +29,7 @@ import okhttp3.Cookie;
 /**
  * @author by5388  on 2018/8/20.
  */
-public class CombinationModel implements ICombinationModel {
+public class DetailRemainTicketModel implements IDetailRemainTicketModel {
     private final IGetPassCodeService service;
     private final SyService syService;
     private final IShenYangStationDb db;
@@ -37,7 +37,7 @@ public class CombinationModel implements ICombinationModel {
     private static final String COOKIE_12306 = ReceivedCookieInterceptor.COOKIE_12306;
     private final HashMap<String, List<Cookie>> cookieStore;
 
-    public CombinationModel() {
+    public DetailRemainTicketModel() {
         cookieStore = new HashMap<>();
         service = new GetPassCodeImpl(cookieStore);
         syService = new SyNetTools().getRetrofit().create(SyService.class);
@@ -47,7 +47,6 @@ public class CombinationModel implements ICombinationModel {
 
     @Override
     public Observable<Boolean> checkCode(String randCode) {
-        //TODO presenter 层对数据长度进行校验
         return service.checkCode(randCode);
     }
 

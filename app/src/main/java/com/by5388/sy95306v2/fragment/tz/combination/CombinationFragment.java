@@ -65,18 +65,18 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
     protected void loadData() {
         buttonDate.setText(getData(calendar));
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            IRemainingTicket ticket = adapter.getItem(position);
-            Intent intent = TzRemainTicketActivity.toTzRemainTicketActivity(
-                    getContext(),
-                    ticket.getCode(),
-                    getData(calendar),
-                    ticket.getFromStation(),
-                    ticket.getToStation(),
-                    getRandCode()
-            );
-            startActivity(intent);
-        });
+//        listView.setOnItemClickListener((parent, view, position, id) -> {
+//            IRemainingTicket ticket = adapter.getItem(position);
+//            Intent intent = TzRemainTicketActivity.toTzRemainTicketActivity(
+//                    getContext(),
+//                    ticket.getCode(),
+//                    getData(calendar),
+//                    ticket.getFromStation(),
+//                    ticket.getToStation(),
+//                    getRandCode()
+//            );
+//            startActivity(intent);
+//        });
     }
 
     private String getRandCode() {
@@ -103,6 +103,13 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
 
         buttonDate = view.findViewById(R.id.button_query_date);
         buttonSearch.setOnClickListener(v -> searchTrainNumber());
+        buttonSearch.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startActivity(new Intent(getContext(), TzRemainTicketActivity.class));
+                return true;
+            }
+        });
         buttonDate.setOnClickListener(v -> selectDate(dateListener, calendar));
         view.findViewById(R.id.imageView).setOnClickListener(v -> switchStations());
     }

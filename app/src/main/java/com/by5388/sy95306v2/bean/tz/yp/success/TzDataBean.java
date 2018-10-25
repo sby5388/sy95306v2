@@ -15,7 +15,9 @@ public class TzDataBean implements IRemainingTicket, Cloneable {
     private final static String EMPTY = "--";
     private final static String RESULT_EMPTY = "";
     private final static String NO_NUMBER = "无";
+    public TzDataBean() {
 
+    }
     @Override
     public String getCode() {
         return station_train_code;
@@ -149,10 +151,10 @@ public class TzDataBean implements IRemainingTicket, Cloneable {
      * is_support_card : 0
      * controlled_train_flag : 0
      * controlled_train_message : 正常车次，不受控
-     * rw_num : --
-     * srrb_num : --
+     * rw_num : --软卧
+     * srrb_num : -- 动卧
      * gg_num : --
-     * gr_num : --
+     * gr_num : -- 高级软卧
      * qt_num : --
      * rz_num : --
      * tz_num : --
@@ -370,6 +372,8 @@ public class TzDataBean implements IRemainingTicket, Cloneable {
     public void setExchange_train_flag(String exchange_train_flag) {
         this.exchange_train_flag = exchange_train_flag;
     }
+
+
 
     public String getControl_train_day() {
         return control_train_day;
@@ -653,6 +657,8 @@ public class TzDataBean implements IRemainingTicket, Cloneable {
      *
      * @param bean 复制
      */
+
+
     public TzDataBean(TzDataBean bean) {
         this.train_no = bean.train_no;
         this.station_train_code = bean.station_train_code;

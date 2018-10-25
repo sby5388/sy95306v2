@@ -27,7 +27,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author by5388  on 2018/8/20.
  */
 public class CombinationPresenter implements ICombinationPresenter {
-    private static final String TAG = "CombinationPresenter";
+    private static final String TAG = "DetailRemainTicketPresenter";
     private Disposable codeDisposable, bitmapDisposable, listDisposable;
     private final Consumer<Throwable> throwableConsumer;
 

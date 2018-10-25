@@ -12,4 +12,7 @@
     <dimen name="app_bar_height">200dp</dimen>
     <dimen name="text_size_query_page">22sp</dimen>
     <dimen name="detail_title_text_size">22sp</dimen>
+    <dimen name="remain_ticket_width">50dp</dimen>
+    <dimen name="remain_ticket_height">40dp</dimen>
+    <dimen name="remain_ticket_height_half">20dp</dimen>
 </resources>

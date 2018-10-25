@@ -5,7 +5,7 @@ import com.by5388.sy95306v2.fragment.tz.zzcx.persenter.ITzZzCxPresenter;
 /**
  * @author by5388  on 2018/8/22.
  */
-public interface ICombinationPresenter extends ITzZzCxPresenter {
+public interface IDetailRemainTicketPresenter extends ITzZzCxPresenter {
 
     /**
      * 中转查询，获取列车信息

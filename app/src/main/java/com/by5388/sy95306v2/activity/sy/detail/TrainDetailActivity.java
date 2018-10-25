@@ -53,7 +53,7 @@ public class TrainDetailActivity extends BaseActivity implements IDetailView {
     /**
      * 车次
      */
-    private String code = "D7512";
+    private String code = "";
 
 
     /**

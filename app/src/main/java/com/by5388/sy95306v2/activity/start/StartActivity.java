@@ -202,7 +202,6 @@ public class StartActivity extends BaseActivity implements IStartView {
             });
             negativeButton.setOnClickListener(v -> {
                 updateAlertDialog.dismiss();
-
                 toMainActivity();
             });
         });

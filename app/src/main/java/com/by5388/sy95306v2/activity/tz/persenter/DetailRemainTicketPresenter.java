@@ -4,10 +4,9 @@ import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.by5388.sy95306v2.activity.tz.model.CombinationModel;
-import com.by5388.sy95306v2.activity.tz.model.ICombinationModel;
-import com.by5388.sy95306v2.activity.tz.view.ICombinationView;
-import com.by5388.sy95306v2.bean.IRemainingTicket;
+import com.by5388.sy95306v2.activity.tz.model.DetailRemainTicketModel;
+import com.by5388.sy95306v2.activity.tz.model.IDetailRemainTicketModel;
+import com.by5388.sy95306v2.activity.tz.view.IDetailRemainTicketView;
 import com.by5388.sy95306v2.bean.shenyang.TrainDetail;
 import com.by5388.sy95306v2.bean.tz.yp.success.SuccessDataBean;
 import com.by5388.sy95306v2.bean.tz.yp.success.TzDataBean;
@@ -26,8 +25,8 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * @author by5388  on 2018/8/20.
  */
-public class CombinationPresenter implements ICombinationPresenter {
-    private static final String TAG = "CombinationPresenter";
+public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter {
+    private static final String TAG = "DetailRemainTicket";
     private Disposable codeDisposable, bitmapDisposable, listDisposable;
     private final Consumer<Throwable> throwableConsumer;
 
@@ -37,8 +36,8 @@ public class CombinationPresenter implements ICombinationPresenter {
     private final Consumer<Boolean> booleanConsumer;
     private final Consumer<SuccessDataBean> addConsumer;
 
-    private final ICombinationModel model;
-    private final ICombinationView view;
+    private final IDetailRemainTicketModel model;
+    private final IDetailRemainTicketView view;
     /**
      * 错误统计，连续错误则清除cookie
      */
@@ -48,9 +47,9 @@ public class CombinationPresenter implements ICombinationPresenter {
      */
     private static final int MAX_ERROR_COUNT = 1;
 
-    public CombinationPresenter(ICombinationView view) {
+    public DetailRemainTicketPresenter(IDetailRemainTicketView view) {
         this.view = view;
-        this.model = new CombinationModel();
+        this.model = new DetailRemainTicketModel();
         this.throwableConsumer = throwable -> {
             view.showError(throwable.getLocalizedMessage());
             view.finishQuery();
@@ -82,8 +81,7 @@ public class CombinationPresenter implements ICombinationPresenter {
             if (null == beans || beans.isEmpty()) {
                 return;
             }
-            List<IRemainingTicket> yps = new ArrayList<>(beans);
-            view.updateList(yps);
+            view.updateList(beans);
         };
         this.addConsumer = new Consumer<SuccessDataBean>() {
             @Override
@@ -95,7 +93,7 @@ public class CombinationPresenter implements ICombinationPresenter {
                 if (null == beans || beans.isEmpty()) {
                     return;
                 }
-                view.addIRemainingTicket(successDataBean.getDatas().get(0));
+                view.addRemainingTicket(successDataBean.getDatas().get(0));
             }
         };
     }
@@ -259,14 +257,11 @@ public class CombinationPresenter implements ICombinationPresenter {
     }
 
     private void getFromStationDetailData(String date, String toStation, String randCode, String trainCode, @NonNull List<String> names) {
-        Log.d(TAG, "getFromStationDetailData: " + names);
         listDisposable = Observable.fromIterable(names)
                 .flatMap(new Function<String, ObservableSource<SuccessDataBean>>() {
                     @Override
                     public ObservableSource<SuccessDataBean> apply(String fromStation) {
-                        Log.d(TAG, "apply: " + fromStation);
                         return model.getOnLyResult(date, fromStation, toStation, randCode, trainCode);
-
                     }
                 })
                 .subscribeOn(Schedulers.io())
