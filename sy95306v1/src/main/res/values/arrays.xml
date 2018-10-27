@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="train_type">
+        <item>全部列车</item>
+        <item>高铁列车</item>
+        <item>动车列车</item>
+        <item>特快列车</item>
+        <item>普快列车</item>
+        <item>其他列车</item>
+    </string-array>
+
+</resources>
