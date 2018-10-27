@@ -25,10 +25,9 @@ public class StationPresenter implements IStationPresenter {
     private Disposable disposable;
     private final Consumer<List<Station>> consumer;
     private final Consumer<Throwable> throwableConsumer;
-    private IStationView view;
 
     public StationPresenter(IStationView view) {
-        this.view = view;
+        IStationView view1 = view;
         this.model = new StationModel();
         consumer = stations -> {
             if (stations == null || stations.isEmpty()) {

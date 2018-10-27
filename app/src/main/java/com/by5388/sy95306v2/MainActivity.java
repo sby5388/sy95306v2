@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity
     private static final String TITLE_SH = "上海12306";
 
 
-    private Toolbar toolbar;
     private List<Fragment> fragments;
     private List<String> titles;
     private FragmentManager fragmentManager;
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity
         //竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -150,9 +149,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        // TODO: 2018/10/27  
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

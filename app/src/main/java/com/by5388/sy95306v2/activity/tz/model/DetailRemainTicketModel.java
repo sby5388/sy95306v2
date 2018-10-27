@@ -59,7 +59,7 @@ public class DetailRemainTicketModel implements IDetailRemainTicketModel {
     @Override
     public boolean isTrueStationName(String stationName) {
         Station station = db.selectStationByName(stationName.trim());
-        return Station.EMPTY_ID != station.getId();
+        return Station.EMPTY_ID == station.getId();
     }
 
     @Override

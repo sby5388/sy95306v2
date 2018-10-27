@@ -7,9 +7,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="detail_text_size">16sp</dimen>
     <dimen name="detail_padding">5dp</dimen>
-    <dimen name="detail_margin_bottom">5dp</dimen>
     <dimen name="check_box_text_size">20sp</dimen>
-    <dimen name="app_bar_height">200dp</dimen>
     <dimen name="text_size_query_page">22sp</dimen>
     <dimen name="detail_title_text_size">22sp</dimen>
     <dimen name="remain_ticket_width">50dp</dimen>

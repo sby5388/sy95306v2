@@ -14,15 +14,12 @@
 
     <color name="search_text">#FFFFFF</color>
     <color name="button_selected">#CD2626</color>
-    <color name="button_un_select">#FFFFFF</color>
     <color name="train_number_text">#FF8C00</color>
     <color name="station_time">#63B8FF</color>
-    <color name="check_box_bg">#7EC0EE</color>
     <color name="detail_item_bg">#FFFFF0</color>
     <color name="recycler_view_item_bg">#FFFFFF</color>
     <color name="detail_listView_bg">#E0FFFF</color>
     <color name="detail_top_lly_bg">#458B74</color>
     <color name="detail_second_lly_bg">#E0EEE0</color>
-    <color name="lly_bottom_bg">#C1C1C1</color>
     <color name="light_blue">#ADD8E6</color>
 </resources>

@@ -40,11 +40,10 @@ import java.util.Locale;
  */
 public class TzRemainTicketActivity extends BaseActivity implements IDetailRemainTicketView, MyListener.UpdateDate {
 
-    private RecyclerView recyclerView;
     private DetailRemainTicketAdapter adapter;
 
-    IDetailRemainTicketPresenter presenter;
-    private List<TzDataBean> dataBeans = new ArrayList<>();
+    private IDetailRemainTicketPresenter presenter;
+    private final List<TzDataBean> dataBeans = new ArrayList<>();
     private TextInputEditText fromStation, toStation, passCode, trainCode;
     /**
      * 图片验证码
@@ -75,7 +74,7 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
 
     @Override
     protected void initView() {
-        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
@@ -304,7 +303,7 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
      * @param calendar 日期
      * @return 格式转化后的日期
      */
-    protected String getData(Calendar calendar) {
+    private String getData(Calendar calendar) {
         Locale locale = Locale.getDefault();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", locale);
         Date date = calendar.getTime();

@@ -27,7 +27,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author by5388  on 2018/8/20.
  */
 public class CombinationPresenter implements ICombinationPresenter {
-    private static final String TAG = "DetailRemainTicketPresenter";
+    private static final String TAG = "DRTicketPresenter";
     private Disposable codeDisposable, bitmapDisposable, listDisposable;
     private final Consumer<Throwable> throwableConsumer;
 
@@ -133,11 +133,11 @@ public class CombinationPresenter implements ICombinationPresenter {
 
     @Override
     public void getTrainList(String date, String fromStation, String toStation, String randCode) {
-        if (!model.isTrueStationName(fromStation)) {
+        if (model.isTrueStationName(fromStation)) {
             view.showError(fromStation + " 不正确");
             return;
         }
-        if (!model.isTrueStationName(toStation)) {
+        if (model.isTrueStationName(toStation)) {
             view.showError(toStation + " 不正确");
             return;
         }
@@ -148,11 +148,11 @@ public class CombinationPresenter implements ICombinationPresenter {
 
     @Override
     public void getOnlyOneTrainList(String date, String fromStation, String toStation, String randCode, String trainCode) {
-        if (!model.isTrueStationName(fromStation)) {
+        if (model.isTrueStationName(fromStation)) {
             view.showError(fromStation + " 不正确");
             return;
         }
-        if (!model.isTrueStationName(toStation)) {
+        if (model.isTrueStationName(toStation)) {
             view.showError(toStation + " 不正确");
             return;
         }
@@ -163,7 +163,7 @@ public class CombinationPresenter implements ICombinationPresenter {
 
     @Override
     public void getTrainListByEmptyToStation(String date, String fromStation, String randCode, String trainCode) {
-        if (!model.isTrueStationName(fromStation)) {
+        if (model.isTrueStationName(fromStation)) {
             view.showError(fromStation + " 不正确");
             return;
         }
@@ -197,7 +197,7 @@ public class CombinationPresenter implements ICombinationPresenter {
 
     @Override
     public void getTrainListByEmptyFromStation(String date, String toStation, String randCode, String trainCode) {
-        if (!model.isTrueStationName(toStation)) {
+        if (model.isTrueStationName(toStation)) {
             view.showError(toStation + " 不正确");
             return;
         }

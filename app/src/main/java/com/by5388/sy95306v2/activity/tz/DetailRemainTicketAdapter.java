@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author by5388  on 2018/8/28.
  */
-public class DetailRemainTicketAdapter extends RecyclerView.Adapter {
+class DetailRemainTicketAdapter extends RecyclerView.Adapter {
 
     private List<TzDataBean> beans;
     private final LayoutInflater inflater;
@@ -54,8 +54,24 @@ public class DetailRemainTicketAdapter extends RecyclerView.Adapter {
     }
 
     static class DetailViewHolder extends RecyclerView.ViewHolder {
-        TextView trainCode, fromStation, toStation, leaveTime, arriveTime, speedTime, contentDescription;
-        TextView swz, tz, zy, ze, gjrw, rw, dw, yw, rz, yz, wz;
+        final TextView trainCode;
+        final TextView fromStation;
+        final TextView toStation;
+        final TextView leaveTime;
+        final TextView arriveTime;
+        final TextView speedTime;
+        final TextView contentDescription;
+        final TextView swz;
+        final TextView tz;
+        final TextView zy;
+        final TextView ze;
+        final TextView gjrw;
+        final TextView rw;
+        final TextView dw;
+        final TextView yw;
+        final TextView rz;
+        final TextView yz;
+        final TextView wz;
 
         DetailViewHolder(View view) {
             super(view);

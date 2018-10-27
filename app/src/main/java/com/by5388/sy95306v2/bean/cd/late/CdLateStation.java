@@ -129,7 +129,7 @@ public class CdLateStation {
     }
 
 
-    CdLateStation() {
+    private CdLateStation() {
         this.trainCode = EMPTY;
         this.serialNumber = EMPTY;
         this.stationName = EMPTY;

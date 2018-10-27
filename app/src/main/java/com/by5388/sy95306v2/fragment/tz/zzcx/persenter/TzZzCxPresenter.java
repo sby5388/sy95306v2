@@ -113,11 +113,11 @@ public class TzZzCxPresenter implements ITzZzCxPresenter {
 
     @Override
     public void getTrainList(String date, String fromStation, String toStation, String randCode) {
-        if (!model.isTrueStationName(fromStation)) {
+        if (model.isTrueStationName(fromStation)) {
             view.showError(fromStation + " 不正确");
             return;
         }
-        if (!model.isTrueStationName(toStation)) {
+        if (model.isTrueStationName(toStation)) {
             view.showError(toStation + " 不正确");
             return;
         }

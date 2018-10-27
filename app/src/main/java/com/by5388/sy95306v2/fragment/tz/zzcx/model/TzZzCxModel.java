@@ -55,7 +55,7 @@ public class TzZzCxModel implements ITzZzCxModel {
     @Override
     public boolean isTrueStationName(String stationName) {
         Station station = db.selectStationByName(stationName.trim());
-        return Station.EMPTY_ID != station.getId();
+        return Station.EMPTY_ID == station.getId();
     }
 
     @Override
