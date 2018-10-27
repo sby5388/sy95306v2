@@ -14,11 +14,9 @@ public class TestWanDian {
     @Test
     public void test() {
         String name = "饶平";
-        String trainCode = "D7514";
-        String date = "2018-08-15";
+        String trainCode = "D7414";
+        String date = "2018-10-27";
         TzQuery.queryLate(name, trainCode, 1, date)
-                //.subscribeOn(Schedulers.io())
-                //.observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -27,7 +25,6 @@ public class TestWanDian {
 
                     @Override
                     public void onNext(String s) {
-//                        holder.realArrive.setText(s);
                         System.out.println(s.trim());
                     }
 

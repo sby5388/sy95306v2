@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
 /**
+ * 成都铁路局部分
  * @author by5388  on 2018/8/20.
  */
 final class CdStationTable {
