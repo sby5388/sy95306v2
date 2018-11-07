@@ -8,7 +8,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
 import okhttp3.ResponseBody;
 
@@ -51,23 +50,11 @@ public class TzQuery {
                             message = responseBody.string();
                             message = getRealMessage(message.trim());
                         } catch (IOException e) {
-                            message = "";
+                            //
                         }
                         return message;
                     }
                 });
-//                .flatMap((Function<ResponseBody, ObservableSource<String>>) responseBody -> {
-//                    // TODO: 2018/8/14 对字符串进行解析:早点、晚点、始发、终到等情况
-//                    String message = "";
-//                    try {
-//                        message = responseBody.string();
-//                        message = getRealMessage(message.trim());
-//                    } catch (IOException e) {
-//                        message = "";
-//                    }
-//
-//                    return Observable.just(message);
-//                });
     }
 
     /**

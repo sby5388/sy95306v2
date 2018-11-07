@@ -1,7 +1,6 @@
 package com.by5388.sy95306v2.fragment.cd.late;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
@@ -25,6 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * @author by5388  on 2018/8/19.
@@ -50,7 +50,7 @@ public class CdLateFragment extends BaseCdFragment implements ICdLateView {
     protected void initData() {
         calendar = Calendar.getInstance();
         presenter = new CdLatePresenter(this);
-        adapter = new CdLateAdapter(getContext(), new ArrayList<>());
+        adapter = new CdLateAdapter(Objects.requireNonNull(getContext()), new ArrayList<>());
     }
 
     @Override

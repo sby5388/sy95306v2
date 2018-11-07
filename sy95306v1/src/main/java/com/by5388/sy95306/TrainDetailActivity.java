@@ -123,8 +123,7 @@ public class TrainDetailActivity extends BaseListActivity {
         disposable = trainNumberService.getTrainByTrainCode(currentDate, code)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateData, throwable -> showException(throwable));
-               // .subscribe(trainDetails -> updateData(trainDetails), throwable -> showException(throwable));
+                .subscribe(this::updateData, this::showException);
     }
 
 

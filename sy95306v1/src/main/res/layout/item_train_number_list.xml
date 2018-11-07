@@ -1,232 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/lly_item_all"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/lly_item_top"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal">
 
-        <!--车次应该固定宽度-->
         <TextView
             android:id="@+id/textView_train_number_name"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:gravity="center_vertical"
             android:text="@string/d7412"
             android:textColor="@color/train_number_text"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@id/lly_top_right"
-            app:layout_constraintHorizontal_weight="18"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/lly_top_right"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="20sp" />
 
+        <!--起始时间-->
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/lly_top_right"
+            android:id="@+id/lly_start_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintHorizontal_weight="82"
-            app:layout_constraintLeft_toRightOf="@+id/textView_train_number_name"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_weight="3">
 
-            <!--起始时间-->
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/lly_start_time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/lly_spend_time"
-                app:layout_constraintHorizontal_weight="33.3"
+            <TextView
+                android:id="@+id/textView_start_station"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@color/detail_top_lly_bg"
+                android:text="@string/station_start"
+                android:textColor="@color/search_text"
+                android:typeface="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_start_station_name"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/lly_spend_time">
+                app:layout_constraintRight_toLeftOf="@+id/textView_start_station_name"
+                app:layout_constraintTop_toTopOf="@+id/textView_start_station_name" />
 
-                <TextView
-                    android:id="@+id/textView_start_station"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:background="@color/detail_top_lly_bg"
-                    android:text="@string/station_start"
-                    android:textColor="@color/search_text"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView_start_station_name"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/textView_start_station_name"
-                    app:layout_constraintTop_toTopOf="@+id/textView_start_station_name" />
-
-                <TextView
-                    android:id="@+id/textView_start_station_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|start"
-                    android:text="@string/shen_yang_bei"
-                    android:textColor="#000"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView_start_station"
-                    app:layout_constraintLeft_toRightOf="@+id/textView_start_station"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView_start_station_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/station_time"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="@+id/textView_start_station_name"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_start_station_name" />
-
-            </android.support.constraint.ConstraintLayout>
-            <!--消耗时间-->
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/lly_spend_time"
+            <TextView
+                android:id="@+id/textView_start_station_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintHorizontal_weight="33.3"
-                app:layout_constraintLeft_toRightOf="@+id/lly_start_time"
-                app:layout_constraintRight_toLeftOf="@+id/lly_end_time">
+                android:gravity="center_vertical|start"
+                android:text="@string/shen_yang_bei"
+                android:textColor="#000"
+                android:typeface="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_start_station"
+                app:layout_constraintLeft_toRightOf="@+id/textView_start_station"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView_train_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="@+id/image_barrow"
-                    app:layout_constraintRight_toRightOf="@+id/image_barrow"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView_start_station_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/station_time"
+                android:typeface="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="@+id/textView_start_station_name"
+                app:layout_constraintTop_toBottomOf="@+id/textView_start_station_name" />
 
-                <ImageView
-                    android:id="@+id/image_barrow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_barrow"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_train_description" />
+        </android.support.constraint.ConstraintLayout>
+        <!--消耗时间-->
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/lly_spend_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            app:layout_constraintHorizontal_weight="33.3"
+            app:layout_constraintLeft_toRightOf="@+id/lly_start_time"
+            app:layout_constraintRight_toLeftOf="@+id/lly_end_time">
 
-                <TextView
-                    android:id="@+id/textView_spend_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_barrow" />
+            <TextView
+                android:id="@+id/textView_train_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </android.support.constraint.ConstraintLayout>
-            <!--到达时间-->
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/lly_end_time"
+
+            <TextView
+                android:id="@+id/textView_spend_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_train_description" />
+
+        </android.support.constraint.ConstraintLayout>
+        <!--到达时间-->
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/lly_end_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            app:layout_constraintBottom_toBottomOf="@+id/lly_spend_time"
+            app:layout_constraintHorizontal_weight="33.3"
+            app:layout_constraintLeft_toRightOf="@+id/lly_spend_time"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/textView_end_station"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:background="@color/button_selected"
+                android:text="@string/station_end"
+                android:textColor="@color/search_text"
+                android:typeface="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_end_station_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/textView_end_station_name"
+                app:layout_constraintTop_toTopOf="@+id/textView_end_station_name" />
+
+            <TextView
+                android:id="@+id/textView_end_station_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/lly_spend_time"
-                app:layout_constraintHorizontal_weight="33.3"
-                app:layout_constraintLeft_toRightOf="@+id/lly_spend_time"
-                app:layout_constraintRight_toRightOf="parent">
+                android:gravity="center_vertical|start"
+                android:text="@string/bei_jing"
+                android:textColor="#000"
+                android:typeface="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_end_station"
+                app:layout_constraintLeft_toRightOf="@+id/textView_end_station"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView_end_station"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@color/button_selected"
-                    android:text="@string/station_end"
-                    android:textColor="@color/search_text"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView_end_station_name"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/textView_end_station_name"
-                    app:layout_constraintTop_toTopOf="@+id/textView_end_station_name" />
-
-                <TextView
-                    android:id="@+id/textView_end_station_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|start"
-                    android:text="@string/bei_jing"
-                    android:textColor="#000"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView_end_station"
-                    app:layout_constraintLeft_toRightOf="@+id/textView_end_station"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView_end_station_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/station_time"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@+id/textView_end_station"
-                    app:layout_constraintRight_toRightOf="@+id/textView_end_station_name"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_end_station" />
-
-            </android.support.constraint.ConstraintLayout>
-
+            <TextView
+                android:id="@+id/textView_end_station_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/station_time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@+id/textView_end_station"
+                app:layout_constraintRight_toRightOf="@+id/textView_end_station_name"
+                app:layout_constraintTop_toBottomOf="@+id/textView_end_station" />
 
         </android.support.constraint.ConstraintLayout>
 
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <TextView
+        android:id="@+id/textView_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lly_item_top">
-
-        <TextView
-            android:id="@+id/textView_price_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/price_test_shangwu"
-            android:textColor="#000"
-            android:textSize="14sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/textView_price_2"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView_price_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/price_test_yideng"
-            android:textColor="#000"
-            app:layout_constraintLeft_toRightOf="@+id/textView_price_1"
-            app:layout_constraintRight_toLeftOf="@+id/textView_price_3"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView_price_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/price_test_erdeng"
-            android:textColor="#000"
-            app:layout_constraintLeft_toRightOf="@+id/textView_price_2"
-            app:layout_constraintRight_toLeftOf="@+id/textView_price_4"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView_price_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/app_name"
-            android:textColor="#000"
-            app:layout_constraintLeft_toRightOf="@+id/textView_price_3"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/app_name" />
 
 
-    </android.support.constraint.ConstraintLayout>
-
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

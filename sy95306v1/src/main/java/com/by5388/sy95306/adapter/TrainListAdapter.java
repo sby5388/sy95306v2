@@ -27,7 +27,6 @@ import java.util.List;
  *
  * @author by5388  on 2018/6/7.
  */
-@SuppressWarnings("unused")
 public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.ViewHolder> implements View.OnClickListener {
     private List<TrainNumber> trainNumbers;
     private List<Station> stations = new ArrayList<>();
@@ -74,7 +73,7 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ConstraintLayout rootView;
+        View rootView;
         TextView imageViewStart, imageViewEnd;
         TextView startStationName, endStationName;
         TextView startStationTime, endStationTime;
@@ -83,7 +82,7 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
         /**
          * 四种价格
          */
-        TextView price1, price2, price3, price4;
+        TextView price;
 
 
         ViewHolder(View itemView) {
@@ -98,20 +97,13 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
             this.spendTime = itemView.findViewById(R.id.textView_spend_time);
             this.trainNumberName = itemView.findViewById(R.id.textView_train_number_name);
             this.description = itemView.findViewById(R.id.textView_train_description);
-            this.price1 = itemView.findViewById(R.id.textView_price_1);
-            this.price2 = itemView.findViewById(R.id.textView_price_2);
-            this.price3 = itemView.findViewById(R.id.textView_price_3);
-            this.price4 = itemView.findViewById(R.id.textView_price_4);
+            this.price = itemView.findViewById(R.id.textView_price);
         }
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         TrainNumber trainNumber = trainNumbers.get(position);
-        String price1 = trainNumber.getDESPRI1() + trainNumber.getPRI1();
-        String price2 = trainNumber.getDESPRI2() + trainNumber.getPRI2();
-        String price3 = trainNumber.getDESPRI3() + trainNumber.getPRI3();
-        String price4 = trainNumber.getDESPRI4() + trainNumber.getPRI4();
         holder.trainNumberName.setText(trainNumber.getSTCODE());
         holder.description.setText(StaticData.getDescription(trainNumber));
         holder.startStationName.setText(getStationName(trainNumber.getFST()));
@@ -124,10 +116,13 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
         holder.endStationTime.setText(Tools.showTime(trainNumber.getATIME()));
         holder.spendTime.setText(Tools.getAllSpendTime(trainNumber.getLISHI()));
 
-        holder.price1.setText(price1);
-        holder.price2.setText(price2);
-        holder.price3.setText(price3);
-        holder.price4.setText(price4);
+
+        String price1 = trainNumber.getDESPRI1() + trainNumber.getPRI1();
+        String price2 = trainNumber.getDESPRI2() + trainNumber.getPRI2();
+        String price3 = trainNumber.getDESPRI3() + trainNumber.getPRI3();
+        String price4 = trainNumber.getDESPRI4() + trainNumber.getPRI4();
+        String allPrice = String.format(context.getResources().getString(R.string.all_price), price1, price2, price3, price4);
+        holder.price.setText(allPrice);
         holder.rootView.setTag(position);
     }
 

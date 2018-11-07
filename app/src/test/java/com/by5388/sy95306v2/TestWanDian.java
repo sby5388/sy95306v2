@@ -13,9 +13,9 @@ import io.reactivex.disposables.Disposable;
 public class TestWanDian {
     @Test
     public void test() {
-        String name = "饶平";
-        String trainCode = "D7414";
-        String date = "2018-10-27";
+        String name = "深圳北";
+        String trainCode = "D7415";
+        String date = "2018-11-06";
         TzQuery.queryLate(name, trainCode, 1, date)
                 .subscribe(new Observer<String>() {
                     @Override
