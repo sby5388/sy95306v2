@@ -61,8 +61,9 @@ public class StartModel implements IStartModel {
     }
 
     private static int getStationCount2(String stationList) {
+        final int minLength = 2;
         String[] newList = stationList.split("'");
-        if (newList.length > 2) {
+        if (newList.length > minLength) {
             stationListFile = newList[1];
         }
         String[] stationNames = stationListFile.split("@");

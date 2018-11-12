@@ -16,7 +16,10 @@ public interface CdYpService {
     String END_STATION = "endStation";
     String START_DATE = "startDate";
     String MY_PASS_TYPE = "myPassType";
-
+    /**
+     * 查询类型：余票
+     */
+    @SuppressWarnings("all")
     String QUERY_YP = "Ypcx";
 
 

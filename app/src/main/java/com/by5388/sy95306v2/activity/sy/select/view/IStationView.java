@@ -13,7 +13,7 @@ public interface IStationView {
     /**
      * 设置车站列表
      *
-     * @param stations
+     * @param stations 车站列表
      */
     void setStations(List<Station> stations);
 

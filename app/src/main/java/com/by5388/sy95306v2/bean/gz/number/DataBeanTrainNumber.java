@@ -9,6 +9,7 @@ import java.util.List;
  *
  * @author by5388  on 2018/8/1.
  */
+@SuppressWarnings("all")
 class DataBeanTrainNumber {
 
     /**

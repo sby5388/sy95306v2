@@ -6,6 +6,7 @@ package com.by5388.sy95306v2.bean.cd.yupiao;
  * @author by5388
  * @date 2018/8/13 11:17
  */
+@SuppressWarnings("all")
 public class CdYpTop {
 
     /**

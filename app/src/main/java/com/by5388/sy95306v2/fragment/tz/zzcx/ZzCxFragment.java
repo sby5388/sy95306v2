@@ -24,6 +24,9 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
+ * FIXME: 2018/8/25  gson  解析泛型 参考
+ * https://www.cnblogs.com/qq78292959/p/3781808.html
+ *
  * @author by5388  on 2018/8/17.
  */
 public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
@@ -49,8 +52,6 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
         return fragment;
     }
 
-    // FIXME: 2018/8/25  gson  解析泛型
-    //  https://www.cnblogs.com/qq78292959/p/3781808.html
     @Override
     protected void initData() {
         presenter = new TzZzCxPresenter(this);

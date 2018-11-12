@@ -19,19 +19,19 @@
         <item
             android:id="@+id/nav_tz_12306"
             android:icon="@drawable/ic_menu_manage"
-            android:title="铁总12306" />
+            android:title="@string/title_tie_zhong" />
+        <item
+            android:id="@+id/nav_cd_12306"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/title_cheng_du" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_cd_12306"
-                android:icon="@drawable/ic_menu_share"
-                android:title="成都12306" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/about"
+                android:icon="@android:drawable/ic_menu_share"
+                android:title="@string/about" />
         </menu>
     </item>
 

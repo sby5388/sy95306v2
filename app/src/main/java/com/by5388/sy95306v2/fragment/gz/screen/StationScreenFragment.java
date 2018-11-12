@@ -5,6 +5,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -16,6 +17,7 @@ import com.by5388.sy95306v2.fragment.gz.screen.view.IScreenView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 车站大屏幕
@@ -56,7 +58,7 @@ public class StationScreenFragment extends BaseGzFragment implements IScreenView
         strings.add("深圳北站");
         strings.add("韶关东站");
         strings.add("长沙南站");
-        adapter = new MyAdapter(getContext(), strings, this);
+        adapter = new MyAdapter(Objects.requireNonNull(getContext()), strings, this);
     }
 
     @Override
@@ -95,12 +97,20 @@ public class StationScreenFragment extends BaseGzFragment implements IScreenView
             url = baseUrl + STATION_CODE[position];
         }
         webView.loadUrl(url);
+//        webView.setWebViewClient(new WebViewClient() {
+//            // TODO: 2018/8/22 过时方法
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                view.loadUrl(url);
+//                return true;
+//            }
+//        });
+
         webView.setWebViewClient(new WebViewClient() {
-            // TODO: 2018/8/22 过时方法
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 view.loadUrl(url);
-                return true;
+                return super.shouldOverrideUrlLoading(view, request);
             }
         });
     }

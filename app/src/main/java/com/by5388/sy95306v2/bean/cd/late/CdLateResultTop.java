@@ -6,6 +6,7 @@ package com.by5388.sy95306v2.bean.cd.late;
  * @author by5388
  * @date 2018/8/12 21:19
  */
+@SuppressWarnings("all")
 public class CdLateResultTop {
 
     /**

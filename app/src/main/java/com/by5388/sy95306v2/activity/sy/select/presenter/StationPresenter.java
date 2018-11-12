@@ -27,11 +27,10 @@ public class StationPresenter implements IStationPresenter {
     private final Consumer<Throwable> throwableConsumer;
 
     public StationPresenter(IStationView view) {
-        IStationView view1 = view;
         this.model = new StationModel();
         consumer = stations -> {
             if (stations == null || stations.isEmpty()) {
-                //view.showErrorMessage("名字异常");
+                view.showErrorMessage("名字异常");
                 return;
             }
             view.setStations(stations);

@@ -20,7 +20,7 @@ import io.reactivex.functions.Function;
  * @author by5388  on 2018/8/22.
  */
 public class CombinationTest {
-    static int count = 0;
+    private static int count = 0;
 
     private Observable<List<TrainDetail>> getObservable(int date, String trainCode) {
         SyService syService = new SyNetTools().getRetrofit().create(SyService.class);
@@ -40,42 +40,34 @@ public class CombinationTest {
 
 
     private Consumer<Throwable> getThrowableConsumer() {
-        return new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) {
-                System.err.println(throwable.getLocalizedMessage());
-            }
-        };
+        return throwable -> System.err.println(throwable.getLocalizedMessage());
     }
 
     private Consumer<List<TrainDetail>> getSyConsumer(String fromStationName) {
-        return new Consumer<List<TrainDetail>>() {
-            @Override
-            public void accept(List<TrainDetail> trainDetails) {
-                List<String> names = new ArrayList<>();
-                for (TrainDetail detail : trainDetails) {
-                    names.add(detail.getSNAME());
-                    System.out.println(detail.getSNAME());
-                }
-                int position = names.indexOf(fromStationName);
-                System.out.println(position);
-                if (position < 0) {
-                    System.err.println("错误");
-                    return;
-                }
-                List<String> newNames = new ArrayList<>();
-                for (int i = position + 1; i < names.size(); i++) {
-                    System.out.println(names.get(i));
-                    newNames.add(names.get(i));
-                }
-                getDetailData(newNames);
+        return trainDetails -> {
+            List<String> names = new ArrayList<>();
+            for (TrainDetail detail : trainDetails) {
+                names.add(detail.getSNAME());
+                System.out.println(detail.getSNAME());
             }
+            int position = names.indexOf(fromStationName);
+            System.out.println(position);
+            if (position < 0) {
+                System.err.println("错误");
+                return;
+            }
+            List<String> newNames = new ArrayList<>();
+            for (int i = position + 1; i < names.size(); i++) {
+                System.out.println(names.get(i));
+                newNames.add(names.get(i));
+            }
+            getDetailData(newNames);
         };
     }
 
     class Person {
-        String name;
-        int number;
+        final String name;
+        final int number;
 
         Person(String name) {
             count++;
@@ -94,17 +86,7 @@ public class CombinationTest {
 
     private void getDetailData(@NonNull List<String> names) {
         Observable.fromIterable(names)
-                .flatMap(new Function<String, ObservableSource<Person>>() {
-                    @Override
-                    public ObservableSource<Person> apply(String s) {
-                        return Observable.just(new Person(s));
-                    }
-                }).subscribe(new Consumer<Person>() {
-            @Override
-            public void accept(Person person) {
-                System.err.println(person);
-            }
-        });
+                .flatMap((Function<String, ObservableSource<Person>>) s -> Observable.just(new Person(s))).subscribe(person -> System.err.println(person));
     }
 
 }

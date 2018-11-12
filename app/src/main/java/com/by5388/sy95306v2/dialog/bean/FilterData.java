@@ -13,11 +13,11 @@ public class FilterData {
     public static List<FilterBean> getFilterItems() {
         if (items == null) {
             items = new ArrayList<>();
-            items.add(new FilterBean("高铁", true));
-            items.add(new FilterBean("动车", true));
-            items.add(new FilterBean("特快", true));
-            items.add(new FilterBean("普快", true));
-            items.add(new FilterBean("其他", true));
+            items.add(new FilterBean("高铁"));
+            items.add(new FilterBean("动车"));
+            items.add(new FilterBean("特快"));
+            items.add(new FilterBean("普快"));
+            items.add(new FilterBean("其他"));
         }
         return items;
     }

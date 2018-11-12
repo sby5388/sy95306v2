@@ -82,7 +82,7 @@ public class StaticData {
      */
     private static String getTrainNumberClass(String info) {
         if (null == TRAIN_TYPE) {
-            TRAIN_TYPE = new HashMap<>();
+            TRAIN_TYPE = new HashMap<>(8);
             initTrainNumberHashMap(TRAIN_TYPE);
         }
         //TODO HashMap的遍历有待熟悉

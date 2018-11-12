@@ -4,7 +4,7 @@ package com.by5388.sy95306v2.bean.gz;
  * @author by5388  on 2018/8/1.
  */
 
-
+@SuppressWarnings("unused")
 public class ArrTimestampBean {
     /**
      * date : 26

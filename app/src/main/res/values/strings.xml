@@ -86,6 +86,12 @@
     <string name="zhengDian">正点</string>
     <string name="expect_arrive_time">预计到达时间</string>
     <string name="wan_dian">晚点</string>
+    <string name="title_shen_yang">沈阳12306</string>
+    <string name="title_tie_zhong">铁总12306</string>
+    <string name="title_cheng_du">成都12306</string>
+    <string name="title_guang_zhou">广铁12306</string>
+    <string name="title_shang_hai">上海12306</string>
+    <string name="about">关于</string>
 
 
 </resources>

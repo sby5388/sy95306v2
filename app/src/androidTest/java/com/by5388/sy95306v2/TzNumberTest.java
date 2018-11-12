@@ -29,24 +29,11 @@ public class TzNumberTest {
                 "EFQ",
                 "IZQ",
                 "2018-08-27")
-                .subscribe(new Consumer<List<NumberDataBean>>() {
-                    @Override
-                    public void accept(List<NumberDataBean> numberDataBeans) {
-                        System.out.println("start");
-                        for (NumberDataBean bean : numberDataBeans) {
-                            System.out.println(bean.getStart_station_name());
-                        }
+                .subscribe(numberDataBeans -> {
+                    System.out.println("start");
+                    for (NumberDataBean bean : numberDataBeans) {
+                        System.out.println(bean.getStart_station_name());
                     }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) {
-                        System.err.println(throwable.getLocalizedMessage());
-                    }
-                }, new Action() {
-                    @Override
-                    public void run() {
-                        System.out.println("finish-------------");
-                    }
-                });
+                }, throwable -> System.err.println(throwable.getLocalizedMessage()), () -> System.out.println("finish-------------"));
     }
 }

@@ -13,6 +13,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.by5388.sy95306v2.activity.sy.list.model.sort.BaseTrainNumberSort.SORT_BY_START_TIME;
+
 /**
  * @author by5388  on 2018/7/29.
  */
@@ -37,7 +39,7 @@ public class TrainListPresenter implements ITrainListPresenter {
             //获取初始值.执行过滤+排序
             if (allTrainNumbers == null) {
                 allTrainNumbers = trainNumbers;
-                bindData(model.sortTrainNumber(trainNumbers, 0, true));
+                bindData(model.sortTrainNumber(trainNumbers, SORT_BY_START_TIME, true));
             } else {
                 view.updateTrainList(trainNumbers);
                 view.finishLoading();

@@ -6,6 +6,7 @@ import java.util.List;
  * @author by5388
  * @date 2018/8/16 19:11
  */
+@SuppressWarnings("all")
 public class CdLateDetail {
 
     /**

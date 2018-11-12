@@ -26,11 +26,11 @@ public class CdRemainTicketPresenter implements ICdRemainTicketPresenter {
     public CdRemainTicketPresenter(ICdRemainTicketView view) {
         this.view = view;
         this.model = new CdRemainTicketModel();
-        this.consumer = yuPiaoData -> {
-            if (null == yuPiaoData || yuPiaoData.isEmpty()) {
+        this.consumer = remainingTickets -> {
+            if (null == remainingTickets || remainingTickets.isEmpty()) {
                 view.showError("没有相关数据");
             } else {
-                view.updateDate(yuPiaoData);
+                view.updateDate(remainingTickets);
             }
             view.finishQuery();
         };

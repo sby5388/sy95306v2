@@ -46,15 +46,20 @@ public class MainActivity extends AppCompatActivity
      * 2秒内双返回键直接退出
      */
     private static final int EXIT_TIME = 2000;
-    private static final String TITLE_SHEN_YANG = "沈阳12306";
-    private static final String TITLE_TZ = "铁总12306";
-    private static final String TITLE_CD = "成都12306";
-    private static final String TITLE_GZ = "广铁12306";
-    private static final String TITLE_SH = "上海12306";
+    private static final int TITLE_SHEN_YANG = R.string.title_shen_yang;
+    private static final int TITLE_TZ = R.string.title_tie_zhong;
+    private static final int TITLE_CD = R.string.title_cheng_du;
+    private static final int TITLE_GZ = R.string.title_guang_zhou;
+    private static final int TITLE_SH = R.string.title_shang_hai;
 
+    private static final int SHEN_YANG = 0;
+    private static final int GUANG_ZHOU = 1;
+    private static final int SHANG_HAI = 2;
+    private static final int TIE_ZONG = 3;
+    private static final int CHENG_DU = 4;
 
     private List<Fragment> fragments;
-    private List<String> titles;
+    private List<Integer> titles;
     private FragmentManager fragmentManager;
     private View mainView;
 
@@ -81,8 +86,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         initData();
         loadData();
-
-
     }
 
     private void loadData() {
@@ -93,7 +96,7 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.hide(fragment);
         }
         fragmentTransaction.commit();
-        changeShenYang();
+        changeFragment(SHEN_YANG);
     }
 
     private void initData() {
@@ -113,10 +116,6 @@ public class MainActivity extends AppCompatActivity
         fragmentManager = getSupportFragmentManager();
     }
 
-    private void changeShenYang() {
-        changeFragment(0);
-    }
-
     private void changeFragment(int position) {
         if (position >= fragments.size()) {
             return;
@@ -130,9 +129,6 @@ public class MainActivity extends AppCompatActivity
         setTitle(titles.get(position));
     }
 
-    private void changeGuangzhou() {
-        changeFragment(1);
-    }
 
     @Override
     public void onBackPressed() {
@@ -157,30 +153,28 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    //@SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         switch (id) {
             case R.id.nav_shen_yang:
-                changeShenYang();
+                changeFragment(SHEN_YANG);
                 break;
             case R.id.nav_guang_tie:
-                changeGuangzhou();
+                changeFragment(GUANG_ZHOU);
                 break;
             case R.id.nav_shang_hai:
-                changeShanghai();
+                changeFragment(SHANG_HAI);
                 break;
             case R.id.nav_tz_12306:
-                changeTz();
+                changeFragment(TIE_ZONG);
                 break;
             case R.id.nav_cd_12306:
-                changeChengdu();
+                changeFragment(CHENG_DU);
                 break;
             case R.id.nav_send:
-
+                // TODO: 2018/11/12  show about dialog
                 break;
             default:
                 break;
@@ -191,18 +185,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void changeChengdu() {
-        changeFragment(4);
-    }
-
-    private void changeTz() {
-        changeFragment(3);
-    }
-
-    private void changeShanghai() {
-        changeFragment(2);
-    }
-
     @Override
     public void onFragmentInteraction(Uri uri) {
         // TODO: 2018/7/28
@@ -211,9 +193,9 @@ public class MainActivity extends AppCompatActivity
     /**
      * 双击返回键 彻底关闭应用
      *
-     * @param keyCode
-     * @param event
-     * @return
+     * @param keyCode 按键
+     * @param event   按键事件：抬起或者按下
+     * @return true:自己处理，false :系统处理
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

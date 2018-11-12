@@ -85,18 +85,15 @@ public class CombinationPresenter implements ICombinationPresenter {
             List<IRemainingTicket> yps = new ArrayList<>(beans);
             view.updateList(yps);
         };
-        this.addConsumer = new Consumer<SuccessDataBean>() {
-            @Override
-            public void accept(SuccessDataBean successDataBean) {
-                if (null == successDataBean) {
-                    return;
-                }
-                List<TzDataBean> beans = successDataBean.getDatas();
-                if (null == beans || beans.isEmpty()) {
-                    return;
-                }
-                view.addIRemainingTicket(successDataBean.getDatas().get(0));
+        this.addConsumer = successDataBean -> {
+            if (null == successDataBean) {
+                return;
             }
+            List<TzDataBean> beans = successDataBean.getDatas();
+            if (null == beans || beans.isEmpty()) {
+                return;
+            }
+            view.addIRemainingTicket(successDataBean.getDatas().get(0));
         };
     }
 
@@ -172,25 +169,22 @@ public class CombinationPresenter implements ICombinationPresenter {
         listDisposable = model.getTrainByTrainCode(Integer.parseInt(newDate), trainCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<TrainDetail>>() {
-                    @Override
-                    public void accept(List<TrainDetail> trainDetails) {
-                        List<String> names = new ArrayList<>();
-                        for (TrainDetail detail : trainDetails) {
-                            names.add(detail.getSNAME());
-                        }
-                        int position = names.indexOf(fromStation);
-                        if (position < 0) {
-                            System.err.println("该站没有在该车次中");
-                            return;
-                        }
-                        List<String> newNames = new ArrayList<>();
-                        for (int i = position + 1; i < names.size(); i++) {
-                            System.out.println(names.get(i));
-                            newNames.add(names.get(i));
-                        }
-                        getToStationDetailData(date, fromStation, randCode, trainCode, newNames);
+                .subscribe(trainDetails -> {
+                    List<String> names = new ArrayList<>();
+                    for (TrainDetail detail : trainDetails) {
+                        names.add(detail.getSNAME());
                     }
+                    int position = names.indexOf(fromStation);
+                    if (position < 0) {
+                        System.err.println("该站没有在该车次中");
+                        return;
+                    }
+                    List<String> newNames = new ArrayList<>();
+                    for (int i = position + 1; i < names.size(); i++) {
+                        System.out.println(names.get(i));
+                        newNames.add(names.get(i));
+                    }
+                    getToStationDetailData(date, fromStation, randCode, trainCode, newNames);
                 }, throwableConsumer);
     }
 
@@ -207,26 +201,23 @@ public class CombinationPresenter implements ICombinationPresenter {
         listDisposable = model.getTrainByTrainCode(Integer.parseInt(newDate), trainCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<TrainDetail>>() {
-                    @Override
-                    public void accept(List<TrainDetail> trainDetails) {
-                        List<String> names = new ArrayList<>();
-                        for (TrainDetail detail : trainDetails) {
-                            names.add(detail.getSNAME());
-                            Log.d(TAG, "accept: " + detail.getSNAME());
-                        }
-                        int position = names.indexOf(toStation);
-                        Log.d(TAG, "accept: " + position);
-                        if (position < 0 || position == 0) {
-                            view.showError("该站没有在该车次中");
-                            return;
-                        }
-                        List<String> newNames = new ArrayList<>();
-                        for (int i = 0; i < position - 1; i++) {
-                            newNames.add(names.get(i));
-                        }
-                        getFromStationDetailData(date, toStation, randCode, trainCode, newNames);
+                .subscribe(trainDetails -> {
+                    List<String> names = new ArrayList<>();
+                    for (TrainDetail detail : trainDetails) {
+                        names.add(detail.getSNAME());
+                        Log.d(TAG, "accept: " + detail.getSNAME());
                     }
+                    int position = names.indexOf(toStation);
+                    Log.d(TAG, "accept: " + position);
+                    if (position < 0 || position == 0) {
+                        view.showError("该站没有在该车次中");
+                        return;
+                    }
+                    List<String> newNames = new ArrayList<>();
+                    for (int i = 0; i < position - 1; i++) {
+                        newNames.add(names.get(i));
+                    }
+                    getFromStationDetailData(date, toStation, randCode, trainCode, newNames);
                 }, throwableConsumer);
     }
 
@@ -249,12 +240,7 @@ public class CombinationPresenter implements ICombinationPresenter {
 
     private void getToStationDetailData(String date, String fromStation, String randCode, String trainCode, @NonNull List<String> names) {
         listDisposable = Observable.fromIterable(names)
-                .flatMap(new Function<String, ObservableSource<SuccessDataBean>>() {
-                    @Override
-                    public ObservableSource<SuccessDataBean> apply(String toStation) {
-                        return model.getOnLyResult(date, fromStation, toStation, randCode, trainCode);
-                    }
-                })
+                .flatMap((Function<String, ObservableSource<SuccessDataBean>>) toStation -> model.getOnLyResult(date, fromStation, toStation, randCode, trainCode))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(addConsumer, throwableConsumer);
@@ -263,13 +249,10 @@ public class CombinationPresenter implements ICombinationPresenter {
     private void getFromStationDetailData(String date, String toStation, String randCode, String trainCode, @NonNull List<String> names) {
         Log.d(TAG, "getFromStationDetailData: " + names);
         listDisposable = Observable.fromIterable(names)
-                .flatMap(new Function<String, ObservableSource<SuccessDataBean>>() {
-                    @Override
-                    public ObservableSource<SuccessDataBean> apply(String fromStation) {
-                        Log.d(TAG, "apply: " + fromStation);
-                        return model.getOnLyResult(date, fromStation, toStation, randCode, trainCode);
+                .flatMap((Function<String, ObservableSource<SuccessDataBean>>) fromStation -> {
+                    Log.d(TAG, "apply: " + fromStation);
+                    return model.getOnLyResult(date, fromStation, toStation, randCode, trainCode);
 
-                    }
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -39,11 +39,13 @@ public interface IPassCodeService {
      */
     String CHANGE_STATION_TEXT = "changeStationText";
 
-    //queryDate=2018-08-20&from_station=BJQ&to_station=GZQ&from_station_name=深圳东&
-    //to_station_name=广州&randCode=ut5p&changeStationText=
 
     /**
      * 中转查询：实际是余票查询
+     * FIXME: 2018/8/20  TODO 需要增加Gson对泛型 支持
+     * https://www.baidu.com/s?ie=UTF-8&wd=Gson%20%E8%BD%AC%E5%8C%96%E6%88%90%20%E6%B3%9B%E5%9E%8B
+     * queryDate=2018-08-20&from_station=BJQ&to_station=GZQ&from_station_name=深圳东&
+     * to_station_name=广州&randCode=ut5p&changeStationText=
      *
      * @param queryDate         日期，格式"2018-08-20"
      * @param fromStationCode   出发站，电报码
@@ -54,8 +56,6 @@ public interface IPassCodeService {
      * @param changeStationText 中转站，此处为空
      * @return 结果，可能是成功也可能是失败
      */
-    // FIXME: 2018/8/20  TODO 需要增加Gson对泛型 支持
-    //https://www.baidu.com/s?ie=UTF-8&wd=Gson%20%E8%BD%AC%E5%8C%96%E6%88%90%20%E6%B3%9B%E5%9E%8B
     @GET("zzzcx/query")
     Observable<TzResult<SuccessDataBean>> getZzCxData(
             @Query(QUERY_DATA) String queryDate,
@@ -67,11 +67,9 @@ public interface IPassCodeService {
             @Query(CHANGE_STATION_TEXT) String changeStationText
     );
 
-
-    //module=other&rand=sjrand&0.4185230006624856
-
     /**
      * 获取图片验证码
+     * module=other&rand=sjrand&0.4185230006624856
      *
      * @param module       固定值："other"
      * @param rand         固定值："sjrand"

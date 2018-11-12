@@ -39,6 +39,7 @@ public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter
     private final IDetailRemainTicketModel model;
     private final IDetailRemainTicketView view;
     /**
+     * Fixme cookie 存在清除不完整
      * 错误统计，连续错误则清除cookie
      */
     private int errorCount = 0;
@@ -83,18 +84,15 @@ public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter
             }
             view.updateList(beans);
         };
-        this.addConsumer = new Consumer<SuccessDataBean>() {
-            @Override
-            public void accept(SuccessDataBean successDataBean) {
-                if (null == successDataBean) {
-                    return;
-                }
-                List<TzDataBean> beans = successDataBean.getDatas();
-                if (null == beans || beans.isEmpty()) {
-                    return;
-                }
-                view.addRemainingTicket(successDataBean.getDatas().get(0));
+        this.addConsumer = successDataBean -> {
+            if (null == successDataBean) {
+                return;
             }
+            List<TzDataBean> beans = successDataBean.getDatas();
+            if (null == beans || beans.isEmpty()) {
+                return;
+            }
+            view.addRemainingTicket(successDataBean.getDatas().get(0));
         };
     }
 
@@ -168,25 +166,22 @@ public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter
         listDisposable = model.getTrainByTrainCode(Integer.parseInt(newDate), trainCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<TrainDetail>>() {
-                    @Override
-                    public void accept(List<TrainDetail> trainDetails) {
-                        List<String> names = new ArrayList<>();
-                        for (TrainDetail detail : trainDetails) {
-                            names.add(detail.getSNAME());
-                        }
-                        int position = names.indexOf(fromStation);
-                        if (position < 0) {
-                            System.err.println("该站没有在该车次中");
-                            return;
-                        }
-                        List<String> newNames = new ArrayList<>();
-                        for (int i = position + 1; i < names.size(); i++) {
-                            System.out.println(names.get(i));
-                            newNames.add(names.get(i));
-                        }
-                        getToStationDetailData(date, fromStation, randCode, trainCode, newNames);
+                .subscribe(trainDetails -> {
+                    List<String> names = new ArrayList<>();
+                    for (TrainDetail detail : trainDetails) {
+                        names.add(detail.getSNAME());
                     }
+                    int position = names.indexOf(fromStation);
+                    if (position < 0) {
+                        System.err.println("该站没有在该车次中");
+                        return;
+                    }
+                    List<String> newNames = new ArrayList<>();
+                    for (int i = position + 1; i < names.size(); i++) {
+                        System.out.println(names.get(i));
+                        newNames.add(names.get(i));
+                    }
+                    getToStationDetailData(date, fromStation, randCode, trainCode, newNames);
                 }, throwableConsumer);
     }
 
@@ -203,26 +198,23 @@ public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter
         listDisposable = model.getTrainByTrainCode(Integer.parseInt(newDate), trainCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<TrainDetail>>() {
-                    @Override
-                    public void accept(List<TrainDetail> trainDetails) {
-                        List<String> names = new ArrayList<>();
-                        for (TrainDetail detail : trainDetails) {
-                            names.add(detail.getSNAME());
-                            Log.d(TAG, "accept: " + detail.getSNAME());
-                        }
-                        int position = names.indexOf(toStation);
-                        Log.d(TAG, "accept: " + position);
-                        if (position < 0 || position == 0) {
-                            view.showError("该站没有在该车次中");
-                            return;
-                        }
-                        List<String> newNames = new ArrayList<>();
-                        for (int i = 0; i < position - 1; i++) {
-                            newNames.add(names.get(i));
-                        }
-                        getFromStationDetailData(date, toStation, randCode, trainCode, newNames);
+                .subscribe(trainDetails -> {
+                    List<String> names = new ArrayList<>();
+                    for (TrainDetail detail : trainDetails) {
+                        names.add(detail.getSNAME());
+                        Log.d(TAG, "accept: " + detail.getSNAME());
                     }
+                    int position = names.indexOf(toStation);
+                    Log.d(TAG, "accept: " + position);
+                    if (position < 0 || position == 0) {
+                        view.showError("该站没有在该车次中");
+                        return;
+                    }
+                    List<String> newNames = new ArrayList<>();
+                    for (int i = 0; i < position - 1; i++) {
+                        newNames.add(names.get(i));
+                    }
+                    getFromStationDetailData(date, toStation, randCode, trainCode, newNames);
                 }, throwableConsumer);
     }
 
@@ -245,12 +237,7 @@ public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter
 
     private void getToStationDetailData(String date, String fromStation, String randCode, String trainCode, @NonNull List<String> names) {
         listDisposable = Observable.fromIterable(names)
-                .flatMap(new Function<String, ObservableSource<SuccessDataBean>>() {
-                    @Override
-                    public ObservableSource<SuccessDataBean> apply(String toStation) {
-                        return model.getOnLyResult(date, fromStation, toStation, randCode, trainCode);
-                    }
-                })
+                .flatMap((Function<String, ObservableSource<SuccessDataBean>>) toStation -> model.getOnLyResult(date, fromStation, toStation, randCode, trainCode))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(addConsumer, throwableConsumer);
@@ -258,12 +245,7 @@ public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter
 
     private void getFromStationDetailData(String date, String toStation, String randCode, String trainCode, @NonNull List<String> names) {
         listDisposable = Observable.fromIterable(names)
-                .flatMap(new Function<String, ObservableSource<SuccessDataBean>>() {
-                    @Override
-                    public ObservableSource<SuccessDataBean> apply(String fromStation) {
-                        return model.getOnLyResult(date, fromStation, toStation, randCode, trainCode);
-                    }
-                })
+                .flatMap((Function<String, ObservableSource<SuccessDataBean>>) fromStation -> model.getOnLyResult(date, fromStation, toStation, randCode, trainCode))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(addConsumer, throwableConsumer);

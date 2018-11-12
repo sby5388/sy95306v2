@@ -110,7 +110,8 @@ public class CdLateStation {
     }
 
     public static CdLateStation getStation(String[] params) {
-        if (null == params || params.length != 8) {
+        final int length = 8;
+        if (null == params || params.length != length) {
             return new CdLateStation();
         }
         return new CdLateStation(params);

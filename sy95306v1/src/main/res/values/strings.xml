@@ -27,9 +27,6 @@
     <string name="shen_yang_bei">沈阳北</string>
     <string name="hint_input_station">中文/拼音/首字母</string>
     <string name="bei_jing">北京</string>
-    <string name="price_test_shangwu">商务座:2724.0元</string>
-    <string name="price_test_yideng">一等座:270.5元</string>
-    <string name="price_test_erdeng">二等座:181.5元</string>
     <string name="init_data">初始化中，请稍候…</string>
     <string name="textView_loading">加载中，请稍候</string>
     <string name="station_start">始</string>

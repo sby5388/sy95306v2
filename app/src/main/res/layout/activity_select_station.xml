@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:hint="@string/hint_input_station"
+        android:inputType="text"
         android:paddingTop="20dp"
         android:singleLine="true"
         android:textSize="22sp"

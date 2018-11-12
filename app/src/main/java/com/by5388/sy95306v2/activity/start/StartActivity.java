@@ -2,10 +2,7 @@ package com.by5388.sy95306v2.activity.start;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -34,10 +31,6 @@ import com.by5388.sy95306v2.activity.start.view.IStartView;
 public class StartActivity extends BaseActivity implements IStartView {
     private final static String TAG = "StartActivity";
     /**
-     * 读写文件权限：1
-     */
-    private static final int WRITE_EXTERNAL_STORAGE_PERMISSION = 1;
-    /**
      * 双击退出时间内
      */
 
@@ -57,7 +50,6 @@ public class StartActivity extends BaseActivity implements IStartView {
     @Override
     protected void initView() {
         // TODO: 2018/8/9  启动页面不好看
-        ConstraintLayout startProgressBar = findViewById(R.id.lly_progress_bar);
     }
 
     @Override
@@ -77,23 +69,6 @@ public class StartActivity extends BaseActivity implements IStartView {
         if (presenter != null) {
             presenter.unSubscribe();
             presenter = null;
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case WRITE_EXTERNAL_STORAGE_PERMISSION:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //授权成功-->写数据库
-                    //loadDataBase();
-                } else {
-                    // 授权失败！
-                    Toast.makeText(this, "授权失败！", Toast.LENGTH_LONG).show();
-                }
-                break;
-            default:
-                break;
         }
     }
 

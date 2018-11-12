@@ -42,18 +42,15 @@ public class TzQuery {
         }
         String stationCode = getCode(stationName);
         return SERVICE.queryLate(stationName, code, queryType, date, stationCode, System.currentTimeMillis())
-                .map(new Function<ResponseBody, String>() {
-                    @Override
-                    public String apply(ResponseBody responseBody) throws Exception {
-                        String message = "";
-                        try {
-                            message = responseBody.string();
-                            message = getRealMessage(message.trim());
-                        } catch (IOException e) {
-                            //
-                        }
-                        return message;
+                .map(responseBody -> {
+                    String message = "";
+                    try {
+                        message = responseBody.string();
+                        message = getRealMessage(message.trim());
+                    } catch (IOException e) {
+                        //
                     }
+                    return message;
                 });
     }
 

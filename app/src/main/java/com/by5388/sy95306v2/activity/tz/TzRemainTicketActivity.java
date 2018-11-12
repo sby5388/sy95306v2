@@ -103,17 +103,14 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
     }
 
     private void selectDate(MyListener dateListener, Calendar calendarData) {
-        /**
-         * 往后延长60天
-         */
-        final long MAX_TIME = 5184000000L;
+        final long maxMinute = 5184000000L;
         //  这里要记录已经选择的日期
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, dateListener,
                 calendarData.get(Calendar.YEAR), calendarData.get(Calendar.MONTH), calendarData.get(Calendar.DATE));
         Calendar calendar = Calendar.getInstance();
         DatePicker picker = datePickerDialog.getDatePicker();
         // 设置最大日期
-        picker.setMaxDate(calendar.getTimeInMillis() + MAX_TIME);
+        picker.setMaxDate(calendar.getTimeInMillis() + maxMinute);
         // 设置最小日期
         picker.setMinDate(calendar.getTimeInMillis());
         datePickerDialog.show();
@@ -134,24 +131,20 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
         //组合0：三个都不为空
         if (isNotEmptyFromStation && isNotEmptyToStation && isNotEmptyTrainCode) {
             presenter.getOnlyOneTrainList(date, fromStation, toStation, randCode, trainCode);
-            Log.d(TAG, "searchTrainNumber: 0");
             return;
         }
         //组合1：出发+目的：列出所有的车次信息
         if (isNotEmptyFromStation && isNotEmptyToStation) {
             presenter.getTrainListByEmptyTrainCode(date, fromStation, toStation, randCode);
-            Log.d(TAG, "searchTrainNumber: 1");
             return;
         }
         //组合2：没有出发站
         if (isNotEmptyToStation && isNotEmptyTrainCode) {
             presenter.getTrainListByEmptyFromStation(date, toStation, randCode, trainCode);
-            Log.d(TAG, "searchTrainNumber: 2");
             return;
         }//组合3：没有目的站
         if (isNotEmptyFromStation && isNotEmptyTrainCode) {
             presenter.getTrainListByEmptyToStation(date, fromStation, randCode, trainCode);
-            Log.d(TAG, "searchTrainNumber: 3");
             return;
         }
         showError("请至少填写2个信息");

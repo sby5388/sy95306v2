@@ -84,8 +84,8 @@ public class Tools {
 
     public static void getDefaultStation(@NonNull List<Station> emptyStations) {
         DataBaseImpl dataBaseService = DataBaseTempAction.getInstance();
-       Disposable disposable = Observable.fromArray(STATION_NAME_UPPER).map(nameUpper ->
-                dataBaseService.selectStationByNameUpper(nameUpper))
+        Disposable disposable = Observable.fromArray(STATION_NAME_UPPER)
+                .map(dataBaseService::selectStationByNameUpper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 //                .subscribe(station -> emptyStations.add(station));
@@ -136,7 +136,7 @@ public class Tools {
             return Observable.just(empty);
         }
         if (regEnglish(string)) {
-            // TODO: 2018/7/21 要同步互斥
+            // TODO: 2018/7/21 要同步
             List<Station> nameFirst = dataBaseService.selectStationListByNameFirst(string.toLowerCase());
             List<Station> nameEn = dataBaseService.selectStationListByNameEn(string.toLowerCase());
             List<Station> nameLower = dataBaseService.selectStationListByNameLower(string.toLowerCase());

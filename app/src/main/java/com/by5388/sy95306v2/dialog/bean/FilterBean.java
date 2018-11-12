@@ -9,9 +9,9 @@ public class FilterBean {
     private String itemName;
     private boolean selected;
 
-    FilterBean(String itemName, boolean selected) {
+    FilterBean(String itemName) {
         this.itemName = itemName;
-        this.selected = selected;
+        this.selected = true;
     }
 
     public String getItemName() {

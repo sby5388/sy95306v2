@@ -6,10 +6,6 @@ package com.by5388.sy95306v2.bean.tz.check;
  */
 public class PassCodeDataBean {
     private static final String RIGHT_CODE = "1";
-    /**
-     * result : 1
-     * msg : randCodeRight
-     */
 
     /**
      * "0":不正确

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -72,7 +73,11 @@ public class CdLateFragment extends BaseCdFragment implements ICdLateView {
     }
 
     private void query() {
-        final String trainNo = trainCode.getText().toString().trim();
+        Editable editable = trainCode.getText();
+        if (editable == null) {
+            return;
+        }
+        final String trainNo = editable.toString().trim();
         if (TextUtils.isEmpty(trainNo)) {
             trainCode.setError("请输入车次");
             trainCode.requestFocus();
@@ -104,7 +109,11 @@ public class CdLateFragment extends BaseCdFragment implements ICdLateView {
     @Override
     public void showDialog(@NonNull List<String> trainDetail) {
         int length = trainDetail.size();
-        final String trainNo = trainCode.getText().toString().trim();
+        Editable editable = trainCode.getText();
+        if (editable == null) {
+            return;
+        }
+        final String trainNo = editable.toString().trim();
 
         String[] items = new String[length];
         for (int position = 0; position < length; position++) {
@@ -141,7 +150,11 @@ public class CdLateFragment extends BaseCdFragment implements ICdLateView {
 
     @Override
     public void getLateDetail() {
-        final String trainNo = trainCode.getText().toString().trim();
+        Editable editable = trainCode.getText();
+        if (editable == null) {
+            return;
+        }
+        final String trainNo = editable.toString().trim();
         String date = getData(calendar);
         presenter.getLateDetail(trainNo, date, "");
     }

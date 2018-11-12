@@ -19,22 +19,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public static final String DATA_STATION_CODE = "code";
 
-    @Override
-    protected final void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(getLayoutViewID());
-        if (isShowActionBar()) {
-            ActionBar actionBar = getSupportActionBar();
-            if (null != actionBar) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-            }
-        }
-        initData();
-        initView();
-        loadData();
-    }
-
     /**
      * 是否显示 actionBar
      *
@@ -83,6 +67,22 @@ public abstract class BaseActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected final void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(getLayoutViewID());
+        if (isShowActionBar()) {
+            ActionBar actionBar = getSupportActionBar();
+            if (null != actionBar) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
+        }
+        initData();
+        initView();
+        loadData();
     }
 
 }

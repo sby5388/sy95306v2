@@ -79,12 +79,9 @@ public class DetailRemainTicketModel implements IDetailRemainTicketModel {
     @Override
     public Observable<SuccessDataBean> getOnLyResult(String queryDate, String fromStationName, String toStationName, String randCode, String trainCode) {
         return getResult(queryDate, fromStationName, toStationName, randCode)
-                .flatMap(new Function<SuccessDataBean, ObservableSource<SuccessDataBean>>() {
-                    @Override
-                    public ObservableSource<SuccessDataBean> apply(SuccessDataBean successDataBean) {
-                        SuccessDataBean result = getSuccessDataBeanByTrainCode(successDataBean, trainCode);
-                        return Observable.just(result);
-                    }
+                .flatMap((Function<SuccessDataBean, ObservableSource<SuccessDataBean>>) successDataBean -> {
+                    SuccessDataBean result = getSuccessDataBeanByTrainCode(successDataBean, trainCode);
+                    return Observable.just(result);
                 });
     }
 

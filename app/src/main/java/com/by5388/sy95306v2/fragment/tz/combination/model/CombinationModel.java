@@ -79,12 +79,9 @@ public class CombinationModel implements ICombinationModel {
     @Override
     public Observable<SuccessDataBean> getOnLyResult(String queryDate, String fromStationName, String toStationName, String randCode, String trainCode) {
         return getResult(queryDate, fromStationName, toStationName, randCode)
-                .flatMap(new Function<SuccessDataBean, ObservableSource<SuccessDataBean>>() {
-                    @Override
-                    public ObservableSource<SuccessDataBean> apply(SuccessDataBean successDataBean) {
-                        SuccessDataBean result = getSuccessDataBeanByTrainCode(successDataBean, trainCode);
-                        return Observable.just(result);
-                    }
+                .flatMap((Function<SuccessDataBean, ObservableSource<SuccessDataBean>>) successDataBean -> {
+                    SuccessDataBean result = getSuccessDataBeanByTrainCode(successDataBean, trainCode);
+                    return Observable.just(result);
                 });
     }
 
@@ -101,13 +98,13 @@ public class CombinationModel implements ICombinationModel {
         result.setFlag(successDataBean.isFlag());
         result.setIsThrough(successDataBean.getIsThrough());
         // FIXME: 2018/8/25 应当使用深拷贝
-        List<TzDataBean> datas = new ArrayList<>();
+        List<TzDataBean> dataBeans = new ArrayList<>();
         for (TzDataBean data : successDataBean.getDatas()) {
             if (data.getStation_train_code().contains(trainCode)) {
-                datas.add(new TzDataBean(data));
+                dataBeans.add(new TzDataBean(data));
             }
         }
-        result.setDatas(datas);
+        result.setDatas(dataBeans);
         return result;
     }
 

@@ -17,8 +17,6 @@ import java.util.List;
  * @author by5388  on 2018/8/19.
  */
 final class CdLateAdapter extends BaseAdapter {
-    private static final String START_STATION = "0";
-
     private List<CdTrainAllNodeBean> beans;
     private final LayoutInflater inflater;
 

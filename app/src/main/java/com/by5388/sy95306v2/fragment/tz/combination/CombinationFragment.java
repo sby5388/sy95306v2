@@ -103,12 +103,9 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
 
         buttonDate = view.findViewById(R.id.button_query_date);
         buttonSearch.setOnClickListener(v -> searchTrainNumber());
-        buttonSearch.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                startActivity(new Intent(getContext(), TzRemainTicketActivity.class));
-                return true;
-            }
+        buttonSearch.setOnLongClickListener(v -> {
+            startActivity(new Intent(getContext(), TzRemainTicketActivity.class));
+            return true;
         });
         buttonDate.setOnClickListener(v -> selectDate(dateListener, calendar));
         view.findViewById(R.id.imageView).setOnClickListener(v -> switchStations());
