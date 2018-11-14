@@ -11,7 +11,6 @@ import com.by5388.sy95306v2.net.sy.SyService;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -27,14 +26,14 @@ import static com.by5388.sy95306v2.dialog.bean.FilterData.getFilterItems;
 public class TrainListModel implements ITrainListModel {
     private final SyService trainNumberService;
     private final List<Integer> selected;
-    private final IShenYangStationDb dataBaseService;
+    private IShenYangStationDb dataBaseService;
 
     public TrainListModel() {
         Retrofit retrofit = new SyNetTools().getRetrofit();
         trainNumberService = retrofit.create(SyService.class);
         selected = new ArrayList<>();
-        dataBaseService = DataBaseTempAction.getInstance();
     }
+
 
     @Override
     public Observable<List<TrainNumber>> getTrainNumber(int date, String fromStation, String toStation) {
@@ -100,6 +99,9 @@ public class TrainListModel implements ITrainListModel {
 
     @Override
     public String getStationNames(String fromStationCode, String toStationCode) {
+        if (null == dataBaseService) {
+            dataBaseService = DataBaseTempAction.getInstance();
+        }
         Station startStation = dataBaseService.selectStationByNameUpper(fromStationCode);
         Station endStation = dataBaseService.selectStationByNameUpper(toStationCode);
         if (null == startStation || null == endStation) {

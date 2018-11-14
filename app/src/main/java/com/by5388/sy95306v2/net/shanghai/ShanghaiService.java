@@ -30,6 +30,7 @@ public interface ShanghaiService {
     //    {info:{stationName:"济南西",trainCode:"G105"}
     // ,user:{mac:"",version:"",phone:"",device:"",system:"1"}}
 
+
     /**
      * 车次查询
      *

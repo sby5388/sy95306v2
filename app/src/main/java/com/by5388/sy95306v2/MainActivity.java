@@ -141,20 +141,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        // TODO: 2018/10/27  
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    //@SuppressWarnings("StatementWithEmptyBody")
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id) {
@@ -173,7 +159,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_cd_12306:
                 changeFragment(CHENG_DU);
                 break;
-            case R.id.nav_send:
+            case R.id.about:
                 // TODO: 2018/11/12  show about dialog
                 break;
             default:
