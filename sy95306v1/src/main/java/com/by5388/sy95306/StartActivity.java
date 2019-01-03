@@ -127,7 +127,8 @@ public class StartActivity extends AppCompatActivity {
         String stationList = getCityList();
         List<Station> stations = getCityList(stationList);
 
-        Observable.create((ObservableOnSubscribe<Integer>) e -> e.onNext(service.addStation(stations)))
+        Observable.create((ObservableOnSubscribe<Integer>) e ->
+                e.onNext(service.addStation(stations)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(integer -> {

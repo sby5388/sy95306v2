@@ -1,8 +1,10 @@
 package com.by5388.sy95306v2.database;
 
-import com.by5388.sy95306v2.bean.Station;
+import com.by5388.sy95306v2.shenyang.bean.Station;
 
 import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
  * 沈阳车站数据
@@ -21,11 +23,13 @@ public interface IShenYangStationDb {
 
 
     /**
-     * 增加一个车站
+     * 批量插入输入库：使用“事务”提高效率
+     * copy from :https://blog.csdn.net/jbb0403/article/details/46680393
      *
-     * @param station 车站
+     * @param stations 车站集合
+     * @return 进度值
      */
-    void addStation(Station station);
+    Observable<Integer> addStations(List<Station> stations);
 
     /**
      * 搜索单个:name,
@@ -44,35 +48,11 @@ public interface IShenYangStationDb {
     Station selectStationByName(String stationName);
 
     /**
-     * 搜索多个:firstName,nameEn,nameLower,name：模糊搜索
+     * 模糊查询
      *
-     * @param nameLower 站名
-     * @return 车站
+     * @param key 关键字
+     * @return 车站集合
      */
-    List<Station> selectStationListByNameLower(String nameLower);
-
-    /**
-     * 搜索多个:firstName,nameEn,nameLower,name：模糊搜索
-     *
-     * @param nameEn 站名
-     * @return 车站
-     */
-    List<Station> selectStationListByNameEn(String nameEn);
-
-    /**
-     * 搜索多个:firstName,nameEn,nameLower,name：模糊搜索
-     *
-     * @param stationName 站名
-     * @return 车站
-     */
-    List<Station> selectStationListByName(String stationName);
-
-    /**
-     * 搜索多个:firstName,nameEn,nameLower,name：模糊搜索
-     *
-     * @param nameFirst 站名
-     * @return 车站
-     */
-    List<Station> selectStationListByNameFirst(String nameFirst);
+    List<Station> selectStationList(String key);
 
 }

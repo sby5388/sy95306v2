@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2.other.step1.sy;
 
-import com.by5388.sy95306v2.bean.shenyang.TrainDetail;
-import com.by5388.sy95306v2.bean.shenyang.TrainNumber;
+import com.by5388.sy95306v2.shenyang.bean.TrainDetail;
+import com.by5388.sy95306v2.shenyang.bean.TrainNumber;
 
 import java.util.List;
 

@@ -1,15 +1,10 @@
 package com.by5388.sy95306v2;
 
-import com.by5388.sy95306v2.bean.tz.TzResult;
-import com.by5388.sy95306v2.bean.tz.yp.success.SuccessDataBean;
+import com.by5388.sy95306v2.tiezong.bean.TzResult;
+import com.by5388.sy95306v2.tiezong.bean.yp.success.SuccessDataBean;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author by5388  on 2018/8/28.

@@ -2,11 +2,11 @@ package com.by5388.sy95306v2.gz;
 
 import android.support.annotation.NonNull;
 
-import com.by5388.sy95306v2.bean.gz.GzResultData;
-import com.by5388.sy95306v2.bean.gz.StationInfoBean;
-import com.by5388.sy95306v2.bean.gz.station.TrainsBean;
-import com.by5388.sy95306v2.fragment.gz.number.model.ITrainNumberModel;
-import com.by5388.sy95306v2.fragment.gz.number.model.TrainNumberModel;
+import com.by5388.sy95306v2.guangzhou.bean.GzResultData;
+import com.by5388.sy95306v2.guangzhou.bean.StationInfoBean;
+import com.by5388.sy95306v2.guangzhou.bean.station.TrainsBean;
+import com.by5388.sy95306v2.guangzhou.number.model.ITrainNumberModel;
+import com.by5388.sy95306v2.guangzhou.number.model.TrainNumberModel;
 
 import org.junit.Test;
 
@@ -19,13 +19,13 @@ import io.reactivex.disposables.Disposable;
  * @author by5388  on 2018/11/9.
  */
 public class GzNumberTest {
-    private final String date = "2018-11-09";
+    private final String date = "2018-12-05";
     private static final Formatter formatter = new Formatter(System.out);
 
     @Test
     public void testNumber() {
         ITrainNumberModel model = new TrainNumberModel();
-        String trainNo = "G30";
+        String trainNo = "D741";
         Disposable disposable = model.getTrainByNo(trainNo, date)
                 .subscribe(this::showResult, throwable -> System.err.println(throwable.getLocalizedMessage()));
     }

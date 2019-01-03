@@ -34,9 +34,13 @@ public class DataBaseTempAction implements DataBaseImpl {
         if (null == stationList || stationList.isEmpty()) {
             return StartActivity.FAIL;
         }
+        db.beginTransaction();
         for (Station station : stationList) {
-            addStation(station);
+            ContentValues values = getValues(station);
+            db.insert(StationTable.TableStation.TABLE_NAME, null, values);
         }
+        db.setTransactionSuccessful();
+        db.endTransaction();
         return StartActivity.SUCCESS;
     }
 
@@ -60,37 +64,6 @@ public class DataBaseTempAction implements DataBaseImpl {
         }
         cursor.close();
         return station;
-    }
-
-    @Override
-    public List<Station> selectStationListByNameLower(String nameLower) {
-        final String colName = "nameLower";
-        return getStationListByName(colName, nameLower);
-    }
-
-    @Override
-    public List<Station> selectStationListByNameEn(String nameEn) {
-        final String colName = "nameEn";
-        return getStationListByName(colName, nameEn);
-    }
-
-    @Override
-    public List<Station> selectStationListByName(String stationName) {
-        final String colName = "name";
-        return getStationListByName(colName, stationName);
-    }
-
-    @Override
-    public List<Station> selectStationListByNameFirst(String nameFirst) {
-        final String colName = "nameFirst";
-        return getStationListByName(colName, nameFirst);
-    }
-
-
-    private void addStation(Station station) {
-        ContentValues values = getValues(station);
-        db.insert(StationTable.TableStation.TABLE_NAME, null, values);
-
     }
 
     private static class SingletonHandler {
@@ -148,6 +121,26 @@ public class DataBaseTempAction implements DataBaseImpl {
             stationList.add(station);
         }
         cursor.close();
+        return stationList;
+    }
+
+    @Override
+    public List<Station> selectStationList(String key) {
+        List<Station> stationList = new ArrayList<>();
+
+        String selection = StationTable.TableStation.NAME_LOWER + " like ? or " +
+                StationTable.TableStation.NAME_FIRST + " like ? or " +
+                StationTable.TableStation.NAME_EN + " like ? or " +
+                StationTable.TableStation.STATION_NAME + " like ? ";
+        String[] selectionArgs = new String[]{"%" + key + "%", "%" + key + "%", "%" + key + "%", "%" + key + "%"};
+        Cursor cursor = db.query(true, StationTable.TableStation.TABLE_NAME, null, selection, selectionArgs,
+                null, null, null, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                stationList.add(getStation(cursor));
+            }
+            cursor.close();
+        }
         return stationList;
     }
 }

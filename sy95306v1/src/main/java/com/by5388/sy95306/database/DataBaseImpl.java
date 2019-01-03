@@ -23,16 +23,12 @@ public interface DataBaseImpl {
 
     Station selectStationByName(String stationName);
 
+
     /**
-     * 搜索多个:firstName,nameEn,nameLower,name：模糊搜索
-     * @param nameLower
-     * @return
+     * 模糊查询
+     *
+     * @param key 关键字
+     * @return 车站集合
      */
-    List<Station> selectStationListByNameLower(String nameLower);
-
-    List<Station> selectStationListByNameEn(String nameEn);
-
-    List<Station> selectStationListByName(String stationName);
-
-    List<Station> selectStationListByNameFirst(String nameFirst);
+    List<Station> selectStationList(String key);
 }

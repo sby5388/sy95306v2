@@ -1,16 +1,12 @@
 package com.by5388.sy95306v2;
 
-import com.by5388.sy95306v2.bean.tz.number.NumberDataBean;
-import com.by5388.sy95306v2.fragment.tz.GetPassCodeImpl;
-import com.by5388.sy95306v2.fragment.tz.IGetPassCodeService;
+import com.by5388.sy95306v2.tiezong.bean.number.NumberDataBean;
+import com.by5388.sy95306v2.tiezong.GetPassCodeImpl;
+import com.by5388.sy95306v2.tiezong.IGetPassCodeService;
 
 import org.junit.Test;
 
 import java.util.HashMap;
-import java.util.List;
-
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 
 /**
  * @author by5388  on 2018/8/24.

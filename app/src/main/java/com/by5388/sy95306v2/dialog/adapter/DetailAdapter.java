@@ -11,9 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.bean.gz.StationInfoBean;
-import com.by5388.sy95306v2.bean.gz.station.TrainsBean;
-import com.by5388.sy95306v2.net.tz.TzQuery;
+import com.by5388.sy95306v2.guangzhou.bean.StationInfoBean;
+import com.by5388.sy95306v2.guangzhou.bean.station.TrainsBean;
+import com.by5388.sy95306v2.tiezong.api.TzQuery;
 
 import java.util.List;
 

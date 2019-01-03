@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.database;
 
-import com.by5388.sy95306v2.bean.cd.screen.ScreenStation;
+import com.by5388.sy95306v2.chengdu.bean.screen.ScreenStation;
 
 import java.util.List;
 

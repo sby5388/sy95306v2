@@ -170,8 +170,8 @@ public class FirstFragment extends BaseFragment {
         }
         for (int i = 1; i < selected.length; i++) {
             if (selected[i]) {
-                stringBuilder.append(name[i]);
-                stringBuilder.append(";");
+                stringBuilder.append(name[i])
+                        .append(";");
             }
         }
 

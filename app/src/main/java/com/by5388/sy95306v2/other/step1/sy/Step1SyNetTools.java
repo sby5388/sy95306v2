@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.other.step1.sy;
 
-import com.by5388.sy95306v2.net.BaseNetTools;
+import com.by5388.sy95306v2.base.BaseNetTools;
 
 import java.util.concurrent.TimeUnit;
 

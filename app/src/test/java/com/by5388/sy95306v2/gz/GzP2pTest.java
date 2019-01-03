@@ -2,20 +2,18 @@ package com.by5388.sy95306v2.gz;
 
 import android.support.annotation.NonNull;
 
-import com.by5388.sy95306v2.bean.gz.GzResultData;
-import com.by5388.sy95306v2.bean.gz.station.DataBeanP2P;
-import com.by5388.sy95306v2.bean.gz.station.StationsBean;
-import com.by5388.sy95306v2.bean.gz.station.TrainsBean;
-import com.by5388.sy95306v2.fragment.gz.p2p.model.GzP2pModel;
-import com.by5388.sy95306v2.fragment.gz.p2p.model.IGzP2pModel;
+import com.by5388.sy95306v2.guangzhou.bean.GzResultData;
+import com.by5388.sy95306v2.guangzhou.bean.station.DataBeanP2P;
+import com.by5388.sy95306v2.guangzhou.bean.station.StationsBean;
+import com.by5388.sy95306v2.guangzhou.bean.station.TrainsBean;
+import com.by5388.sy95306v2.guangzhou.p2p.model.GzP2pModel;
+import com.by5388.sy95306v2.guangzhou.p2p.model.IGzP2pModel;
 
 import org.junit.Test;
 
-import java.util.Comparator;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 /**
  * @author by5388  on 2018/11/9.

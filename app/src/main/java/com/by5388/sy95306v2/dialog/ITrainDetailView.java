@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.dialog;
 
-import com.by5388.sy95306v2.bean.gz.station.TrainsBean;
+import com.by5388.sy95306v2.guangzhou.bean.station.TrainsBean;
 
 /**
  * @author by5388  on 2018/8/2.

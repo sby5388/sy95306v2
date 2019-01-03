@@ -2,7 +2,7 @@ package com.by5388.sy95306v2.step1;
 
 import android.support.annotation.NonNull;
 
-import com.by5388.sy95306v2.bean.shenyang.TrainDetail;
+import com.by5388.sy95306v2.shenyang.bean.TrainDetail;
 import com.by5388.sy95306v2.other.step1.sy.Step1SyNetTools;
 import com.by5388.sy95306v2.other.step1.sy.Step1SyService;
 

@@ -9,9 +9,7 @@ import com.by5388.sy95306.database.DataBaseImpl;
 import com.by5388.sy95306.database.DataBaseTempAction;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -93,13 +91,6 @@ public class Tools {
 
     }
 
-    /**
-     * TODO
-     *
-     * @param context
-     * @param string
-     * @return
-     */
     private static Observable<List<Station>> getObservableByString2(@NonNull Context context, String string) {
         DataBaseImpl dataBaseService = DataBaseTempAction.getInstance();
 
@@ -110,12 +101,9 @@ public class Tools {
                 //TODO  数字没有任何意义
                 //数字
                 stations = new ArrayList<>();
-            } else if (regEnglish(string)) {
-                //字母
-                stations = dataBaseService.selectStationListByNameLower(string.toLowerCase());
             } else {
-                //其他：中文
-                stations = dataBaseService.selectStationListByName(string);
+                //字母+中文
+                stations = dataBaseService.selectStationList(string);
             }
             e.onNext(stations);
             e.onComplete();
@@ -124,32 +112,15 @@ public class Tools {
 
     /**
      * 新的筛选条件：nameFirst/name/nameEn/nameLower，去掉数字
-     *
-     * @param string
-     * @return
      */
     private static Observable<List<Station>> getObservableByString(String string) {
         DataBaseImpl dataBaseService = DataBaseTempAction.getInstance();
         if (regNumber(string)) {
             List<Station> empty = new ArrayList<>();
-            //TODO  数字没有任何意义
             return Observable.just(empty);
         }
-        if (regEnglish(string)) {
-            // TODO: 2018/7/21 要同步
-            List<Station> nameFirst = dataBaseService.selectStationListByNameFirst(string.toLowerCase());
-            List<Station> nameEn = dataBaseService.selectStationListByNameEn(string.toLowerCase());
-            List<Station> nameLower = dataBaseService.selectStationListByNameLower(string.toLowerCase());
-            Set<Station> stations = new HashSet<>();
-            stations.addAll(nameFirst);
-            stations.addAll(nameEn);
-            stations.addAll(nameLower);
-            List<Station> back = new ArrayList<>(stations);
-            return Observable.just(back);
-        }
-        //中文
-        List<Station> name = dataBaseService.selectStationListByName(string);
-        return Observable.just(name);
+        List<Station> mStationList = dataBaseService.selectStationList(string);
+        return Observable.just(mStationList);
     }
 
     public static void refreshStationData(@NonNull Context context, String string, StationAdapter adapter) {
@@ -164,7 +135,8 @@ public class Tools {
      * @param adapter    设配器
      */
     private static void updateStationData(@NonNull Observable<List<Station>> observable, StationAdapter adapter) {
-        observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(adapter::setStations);
     }
 

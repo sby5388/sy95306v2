@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".activity.start.StartActivity">
+        <activity android:name=".start.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,15 +26,15 @@
 
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".activity.sy.select.SelectStationActivity" />
-        <activity android:name=".activity.sy.detail.TrainDetailActivity" />
-        <activity android:name=".activity.sy.list.TrainNumberListActivity" />
-        <activity android:name=".activity.tz.TzRemainTicketActivity" />
+        <activity android:name=".shenyang.select.SelectStationActivity" />
+        <activity android:name=".shenyang.detail.TrainDetailActivity" />
+        <activity android:name=".shenyang.list.TrainNumberListActivity" />
+        <activity android:name=".tiezong.TzRemainTicketActivity" />
     </application>
 
 </manifest>

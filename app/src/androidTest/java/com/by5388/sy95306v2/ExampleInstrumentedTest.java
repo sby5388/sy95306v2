@@ -1,11 +1,11 @@
 package com.by5388.sy95306v2;
 
 import android.content.Context;
-import android.os.Looper;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.EditText;
 
-import com.by5388.sy95306v2.fragment.shanghai.dialog.ShNumberDialog;
+import com.by5388.sy95306v2.shanghai.dialog.ShNumberDialog;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,10 +24,10 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        //assertEquals("com.by5388.sy95306v2", appContext.getPackageName());
-        Looper.prepare();
-        ShNumberDialog dialog = new ShNumberDialog(appContext);
-        dialog.search("D2316", "2018-08-11");
-        Looper.loop();
+        EditText editText = new EditText(appContext);
+        editText.setText("*132#");
+        System.out.println(editText.getText());
+        System.out.println(editText.getText().toString());
+        System.out.println(editText.getText().toString().trim());
     }
 }

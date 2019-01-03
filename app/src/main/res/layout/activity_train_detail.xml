@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.sy.detail.TrainDetailActivity">
+    tools:context=".shenyang.detail.TrainDetailActivity">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/lly_top"
@@ -126,7 +126,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/detail_listView_bg"
-        app:layout_constraintBottom_toTopOf="@+id/empty_view"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lly_second">
 
         <android.support.v7.widget.RecyclerView
@@ -137,10 +137,10 @@
             android:visibility="gone" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <LinearLayout
-        android:id="@+id/empty_view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent" />
+    <!--<LinearLayout-->
+    <!--android:id="@+id/empty_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:orientation="vertical"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent" />-->
 </android.support.constraint.ConstraintLayout>

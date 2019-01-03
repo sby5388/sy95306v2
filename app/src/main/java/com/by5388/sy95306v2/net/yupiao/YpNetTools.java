@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.net.yupiao;
 
-import com.by5388.sy95306v2.net.BaseNetTools;
+import com.by5388.sy95306v2.base.BaseNetTools;
 
 /**
  * 余票查询

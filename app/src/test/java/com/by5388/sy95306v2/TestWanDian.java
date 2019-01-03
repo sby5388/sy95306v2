@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2;
 
-import com.by5388.sy95306v2.net.tz.TzQuery;
+import com.by5388.sy95306v2.tiezong.api.TzQuery;
 
 import org.junit.Test;
 
