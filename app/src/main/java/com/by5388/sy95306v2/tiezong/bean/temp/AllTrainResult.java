@@ -1,40 +1,28 @@
-package com.by5388.sy95306v2.tiezong.bean;
+package com.by5388.sy95306v2.tiezong.bean.temp;
 
-import com.by5388.sy95306v2.tiezong.bean.check.PassCodeDataBean;
-import com.by5388.sy95306v2.tiezong.bean.number.NumberListDataBean;
-import com.by5388.sy95306v2.tiezong.bean.temp.DataBeanX;
-import com.by5388.sy95306v2.tiezong.bean.yp.fail.FailDataBean;
-import com.by5388.sy95306v2.tiezong.bean.yp.success.SuccessDataBean;
+import com.by5388.sy95306v2.tiezong.bean.ValidateMessagesBean;
 
 import java.util.List;
 
 /**
- * @author by5388
- * @date 2018/8/17 15:05
- * 12306 相关数据请求的数据返回格式
+ * @author by5388  on 2019/1/6.
  */
-@SuppressWarnings("all")
-public class TzResult<T> {
+public class AllTrainResult {
 
     /**
      * validateMessagesShowId : _validatorMessage
      * status : true
      * httpstatus : 200
+     * data : T
      * messages : []
      * validateMessages : {}
-     * data::T ,
-     *
-     * @see PassCodeDataBean 包括图片验证码校验、
-     * @see SuccessDataBean 中转查询中的得到直达车次,为成功
-     * @see FailDataBean 没有直达车次为失败的
-     * @see NumberListDataBean 车次查询结果
-     * @see DataBeanX 车站车次查询的结果
      */
 
     private String validateMessagesShowId;
     private boolean status;
+    //    @SerializedName()
     private int httpstatus;
-    private T data;
+    private DataBeanX data;
     private ValidateMessagesBean validateMessages;
     private List<?> messages;
 
@@ -62,11 +50,11 @@ public class TzResult<T> {
         this.httpstatus = httpstatus;
     }
 
-    public T getData() {
+    public DataBeanX getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(DataBeanX data) {
         this.data = data;
     }
 

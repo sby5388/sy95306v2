@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.by5388.sy95306v2.tiezong.bean.TzResult;
 import com.by5388.sy95306v2.tiezong.bean.number.NumberDataBean;
 import com.by5388.sy95306v2.tiezong.bean.number.NumberListDataBean;
+import com.by5388.sy95306v2.tiezong.bean.temp.DataBeanX;
 import com.by5388.sy95306v2.tiezong.bean.yp.success.SuccessDataBean;
 
 import java.util.List;
@@ -67,6 +68,21 @@ public interface IGetPassCodeService {
                                                            String fromStationCOde,
                                                            String toStationCOde,
                                                            String date);
+
+    /**
+     * 车站车次查询：
+     * {@link DataBeanX}
+     *
+     * @param date        日期  格式：yyyy-MM-dd
+     * @param stationName 车站中文名，如“饶平”
+     * @param stationCode 车站电报码，如 “RVQ”
+     * @return 某个车站（包括同城车站）当天的所有车次
+     */
+    Observable<TzResult<DataBeanX>> getStationAllTrain(
+            String date,
+            String stationName,
+            String stationCode
+    );
 
 
 }

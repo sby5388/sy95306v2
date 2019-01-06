@@ -5,7 +5,7 @@ package com.by5388.sy95306v2.tiezong.bean.yp.fail;
  * @date 2018/8/17 15:31
  * 请求失败
  */
-class FailDataBean {
+public class FailDataBean {
     /**
      * message : 没有查询到中转信息！
      * flag : false

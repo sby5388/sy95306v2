@@ -51,13 +51,13 @@ public class PassCodeNetTools extends BaseNetTools {
             CookieJar cookieJar = new CookieJar() {
                 @Override
                 public void saveFromResponse(HttpUrl url, @NonNull List<Cookie> cookies) {
-                    Log.d(TAG, "saveFromResponse: " + url.host());
+                    //Log.d(TAG, "saveFromResponse: " + url.host());
                     cookieStore.put(url.host(), cookies);
                 }
 
                 @Override
                 public List<Cookie> loadForRequest(HttpUrl url) {
-                    Log.d(TAG, "loadForRequest: " + url.host());
+                    //Log.d(TAG, "loadForRequest: " + url.host());
                     List<Cookie> cookies = cookieStore.get(url.host());
                     return cookies != null ? cookies : new ArrayList<>();
                 }

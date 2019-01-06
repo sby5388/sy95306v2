@@ -3,6 +3,7 @@ package com.by5388.sy95306v2.tiezong.api;
 import com.by5388.sy95306v2.tiezong.bean.TzResult;
 import com.by5388.sy95306v2.tiezong.bean.check.PassCodeDataBean;
 import com.by5388.sy95306v2.tiezong.bean.number.NumberListDataBean;
+import com.by5388.sy95306v2.tiezong.bean.temp.DataBeanX;
 import com.by5388.sy95306v2.tiezong.bean.yp.success.SuccessDataBean;
 
 import io.reactivex.Observable;
@@ -21,7 +22,7 @@ public interface IPassCodeService {
     //    https://kyfw.12306.cn/otn/passcodeNew/checkRandCodeAnsyn
     //    https://kyfw.12306.cn/otn/passcodeNew/getPassCodeNew
     //    https://kyfw.12306.cn/otn/czxx/queryByTrainNo
-
+   //     https://kyfw.12306.cn/otn/czxx/
     String MODULE = "module";
     String RAND = "rand";
     String RAND_CODE = "randCode";
@@ -97,21 +98,40 @@ public interface IPassCodeService {
     );
 
     /**
-     * 车次查询：
+     * 车站车次查询：
      *
      * @param trainNo         车次的全称，6k0000D92200
-     * @param fromStationCOde 出发站电报码，估计没啥用，待验证
-     * @param toStationCOde   目的站电报码，估计没啥用，待验证
+     * @param fromStationCode 出发站电报码，估计没啥用，待验证
+     * @param toStationCode   目的站电报码，估计没啥用，待验证
      * @param date            日期，格式yyyy-MM-dd
      * @return 数据， {@link NumberListDataBean}
      */
     @GET("czxx/queryByTrainNo")
     Observable<TzResult<NumberListDataBean>> getNumberList(
             @Query("train_no") String trainNo,
-            @Query("from_station_telecode") String fromStationCOde,
-            @Query("to_station_telecode") String toStationCOde,
+            @Query("from_station_telecode") String fromStationCode,
+            @Query("to_station_telecode") String toStationCode,
             @Query("depart_date") String date
 
     );
+
+    /**
+     * 车站车次查询：
+     * {@link DataBeanX}
+     * @param date 日期  格式：yyyy-MM-dd
+     * @param stationName 车站中文名，如“饶平”
+     * @param stationCode 车站电报码，如 “RVQ”
+     * @param randCode 随机数，可为空
+     * @return 某个车站（包括同城车站）当天的所有车次
+     */
+    @GET("czxx/query")
+    Observable<TzResult<DataBeanX>> getStationAllTrain(
+            @Query("train_start_date") String date,
+            @Query("train_station_name") String stationName,
+            @Query("train_station_code") String stationCode,
+            @Query(RAND_CODE) String randCode
+    );
+
+
 
 }
