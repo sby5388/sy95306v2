@@ -1,115 +1,127 @@
 package com.by5388.sy95306v2.tiezong.bean.number;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * 12306 车次查询返回item
+ *
  * @author by5388  on 2018/8/24.
  */
 @SuppressWarnings("all")
 public class NumberDataBean {
     /**
-     * start_station_name : 湛江西
-     * arrive_time : 09:20
-     * station_train_code : D7458
-     * station_name : 湛江西
-     * train_class_name : 动车
-     * service_type : 1
-     * start_time : 09:20
-     * stopover_time : ----
-     * end_station_name : 广州南
-     * station_no : 01
+     * startStationName : 湛江西
+     * arriveTime : 09:20
+     * stationTrainCode : D7458
+     * stationName : 湛江西
+     * trainClassName : 动车
+     * serviceType : 1
+     * startTime : 09:20
+     * stopoverTime : ----
+     * endStationName : 广州南
+     * stationNo : 01
      * isEnabled : false
      */
-
-    private String start_station_name;
-    private String arrive_time;
-    private String station_train_code;
-    private String station_name;
-    private String train_class_name;
-    private String service_type;
-    private String start_time;
-    private String stopover_time;
-    private String end_station_name;
-    private String station_no;
+    @SerializedName("start_station_name")
+    private String startStationName;
+    @SerializedName("arrive_time")
+    private String arriveTime;
+    @SerializedName("station_train_code")
+    private String stationTrainCode;
+    @SerializedName("station_name")
+    private String stationName;
+    @SerializedName("train_class_name")
+    private String trainClassName;
+    @SerializedName("service_type")
+    private String serviceType;
+    @SerializedName("start_time")
+    private String startTime;
+    @SerializedName("stopover_time")
+    private String stopoverTime;
+    @SerializedName("end_station_name")
+    private String endStationName;
+    @SerializedName("station_no")
+    private String stationNo;
     private boolean isEnabled;
 
-    public String getStart_station_name() {
-        return start_station_name;
+    public String getStartStationName() {
+        return startStationName;
     }
 
-    public void setStart_station_name(String start_station_name) {
-        this.start_station_name = start_station_name;
+    public void setStartStationName(String startStationName) {
+        this.startStationName = startStationName;
     }
 
-    public String getArrive_time() {
-        return arrive_time;
+    public String getArriveTime() {
+        return arriveTime;
     }
 
-    public void setArrive_time(String arrive_time) {
-        this.arrive_time = arrive_time;
+    public void setArriveTime(String arriveTime) {
+        this.arriveTime = arriveTime;
     }
 
-    public String getStation_train_code() {
-        return station_train_code;
+    public String getStationTrainCode() {
+        return stationTrainCode;
     }
 
-    public void setStation_train_code(String station_train_code) {
-        this.station_train_code = station_train_code;
+    public void setStationTrainCode(String stationTrainCode) {
+        this.stationTrainCode = stationTrainCode;
     }
 
-    public String getStation_name() {
-        return station_name;
+    public String getStationName() {
+        return stationName;
     }
 
-    public void setStation_name(String station_name) {
-        this.station_name = station_name;
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
     }
 
-    public String getTrain_class_name() {
-        return train_class_name;
+    public String getTrainClassName() {
+        return trainClassName;
     }
 
-    public void setTrain_class_name(String train_class_name) {
-        this.train_class_name = train_class_name;
+    public void setTrainClassName(String trainClassName) {
+        this.trainClassName = trainClassName;
     }
 
-    public String getService_type() {
-        return service_type;
+    public String getServiceType() {
+        return serviceType;
     }
 
-    public void setService_type(String service_type) {
-        this.service_type = service_type;
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
     }
 
-    public String getStart_time() {
-        return start_time;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setStart_time(String start_time) {
-        this.start_time = start_time;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public String getStopover_time() {
-        return stopover_time;
+    public String getStopoverTime() {
+        return stopoverTime;
     }
 
-    public void setStopover_time(String stopover_time) {
-        this.stopover_time = stopover_time;
+    public void setStopoverTime(String stopoverTime) {
+        this.stopoverTime = stopoverTime;
     }
 
-    public String getEnd_station_name() {
-        return end_station_name;
+    public String getEndStationName() {
+        return endStationName;
     }
 
-    public void setEnd_station_name(String end_station_name) {
-        this.end_station_name = end_station_name;
+    public void setEndStationName(String endStationName) {
+        this.endStationName = endStationName;
     }
 
-    public String getStation_no() {
-        return station_no;
+    public String getStationNo() {
+        return stationNo;
     }
 
-    public void setStation_no(String station_no) {
-        this.station_no = station_no;
+    public void setStationNo(String stationNo) {
+        this.stationNo = stationNo;
     }
 
     public boolean isIsEnabled() {

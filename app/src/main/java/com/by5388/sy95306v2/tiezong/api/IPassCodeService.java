@@ -132,6 +132,9 @@ public interface IPassCodeService {
             @Query(RAND_CODE) String randCode
     );
 
+    /**
+     * 车次查询
+     */
 
 
 }
