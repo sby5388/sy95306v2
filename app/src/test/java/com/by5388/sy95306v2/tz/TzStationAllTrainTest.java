@@ -9,14 +9,9 @@ import com.by5388.sy95306v2.tiezong.bean.temp.DataBeanX;
 import org.junit.Test;
 
 import java.util.HashMap;
-import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 
 /**
  * @author by5388  on 2019/1/6.
@@ -24,7 +19,7 @@ import io.reactivex.functions.Predicate;
 public class TzStationAllTrainTest {
     @Test
     public void testTzStationAllTrain() {
-        IGetPassCodeService service = new GetPassCodeImpl(new HashMap<>());
+        IGetPassCodeService service = new GetPassCodeImpl();
         String date = "2019-01-12";
         String stationName = "饶平";
         String stationCode = "RVQ";

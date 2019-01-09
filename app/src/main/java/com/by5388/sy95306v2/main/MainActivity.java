@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.chengdu.ChengduFragment;
-import com.by5388.sy95306v2.base.BaseFragment;
 import com.by5388.sy95306v2.guangzhou.GuangzhouFragment;
 import com.by5388.sy95306v2.shanghai.ShanghaiFragment;
 import com.by5388.sy95306v2.shenyang.ShenYangFragment;

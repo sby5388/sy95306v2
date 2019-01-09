@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
  */
 //@SuppressWarnings("all")
 public class Station {
-    public final static int EMPTY_ID = -1;
+    private final static int EMPTY_ID = -1;
     /**
      * nameFirst:bjb
      * name:北京北

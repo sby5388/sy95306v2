@@ -10,20 +10,7 @@ import io.reactivex.Observable;
  * @author by5388  on 2018/8/20.
  */
 public interface ITzZzCxModel {
-    /**
-     * 检验验证码
-     *
-     * @param randCode 验证码
-     * @return 是否正确
-     */
-    Observable<Boolean> checkCode(String randCode);
 
-    /**
-     * 获取图片
-     *
-     * @return 图片
-     */
-    Observable<Bitmap> getPassCodeBitmap();
 
     /**
      * 站名是否正确：存在数据库中
@@ -45,8 +32,4 @@ public interface ITzZzCxModel {
     Observable<SuccessDataBean> getResult(String queryDate, String fromStationName,
                                           String toStationName, String randCode);
 
-    /**
-     * 清除cookie
-     */
-    void clearCookie();
 }

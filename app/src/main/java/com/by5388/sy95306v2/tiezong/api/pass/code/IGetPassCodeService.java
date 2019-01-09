@@ -17,22 +17,6 @@ import io.reactivex.Observable;
  * @author by5388  on 2018/8/17.
  */
 public interface IGetPassCodeService {
-    /**
-     * 获取图片
-     *
-     * @param value 随机数
-     * @return 图片
-     */
-    Observable<Bitmap> getBitmap(double value);
-
-    /**
-     * 检验验证码
-     *
-     * @param randCode 验证码
-     * @return 是否正确
-     */
-    Observable<Boolean> checkCode(String randCode);
-
 
     /**
      * 中转查询：实际是余票查询

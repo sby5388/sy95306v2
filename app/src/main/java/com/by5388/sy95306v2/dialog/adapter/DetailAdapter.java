@@ -51,12 +51,12 @@ public class DetailAdapter extends BaseAdapter {
     }
 
     public void setInfoBeans(@NonNull TrainsBean trainsBean) {
-        List<StationInfoBean> infosBeans = trainsBean.getStationInfos();
-        if (infosBeans != null) {
-            this.infoBeans = infosBeans;
+        List<StationInfoBean> infoBeans = trainsBean.getStationInfos();
+        if (infoBeans != null) {
+            this.infoBeans = infoBeans;
             trainCode = trainsBean.getTrainNo().split("/")[0];
-            date = getDate(infosBeans.get(0).getArrDate());
-            status = new String[infosBeans.size()][2];
+            date = getDate(infoBeans.get(0).getArrDate());
+            status = new String[infoBeans.size()][2];
             notifyDataSetChanged();
         }
     }
@@ -84,7 +84,7 @@ public class DetailAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        StationInfoBean infosBean = getItem(position);
+        StationInfoBean infoBean = getItem(position);
         ViewHolder holder;
         if (null == convertView) {
             convertView = inflater.inflate(R.layout.item_detail_simple, parent, false);
@@ -93,10 +93,10 @@ public class DetailAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        String name = infosBean.getStationName();
+        String name = infoBean.getStationName();
         holder.name.setText(name);
-        holder.arrive.setText(infosBean.getArrTime());
-        holder.leave.setText(infosBean.getGoTime());
+        holder.arrive.setText(infoBean.getArrTime());
+        holder.leave.setText(infoBean.getGoTime());
         Disposable disposable;
         if (TextUtils.isEmpty(status[position][ARRIVE]) || TextUtils.isEmpty(status[position][LEAVE])) {
             if (!TextUtils.isEmpty(trainCode) && !(TextUtils.isEmpty(date))) {

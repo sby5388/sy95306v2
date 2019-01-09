@@ -19,13 +19,13 @@ import io.reactivex.disposables.Disposable;
  * @author by5388  on 2018/11/9.
  */
 public class GzNumberTest {
-    private final String date = "2018-12-05";
     private static final Formatter formatter = new Formatter(System.out);
 
     @Test
     public void testNumber() {
         ITrainNumberModel model = new TrainNumberModel();
         String trainNo = "D741";
+        String date = "2018-12-05";
         Disposable disposable = model.getTrainByNo(trainNo, date)
                 .subscribe(this::showResult, throwable -> System.err.println(throwable.getLocalizedMessage()));
     }

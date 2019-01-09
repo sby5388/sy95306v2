@@ -25,6 +25,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * 成都车站大屏幕
@@ -68,7 +69,7 @@ public class CdScreenFragment extends BaseCdFragment implements ICdScreenView {
         presenter = new CdScreenPresenter(this);
         adapter = new CdScreenAdapter(getContext(), new ArrayList<>());
         stations = new ArrayList<>();
-        arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, stations);
+        arrayAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_list_item_1, stations);
         calendar = Calendar.getInstance();
 
     }
@@ -158,7 +159,7 @@ public class CdScreenFragment extends BaseCdFragment implements ICdScreenView {
     @Override
     public void updateScreenStation(List<ScreenStation> screenStations) {
         stations = screenStations;
-        arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, stations);
+        arrayAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_list_item_1, stations);
         spinner.setAdapter(arrayAdapter);
         Toast.makeText(getContext(), "加载完成", Toast.LENGTH_SHORT).show();
     }

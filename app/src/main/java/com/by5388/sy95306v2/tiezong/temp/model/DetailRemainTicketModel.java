@@ -34,38 +34,17 @@ public class DetailRemainTicketModel implements IDetailRemainTicketModel {
     private final IGetPassCodeService service;
     private final SyService syService;
     private final IShenYangStationDb db;
-    private final Random random;
-    private static final String COOKIE_12306 = ReceivedCookieInterceptor.COOKIE_12306;
-    private final HashMap<String, List<Cookie>> cookieStore;
 
     public DetailRemainTicketModel() {
-        cookieStore = new HashMap<>();
-        service = new GetPassCodeImpl(cookieStore);
+        service = new GetPassCodeImpl();
         syService = new SyNetTools().getRetrofit().create(SyService.class);
         db = DataBaseTempApi.getInstance();
-        random = new Random();
-    }
-
-    @Override
-    public Observable<Boolean> checkCode(String randCode) {
-        return service.checkCode(randCode);
-    }
-
-    @Override
-    public Observable<Bitmap> getPassCodeBitmap() {
-        double value = random.nextDouble();
-        return service.getBitmap(value);
     }
 
     @Override
     public boolean isErrorStationName(String stationName) {
         Station station = db.selectStationByName(stationName.trim());
         return TextUtils.isEmpty(station.getName());
-    }
-
-    @Override
-    public void clearCookie() {
-        cookieStore.clear();
     }
 
     @Override
@@ -99,13 +78,13 @@ public class DetailRemainTicketModel implements IDetailRemainTicketModel {
         result.setFlag(successDataBean.isFlag());
         result.setIsThrough(successDataBean.getIsThrough());
         // FIXME: 2018/8/25 应当使用深拷贝
-        List<TzDataBean> datas = new ArrayList<>();
+        List<TzDataBean> dataBeans = new ArrayList<>();
         for (TzDataBean data : successDataBean.getDatas()) {
             if (data.getStation_train_code().contains(trainCode)) {
-                datas.add(new TzDataBean(data));
+                dataBeans.add(new TzDataBean(data));
             }
         }
-        result.setDatas(datas);
+        result.setDatas(dataBeans);
         return result;
     }
 

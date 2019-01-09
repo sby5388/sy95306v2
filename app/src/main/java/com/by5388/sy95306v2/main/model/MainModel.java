@@ -40,7 +40,7 @@ public class MainModel implements IStartModel, IMainModel {
     /**
      * 车站列表字符串
      */
-    private StringBuilder stationListFile;
+    private final StringBuilder stationListFile;
     private final String path = "https://kyfw.12306.cn/otn/leftTicket/init";
     /**
      * 当前的版本号：20180730时网站上的最新版
@@ -49,7 +49,7 @@ public class MainModel implements IStartModel, IMainModel {
     private String getVersion = "";
     private final SettingSharedPreferences preferences;
     private final IShenYangStationDb service;
-    private IStationJson json;
+    private final IStationJson json;
 
     public MainModel() {
         preferences = SettingSharedPreferences.getInstance();

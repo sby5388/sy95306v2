@@ -25,12 +25,11 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class TzDetailActivity extends AppCompatActivity {
     public static final String TAG = "TzDetailActivity";
-    public static final String BUNDLE_NAME = "bundleName";
-    public static final String TRAIN_NO = "trainNo";
-    public static final String FROM_STATION_CODE = "fromStationCode";
-    public static final String TO_STATION_CODE = "toStationCode";
-    public static final String DATE = "date";
-    private ListView mListView;
+    private static final String BUNDLE_NAME = "bundleName";
+    private static final String TRAIN_NO = "trainNo";
+    private static final String FROM_STATION_CODE = "fromStationCode";
+    private static final String TO_STATION_CODE = "toStationCode";
+    private static final String DATE = "date";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class TzDetailActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mListView = findViewById(R.id.listView_tz_detail);
+        ListView mListView = findViewById(R.id.listView_tz_detail);
     }
 
     private void loadData() {
@@ -55,7 +54,7 @@ public class TzDetailActivity extends AppCompatActivity {
         String date = bundle.getString(DATE);
 
 
-        IGetPassCodeService service = new GetPassCodeImpl(new HashMap<>());
+        IGetPassCodeService service = new GetPassCodeImpl();
 
         service.getListNumberDataBean(trainCode, fromStationCode, toStationCode, date)
                 .subscribeOn(Schedulers.io())

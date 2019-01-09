@@ -20,11 +20,11 @@ import okhttp3.Response;
  *
  * @author by5388  on 2018/8/20.
  */
-public class ReceivedCookieInterceptor implements Interceptor {
+class ReceivedCookieInterceptor implements Interceptor {
     private static final String TAG = "Interceptor";
     private final ISettingSharedPreferences sharedPreference;
     private static final String SET_COOKIE = "Set-Cookie";
-    public static final String COOKIE_12306 = "cookie12306";
+    private static final String COOKIE_12306 = "cookie12306";
 
     public ReceivedCookieInterceptor() {
         sharedPreference = SettingSharedPreferences.getInstance();

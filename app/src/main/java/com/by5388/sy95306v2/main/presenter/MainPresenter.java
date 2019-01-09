@@ -6,7 +6,6 @@ import com.by5388.sy95306v2.main.view.IMainView;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -14,9 +13,9 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class MainPresenter implements IMainPresenter {
 
-    private IMainView view;
-    private IMainModel model;
-    private CompositeDisposable disposable;
+    private final IMainView view;
+    private final IMainModel model;
+    private final CompositeDisposable disposable;
 
     public MainPresenter(IMainView view) {
         this.view = view;

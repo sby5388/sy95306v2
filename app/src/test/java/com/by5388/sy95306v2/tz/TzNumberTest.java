@@ -15,7 +15,7 @@ public class TzNumberTest {
     @Test
     public void test() {
         System.out.println("start-----");
-        IGetPassCodeService service = new GetPassCodeImpl(new HashMap<>());
+        IGetPassCodeService service = new GetPassCodeImpl();
         service.getListNumberDataBean(
                 "6i000D31080C",
                 "IOQ",

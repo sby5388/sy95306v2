@@ -25,6 +25,7 @@ public class FailDataBean {
     public final void setFlag(boolean flag) {
         this.flag = flag;
     }
+
     public String getMessage() {
         return message;
     }

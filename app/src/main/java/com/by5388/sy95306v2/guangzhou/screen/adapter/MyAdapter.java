@@ -28,8 +28,9 @@ public class MyAdapter extends RecyclerView.Adapter implements View.OnClickListe
         this.stationNames = stationNames;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.item_screen_name, parent, false);
         RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         itemView.setLayoutParams(layoutParams);
@@ -37,7 +38,7 @@ public class MyAdapter extends RecyclerView.Adapter implements View.OnClickListe
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         String name = stationNames.get(position);
         MyViewHolder holder1 = (MyViewHolder) holder;
         holder1.name.setText(name);

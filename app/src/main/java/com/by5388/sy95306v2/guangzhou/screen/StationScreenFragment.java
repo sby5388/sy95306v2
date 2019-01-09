@@ -64,7 +64,7 @@ public class StationScreenFragment extends BaseGzFragment implements IScreenView
     @Override
     protected void loadData() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.HORIZONTAL));
         recyclerView.setAdapter(adapter);
         //TODO   WebSettings
         WebSettings settings = webView.getSettings();

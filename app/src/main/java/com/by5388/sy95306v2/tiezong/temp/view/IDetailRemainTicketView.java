@@ -22,11 +22,6 @@ public interface IDetailRemainTicketView extends IBaseView {
 
 
     /**
-     * 筛选对话框
-     */
-    void showFilterDialog();
-
-    /**
      * 显示齐全的余票信息
      *
      * @param bean 余票信息
@@ -39,25 +34,6 @@ public interface IDetailRemainTicketView extends IBaseView {
      * @param dataBeans 车次列表
      */
     void updateList(List<TzDataBean> dataBeans);
-
-    /**
-     * 更新验证码图片
-     *
-     * @param bitmap 图片
-     */
-    void updateCheckCodeBitmap(Bitmap bitmap);
-
-    /**
-     * 验证码是否正确
-     *
-     * @param isChecked 正确
-     */
-    void checkPassCode(boolean isChecked);
-
-    /**
-     * 清除验证码
-     */
-    void clearPassCode();
 
 
 }

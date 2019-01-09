@@ -1,6 +1,5 @@
 package com.by5388.sy95306v2.tiezong.combination.model;
 
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -17,14 +16,11 @@ import com.by5388.sy95306v2.tiezong.bean.yp.success.SuccessDataBean;
 import com.by5388.sy95306v2.tiezong.bean.yp.success.TzDataBean;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
-import okhttp3.Cookie;
 
 /**
  * @author by5388  on 2018/8/20.
@@ -33,27 +29,13 @@ public class CombinationModel implements ICombinationModel {
     private final IGetPassCodeService service;
     private final SyService syService;
     private final IShenYangStationDb db;
-    private final Random random;
-    private final HashMap<String, List<Cookie>> cookieStore;
 
     public CombinationModel() {
-        cookieStore = new HashMap<>();
-        service = new GetPassCodeImpl(cookieStore);
+        service = new GetPassCodeImpl();
         syService = new SyNetTools().getRetrofit().create(SyService.class);
         db = DataBaseTempApi.getInstance();
-        random = new Random();
     }
 
-    @Override
-    public Observable<Boolean> checkCode(String randCode) {
-        return service.checkCode(randCode);
-    }
-
-    @Override
-    public Observable<Bitmap> getPassCodeBitmap() {
-        double value = random.nextDouble();
-        return service.getBitmap(value);
-    }
 
     @Override
     public boolean isErrorStationName(String stationName) {
@@ -61,10 +43,6 @@ public class CombinationModel implements ICombinationModel {
         return TextUtils.isEmpty(station.getName());
     }
 
-    @Override
-    public void clearCookie() {
-        cookieStore.clear();
-    }
 
     @Override
     public Observable<SuccessDataBean> getResult(String queryDate, String fromStationName, String toStationName, String randCode) {

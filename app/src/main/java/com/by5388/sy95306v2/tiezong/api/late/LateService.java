@@ -23,6 +23,7 @@ public interface LateService {
     /**
      * 查询类型：0：到达，1：出发
      */
+    @SuppressWarnings("all")
     String QUERY_TYPE = "cxlx";
     /**
      * 日期
@@ -51,6 +52,7 @@ public interface LateService {
      * @param time        时间戳:毫秒
      * @return 正晚点情况
      */
+    @SuppressWarnings("all")
     @GET("mapping/kfxt/zwdcx/LCZWD/cx.jsp")
     Observable<ResponseBody> queryLate(
             @Query(CZ) String stationName,

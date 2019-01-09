@@ -1,6 +1,5 @@
 package com.by5388.sy95306v2.tiezong.combination.persenter;
 
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -28,25 +27,14 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class CombinationPresenter implements ICombinationPresenter {
     private static final String TAG = "DRTicketPresenter";
-    private CompositeDisposable mDisposable;
+    private final CompositeDisposable mDisposable;
     private final Consumer<Throwable> throwableConsumer;
 
     private final Consumer<SuccessDataBean> resultConsumer;
-    private final Consumer<Bitmap> bitmapConsumer;
-
-    private final Consumer<Boolean> booleanConsumer;
     private final Consumer<SuccessDataBean> addConsumer;
 
     private final ICombinationModel model;
     private final ICombinationView view;
-    /**
-     * 错误统计，连续错误则清除cookie
-     */
-    private int errorCount = 0;
-    /**
-     * 最大错误数
-     */
-    private static final int MAX_ERROR_COUNT = 1;
 
     public CombinationPresenter(ICombinationView view) {
         this.view = view;
@@ -55,23 +43,7 @@ public class CombinationPresenter implements ICombinationPresenter {
             view.showError(throwable.getLocalizedMessage());
             view.finishQuery();
         };
-        this.bitmapConsumer = bitmap -> {
-            view.finishQuery();
-            if (null == bitmap) {
-                return;
-            }
-            view.updateCheckCodeBitmap(bitmap);
-        };
-        this.booleanConsumer = aBoolean -> {
-            if (!aBoolean) {
-                errorCount++;
-                if (errorCount > MAX_ERROR_COUNT) {
-                    model.clearCookie();
-                    errorCount = 0;
-                }
-            }
-            view.checkPassCode(aBoolean);
-        };
+
         this.resultConsumer = successDataBean -> {
             view.finishQuery();
             if (null == successDataBean) {
@@ -96,33 +68,6 @@ public class CombinationPresenter implements ICombinationPresenter {
             view.addIRemainingTicket(successDataBean.getDatas().get(0));
         };
         mDisposable = new CompositeDisposable();
-    }
-
-
-    @Override
-    public void refreshPassCodeBitmap() {
-        view.clearPassCode();
-        view.startQuery();
-        mDisposable.add(model.getPassCodeBitmap()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(bitmapConsumer, throwableConsumer));
-    }
-
-    @Override
-    public void checkPassCode(String passCode) {
-        final int codeLength = 4;
-        if (codeLength != passCode.length()) {
-            view.showError("格式不对");
-            return;
-        }
-        view.startQuery();
-        mDisposable.add(model.checkCode(passCode)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(booleanConsumer, throwableConsumer));
-
-
     }
 
     @Override
@@ -244,7 +189,7 @@ public class CombinationPresenter implements ICombinationPresenter {
     private void getFromStationDetailData(String date, String toStation, String randCode, String trainCode, @NonNull List<String> names) {
         mDisposable.add(Observable.fromIterable(names)
                 .flatMap((Function<String, ObservableSource<SuccessDataBean>>) fromStation ->
-                        model.getOnlyResult(date, fromStation, toStation, randCode, trainCode) )
+                        model.getOnlyResult(date, fromStation, toStation, randCode, trainCode))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(addConsumer, throwableConsumer));
@@ -256,7 +201,6 @@ public class CombinationPresenter implements ICombinationPresenter {
         if (mDisposable != null) {
             mDisposable.clear();
         }
-        model.clearCookie();
     }
 
 }

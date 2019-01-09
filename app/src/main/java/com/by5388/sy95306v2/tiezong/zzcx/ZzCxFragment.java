@@ -1,12 +1,9 @@
 package com.by5388.sy95306v2.tiezong.zzcx;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,13 +31,8 @@ import java.util.Objects;
 public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
 
     private static final String TAG = "ZzCxFragment";
-    private TextInputEditText fromStation, toStation, passCode;
-    /**
-     * 图片验证码
-     */
-    private ImageView imageViewPassCode;
-    private Button buttonSearch, buttonDate, buttonCheck;
-    private ListView listView;
+    private TextInputEditText fromStation, toStation;
+    private Button buttonDate;
     private RemainTicketAdapter adapter;
     private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
     private MyListener dateListener;
@@ -64,8 +56,6 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
 
     @Override
     protected void loadData() {
-        buttonDate.setText(getData(calendar));
-        listView.setAdapter(adapter);
     }
 
     @Override
@@ -75,43 +65,17 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
 
     @Override
     protected void initView(View view) {
-        listView = view.findViewById(R.id.listView_train_code);
+        ListView listView = view.findViewById(R.id.listView_train_code);
+        listView.setAdapter(adapter);
         fromStation = view.findViewById(R.id.textView_from_station);
         toStation = view.findViewById(R.id.textView_to_station);
-        passCode = view.findViewById(R.id.textView_pass_code);
-        buttonCheck = view.findViewById(R.id.button_check_pass_code);
-        buttonCheck.setOnClickListener(v -> checkPassCode());
-        buttonSearch = view.findViewById(R.id.button_query);
-        imageViewPassCode = view.findViewById(R.id.imageView_pass_code);
-        imageViewPassCode.setOnClickListener(v -> refreshPassCode());
+        Button buttonSearch = view.findViewById(R.id.button_query);
 
         buttonDate = view.findViewById(R.id.button_query_date);
         buttonSearch.setOnClickListener(v -> searchTrainNumber());
         buttonDate.setOnClickListener(v -> selectDate(dateListener, calendar));
+        buttonDate.setText(getData(calendar));
         view.findViewById(R.id.imageView).setOnClickListener(v -> switchStations());
-    }
-
-    /**
-     * 校验验证码
-     */
-    private void checkPassCode() {
-        final int codeLength = 4;
-        String code = passCode.getText().toString().trim();
-        Log.d(TAG, "checkPassCode: " + code);
-        if (codeLength != code.length()) {
-            passCode.setError("格式不对");
-            return;
-        }
-        buttonCheck.setEnabled(false);
-        presenter.checkPassCode(code);
-    }
-
-    /**
-     * 刷新验证码
-     */
-    private void refreshPassCode() {
-        imageViewPassCode.setEnabled(false);
-        presenter.refreshPassCodeBitmap();
     }
 
     private void switchStations() {
@@ -124,14 +88,9 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
         String date = buttonDate.getText().toString().trim();
         String fromStation = this.fromStation.getText().toString().trim();
         String toStation = this.toStation.getText().toString().trim();
-        String randCode = passCode.getText().toString().trim();
+        String randCode = "";
         presenter.getTrainList(date, fromStation, toStation, randCode);
         adapter.setTickets(EMPTY_LIST);
-    }
-
-    @Override
-    public void clearPassCode() {
-        passCode.setText("");
     }
 
     @Override
@@ -143,14 +102,10 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
 
     @Override
     public void startQuery() {
-        imageViewPassCode.setEnabled(false);
-        buttonCheck.setEnabled(false);
     }
 
     @Override
     public void finishQuery() {
-        imageViewPassCode.setEnabled(true);
-        buttonCheck.setEnabled(true);
     }
 
     @Override
@@ -164,27 +119,6 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
             return;
         }
         adapter.setTickets(dataBeans);
-    }
-
-    @Override
-    public void updateCheckCodeBitmap(Bitmap bitmap) {
-        if (null == bitmap) {
-            return;
-        }
-        imageViewPassCode.setImageBitmap(bitmap);
-        imageViewPassCode.setEnabled(true);
-    }
-
-    @Override
-    public void checkPassCode(boolean isChecked) {
-        String show = "输入不正确";
-        if (isChecked) {
-            show = "输入正确";
-            buttonSearch.setEnabled(true);
-        }
-        Toast.makeText(getContext(), show, Toast.LENGTH_SHORT).show();
-        buttonCheck.setEnabled(true);
-        imageViewPassCode.setEnabled(true);
     }
 
     @Override

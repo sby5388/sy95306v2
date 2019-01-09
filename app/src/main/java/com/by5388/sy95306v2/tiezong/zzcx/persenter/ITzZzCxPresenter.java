@@ -10,18 +10,6 @@ public interface ITzZzCxPresenter {
     void unSubscribe();
 
     /**
-     * 更新验证码图片
-     */
-    void refreshPassCodeBitmap();
-
-    /**
-     * 校验验证码
-     *
-     * @param passCode 验证码
-     */
-    void checkPassCode(String passCode);
-
-    /**
      * 中转查询，获取列车信息
      *
      * @param date        日期

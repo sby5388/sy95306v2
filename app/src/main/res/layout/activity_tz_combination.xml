@@ -2,54 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".tiezong.temp.view.TzRemainTicketActivity"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button_query_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:gravity="start"
-            android:textSize="@dimen/text_size_query_page" />
-
-        <ImageView
-            android:id="@+id/imageView_pass_code"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:contentDescription="@string/ic_pass_code"
-            android:src="@drawable/ic_pass_code" />
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/textView_pass_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/ic_pass_code"
-                android:inputType="text"
-                android:maxEms="4"
-                android:maxLines="1"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-
-        <Button
-            android:id="@+id/button_check_pass_code"
-            android:text="@string/check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
-    </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -109,17 +64,32 @@
                 android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
 
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_query_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            style="?android:textAppearanceSmall"
+            android:textSize="@dimen/text_size_query_page" />
+
         <Button
             android:id="@+id/button_query"
             style="?android:textAppearanceSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="@string/query"
             android:textStyle="bold" />
 
     </LinearLayout>
-
-
     <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="match_parent">

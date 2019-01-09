@@ -1,7 +1,5 @@
 package com.by5388.sy95306v2.observable;
 
-import android.util.Log;
-
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

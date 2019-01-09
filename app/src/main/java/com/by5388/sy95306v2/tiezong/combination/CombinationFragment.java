@@ -1,14 +1,12 @@
 package com.by5388.sy95306v2.tiezong.combination;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,7 +17,6 @@ import com.by5388.sy95306v2.tiezong.BaseTzFragment;
 import com.by5388.sy95306v2.tiezong.combination.persenter.CombinationPresenter;
 import com.by5388.sy95306v2.tiezong.combination.persenter.ICombinationPresenter;
 import com.by5388.sy95306v2.tiezong.combination.view.ICombinationView;
-import com.by5388.sy95306v2.tiezong.detail.TzDetailActivity;
 import com.by5388.sy95306v2.tiezong.remainticket.temp.RemainTicketAdapter;
 import com.by5388.sy95306v2.tiezong.temp.view.TzRemainTicketActivity;
 
@@ -28,20 +25,14 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
-// TODO: 2019/1/5 并不需要验证码的  ：去掉验证码模块
-
 /**
  * @author by5388  on 2018/8/22.
  */
 public class CombinationFragment extends BaseTzFragment implements ICombinationView {
     private static final String TAG = "CombinationFragment";
     private List<IRemainingTicket> currentTickets;
-    private TextInputEditText fromStation, toStation, passCode, trainCode;
-    /**
-     * 图片验证码
-     */
-    private ImageView imageViewPassCode;
-    private Button buttonSearch, buttonDate, buttonCheck;
+    private TextInputEditText fromStation, toStation, trainCode;
+    private Button buttonDate;
     private ListView listView;
     private RemainTicketAdapter adapter;
     private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
@@ -77,9 +68,6 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
         });
     }
 
-    private String getRandCode() {
-        return passCode.getText().toString().trim();
-    }
 
     @Override
     protected int getLayoutID() {
@@ -91,13 +79,8 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
         listView = view.findViewById(R.id.listView_train_code);
         fromStation = view.findViewById(R.id.textView_from_station);
         toStation = view.findViewById(R.id.textView_to_station);
-        passCode = view.findViewById(R.id.textView_pass_code);
         trainCode = view.findViewById(R.id.textView_train_code);
-        buttonCheck = view.findViewById(R.id.button_check_pass_code);
-        buttonCheck.setOnClickListener(v -> checkPassCode());
-        buttonSearch = view.findViewById(R.id.button_query);
-        imageViewPassCode = view.findViewById(R.id.imageView_pass_code);
-        imageViewPassCode.setOnClickListener(v -> refreshPassCode());
+        Button buttonSearch = view.findViewById(R.id.button_query);
 
         buttonDate = view.findViewById(R.id.button_query_date);
         buttonSearch.setOnClickListener(v -> searchTrainNumber());
@@ -107,29 +90,6 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
         });
         buttonDate.setOnClickListener(v -> selectDate(dateListener, calendar));
         view.findViewById(R.id.imageView).setOnClickListener(v -> switchStations());
-    }
-
-    /**
-     * 校验验证码
-     */
-    private void checkPassCode() {
-        final int codeLength = 4;
-        String code = passCode.getText().toString().trim();
-        Log.d(TAG, "checkPassCode: " + code);
-        if (codeLength != code.length()) {
-            passCode.setError("格式不对");
-            return;
-        }
-        buttonCheck.setEnabled(false);
-        presenter.checkPassCode(code);
-    }
-
-    /**
-     * 刷新验证码
-     */
-    private void refreshPassCode() {
-        imageViewPassCode.setEnabled(false);
-        presenter.refreshPassCodeBitmap();
     }
 
     private void switchStations() {
@@ -144,7 +104,7 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
         String date = buttonDate.getText().toString().trim();
         String fromStation = this.fromStation.getText().toString().trim();
         String toStation = this.toStation.getText().toString().trim();
-        String randCode = passCode.getText().toString().trim();
+        String randCode = "";
         String trainCode = this.trainCode.getText().toString().trim();
 
         boolean isNotEmptyFromStation = !TextUtils.isEmpty(fromStation);
@@ -186,14 +146,12 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
 
     @Override
     public void startQuery() {
-        imageViewPassCode.setEnabled(false);
-        buttonCheck.setEnabled(false);
+
     }
 
     @Override
     public void finishQuery() {
-        imageViewPassCode.setEnabled(true);
-        buttonCheck.setEnabled(true);
+
     }
 
     @Override
@@ -209,26 +167,6 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
         adapter.setTickets(dataBeans);
     }
 
-    @Override
-    public void updateCheckCodeBitmap(Bitmap bitmap) {
-        if (null == bitmap) {
-            return;
-        }
-        imageViewPassCode.setImageBitmap(bitmap);
-        imageViewPassCode.setEnabled(true);
-    }
-
-    @Override
-    public void checkPassCode(boolean isChecked) {
-        String show = "输入不正确";
-        if (isChecked) {
-            show = "输入正确";
-            buttonSearch.setEnabled(true);
-        }
-        Toast.makeText(getContext(), show, Toast.LENGTH_SHORT).show();
-        buttonCheck.setEnabled(true);
-        imageViewPassCode.setEnabled(true);
-    }
 
     @Override
     public void onDestroy() {
@@ -241,10 +179,5 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
         currentTickets.add(ticket);
         adapter.setTickets(currentTickets);
 
-    }
-
-    @Override
-    public void clearPassCode() {
-        passCode.setText("");
     }
 }

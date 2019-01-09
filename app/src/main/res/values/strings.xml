@@ -13,16 +13,13 @@
     <string name="startStationName">出发站</string>
     <string name="end_station_name">终到站</string>
     <string name="all_type">全部</string>
-    <string name="start_time">出发时间</string>
     <string name="spend_time">运行时间</string>
     <string name="end_time">到达时间</string>
     <string name="filter">过滤</string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
     <string name="order">站序</string>
-    <string name="station_name">站名</string>
     <string name="remain_time">停留</string>
-    <string name="arrive_time">到时</string>
     <string name="leave_time">发时</string>
     <string name="d7412">D7412</string>
     <string name="shen_yang_bei">沈阳北</string>
@@ -68,7 +65,6 @@
     <string name="yz">硬座:%1$s</string>
     <string name="wz">无座:%1$s</string>
     <string name="yu_piao_tip">硬座包括二等座，软座包括一等座</string>
-    <string name="ic_pass_code">验证码</string>
     <string name="select_station">选择车站</string>
     <string name="select_arrive">接站</string>
     <string name="select_leave">候乘</string>
@@ -82,7 +78,6 @@
     <string name="expect_arrive">图定到站</string>
     <string name="expect_leave">图定发站</string>
     <string name="cd_late">正晚点</string>
-    <string name="check">校验</string>
     <string name="zhengDian">正点</string>
     <string name="expect_arrive_time">预计到达时间</string>
     <string name="wan_dian">晚点</string>

@@ -1,6 +1,5 @@
 package com.by5388.sy95306v2.tiezong.temp.persenter;
 
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -27,22 +26,15 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter {
     private static final String TAG = "DetailRemainTicket";
-    private Disposable codeDisposable, bitmapDisposable, listDisposable;
+    private Disposable  listDisposable;
     private final Consumer<Throwable> throwableConsumer;
 
     private final Consumer<SuccessDataBean> resultConsumer;
-    private final Consumer<Bitmap> bitmapConsumer;
 
-    private final Consumer<Boolean> booleanConsumer;
     private final Consumer<SuccessDataBean> addConsumer;
 
     private final IDetailRemainTicketModel model;
     private final IDetailRemainTicketView view;
-    /**
-     * Fixme cookie 存在清除不完整
-     * 错误统计，连续错误则清除cookie
-     */
-    private int errorCount = 0;
     /**
      * 最大错误数
      */
@@ -55,23 +47,7 @@ public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter
             view.showError(throwable.getLocalizedMessage());
             view.finishQuery();
         };
-        this.bitmapConsumer = bitmap -> {
-            view.finishQuery();
-            if (null == bitmap) {
-                return;
-            }
-            view.updateCheckCodeBitmap(bitmap);
-        };
-        this.booleanConsumer = aBoolean -> {
-            if (!aBoolean) {
-                errorCount++;
-                if (errorCount > MAX_ERROR_COUNT) {
-                    model.clearCookie();
-                    errorCount = 0;
-                }
-            }
-            view.checkPassCode(aBoolean);
-        };
+
         this.resultConsumer = successDataBean -> {
             view.finishQuery();
             if (null == successDataBean) {
@@ -96,34 +72,6 @@ public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter
         };
     }
 
-
-    @Override
-    public void refreshPassCodeBitmap() {
-        view.clearPassCode();
-        view.startQuery();
-        bitmapDisposable = model.getPassCodeBitmap()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(bitmapConsumer
-                        , throwableConsumer
-                );
-    }
-
-    @Override
-    public void checkPassCode(String passCode) {
-        final int codeLength = 4;
-        if (codeLength != passCode.length()) {
-            view.showError("格式不对");
-            return;
-        }
-        view.startQuery();
-        codeDisposable = model.checkCode(passCode)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(booleanConsumer
-                        , throwableConsumer
-                );
-    }
 
     @Override
     public void getTrainList(String date, String fromStation, String toStation, String randCode) {
@@ -254,16 +202,9 @@ public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter
 
     @Override
     public void unSubscribe() {
-        if (codeDisposable != null) {
-            codeDisposable.dispose();
-        }
-        if (bitmapDisposable != null) {
-            bitmapDisposable.dispose();
-        }
         if (listDisposable != null) {
             listDisposable.dispose();
         }
-        model.clearCookie();
     }
 
 }

@@ -23,6 +23,7 @@ import com.by5388.sy95306v2.shanghai.number.view.INumberView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author by5388  on 2018/8/9.
@@ -85,7 +86,7 @@ public class ShanghaiNumberFragment extends BaseShFragment implements INumberVie
     protected void loadData() {
         buttonDate.setText(getData(calendar));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
     }

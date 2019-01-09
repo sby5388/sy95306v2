@@ -22,7 +22,7 @@ public interface IPassCodeService {
     //    https://kyfw.12306.cn/otn/passcodeNew/checkRandCodeAnsyn
     //    https://kyfw.12306.cn/otn/passcodeNew/getPassCodeNew
     //    https://kyfw.12306.cn/otn/czxx/queryByTrainNo
-   //     https://kyfw.12306.cn/otn/czxx/
+    //     https://kyfw.12306.cn/otn/czxx/
     String MODULE = "module";
     String RAND = "rand";
     String RAND_CODE = "randCode";
@@ -76,7 +76,10 @@ public interface IPassCodeService {
      * @param rand         固定值："sjrand"
      * @param randomNumber 随机数
      * @return 获取图片验证码
+     * @deprecated 不需要
      */
+    @SuppressWarnings("unused")
+    @Deprecated
     @GET("passcodeNew/getPassCodeNew")
     Observable<ResponseBody> getNewPassCode(
             @Query(MODULE) String module,
@@ -118,10 +121,11 @@ public interface IPassCodeService {
     /**
      * 车站车次查询：
      * {@link DataBeanX}
-     * @param date 日期  格式：yyyy-MM-dd
+     *
+     * @param date        日期  格式：yyyy-MM-dd
      * @param stationName 车站中文名，如“饶平”
      * @param stationCode 车站电报码，如 “RVQ”
-     * @param randCode 随机数，可为空
+     * @param randCode    随机数，可为空
      * @return 某个车站（包括同城车站）当天的所有车次
      */
     @GET("czxx/query")

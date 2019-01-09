@@ -14,13 +14,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.base.BaseActivity;
-import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.tiezong.bean.yp.success.TzDataBean;
 import com.by5388.sy95306v2.tiezong.temp.persenter.DetailRemainTicketPresenter;
 import com.by5388.sy95306v2.tiezong.temp.persenter.IDetailRemainTicketPresenter;
@@ -43,13 +41,8 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
 
     private IDetailRemainTicketPresenter presenter;
     private final List<TzDataBean> dataBeans = new ArrayList<>();
-    private TextInputEditText fromStation, toStation, passCode, trainCode;
-    /**
-     * 图片验证码
-     */
-    private ImageView imageViewPassCode;
-    private Button buttonSearch, buttonDate, buttonCheck;
-    private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
+    private TextInputEditText fromStation, toStation, trainCode;
+    private Button  buttonDate;
     private MyListener dateListener;
     private Calendar calendar;
 
@@ -80,13 +73,8 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
 
         fromStation = findViewById(R.id.textView_from_station);
         toStation = findViewById(R.id.textView_to_station);
-        passCode = findViewById(R.id.textView_pass_code);
         trainCode = findViewById(R.id.textView_train_code);
-        buttonCheck = findViewById(R.id.button_check_pass_code);
-        buttonCheck.setOnClickListener(v -> checkPassCode());
-        buttonSearch = findViewById(R.id.button_query);
-        imageViewPassCode = findViewById(R.id.imageView_pass_code);
-        imageViewPassCode.setOnClickListener(v -> refreshPassCode());
+        Button buttonSearch = findViewById(R.id.button_query);
 
         buttonDate = findViewById(R.id.button_query_date);
         buttonSearch.setOnClickListener(v -> searchTrainNumber());
@@ -121,7 +109,7 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
         String date = buttonDate.getText().toString().trim();
         String fromStation = this.fromStation.getText().toString().trim();
         String toStation = this.toStation.getText().toString().trim();
-        String randCode = passCode.getText().toString().trim();
+        String randCode = "";
         String trainCode = this.trainCode.getText().toString().trim();
 
         boolean isNotEmptyFromStation = !TextUtils.isEmpty(fromStation);
@@ -147,23 +135,6 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
             return;
         }
         showError("请至少填写2个信息");
-    }
-
-    private void refreshPassCode() {
-        imageViewPassCode.setEnabled(false);
-        presenter.refreshPassCodeBitmap();
-    }
-
-    private void checkPassCode() {
-        final int codeLength = 4;
-        String code = passCode.getText().toString().trim();
-        Log.d(IDetailRemainTicketView.TAG, "checkPassCode: " + code);
-        if (codeLength != code.length()) {
-            passCode.setError("格式不对");
-            return;
-        }
-        buttonCheck.setEnabled(false);
-        presenter.checkPassCode(code);
     }
 
     @Override
@@ -211,51 +182,16 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
 
 
     @Override
-    public void showFilterDialog() {
-
-    }
-
-    @Override
     public void updateList(List<TzDataBean> dataBeans) {
         adapter.setBeans(dataBeans);
     }
 
     @Override
-    public void updateCheckCodeBitmap(Bitmap bitmap) {
-        if (null == bitmap) {
-            return;
-        }
-        imageViewPassCode.setImageBitmap(bitmap);
-        imageViewPassCode.setEnabled(true);
-    }
-
-    @Override
-    public void checkPassCode(boolean isChecked) {
-        String show = "输入不正确";
-        if (isChecked) {
-            show = "输入正确";
-            buttonSearch.setEnabled(true);
-        }
-        Toast.makeText(this, show, Toast.LENGTH_SHORT).show();
-        buttonCheck.setEnabled(true);
-        imageViewPassCode.setEnabled(true);
-    }
-
-    @Override
-    public void clearPassCode() {
-        passCode.setText("");
-    }
-
-    @Override
     public void startQuery() {
-        imageViewPassCode.setEnabled(false);
-        buttonCheck.setEnabled(false);
     }
 
     @Override
     public void finishQuery() {
-        imageViewPassCode.setEnabled(true);
-        buttonCheck.setEnabled(true);
     }
 
     @Override
