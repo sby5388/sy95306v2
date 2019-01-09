@@ -34,7 +34,8 @@
         <activity android:name=".shenyang.select.SelectStationActivity" />
         <activity android:name=".shenyang.detail.TrainDetailActivity" />
         <activity android:name=".shenyang.list.TrainNumberListActivity" />
-        <activity android:name=".tiezong.TzRemainTicketActivity" />
+        <activity android:name=".tiezong.temp.view.TzRemainTicketActivity" />
+        <activity android:name=".tiezong.detail.TzDetailActivity" />
     </application>
 
 </manifest>

@@ -12,19 +12,23 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.tiezong.TzRemainTicketActivity;
-import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.MyListener;
+import com.by5388.sy95306v2.R;
+import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.tiezong.BaseTzFragment;
 import com.by5388.sy95306v2.tiezong.combination.persenter.CombinationPresenter;
 import com.by5388.sy95306v2.tiezong.combination.persenter.ICombinationPresenter;
 import com.by5388.sy95306v2.tiezong.combination.view.ICombinationView;
+import com.by5388.sy95306v2.tiezong.detail.TzDetailActivity;
 import com.by5388.sy95306v2.tiezong.remainticket.temp.RemainTicketAdapter;
+import com.by5388.sy95306v2.tiezong.temp.view.TzRemainTicketActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
+
+// TODO: 2019/1/5 并不需要验证码的  ：去掉验证码模块
 
 /**
  * @author by5388  on 2018/8/22.
@@ -57,7 +61,7 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
         presenter = new CombinationPresenter(this);
         dateListener = new MyListener(this);
         calendar = Calendar.getInstance();
-        adapter = new RemainTicketAdapter(getContext(), EMPTY_LIST);
+        adapter = new RemainTicketAdapter(Objects.requireNonNull(getContext()));
         currentTickets = new ArrayList<>();
     }
 
@@ -65,18 +69,12 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
     protected void loadData() {
         buttonDate.setText(getData(calendar));
         listView.setAdapter(adapter);
-//        listView.setOnItemClickListener((parent, view, position, id) -> {
-//            IRemainingTicket ticket = adapter.getItem(position);
-//            Intent intent = TzRemainTicketActivity.toTzRemainTicketActivity(
-//                    getContext(),
-//                    ticket.getCode(),
-//                    getData(calendar),
-//                    ticket.getFromStation(),
-//                    ticket.getToStation(),
-//                    getRandCode()
-//            );
-//            newIntent(intent);
-//        });
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            // TODO: 2019/1/9  
+//            IRemainingTicket iRemainingTicket = adapter.getItem(position);
+//            iRemainingTicket.getCode()
+//            startActivity(TzDetailActivity.newIntent(this));
+        });
     }
 
     private String getRandCode() {
@@ -242,6 +240,7 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
     public void addIRemainingTicket(IRemainingTicket ticket) {
         currentTickets.add(ticket);
         adapter.setTickets(currentTickets);
+
     }
 
     @Override

@@ -2,11 +2,11 @@ package com.by5388.sy95306v2.chengdu;
 
 import android.os.Bundle;
 
-import com.by5388.sy95306v2.adapter.MyViewPagerAdapter;
+import com.by5388.sy95306v2.base.BaseTopFragment;
+import com.by5388.sy95306v2.base.adapter.MyViewPagerAdapter;
 import com.by5388.sy95306v2.chengdu.late.CdLateFragment;
 import com.by5388.sy95306v2.chengdu.screen.CdScreenFragment;
 import com.by5388.sy95306v2.chengdu.yupiao.CdRemainTicketFragment;
-import com.by5388.sy95306v2.base.BaseTopFragment;
 
 /**
  * 成都 查询页面：包括3个子Fragment

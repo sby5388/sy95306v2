@@ -30,7 +30,7 @@ public class CombinationTest {
     @Test
     public void test() {
         String fromStationName = "厦门北";
-        int date = 20181027;
+        int date = 20190108;
         String trainCode = "D2286";
         getObservable(date, trainCode)
                 .subscribe(getSyConsumer(fromStationName), getThrowableConsumer());

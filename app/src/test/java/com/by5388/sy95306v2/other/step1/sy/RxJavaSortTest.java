@@ -18,17 +18,17 @@ import static com.by5388.sy95306v2.shenyang.list.model.sort.BaseTrainNumberSort.
  * @author by5388  on 2018/11/13.
  */
 public class RxJavaSortTest {
-    private final String fromStation = "CBQ";
 
     @Test
     public void testRxJavaSortTest() {
         // TODO: 2018/11/13 如何把一个Observable<List<T>> 变成多个的Observable<T>？
         int date = 20181228;
-
+        String toStation = "IOQ";
+        String fromStation = "CBQ";
 
         BaseTrainNumberSort sort = BaseTrainNumberSort.getTrainNumberSort(true, SORT_BY_START_TIME);
         ITrainListModel model = new TrainListModel();
-        String toStation = "IOQ";
+
         model.getTrainNumber(date, fromStation, toStation)
                 .doOnNext(trainNumbers -> trainNumbers.sort(sort))
                 .subscribe(this::show);

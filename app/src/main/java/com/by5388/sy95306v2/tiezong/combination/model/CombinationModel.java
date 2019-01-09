@@ -4,18 +4,17 @@ import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.by5388.sy95306v2.database.DataBaseTempApi;
+import com.by5388.sy95306v2.database.IShenYangStationDb;
 import com.by5388.sy95306v2.shenyang.bean.Station;
 import com.by5388.sy95306v2.shenyang.bean.TrainDetail;
+import com.by5388.sy95306v2.shenyang.net.api.SyNetTools;
+import com.by5388.sy95306v2.shenyang.net.api.SyService;
+import com.by5388.sy95306v2.tiezong.api.pass.code.GetPassCodeImpl;
+import com.by5388.sy95306v2.tiezong.api.pass.code.IGetPassCodeService;
 import com.by5388.sy95306v2.tiezong.bean.TzResult;
 import com.by5388.sy95306v2.tiezong.bean.yp.success.SuccessDataBean;
 import com.by5388.sy95306v2.tiezong.bean.yp.success.TzDataBean;
-import com.by5388.sy95306v2.database.DataBaseTempApi;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
-import com.by5388.sy95306v2.tiezong.GetPassCodeImpl;
-import com.by5388.sy95306v2.tiezong.IGetPassCodeService;
-import com.by5388.sy95306v2.tiezong.api.cookie.ReceivedCookieInterceptor;
-import com.by5388.sy95306v2.shenyang.net.api.SyNetTools;
-import com.by5388.sy95306v2.shenyang.net.api.SyService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +34,6 @@ public class CombinationModel implements ICombinationModel {
     private final SyService syService;
     private final IShenYangStationDb db;
     private final Random random;
-    private static final String COOKIE_12306 = ReceivedCookieInterceptor.COOKIE_12306;
     private final HashMap<String, List<Cookie>> cookieStore;
 
     public CombinationModel() {
@@ -72,13 +70,12 @@ public class CombinationModel implements ICombinationModel {
     public Observable<SuccessDataBean> getResult(String queryDate, String fromStationName, String toStationName, String randCode) {
         String fromStationCode = db.selectStationByName(fromStationName).getNameUpper();
         String toStationCode = db.selectStationByName(toStationName).getNameUpper();
-        return service.getZzCxData(queryDate, fromStationCode,
-                toStationCode, fromStationName, toStationName, randCode)
+        return service.getZzCxData(queryDate, fromStationCode, toStationCode, fromStationName, toStationName, randCode)
                 .flatMap((Function<TzResult<SuccessDataBean>, ObservableSource<SuccessDataBean>>) successDataBeanTzResult -> Observable.just(successDataBeanTzResult.getData()));
     }
 
     @Override
-    public Observable<SuccessDataBean> getOnLyResult(String queryDate, String fromStationName, String toStationName, String randCode, String trainCode) {
+    public Observable<SuccessDataBean> getOnlyResult(String queryDate, String fromStationName, String toStationName, String randCode, String trainCode) {
         return getResult(queryDate, fromStationName, toStationName, randCode)
                 .flatMap((Function<SuccessDataBean, ObservableSource<SuccessDataBean>>) successDataBean -> {
                     SuccessDataBean result = getSuccessDataBeanByTrainCode(successDataBean, trainCode);
@@ -112,6 +109,7 @@ public class CombinationModel implements ICombinationModel {
 
     @Override
     public Observable<List<TrainDetail>> getTrainByTrainCode(int date, String trainCode) {
+
         return syService.getTrainByTrainCode(date, trainCode);
     }
 }

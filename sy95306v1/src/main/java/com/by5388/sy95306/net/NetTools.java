@@ -13,9 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetTools {
     private static Retrofit retrofit;
-    private static final String BASE_URL = "http://61.161.203.55/mobile.myweixin.com/";
+    private static final String BASE_URL2 = "http://61.161.203.55/mobile.myweixin.com/";
     @SuppressWarnings("unused")
-    private static final String BASE_URL2 = "http://kyfw.sytlj.com/mobile.myweixin.com";
+    private static final String BASE_URL = "http://kyfw.sytlj.com/mobile.myweixin.com/";
 
     public static Retrofit getRetrofit() {
         if (retrofit == null) {

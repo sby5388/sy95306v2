@@ -42,13 +42,7 @@ public interface TrainNumberService {
                                                       @Query(FROM_STATION) String fromStation,
                                                       @Query(TO_STATION) String toStation);
 
-    /**
-     * 车次查询:第二个页面使用、第一个页面查询后的条目点击事件也是这个
-     *
-     * @param date      日期
-     * @param trainCode 车次
-     * @return 车次的停站信息
-     */
+
     @GET(QUERY_SECOND)
     Observable<List<TrainDetail>> getTrainByTrainCode(@Query(TRAIN_DATE) int date,
                                                        @Query(TRAIN_CODE) String trainCode);

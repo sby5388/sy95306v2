@@ -10,9 +10,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.IRemainingTicket;
-import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.tiezong.BaseTzFragment;
 import com.by5388.sy95306v2.tiezong.remainticket.temp.RemainTicketAdapter;
 import com.by5388.sy95306v2.tiezong.zzcx.persenter.ITzZzCxPresenter;
@@ -22,10 +22,12 @@ import com.by5388.sy95306v2.tiezong.zzcx.view.ITzZzCxView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * FIXME: 2018/8/25  gson  解析泛型 参考
  * https://www.cnblogs.com/qq78292959/p/3781808.html
+ * 中转查询：余票查询
  *
  * @author by5388  on 2018/8/17.
  */
@@ -57,7 +59,7 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
         presenter = new TzZzCxPresenter(this);
         dateListener = new MyListener(this);
         calendar = Calendar.getInstance();
-        adapter = new RemainTicketAdapter(getContext(), EMPTY_LIST);
+        adapter = new RemainTicketAdapter(Objects.requireNonNull(getContext()));
     }
 
     @Override

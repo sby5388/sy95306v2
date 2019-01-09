@@ -43,18 +43,18 @@ public abstract class BaseListActivity extends AppCompatActivity {
     private static final int ACTION_SHARE = 2;
     private int currentAction = 1;
     private String fileName = "";
-    String imageName = "";
+    protected String imageName = "";
     private static final int MAX_ITEM_COUNT = 150;
 
-    View topView;
-    View secondView;
-    View bottomView;
+    protected View topView;
+    protected View secondView;
+    protected View bottomView;
     /**
      * 是否后台操作：屏蔽新的请求
      */
     private boolean isLoading = false;
-    RecyclerView recyclerView;
-    Disposable disposable;
+    protected RecyclerView recyclerView;
+    protected Disposable disposable;
 
 
     private void checkPermission() {
@@ -226,7 +226,7 @@ public abstract class BaseListActivity extends AppCompatActivity {
         }
     }
 
-    void showException(Throwable e) {
+    protected void showException(Throwable e) {
         Log.d(TAG, "onError: " + e.getMessage());
         Log.d(TAG, "onError:'JSON格式转换错误' " + e.getLocalizedMessage());
         Toast.makeText(this, "未查到相关车次信息", Toast.LENGTH_SHORT).show();

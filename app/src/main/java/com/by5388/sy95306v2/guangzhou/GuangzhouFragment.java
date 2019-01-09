@@ -2,8 +2,8 @@ package com.by5388.sy95306v2.guangzhou;
 
 import android.os.Bundle;
 
-import com.by5388.sy95306v2.adapter.MyViewPagerAdapter;
 import com.by5388.sy95306v2.base.BaseTopFragment;
+import com.by5388.sy95306v2.base.adapter.MyViewPagerAdapter;
 import com.by5388.sy95306v2.guangzhou.late.GzLateFragment;
 import com.by5388.sy95306v2.guangzhou.number.GzTrainNumberFragment;
 import com.by5388.sy95306v2.guangzhou.p2p.GzP2pFragment;

@@ -1,30 +1,33 @@
 package com.by5388.sy95306;
 
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.by5388.sy95306.fragment.BaseFragment;
-import com.by5388.sy95306.fragment.FirstFragment;
-import com.by5388.sy95306.fragment.SecondFragment;
+import com.by5388.sy95306.fragment.DetailFragment;
+import com.by5388.sy95306.fragment.ListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements BaseFragment.OnFragmentInteractionListener {
+/**
+ * @author Administrator
+ */
+public class MainActivity extends AppCompatActivity
+        implements RadioGroup.OnCheckedChangeListener {
 
     private static final int EXIT_TIME = 2000;
     private List<BaseFragment> fragments;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    private Button button1, button2;
 
+    private RadioGroup mRadioGroup;
     /**
      * 记录用户首次点击返回键的时间
      */
@@ -42,18 +45,8 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
     }
 
     private void initView() {
-        button1 = findViewById(R.id.button_main_p2p);
-        button2 = findViewById(R.id.button_main_number);
-        button1.setOnClickListener(v -> {
-            button1.setEnabled(false);
-            button2.setEnabled(true);
-            changeFragment(0);
-        });
-        button2.setOnClickListener(v -> {
-            button1.setEnabled(true);
-            button2.setEnabled(false);
-            changeFragment(1);
-        });
+        mRadioGroup = findViewById(R.id.radioGroup);
+        mRadioGroup.setOnCheckedChangeListener(this);
     }
 
     private void initData() {
@@ -62,13 +55,15 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
 
 
     private void initFragment() {
+        // TODO: 2019/1/4 Fragment 生命周期注意的事项
+        // TODO: 2019/1/4 https://blog.csdn.net/xiaofei_it/article/details/45675497
         fragments = new ArrayList<>();
-        fragments.add(FirstFragment.newInstance());
-        fragments.add(SecondFragment.newInstance());
+        fragments.add(ListFragment.newInstance());
+        fragments.add(DetailFragment.newInstance());
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         for (BaseFragment fragment : fragments) {
-            fragmentTransaction.add(R.id.center, fragment);
+            fragmentTransaction.add(R.id.container, fragment);
             fragmentTransaction.hide(fragment);
         }
         fragmentTransaction.show(fragments.get(0));
@@ -87,11 +82,6 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
         }
         fragmentTransaction.show(fragments.get(index));
         fragmentTransaction.commit();
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     /**
@@ -114,5 +104,22 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        if (group != mRadioGroup) {
+            return;
+        }
+        switch (checkedId) {
+            case R.id.radioButton1:
+                changeFragment(0);
+                break;
+            case R.id.radioButton2:
+                changeFragment(1);
+                break;
+            default:
+                break;
+        }
     }
 }

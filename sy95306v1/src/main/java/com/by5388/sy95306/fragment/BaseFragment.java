@@ -20,17 +20,6 @@ public abstract class BaseFragment extends Fragment {
      * 往后延长60天
      */
     private static final long MAX_TIME = 5184000000L;
-    OnFragmentInteractionListener mListener;
-
-    public interface OnFragmentInteractionListener {
-        /**
-         * 宿主Activity回调接口
-         *
-         * @param uri ??
-         */
-        void onFragmentInteraction(Uri uri);
-    }
-
 
     static int getData(Calendar calendar) {
         //   待优化年月日的格式

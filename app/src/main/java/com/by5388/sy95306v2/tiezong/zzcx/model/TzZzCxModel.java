@@ -1,14 +1,15 @@
 package com.by5388.sy95306v2.tiezong.zzcx.model;
 
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 
 import com.by5388.sy95306v2.shenyang.bean.Station;
 import com.by5388.sy95306v2.tiezong.bean.TzResult;
 import com.by5388.sy95306v2.tiezong.bean.yp.success.SuccessDataBean;
 import com.by5388.sy95306v2.database.DataBaseTempApi;
 import com.by5388.sy95306v2.database.IShenYangStationDb;
-import com.by5388.sy95306v2.tiezong.GetPassCodeImpl;
-import com.by5388.sy95306v2.tiezong.IGetPassCodeService;
+import com.by5388.sy95306v2.tiezong.api.pass.code.GetPassCodeImpl;
+import com.by5388.sy95306v2.tiezong.api.pass.code.IGetPassCodeService;
 import com.by5388.sy95306v2.tiezong.api.cookie.ReceivedCookieInterceptor;
 import com.by5388.sy95306v2.setting.ISettingSharedPreferences;
 import com.by5388.sy95306v2.setting.SettingSharedPreferences;
@@ -37,12 +38,10 @@ public class TzZzCxModel implements ITzZzCxModel {
         service = new GetPassCodeImpl(cookieStore);
         db = DataBaseTempApi.getInstance();
         random = new Random();
-        ISettingSharedPreferences sharedPreference = SettingSharedPreferences.getInstance();
     }
 
     @Override
     public Observable<Boolean> checkCode(String randCode) {
-        //TODO presenter 层对数据长度进行校验
         return service.checkCode(randCode);
     }
 
@@ -55,7 +54,7 @@ public class TzZzCxModel implements ITzZzCxModel {
     @Override
     public boolean isErrorStationName(String stationName) {
         Station station = db.selectStationByName(stationName.trim());
-        return Station.EMPTY_ID == station.getId();
+        return TextUtils.isEmpty(station.getName());
     }
 
     @Override
@@ -70,7 +69,6 @@ public class TzZzCxModel implements ITzZzCxModel {
 
     @Override
     public void clearCookie() {
-        //sharedPreference.remove(COOKIE_12306);
         cookieStore.clear();
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TrainListActivity">
+    tools:context=".list.TrainListActivity">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/lly_top_show"
@@ -202,47 +202,23 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/lly_progress_bar"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:layout_height="0dp"
+        android:background="@color/detail_listView_bg"
         app:layout_constraintBottom_toTopOf="@+id/lly_bottom"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lly_second_menu">
 
-        <TextView
-            android:id="@+id/textView_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/textView_loading"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/progress_bar"
-            app:layout_constraintTop_toTopOf="@+id/progress_bar" />
-
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@+id/textView_loading"
-            app:layout_constraintRight_toRightOf="parent" />
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_View_train_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/recycler_view_item_bg"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/lly_bottom"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lly_second_menu" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_View_train_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/recycler_view_item_bg"
+            android:visibility="gone" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/lly_bottom"
@@ -250,7 +226,8 @@
         android:layout_height="wrap_content"
         android:background="@color/lly_bottom_bg"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent" >
+        app:layout_constraintBottom_toBottomOf="parent">
+
         <ImageView
             android:id="@+id/imageView_return"
             android:layout_width="0dp"

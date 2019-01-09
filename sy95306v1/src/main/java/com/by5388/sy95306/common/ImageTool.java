@@ -32,9 +32,10 @@ import java.util.List;
 
 public class ImageTool {
 
-    /**
+    /*
      * http://stackoverflow.com/questions/12742343/android-get-screenshot-of-all-listview-items
      */
+
     /**
      * 根据ListView 来生成长截图
      * -->下一步 保存到手机相册之中
@@ -111,7 +112,7 @@ public class ImageTool {
                 }
                 height += holder.itemView.getMeasuredHeight();
             }
-
+            // FIXME: 2019/1/4 
             bigBitmap = Bitmap.createBitmap(view.getMeasuredWidth(), height, Bitmap.Config.ARGB_8888);
             Canvas bigCanvas = new Canvas(bigBitmap);
             Drawable lBackground = view.getBackground();

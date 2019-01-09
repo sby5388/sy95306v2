@@ -15,8 +15,8 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.by5388.sy95306.bean.Station;
-import com.by5388.sy95306.database.DataBaseImpl;
-import com.by5388.sy95306.database.DataBaseTempAction;
+import com.by5388.sy95306.database.DataBaseApi;
+import com.by5388.sy95306.database.DataBaseTempApiImpl;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -45,7 +45,7 @@ public class StartActivity extends AppCompatActivity {
      * 双击退出时间内
      */
 
-    private DataBaseImpl service;
+    private DataBaseApi service;
     public static final int SUCCESS = 1;
     public static final int FAIL = 0;
 
@@ -101,7 +101,7 @@ public class StartActivity extends AppCompatActivity {
      * 对数据库进行初始化
      */
     private void loadDataBase() {
-        service = DataBaseTempAction.getInstance();
+        service = DataBaseTempApiImpl.getInstance();
         boolean isEmpty = service.getStationStatus();
         if (!isEmpty) {
             toMainActivity();

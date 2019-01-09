@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 
 import com.by5388.sy95306.adapter.StationAdapter;
 import com.by5388.sy95306.bean.Station;
-import com.by5388.sy95306.database.DataBaseImpl;
-import com.by5388.sy95306.database.DataBaseTempAction;
+import com.by5388.sy95306.database.DataBaseApi;
+import com.by5388.sy95306.database.DataBaseTempApiImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +81,7 @@ public class Tools {
 
 
     public static void getDefaultStation(@NonNull List<Station> emptyStations) {
-        DataBaseImpl dataBaseService = DataBaseTempAction.getInstance();
+        DataBaseApi dataBaseService = DataBaseTempApiImpl.getInstance();
         Disposable disposable = Observable.fromArray(STATION_NAME_UPPER)
                 .map(dataBaseService::selectStationByNameUpper)
                 .subscribeOn(Schedulers.io())
@@ -92,7 +92,7 @@ public class Tools {
     }
 
     private static Observable<List<Station>> getObservableByString2(@NonNull Context context, String string) {
-        DataBaseImpl dataBaseService = DataBaseTempAction.getInstance();
+        DataBaseApi dataBaseService = DataBaseTempApiImpl.getInstance();
 
 
         return Observable.create(e -> {
@@ -114,7 +114,7 @@ public class Tools {
      * 新的筛选条件：nameFirst/name/nameEn/nameLower，去掉数字
      */
     private static Observable<List<Station>> getObservableByString(String string) {
-        DataBaseImpl dataBaseService = DataBaseTempAction.getInstance();
+        DataBaseApi dataBaseService = DataBaseTempApiImpl.getInstance();
         if (regNumber(string)) {
             List<Station> empty = new ArrayList<>();
             return Observable.just(empty);

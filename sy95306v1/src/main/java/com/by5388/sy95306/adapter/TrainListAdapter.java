@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.by5388.sy95306.R;
-import com.by5388.sy95306.TrainOnClickListener;
 import com.by5388.sy95306.bean.Station;
 import com.by5388.sy95306.bean.TrainNumber;
 import com.by5388.sy95306.common.StaticData;
 import com.by5388.sy95306.common.Tools;
-import com.by5388.sy95306.database.DataBaseImpl;
-import com.by5388.sy95306.database.DataBaseTempAction;
+import com.by5388.sy95306.database.DataBaseApi;
+import com.by5388.sy95306.database.DataBaseTempApiImpl;
+import com.by5388.sy95306.list.TrainOnClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,17 +29,17 @@ import java.util.List;
 public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.ViewHolder> implements View.OnClickListener {
     private List<TrainNumber> trainNumbers;
     private List<Station> stations = new ArrayList<>();
-    private DataBaseImpl dataBaseService;
+    private DataBaseApi dataBaseService;
     private LayoutInflater inflater;
     private final static String TAG = "TrainListAdapter";
     private Context context;
     private TrainOnClickListener listener;
 
 
-    public TrainListAdapter(@NonNull List<TrainNumber> trainNumbers, Context context, TrainOnClickListener listener) {
+    public TrainListAdapter(@NonNull Context context, @NonNull List<TrainNumber> trainNumbers, TrainOnClickListener listener) {
         this.inflater = LayoutInflater.from(context);
         this.trainNumbers = trainNumbers;
-        this.dataBaseService = DataBaseTempAction.getInstance();
+        this.dataBaseService = DataBaseTempApiImpl.getInstance();
         this.context = context;
         this.listener = listener;
     }
@@ -49,6 +49,13 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
         notifyDataSetChanged();
     }
 
+    public TrainNumber getItem(int position) {
+        if (position >= getItemCount()) {
+            return null;
+        }
+        return trainNumbers.get(position);
+
+    }
 
     /**
      * 根据NameUpper来取得车站名称

@@ -1,7 +1,9 @@
 package com.by5388.sy95306v2.main;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -17,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.chengdu.ChengduFragment;
@@ -39,7 +42,7 @@ import java.util.List;
  * @date 20180727
  */
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BaseFragment.OnFragmentListener, IMainView {
+        implements NavigationView.OnNavigationItemSelectedListener, IMainView {
 
     /**
      * 记录用户首次点击返回键的时间
@@ -61,8 +64,8 @@ public class MainActivity extends AppCompatActivity
     private static final int TIE_ZONG = 3;
     private static final int CHENG_DU = 4;
 
-    private List<Fragment> fragments;
-    private List<Integer> titles;
+    private List<Fragment> fragments = new ArrayList<>();
+    private List<Integer> titles = new ArrayList<>();
     private FragmentManager fragmentManager;
     private View mainView;
     private IMainPresenter presenter;
@@ -174,11 +177,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        // TODO: 2018/7/28
-    }
-
     /**
      * 双击返回键 彻底关闭应用
      *
@@ -208,7 +206,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void notifyUpdate() {
         // TODO: 2019/1/3  
-//        Notification notification = getSystemService();
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (notificationManager == null) {
+            Toast.makeText(this, "数据库发生更新", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int id = 10001;
+        Notification notification = new Notification();
+
+        notificationManager.notify(id, notification);
     }
 
     @Override

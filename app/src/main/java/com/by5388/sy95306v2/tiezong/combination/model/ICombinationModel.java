@@ -23,7 +23,7 @@ public interface ICombinationModel extends ITzZzCxModel {
      * @param trainCode       车次
      * @return 结果
      */
-    Observable<SuccessDataBean> getOnLyResult(String queryDate, String fromStationName, String toStationName, String randCode, String trainCode);
+    Observable<SuccessDataBean> getOnlyResult(String queryDate, String fromStationName, String toStationName, String randCode, String trainCode);
 
 //    /**
 //     * 中转查询  ：没有目的站，一直从出发站 查到最后一站

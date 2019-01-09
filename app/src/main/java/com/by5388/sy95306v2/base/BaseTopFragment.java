@@ -5,7 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.adapter.MyViewPagerAdapter;
+import com.by5388.sy95306v2.base.adapter.MyViewPagerAdapter;
 
 /**
  * 沈阳95306 查询页面：包括2个子Fragment
@@ -20,7 +20,7 @@ public abstract class BaseTopFragment extends BaseFragment {
 
     @Override
     protected final void initData() {
-        //TODO getChildFragmentManager
+        //getChildFragmentManager
         adapter = new MyViewPagerAdapter(getChildFragmentManager());
         initFragments(adapter);
     }

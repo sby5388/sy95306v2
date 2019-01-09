@@ -18,7 +18,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -28,7 +28,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class CombinationPresenter implements ICombinationPresenter {
     private static final String TAG = "DRTicketPresenter";
-    private Disposable codeDisposable, bitmapDisposable, listDisposable;
+    private CompositeDisposable mDisposable;
     private final Consumer<Throwable> throwableConsumer;
 
     private final Consumer<SuccessDataBean> resultConsumer;
@@ -95,6 +95,7 @@ public class CombinationPresenter implements ICombinationPresenter {
             }
             view.addIRemainingTicket(successDataBean.getDatas().get(0));
         };
+        mDisposable = new CompositeDisposable();
     }
 
 
@@ -102,12 +103,10 @@ public class CombinationPresenter implements ICombinationPresenter {
     public void refreshPassCodeBitmap() {
         view.clearPassCode();
         view.startQuery();
-        bitmapDisposable = model.getPassCodeBitmap()
+        mDisposable.add(model.getPassCodeBitmap()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(bitmapConsumer
-                        , throwableConsumer
-                );
+                .subscribe(bitmapConsumer, throwableConsumer));
     }
 
     @Override
@@ -118,12 +117,10 @@ public class CombinationPresenter implements ICombinationPresenter {
             return;
         }
         view.startQuery();
-        codeDisposable = model.checkCode(passCode)
+        mDisposable.add(model.checkCode(passCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(booleanConsumer
-                        , throwableConsumer
-                );
+                .subscribe(booleanConsumer, throwableConsumer));
 
 
     }
@@ -155,7 +152,7 @@ public class CombinationPresenter implements ICombinationPresenter {
         }
         view.startQuery();
 
-        bindData(model.getOnLyResult(date, fromStation, toStation, randCode, trainCode));
+        bindData(model.getOnlyResult(date, fromStation, toStation, randCode, trainCode));
     }
 
     @Override
@@ -166,7 +163,7 @@ public class CombinationPresenter implements ICombinationPresenter {
         }
         view.startQuery();
         String newDate = date.replaceAll("-", "");
-        listDisposable = model.getTrainByTrainCode(Integer.parseInt(newDate), trainCode)
+        mDisposable.add(model.getTrainByTrainCode(Integer.parseInt(newDate), trainCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(trainDetails -> {
@@ -185,7 +182,7 @@ public class CombinationPresenter implements ICombinationPresenter {
                         newNames.add(names.get(i));
                     }
                     getToStationDetailData(date, fromStation, randCode, trainCode, newNames);
-                }, throwableConsumer);
+                }, throwableConsumer));
     }
 
 
@@ -198,7 +195,7 @@ public class CombinationPresenter implements ICombinationPresenter {
         view.startQuery();
         String newDate = date.replaceAll("-", "");
         Log.d(TAG, "getTrainListByEmptyFromStation: " + newDate);
-        listDisposable = model.getTrainByTrainCode(Integer.parseInt(newDate), trainCode)
+        mDisposable.add(model.getTrainByTrainCode(Integer.parseInt(newDate), trainCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(trainDetails -> {
@@ -218,7 +215,7 @@ public class CombinationPresenter implements ICombinationPresenter {
                         newNames.add(names.get(i));
                     }
                     getFromStationDetailData(date, toStation, randCode, trainCode, newNames);
-                }, throwableConsumer);
+                }, throwableConsumer));
     }
 
 
@@ -229,47 +226,35 @@ public class CombinationPresenter implements ICombinationPresenter {
 
 
     private void bindData(Observable<SuccessDataBean> observable) {
-        listDisposable = observable
+        mDisposable.add(observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(resultConsumer
-                        , throwableConsumer
-                );
+                .subscribe(resultConsumer, throwableConsumer));
     }
 
 
     private void getToStationDetailData(String date, String fromStation, String randCode, String trainCode, @NonNull List<String> names) {
-        listDisposable = Observable.fromIterable(names)
-                .flatMap((Function<String, ObservableSource<SuccessDataBean>>) toStation -> model.getOnLyResult(date, fromStation, toStation, randCode, trainCode))
+        mDisposable.add(Observable.fromIterable(names)
+                .flatMap((Function<String, ObservableSource<SuccessDataBean>>) toStation -> model.getOnlyResult(date, fromStation, toStation, randCode, trainCode))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(addConsumer, throwableConsumer);
+                .subscribe(addConsumer, throwableConsumer));
     }
 
     private void getFromStationDetailData(String date, String toStation, String randCode, String trainCode, @NonNull List<String> names) {
-        Log.d(TAG, "getFromStationDetailData: " + names);
-        listDisposable = Observable.fromIterable(names)
-                .flatMap((Function<String, ObservableSource<SuccessDataBean>>) fromStation -> {
-                    Log.d(TAG, "apply: " + fromStation);
-                    return model.getOnLyResult(date, fromStation, toStation, randCode, trainCode);
-
-                })
+        mDisposable.add(Observable.fromIterable(names)
+                .flatMap((Function<String, ObservableSource<SuccessDataBean>>) fromStation ->
+                        model.getOnlyResult(date, fromStation, toStation, randCode, trainCode) )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(addConsumer, throwableConsumer);
+                .subscribe(addConsumer, throwableConsumer));
     }
 
 
     @Override
     public void unSubscribe() {
-        if (codeDisposable != null) {
-            codeDisposable.dispose();
-        }
-        if (bitmapDisposable != null) {
-            bitmapDisposable.dispose();
-        }
-        if (listDisposable != null) {
-            listDisposable.dispose();
+        if (mDisposable != null) {
+            mDisposable.clear();
         }
         model.clearCookie();
     }

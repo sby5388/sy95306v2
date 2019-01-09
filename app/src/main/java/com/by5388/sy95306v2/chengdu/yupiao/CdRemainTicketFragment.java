@@ -50,7 +50,7 @@ public class CdRemainTicketFragment extends BaseCdFragment implements ICdRemainT
     @Override
     protected void initData() {
         presenter = new CdRemainTicketPresenter(this);
-        adapter = new RemainTicketAdapter(Objects.requireNonNull(getContext()), EMPTY_LIST);
+        adapter = new RemainTicketAdapter(Objects.requireNonNull(getContext()));
         dateListener = new MyListener(this);
         calendar = Calendar.getInstance();
     }

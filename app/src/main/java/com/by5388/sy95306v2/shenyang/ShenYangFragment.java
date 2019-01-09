@@ -3,7 +3,7 @@ package com.by5388.sy95306v2.shenyang;
 import android.os.Bundle;
 
 import com.by5388.sy95306v2.base.BaseTopFragment;
-import com.by5388.sy95306v2.adapter.MyViewPagerAdapter;
+import com.by5388.sy95306v2.base.adapter.MyViewPagerAdapter;
 
 /**
  * 沈阳95306 查询页面：包括2个子Fragment

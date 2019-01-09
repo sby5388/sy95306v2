@@ -1,2 +1,3 @@
 include ':app'
+include ':sy95306v1kotlin'
 include ':sy95306v1'

@@ -23,8 +23,8 @@
         <activity
             android:name=".SelectCityActivity"
             android:label="@string/please_select_station" />
-        <activity android:name=".TrainListActivity" />
-        <activity android:name=".TrainDetailActivity" />
+        <activity android:name=".list.TrainListActivity" />
+        <activity android:name=".detail.TrainDetailActivity" />
         <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

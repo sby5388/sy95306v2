@@ -37,5 +37,6 @@
     <string name="zhan_zhan">站站</string>
     <string name="che_ci">车次</string>
     <string name="all_price">%1$s %2$s %3$s %4$s</string>
+    <string name="query">搜索</string>
 
 </resources>

@@ -8,9 +8,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.IRemainingTicket;
-import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.tiezong.BaseTzFragment;
 import com.by5388.sy95306v2.tiezong.remainticket.presenter.IRemainTicketPresenter;
 import com.by5388.sy95306v2.tiezong.remainticket.presenter.RemainTicketPresenter;
@@ -20,8 +20,10 @@ import com.by5388.sy95306v2.tiezong.remainticket.view.IRemainTicketView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 /**
+ * 第三方余票查询
  * @author by5388  on 2018/8/13.
  */
 public class RemainTicketFragment extends BaseTzFragment implements IRemainTicketView {
@@ -45,7 +47,7 @@ public class RemainTicketFragment extends BaseTzFragment implements IRemainTicke
     @Override
     protected void initData() {
         presenter = new RemainTicketPresenter(this);
-        adapter = new RemainTicketAdapter(getContext(), EMPTY_LIST);
+        adapter = new RemainTicketAdapter(Objects.requireNonNull(getContext()));
         dateListener = new MyListener(this);
         calendar = Calendar.getInstance();
     }
@@ -126,7 +128,6 @@ public class RemainTicketFragment extends BaseTzFragment implements IRemainTicke
         calendar.set(year, month, dayOfMonth);
         buttonDate.setText(String.valueOf(getData(calendar)));
     }
-
 
 
     @Override

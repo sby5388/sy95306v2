@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.IRemainingTicket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,9 +30,9 @@ public class RemainTicketAdapter extends BaseAdapter {
     private final static String EMPTY = "--";
     private final static String EMPTY2 = "无";
 
-    public RemainTicketAdapter(@NonNull Context context, @NonNull List<IRemainingTicket> tickets) {
+    public RemainTicketAdapter(@NonNull Context context) {
         this.inflater = LayoutInflater.from(context);
-        this.tickets = tickets;
+        this.tickets = new ArrayList<>();
         rw = context.getString(R.string.rw);
         yw = context.getString(R.string.yw);
         rz = context.getString(R.string.rz);

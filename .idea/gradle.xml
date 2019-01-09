@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/sy95306v1" />
+            <option value="$PROJECT_DIR$/sy95306v1kotlin" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

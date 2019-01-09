@@ -7,9 +7,9 @@ import com.by5388.sy95306v2.base.BaseNetTools;
  */
 
 public class SyNetTools extends BaseNetTools {
-    private static final String BASE_URL = "http://61.161.203.55/mobile.myweixin.com/";
+    private static final String BASE_URL2 = "http://61.161.203.55/mobile.myweixin.com/";
     @SuppressWarnings("unused")
-    private static final String BASE_URL2 = "http://kyfw.sytlj.com/mobile.myweixin.com/";
+    private static final String BASE_URL = "http://kyfw.sytlj.com/mobile.myweixin.com/";
 
     @Override
     protected String getBaseUrl() {

@@ -1,8 +1,6 @@
 package com.by5388.sy95306v2.base;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -15,13 +13,13 @@ import android.widget.DatePicker;
 import com.by5388.sy95306v2.MyListener;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * @author by5388  on 2018/7/28.
  */
 
 public abstract class BaseFragment extends Fragment {
-    private OnFragmentListener listener;
 
     @Override
     public final void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,33 +62,6 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract void initView(View view);
 
-
-    @Override
-    public final void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentListener) {
-            listener = (OnFragmentListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public final void onDetach() {
-        super.onDetach();
-        listener = null;
-    }
-
-    public interface OnFragmentListener {
-        /**
-         * 宿主Activity回调接口
-         *
-         * @param uri ??
-         */
-        void onFragmentInteraction(Uri uri);
-    }
-
     /**
      * 往后延长60天
      */
@@ -98,7 +69,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected final void selectDate(MyListener dateListener, Calendar calendarData) {
         //  这里要记录已经选择的日期
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), dateListener,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(Objects.requireNonNull(getContext()), dateListener,
                 calendarData.get(Calendar.YEAR), calendarData.get(Calendar.MONTH), calendarData.get(Calendar.DATE));
         Calendar calendar = Calendar.getInstance();
         DatePicker picker = datePickerDialog.getDatePicker();

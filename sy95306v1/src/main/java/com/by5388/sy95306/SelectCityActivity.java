@@ -18,9 +18,9 @@ import com.by5388.sy95306.common.Tools;
 
 import java.util.List;
 
-import static com.by5388.sy95306.fragment.FirstFragment.DATA_BUNDLE;
-import static com.by5388.sy95306.fragment.FirstFragment.DATA_STATION_CODE;
-import static com.by5388.sy95306.fragment.FirstFragment.SUCCESS_CODE;
+import static com.by5388.sy95306.fragment.ListFragment.DATA_BUNDLE;
+import static com.by5388.sy95306.fragment.ListFragment.DATA_STATION_CODE;
+import static com.by5388.sy95306.fragment.ListFragment.SUCCESS_CODE;
 
 /**
  * 车站选择列表
@@ -45,6 +45,14 @@ public class SelectCityActivity extends AppCompatActivity {
         initData();
         initView();
     }
+
+//    public static Intent newIntent(Context context,int requestCode){
+//        Intent intent = new Intent(context, SelectCityActivity.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putInt(DATA_STATION_CODE, requestCode);
+//        intent.putExtra()
+//
+//    }
 
 
     private void back(Station station) {

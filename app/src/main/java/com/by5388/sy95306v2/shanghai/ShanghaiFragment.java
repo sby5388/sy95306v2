@@ -2,8 +2,8 @@ package com.by5388.sy95306v2.shanghai;
 
 import android.os.Bundle;
 
-import com.by5388.sy95306v2.adapter.MyViewPagerAdapter;
 import com.by5388.sy95306v2.base.BaseTopFragment;
+import com.by5388.sy95306v2.base.adapter.MyViewPagerAdapter;
 import com.by5388.sy95306v2.shanghai.number.ShanghaiNumberFragment;
 import com.by5388.sy95306v2.shanghai.p2p.ShanghaiP2pFragment;
 

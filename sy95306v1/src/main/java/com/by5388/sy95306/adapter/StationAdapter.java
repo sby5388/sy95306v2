@@ -72,11 +72,10 @@ public class StationAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        @BindView(R.id.textView_city_name)
         TextView textView;
 
-        ViewHolder(View convertView) {
-            ButterKnife.bind(this, convertView);
+        ViewHolder(View view) {
+            textView = view.findViewById(R.id.textView_city_name);
         }
     }
 }

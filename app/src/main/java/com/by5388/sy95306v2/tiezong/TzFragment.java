@@ -5,15 +5,15 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.by5388.sy95306v2.base.BaseFragment;
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.adapter.MyViewPagerAdapter;
+import com.by5388.sy95306v2.base.BaseFragment;
+import com.by5388.sy95306v2.base.adapter.MyViewPagerAdapter;
 import com.by5388.sy95306v2.tiezong.combination.CombinationFragment;
 import com.by5388.sy95306v2.tiezong.remainticket.RemainTicketFragment;
 import com.by5388.sy95306v2.tiezong.zzcx.ZzCxFragment;
 
 /**
- * 沈阳95306 查询页面：包括2个子Fragment
+ * 铁总查询页面：包括2个子Fragment
  *
  * @author by5388  on 2018/7/28.
  */
@@ -38,7 +38,7 @@ public class TzFragment extends BaseFragment {
     @Override
     protected void initData() {
         adapter = new MyViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(ZzCxFragment.newInstance(), "中转查询");
+        adapter.addFragment(ZzCxFragment.newInstance(), "余票查询");
         adapter.addFragment(RemainTicketFragment.newInstance(), "余票查询2");
         adapter.addFragment(CombinationFragment.newInstance(), "联合查询");
     }
