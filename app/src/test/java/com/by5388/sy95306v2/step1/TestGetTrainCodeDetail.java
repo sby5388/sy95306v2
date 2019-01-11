@@ -23,7 +23,7 @@ public class TestGetTrainCodeDetail {
     public void getDetail() {
         Retrofit retrofit = new Step1SyNetTools().getRetrofit();
         Step1SyService service = retrofit.create(Step1SyService.class);
-        int date = 20180831;
+        int date = 20180120;
         String trainCode = "D7414";
         Call<List<TrainDetail>> call = service.getTrainByTrainCode(date, trainCode);
         call.enqueue(new Callback<List<TrainDetail>>() {

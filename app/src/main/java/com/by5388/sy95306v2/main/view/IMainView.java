@@ -47,4 +47,14 @@ public interface IMainView {
      * @param tip 提示
      */
     void tip(String tip);
+
+    /**
+     * 打开进度对话框（升级中）
+     */
+    void showUpdating();
+
+    /**
+     * 升级完成
+     */
+    void finishUpdate();
 }

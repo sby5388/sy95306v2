@@ -12,7 +12,7 @@ import java.util.Map;
  * @author by5388  on 2018/7/30.
  */
 
-public class SettingSharedPreferences implements ISettingSharedPreferences {
+public class SettingSharedPreferences<T> implements ISettingSharedPreferences {
     private static final String FILE_NAME = "by5388";
     private final SharedPreferences sharedPreferences;
 
@@ -59,6 +59,7 @@ public class SettingSharedPreferences implements ISettingSharedPreferences {
             return sharedPreferences.getString(key, null);
         }
     }
+
 
     @Override
     public void remove(String key) {

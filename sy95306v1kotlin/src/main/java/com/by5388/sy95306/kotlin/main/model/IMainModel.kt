@@ -11,10 +11,15 @@ interface IMainModel {
      * -1:时 不需要更新
      * 否则更新
      */
-    fun checkUpdate(): Observable<Int>
+    fun checkUpdate(): Observable<Boolean>
 
     /**
      * 已经更新的数量
      */
     fun updateProgress(): Observable<Int>
+
+    /**
+     * 检查网络状态
+     */
+    fun getNetWordStatus(): Observable<Int>
 }

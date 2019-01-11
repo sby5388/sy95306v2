@@ -19,17 +19,17 @@
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
         <activity android:name=".start.StartActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
 
         </activity>
         <activity
             android:name=".main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".shenyang.select.SelectStationActivity" />
         <activity android:name=".shenyang.detail.TrainDetailActivity" />

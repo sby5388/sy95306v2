@@ -22,9 +22,15 @@ import io.reactivex.Observable
  */
 class DataBaseApiImpl : DataBaseApi {
 
-    private val values = ContentValues()
-    private val helper: SQLiteOpenHelper = TrainDataBaseHelper(App.getInstance()!!)
-    private val db: SQLiteDatabase = helper.writableDatabase
+    private val values: ContentValues = ContentValues()
+    private val helper: SQLiteOpenHelper
+    private val db: SQLiteDatabase
+
+    init {
+        helper = TrainDataBaseHelper(App.getInstance()!!)
+        db = helper.writableDatabase
+    }
+
     override fun getStationList(): List<Station> {
         val stationList: MutableList<Station> = ArrayList()
         val cursor = db.query(TABLE_NAME, null, null, null, null, null, null)
@@ -45,7 +51,7 @@ class DataBaseApiImpl : DataBaseApi {
         val selection = "$STATION_NAME = ?"
         val selectionArgs = arrayOf(name)
         val cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, null)
-        var station =  Station(-1, "", "", "", "", "", -1)
+        var station = Station(-1, "", "", "", "", "", -1)
         if (cursor != null) {
             cursor.moveToFirst()
             station = getStation(cursor)
@@ -55,7 +61,7 @@ class DataBaseApiImpl : DataBaseApi {
     }
 
     override fun getStationByKeyWord(keyWord: String): List<Station> {
-        val stationList: MutableList<Station> = ArrayList();
+        val stationList: MutableList<Station> = ArrayList()
         val selection = "$STATION_NAME like ? or $NAME_LOWER like ? or $NAME_EN like ? or $NAME_UPPER like ? "
         val selectionArgs = arrayOf("%$keyWord%", "%$keyWord%", "%$keyWord%", "%$keyWord%")
         val cursor = db.query(true, TABLE_NAME, null, selection, selectionArgs, null, null, null, null)
@@ -67,6 +73,20 @@ class DataBaseApiImpl : DataBaseApi {
             cursor.close()
         }
         return stationList
+    }
+
+    override fun isEmpty(): Boolean {
+        var empty = true
+        val columns = arrayOf(STATION_NAME)
+        val cursor = db.query(TABLE_NAME, columns, null, null, null, null, null)
+        if (cursor != null) {
+            if (cursor.count > 0) {
+                empty = false
+            }
+            cursor.close()
+        }
+        return empty
+
     }
 
     override fun insertStationList(stationList: List<Station>): Observable<Int> {
@@ -94,6 +114,7 @@ class DataBaseApiImpl : DataBaseApi {
         }
 
     }
+
 
     private fun getStation(cursor: Cursor): Station {
         return Station(

@@ -97,7 +97,7 @@ public class StartPresenter implements IStartPresenter {
      */
     private void insertData() {
         compositeDisposable.add(
-                model.insertProgressBar()
+                model.insertData()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(progressConsumer, throwableConsumer));

@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2.tiezong.remainticket.presenter;
 
 import com.by5388.sy95306v2.bean.IRemainingTicket;
-import com.by5388.sy95306v2.bean.second.QueryParam;
+import com.by5388.sy95306v2.bean.thrid.QueryParam;
 import com.by5388.sy95306v2.tiezong.remainticket.model.IRemainTicketModel;
 import com.by5388.sy95306v2.tiezong.remainticket.model.RemainTicketModel;
 import com.by5388.sy95306v2.tiezong.remainticket.view.IRemainTicketView;

@@ -9,7 +9,7 @@ data class Station(val id: Int,
                    val nameFirst: String,
                    val name: String,
                    val nameUpper: String,
-                   @Nullable  val nameEn: String,
+                   @Nullable val nameEn: String,
                    @Nullable val nameLower: String,
-                   @Nullable val code: Int){
+                   @Nullable val code: Int) {
 }

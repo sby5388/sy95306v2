@@ -10,6 +10,7 @@
     <color name="menu_line">#000000</color>
     <color name="menu_text">#000000</color>
 
+    <color name="item_head">#E0FFFF</color>
     <color name="search_text">#FFFFFF</color>
     <color name="button_selected">#CD2626</color>
     <color name="button_un_select">#FFFFFF</color>

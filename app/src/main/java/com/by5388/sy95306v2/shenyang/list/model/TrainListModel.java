@@ -1,10 +1,10 @@
 package com.by5388.sy95306v2.shenyang.list.model;
 
+import com.by5388.sy95306v2.database.DataBaseApiImpl;
 import com.by5388.sy95306v2.shenyang.list.model.sort.BaseTrainNumberSort;
 import com.by5388.sy95306v2.shenyang.bean.Station;
 import com.by5388.sy95306v2.shenyang.bean.TrainNumber;
-import com.by5388.sy95306v2.database.DataBaseTempApi;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
+import com.by5388.sy95306v2.database.IShenYangDbApi;
 import com.by5388.sy95306v2.dialog.bean.FilterBean;
 import com.by5388.sy95306v2.shenyang.net.api.SyNetTools;
 import com.by5388.sy95306v2.shenyang.net.api.SyService;
@@ -26,7 +26,7 @@ import static com.by5388.sy95306v2.dialog.bean.FilterData.getFilterItems;
 public class TrainListModel implements ITrainListModel {
     private final SyService trainNumberService;
     private final List<Integer> selected;
-    private IShenYangStationDb dataBaseService;
+    private IShenYangDbApi dataBaseService;
 
     public TrainListModel() {
         Retrofit retrofit = new SyNetTools().getRetrofit();
@@ -100,7 +100,7 @@ public class TrainListModel implements ITrainListModel {
     @Override
     public String getStationNames(String fromStationCode, String toStationCode) {
         if (null == dataBaseService) {
-            dataBaseService = DataBaseTempApi.getInstance();
+            dataBaseService = DataBaseApiImpl.getInstance();
         }
         Station startStation = dataBaseService.selectStationByNameUpper(fromStationCode);
         Station endStation = dataBaseService.selectStationByNameUpper(toStationCode);

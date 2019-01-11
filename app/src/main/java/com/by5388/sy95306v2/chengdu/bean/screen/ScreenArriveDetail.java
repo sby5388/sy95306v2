@@ -1,6 +1,7 @@
 package com.by5388.sy95306v2.chengdu.bean.screen;
 
 import com.by5388.sy95306v2.chengdu.screen.CdScreenItem;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * 车站大屏幕：显示详情:到达
@@ -11,158 +12,164 @@ import com.by5388.sy95306v2.chengdu.screen.CdScreenItem;
 @SuppressWarnings("all")
 public class ScreenArriveDetail implements CdScreenItem {
 
+    @Override
+    public String getTrainCode() {
+        return trainCode;
+    }
+
+    @Override
+    public String getStartStation() {
+        return getStartStationName();
+    }
+
+    @Override
+    public String getEndStation() {
+        return getEndStationName();
+    }
+
+    @Override
+    public String getTime() {
+        return getLateArrive();
+    }
+
+    @Override
+    public String getPlace() {
+        return getStationExit();
+    }
+
+    @Override
+    public String getStatus() {
+        return getTrainStatus();
+    }
+
     /**
-     * CHECK_STATUS : 停止检票
+     * checkStatus : 停止检票,检票状态
      * DATE_ARR11 : 00:01
-     * END_STN : 昆明
+     * endStationName : 昆明
      * IN_DATE : 2018/08/17 23:03:47
-     * LATE_ARR : 0
-     * START_STN : 北京西
-     * STATUS_TRAIN : 正点
-     * STN_CODE : GIW
-     * STN_EXIT :
-     * TRAIN_DEP : Z53
-     * WAIT_ROOM : 第3候车室
-     * WGQBZ : 0
+     * lateArrive : 0：是否晚点
+     * startStationName : 北京西
+     * trainStatus : 正点
+     * stationCode : GIW
+     * stationExit : 出站口
+     * trainCode : Z53
+     * waitRoom : 第3候车室
+     * unKnow : 0
      */
 
 
-    private String CHECK_STATUS;
+    @SerializedName("CHECK_STATUS")
+    private String checkStatus;
     private String DATE_ARR11;
-    private String END_STN;
+    @SerializedName("END_STN")
+    private String endStationName;
     private String IN_DATE;
-    private String LATE_ARR;
-    private String START_STN;
-    private String STATUS_TRAIN;
-    private String STN_CODE;
-    private String STN_EXIT;
-    private String TRAIN_DEP;
-    private String WAIT_ROOM;
-    private String WGQBZ;
+    @SerializedName("LATE_ARR")
+    private String lateArrive;
+    @SerializedName("START_STN")
+    private String startStationName;
+    @SerializedName("STATUS_TRAIN")
+    private String trainStatus;
+    @SerializedName("STN_CODE")
+    private String stationCode;
+    @SerializedName("STN_EXIT")
+    private String stationExit;
+    @SerializedName("TRAIN_DEP")
+    private String trainCode;
+    @SerializedName("WAIT_ROOM")
+    private String waitRoom;
+    @SerializedName("WGQBZ")
+    private String unKnow;
 
-    public String getCHECK_STATUS() {
-        return CHECK_STATUS;
+    public String getCheckStatus() {
+        return checkStatus;
     }
 
-    public void setCHECK_STATUS(String CHECK_STATUS) {
-        this.CHECK_STATUS = CHECK_STATUS;
+    public void setCheckStatus(String mCheckStatus) {
+        checkStatus = mCheckStatus;
     }
 
     public String getDATE_ARR11() {
         return DATE_ARR11;
     }
 
-    public void setDATE_ARR11(String DATE_ARR11) {
-        this.DATE_ARR11 = DATE_ARR11;
+    public void setDATE_ARR11(String mDATE_ARR11) {
+        DATE_ARR11 = mDATE_ARR11;
     }
 
-    public String getEND_STN() {
-        return END_STN;
+    public String getEndStationName() {
+        return endStationName;
     }
 
-    public void setEND_STN(String END_STN) {
-        this.END_STN = END_STN;
+    public void setEndStationName(String mEndStationName) {
+        endStationName = mEndStationName;
     }
 
     public String getIN_DATE() {
         return IN_DATE;
     }
 
-    public void setIN_DATE(String IN_DATE) {
-        this.IN_DATE = IN_DATE;
+    public void setIN_DATE(String mIN_DATE) {
+        IN_DATE = mIN_DATE;
     }
 
-    public String getLATE_ARR() {
-        return LATE_ARR;
+    public String getLateArrive() {
+        return lateArrive;
     }
 
-    public void setLATE_ARR(String LATE_ARR) {
-        this.LATE_ARR = LATE_ARR;
+    public void setLateArrive(String mLateArrive) {
+        lateArrive = mLateArrive;
     }
 
-    public String getSTART_STN() {
-        return START_STN;
+    public String getStartStationName() {
+        return startStationName;
     }
 
-    public void setSTART_STN(String START_STN) {
-        this.START_STN = START_STN;
+    public void setStartStationName(String mStartStationName) {
+        startStationName = mStartStationName;
     }
 
-    public String getSTATUS_TRAIN() {
-        return STATUS_TRAIN;
+    public String getTrainStatus() {
+        return trainStatus;
     }
 
-    public void setSTATUS_TRAIN(String STATUS_TRAIN) {
-        this.STATUS_TRAIN = STATUS_TRAIN;
+    public void setTrainStatus(String mTrainStatus) {
+        trainStatus = mTrainStatus;
     }
 
-    public String getSTN_CODE() {
-        return STN_CODE;
+    public String getStationCode() {
+        return stationCode;
     }
 
-    public void setSTN_CODE(String STN_CODE) {
-        this.STN_CODE = STN_CODE;
+    public void setStationCode(String mStationCode) {
+        stationCode = mStationCode;
     }
 
-    public String getSTN_EXIT() {
-        return STN_EXIT;
+    public String getStationExit() {
+        return stationExit;
     }
 
-    public void setSTN_EXIT(String STN_EXIT) {
-        this.STN_EXIT = STN_EXIT;
+    public void setStationExit(String mStationExit) {
+        stationExit = mStationExit;
     }
 
-    public String getTRAIN_DEP() {
-        return TRAIN_DEP;
+    public void setTrainCode(String mTrainCode) {
+        trainCode = mTrainCode;
     }
 
-    public void setTRAIN_DEP(String TRAIN_DEP) {
-        this.TRAIN_DEP = TRAIN_DEP;
+    public String getWaitRoom() {
+        return waitRoom;
     }
 
-    public String getWAIT_ROOM() {
-        return WAIT_ROOM;
+    public void setWaitRoom(String mWaitRoom) {
+        waitRoom = mWaitRoom;
     }
 
-    public void setWAIT_ROOM(String WAIT_ROOM) {
-        this.WAIT_ROOM = WAIT_ROOM;
+    public String getUnKnow() {
+        return unKnow;
     }
 
-    public String getWGQBZ() {
-        return WGQBZ;
+    public void setUnKnow(String mUnKnow) {
+        unKnow = mUnKnow;
     }
-
-    public void setWGQBZ(String WGQBZ) {
-        this.WGQBZ = WGQBZ;
-    }
-    @Override
-    public String getTrainCode() {
-        return getTRAIN_DEP();
-    }
-
-    @Override
-    public String getStartStation() {
-        return getSTART_STN();
-    }
-
-    @Override
-    public String getEndStation() {
-        return getEND_STN();
-    }
-
-    @Override
-    public String getTime() {
-        return getDATE_ARR11();
-    }
-
-    @Override
-    public String getPlace() {
-        return getSTN_EXIT();
-    }
-
-    @Override
-    public String getStatus() {
-        return getSTATUS_TRAIN();
-    }
-
 }

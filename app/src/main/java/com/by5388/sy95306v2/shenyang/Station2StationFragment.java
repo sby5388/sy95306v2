@@ -8,11 +8,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.by5388.sy95306v2.R;
+import com.by5388.sy95306v2.database.DataBaseApiImpl;
 import com.by5388.sy95306v2.shenyang.list.TrainNumberListActivity;
 import com.by5388.sy95306v2.shenyang.select.SelectStationActivity;
 import com.by5388.sy95306v2.shenyang.bean.Station;
-import com.by5388.sy95306v2.database.DataBaseTempApi;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
+import com.by5388.sy95306v2.database.IShenYangDbApi;
 import com.by5388.sy95306v2.dialog.TrainFilterDialog;
 import com.by5388.sy95306v2.dialog.TrainFilterDialog.UpdateFilterDataCallBack;
 import com.by5388.sy95306v2.dialog.bean.FilterBean;
@@ -50,7 +50,7 @@ public class Station2StationFragment extends BaseShenYangFragment implements Upd
     private TextView startCity, endCity;
     private Button buttonSelectType, buttonSelectDate;
     private Station fromStation, toStation;
-    private IShenYangStationDb service;
+    private IShenYangDbApi service;
     private int selectedDate = 20180606;
     private TrainFilterDialog dialog;
 
@@ -71,7 +71,7 @@ public class Station2StationFragment extends BaseShenYangFragment implements Upd
 
     @Override
     protected void initData() {
-        service = DataBaseTempApi.getInstance();
+        service = DataBaseApiImpl.getInstance();
         calendar = Calendar.getInstance();
         selectedDate = getData(calendar);
         dateListener = new MyListener(this);

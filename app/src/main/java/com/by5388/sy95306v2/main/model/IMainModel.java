@@ -11,7 +11,7 @@ public interface IMainModel {
      *
      * @return 数量
      */
-    Observable<Integer> insertProgressBar();
+    Observable<Integer> insertData();
 
     /**
      * 车站总数量

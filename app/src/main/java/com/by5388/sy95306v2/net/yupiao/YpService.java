@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.net.yupiao;
 
-import com.by5388.sy95306v2.bean.second.SecondResult;
+import com.by5388.sy95306v2.bean.thrid.SecondResult;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

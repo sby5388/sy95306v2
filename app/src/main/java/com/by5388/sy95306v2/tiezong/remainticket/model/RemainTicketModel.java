@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.by5388.sy95306v2.bean.IRemainingTicket;
-import com.by5388.sy95306v2.bean.second.QueryParam;
-import com.by5388.sy95306v2.bean.second.SecondRemainTicketData;
-import com.by5388.sy95306v2.bean.second.SecondResult;
+import com.by5388.sy95306v2.bean.thrid.QueryParam;
+import com.by5388.sy95306v2.bean.thrid.SecondRemainTicketData;
+import com.by5388.sy95306v2.bean.thrid.SecondResult;
 import com.by5388.sy95306v2.net.yupiao.YpNetTools;
 import com.by5388.sy95306v2.net.yupiao.YpService;
 

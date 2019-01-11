@@ -3,8 +3,8 @@ package com.by5388.sy95306v2.tiezong.combination.model;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.by5388.sy95306v2.database.DataBaseTempApi;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
+import com.by5388.sy95306v2.database.DataBaseApiImpl;
+import com.by5388.sy95306v2.database.IShenYangDbApi;
 import com.by5388.sy95306v2.shenyang.bean.Station;
 import com.by5388.sy95306v2.shenyang.bean.TrainDetail;
 import com.by5388.sy95306v2.shenyang.net.api.SyNetTools;
@@ -28,12 +28,16 @@ import io.reactivex.functions.Function;
 public class CombinationModel implements ICombinationModel {
     private final IGetPassCodeService service;
     private final SyService syService;
-    private final IShenYangStationDb db;
+    private final IShenYangDbApi db;
 
+    // TODO: 2019/1/9 把验证码部分去掉，模糊查询采用12306的api  而不是  沈阳95306的
+    
+    
+    
     public CombinationModel() {
         service = new GetPassCodeImpl();
         syService = new SyNetTools().getRetrofit().create(SyService.class);
-        db = DataBaseTempApi.getInstance();
+        db = DataBaseApiImpl.getInstance();
     }
 
 

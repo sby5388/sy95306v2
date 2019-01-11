@@ -17,4 +17,5 @@ interface DataBaseApi {
     fun getStationByName(name: String): Station
     fun getStationByKeyWord(keyWord: String): List<Station>
     fun insertStationList(stationList: List<Station>): Observable<Int>
+    fun isEmpty():Boolean
 }

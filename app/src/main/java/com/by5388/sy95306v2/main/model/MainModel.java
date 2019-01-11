@@ -7,8 +7,9 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.by5388.sy95306v2.App;
-import com.by5388.sy95306v2.database.DataBaseTempApi;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
+import com.by5388.sy95306v2.database.DataBaseApiImpl;
+import com.by5388.sy95306v2.database.IShenYangDbApi;
+import com.by5388.sy95306v2.setting.ISettingSharedPreferences;
 import com.by5388.sy95306v2.setting.SettingSharedPreferences;
 import com.by5388.sy95306v2.start.model.IStartModel;
 
@@ -47,21 +48,21 @@ public class MainModel implements IStartModel, IMainModel {
      */
     private static String defaultStationVersion = "0.0";
     private String getVersion = "";
-    private final SettingSharedPreferences preferences;
-    private final IShenYangStationDb service;
+    private final ISettingSharedPreferences preferences;
+    private final IShenYangDbApi service;
     private final IStationJson json;
 
     public MainModel() {
         preferences = SettingSharedPreferences.getInstance();
-        service = DataBaseTempApi.getInstance();
+        service = DataBaseApiImpl.getInstance();
         json = new StationJson();
         stationListFile = new StringBuilder();
     }
 
 
     @Override
-    public Observable<Integer> insertProgressBar() {
-        return service.addStations(json.getCityList(stationListFile.toString()));
+    public Observable<Integer> insertData() {
+        return service.insertStationList(json.getCityList(stationListFile.toString()));
     }
 
     @Override
@@ -89,6 +90,10 @@ public class MainModel implements IStartModel, IMainModel {
 
     @Override
     public Observable<Boolean> isNeedUpdate() {
+        boolean isEmpty = service.isEmpty();
+        if (isEmpty) {
+            return Observable.just(true);
+        }
         double currentVersion = getCurrentVersion();
         Log.d(TAG, "isNeedUpdate: 当前版本：" + currentVersion);
         return Observable.create((ObservableOnSubscribe<Double>) emitter -> {

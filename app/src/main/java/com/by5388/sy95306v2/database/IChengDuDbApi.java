@@ -7,8 +7,7 @@ import java.util.List;
 /**
  * @author by5388  on 2018/8/20.
  */
-public interface ICdScreenStationDb {
-    // 2018/8/18 需要增加成都铁路的车站大屏幕所对应的车站信息
+public interface IChengDuDbApi {
 
     /**
      * 成都车站大屏幕

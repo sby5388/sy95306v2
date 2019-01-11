@@ -3,8 +3,8 @@ package com.by5388.sy95306v2.shenyang.select.model;
 import android.text.TextUtils;
 
 import com.by5388.sy95306v2.shenyang.bean.Station;
-import com.by5388.sy95306v2.database.DataBaseTempApi;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
+import com.by5388.sy95306v2.database.DataBaseApiImpl;
+import com.by5388.sy95306v2.database.IShenYangDbApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,10 +60,10 @@ public class StationModel implements IStationModel {
 
     private List<Station> defaultStations;
 
-    private final IShenYangStationDb dataBaseService;
+    private final IShenYangDbApi dataBaseService;
 
     public StationModel() {
-        this.dataBaseService = DataBaseTempApi.getInstance();
+        this.dataBaseService = DataBaseApiImpl.getInstance();
         this.defaultStations = new ArrayList<>();
     }
 

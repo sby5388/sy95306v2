@@ -1,4 +1,4 @@
-package com.by5388.sy95306v2.bean.second;
+package com.by5388.sy95306v2.bean.thrid;
 
 /**
  * 余票查询请求参数

@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
 import com.by5388.sy95306v2.App;
-import com.by5388.sy95306v2.shenyang.bean.Station;
 import com.by5388.sy95306v2.chengdu.bean.screen.ScreenStation;
+import com.by5388.sy95306v2.shenyang.bean.Station;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,21 +18,21 @@ import io.reactivex.Observable;
  * @author by5388  on 2018/7/21.
  */
 
-public class DataBaseTempApi implements IShenYangStationDb, ICdScreenStationDb {
-    public static final String TAG = "DataBaseTempApi";
+public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
+    public static final String TAG = "DataBaseApiImpl";
     private static final int SUCCESS = 1;
     private static final int FAIL = 0;
     private static ContentValues values;
     private final SQLiteDatabase db;
     private final String[] columns = new String[]{StationTable.TableStation.STATION_NAME, StationTable.TableStation.NAME_UPPER};
 
-    private DataBaseTempApi() {
+    private DataBaseApiImpl() {
         MyDataBaseHelper helper = new MyDataBaseHelper(App.getInstance());
         db = helper.getWritableDatabase();
         values = new ContentValues();
     }
 
-    public static DataBaseTempApi getInstance() {
+    public static DataBaseApiImpl getInstance() {
         return SingletonHandler.INSTANCE;
     }
 
@@ -100,7 +100,7 @@ public class DataBaseTempApi implements IShenYangStationDb, ICdScreenStationDb {
     }
 
     private static ContentValues getValues(Station station) {
-        ContentValues values = DataBaseTempApi.values;
+        ContentValues values = DataBaseApiImpl.values;
         values.clear();
         values.put(StationTable.TableStation.NAME_FIRST, station.getNameFirst());
         values.put(StationTable.TableStation.STATION_NAME, station.getName());
@@ -112,7 +112,7 @@ public class DataBaseTempApi implements IShenYangStationDb, ICdScreenStationDb {
     }
 
     private static ContentValues getValues(ScreenStation station) {
-        ContentValues values = DataBaseTempApi.values;
+        ContentValues values = DataBaseApiImpl.values;
         values.clear();
         values.put(CdStationTable.TableStation.PY, station.getPY());
         values.put(CdStationTable.TableStation.PY_SZM, station.getPYSZM());
@@ -127,10 +127,12 @@ public class DataBaseTempApi implements IShenYangStationDb, ICdScreenStationDb {
         String[] selectionArgs = {};
         Cursor cursor = db.query(true, StationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
                 null, null, null, null);
-        while (cursor.moveToNext()) {
-            stations.add(getStation(cursor));
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                stations.add(getStation(cursor));
+            }
+            cursor.close();
         }
-        cursor.close();
         return stations;
     }
 
@@ -175,7 +177,7 @@ public class DataBaseTempApi implements IShenYangStationDb, ICdScreenStationDb {
     }
 
     @Override
-    public Observable<Integer> addStations(List<Station> stations) {
+    public Observable<Integer> insertStationList(List<Station> stations) {
         return Observable.create(emitter -> {
             if (!emitter.isDisposed()) {
                 int currentUpdateCount = 1;
@@ -206,7 +208,7 @@ public class DataBaseTempApi implements IShenYangStationDb, ICdScreenStationDb {
                 StationTable.TableStation.NAME_FIRST + " like ? or " +
                 StationTable.TableStation.NAME_EN + " like ? or " +
                 StationTable.TableStation.STATION_NAME + " like ? ";
-        String[] selectionArgs = new String[]{"%" + key + "%", "%" + key + "%", "%" + key + "%","%" + key + "%"};
+        String[] selectionArgs = new String[]{"%" + key + "%", "%" + key + "%", "%" + key + "%", "%" + key + "%"};
         Cursor cursor = db.query(true, StationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
                 null, null, null, null);
         if (cursor != null) {
@@ -219,6 +221,19 @@ public class DataBaseTempApi implements IShenYangStationDb, ICdScreenStationDb {
     }
 
     private static class SingletonHandler {
-        private static final DataBaseTempApi INSTANCE = new DataBaseTempApi();
+        private static final DataBaseApiImpl INSTANCE = new DataBaseApiImpl();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        boolean empty = true;
+        Cursor cursor = db.rawQuery("select * from " + StationTable.TableStation.TABLE_NAME, null);
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
+                empty = false;
+            }
+            cursor.close();
+        }
+        return false;
     }
 }

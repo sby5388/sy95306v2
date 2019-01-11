@@ -13,7 +13,7 @@ public interface IStartModel {
      *
      * @return 数量
      */
-    Observable<Integer> insertProgressBar();
+    Observable<Integer> insertData();
 
     /**
      * 车站总数量

@@ -2,8 +2,8 @@ package com.by5388.sy95306v2.tiezong.zzcx.model;
 
 import android.text.TextUtils;
 
-import com.by5388.sy95306v2.database.DataBaseTempApi;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
+import com.by5388.sy95306v2.database.DataBaseApiImpl;
+import com.by5388.sy95306v2.database.IShenYangDbApi;
 import com.by5388.sy95306v2.shenyang.bean.Station;
 import com.by5388.sy95306v2.tiezong.api.pass.code.GetPassCodeImpl;
 import com.by5388.sy95306v2.tiezong.api.pass.code.IGetPassCodeService;
@@ -19,11 +19,11 @@ import io.reactivex.functions.Function;
  */
 public class TzZzCxModel implements ITzZzCxModel {
     private final IGetPassCodeService service;
-    private final IShenYangStationDb db;
+    private final IShenYangDbApi db;
 
     public TzZzCxModel() {
         service = new GetPassCodeImpl();
-        db = DataBaseTempApi.getInstance();
+        db = DataBaseApiImpl.getInstance();
     }
 
 

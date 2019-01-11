@@ -3,7 +3,7 @@ package com.by5388.sy95306v2.tiezong.remainticket.model;
 import android.support.annotation.NonNull;
 
 import com.by5388.sy95306v2.bean.IRemainingTicket;
-import com.by5388.sy95306v2.bean.second.QueryParam;
+import com.by5388.sy95306v2.bean.thrid.QueryParam;
 
 import java.util.List;
 

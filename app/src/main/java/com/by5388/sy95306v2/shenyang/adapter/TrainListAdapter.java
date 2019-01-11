@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.by5388.sy95306v2.R;
+import com.by5388.sy95306v2.database.DataBaseApiImpl;
 import com.by5388.sy95306v2.shenyang.list.TrainOnClickListener;
 import com.by5388.sy95306v2.shenyang.bean.Station;
 import com.by5388.sy95306v2.shenyang.bean.TrainNumber;
 import com.by5388.sy95306v2.common.Tools;
-import com.by5388.sy95306v2.database.DataBaseTempApi;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
+import com.by5388.sy95306v2.database.IShenYangDbApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +30,14 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
     private final static String TAG = "TrainListAdapter";
     private List<TrainNumber> trainNumbers;
     private final List<Station> stations = new ArrayList<>();
-    private final IShenYangStationDb dataBaseService;
+    private final IShenYangDbApi dataBaseService;
     private final Context context;
     private final TrainOnClickListener listener;
 
 
     public TrainListAdapter(@NonNull List<TrainNumber> trainNumbers, Context context, TrainOnClickListener listener) {
         this.trainNumbers = trainNumbers;
-        this.dataBaseService = DataBaseTempApi.getInstance();
+        this.dataBaseService = DataBaseApiImpl.getInstance();
         this.context = context;
         this.listener = listener;
     }

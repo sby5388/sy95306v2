@@ -8,8 +8,8 @@ import android.support.annotation.Keep;
 import android.util.Log;
 
 import com.by5388.sy95306v2.App;
-import com.by5388.sy95306v2.database.DataBaseTempApi;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
+import com.by5388.sy95306v2.database.DataBaseApiImpl;
+import com.by5388.sy95306v2.database.IShenYangDbApi;
 import com.by5388.sy95306v2.main.model.IStationJson;
 import com.by5388.sy95306v2.main.model.StationJson;
 import com.by5388.sy95306v2.setting.SettingSharedPreferences;
@@ -49,19 +49,19 @@ public class StartModel implements IStartModel {
     private static String defaultStationVersion = "0.0";
     private String getVersion = "";
     private final SettingSharedPreferences preferences;
-    private final IShenYangStationDb service;
+    private final IShenYangDbApi service;
     private final IStationJson json;
 
     public StartModel() {
         preferences = SettingSharedPreferences.getInstance();
-        service = DataBaseTempApi.getInstance();
+        service = DataBaseApiImpl.getInstance();
         json = new StationJson();
         stationListFile = new StringBuilder();
     }
 
     @Override
-    public Observable<Integer> insertProgressBar() {
-        return service.addStations(json.getCityList(stationListFile.toString()));
+    public Observable<Integer> insertData() {
+        return service.insertStationList(json.getCityList(stationListFile.toString()));
     }
 
     @Override

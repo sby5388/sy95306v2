@@ -4,4 +4,10 @@
     <dimen name="detail_padding">5dp</dimen>
     <dimen name="detail_margin_bottom">5dp</dimen>
 
+    <integer name="detail_weight_order">14</integer>
+    <integer name="detail_weight_station_name">28</integer>
+    <integer name="detail_weight_arrive_time">20</integer>
+    <integer name="detail_weight_leave_time">20</integer>
+    <integer name="detail_weight_remain_time">18</integer>
+
 </resources>

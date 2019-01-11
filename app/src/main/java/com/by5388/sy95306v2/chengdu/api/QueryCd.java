@@ -3,6 +3,12 @@ package com.by5388.sy95306v2.chengdu.api;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.by5388.sy95306v2.chengdu.api.late.CdLateNetTools;
+import com.by5388.sy95306v2.chengdu.api.late.CdLateService;
+import com.by5388.sy95306v2.chengdu.api.screen.CdScreenNetTools;
+import com.by5388.sy95306v2.chengdu.api.screen.CdScreenService;
+import com.by5388.sy95306v2.chengdu.api.yp.CdYpNetTools;
+import com.by5388.sy95306v2.chengdu.api.yp.CdYpService;
 import com.by5388.sy95306v2.chengdu.bean.late.CdLateDetail;
 import com.by5388.sy95306v2.chengdu.bean.late.CdLateResultTop;
 import com.by5388.sy95306v2.chengdu.bean.late.CdLateStation;
@@ -13,12 +19,6 @@ import com.by5388.sy95306v2.chengdu.bean.screen.ScreenStation;
 import com.by5388.sy95306v2.chengdu.bean.yupiao.CdAllResultDataBean;
 import com.by5388.sy95306v2.chengdu.bean.yupiao.CdRemainTicketDetailBean;
 import com.by5388.sy95306v2.chengdu.bean.yupiao.CdYpTop;
-import com.by5388.sy95306v2.chengdu.api.late.CdLateNetTools;
-import com.by5388.sy95306v2.chengdu.api.late.CdLateService;
-import com.by5388.sy95306v2.chengdu.api.screen.CdScreenNetTools;
-import com.by5388.sy95306v2.chengdu.api.screen.CdScreenService;
-import com.by5388.sy95306v2.chengdu.api.yp.CdYpNetTools;
-import com.by5388.sy95306v2.chengdu.api.yp.CdYpService;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -187,7 +187,7 @@ public class QueryCd implements ICdQuery {
             screenService = new CdScreenNetTools().getRetrofit().create(CdScreenService.class);
         }
         final String typeCode = "C50101";
-        date = date.replace("[^0-9]", "");
+        date = date.replace("-","");
         date = date.replace("[^0-9]", "");
         List<String> params = Arrays.asList(date, stationCode);
         return screenService.getLeaveDetail(typeCode, userMessage, gson.toJson(params), emptyJson, emptyJson);
@@ -202,11 +202,14 @@ public class QueryCd implements ICdQuery {
      */
     @Override
     public Observable<List<ScreenArriveDetail>> getArriveDetail(String stationCode, String date) {
+        System.out.println("getArriveDetail: " + stationCode);
+        System.out.println("getArriveDetail: " + date);
         if (null == screenService) {
             screenService = new CdScreenNetTools().getRetrofit().create(CdScreenService.class);
         }
         final String typeCode = "C5054";
         date = date.replace("[^0-9]", "");
+        date = date.replace("-","");
         List<String> params = Arrays.asList(date, stationCode);
         return screenService.getArriveDetail(typeCode, userMessage, gson.toJson(params), emptyJson, emptyJson);
     }

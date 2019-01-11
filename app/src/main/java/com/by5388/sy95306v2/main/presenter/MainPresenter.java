@@ -6,6 +6,8 @@ import com.by5388.sy95306v2.main.view.IMainView;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -35,7 +37,7 @@ public class MainPresenter implements IMainPresenter {
                     } else {
                         view.finishChecked();
                     }
-                },throwable -> {
+                }, throwable -> {
                     view.tip("请重试");
                 })
         );
@@ -44,6 +46,57 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void startUpdate() {
-            //view.
+        view.showUpdating();
+        disposable.add(model.getStationCount()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer mInteger) {
+                        view.updateAllCount(mInteger);
+                        clearData();
+                    }
+                })
+        );
+
+    }
+
+    private void clearData() {
+        disposable.add(model.clearData()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer mInteger) throws Exception {
+                        if (0 == mInteger) {
+                            insertData();
+                        }
+                    }
+                })
+        );
+    }
+
+    private void insertData() {
+        disposable.add(model.insertData()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer progress) {
+                        view.updateProgress(progress);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable mThrowable) {
+                        view.tip("异常");
+                    }
+                }, new Action() {
+                    @Override
+                    public void run() {
+                        view.finishUpdate();
+                        model.finishUpdate();
+                    }
+                })
+        );
     }
 }

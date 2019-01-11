@@ -55,16 +55,11 @@ class CdScreenAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.code.setText(item.getTrainCode());
-        holder.from.setText(item.getStartStation());
-        holder.to.setText(item.getEndStation());
-        holder.time.setText(item.getTime());
-        holder.place.setText(item.getPlace());
-        holder.status.setText(item.getStatus());
+        holder.bind(item);
         return convertView;
     }
 
-    static class ViewHolder {
+    private static class ViewHolder {
         final TextView code;
         final TextView from;
         final TextView to;
@@ -79,6 +74,15 @@ class CdScreenAdapter extends BaseAdapter {
             time = v.findViewById(R.id.showTime);
             place = v.findViewById(R.id.showPlace);
             status = v.findViewById(R.id.showStatus);
+        }
+
+        void bind(CdScreenItem item) {
+            code.setText(item.getTrainCode());
+            from.setText(item.getStartStation());
+            to.setText(item.getEndStation());
+            time.setText(item.getTime());
+            place.setText(item.getPlace());
+            status.setText(item.getStatus());
         }
     }
 }

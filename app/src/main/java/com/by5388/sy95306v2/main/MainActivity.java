@@ -1,8 +1,6 @@
 package com.by5388.sy95306v2.main;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,22 +12,27 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.chengdu.ChengduFragment;
 import com.by5388.sy95306v2.guangzhou.GuangzhouFragment;
-import com.by5388.sy95306v2.shanghai.ShanghaiFragment;
-import com.by5388.sy95306v2.shenyang.ShenYangFragment;
-import com.by5388.sy95306v2.tiezong.TzFragment;
 import com.by5388.sy95306v2.main.presenter.IMainPresenter;
 import com.by5388.sy95306v2.main.presenter.MainPresenter;
 import com.by5388.sy95306v2.main.view.IMainView;
+import com.by5388.sy95306v2.shanghai.ShanghaiFragment;
+import com.by5388.sy95306v2.shenyang.ShenYangFragment;
+import com.by5388.sy95306v2.tiezong.TzFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +72,11 @@ public class MainActivity extends AppCompatActivity
     private View mainView;
     private IMainPresenter presenter;
 
+    private AlertDialog updatingDialog;
+
+    private TextView textViewAllCount, textViewCurrentCount;
+    private ProgressBar progressBar;
+    private int stationCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,21 +212,72 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void notifyUpdate() {
-        // TODO: 2019/1/3  
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        if (notificationManager == null) {
-            Toast.makeText(this, "数据库发生更新", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        int id = 10001;
-        Notification notification = new Notification();
+        //使用一个对话框来提供升级的入口
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.isUpdating)
+                .setMessage(R.string.update_tip)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.startUpdate();
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
+        dialog.show();
+        dialog.setCancelable(true);
+    }
 
-        notificationManager.notify(id, notification);
+    @Override
+    public void showUpdating() {
+        checkUpdatingDialog();
+        AlertDialog alertDialog = updatingDialog;
+        alertDialog.show();
+    }
+
+
+    private void checkUpdatingDialog() {
+        if (updatingDialog == null) {
+            updatingDialog = new AlertDialog.Builder(this)
+                    .setTitle(R.string.updating)
+                    .setView(getDialogView())
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // TODO: 2019/1/11 刷新Fragment
+                            dialog.dismiss();
+                        }
+                    })
+                    .create();
+            updatingDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+
+                }
+            });
+//            Button positiveButton = updatingDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+//            positiveButton.setEnabled(false);
+            updatingDialog.setCancelable(false);
+            updatingDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    // TODO: 2019/1/11 刷新Fragment
+                }
+            });
+        }
+    }
+
+    private View getDialogView() {
+        View view = getLayoutInflater().inflate(R.layout.dialog_update_station, new LinearLayout(this), false);
+        textViewAllCount = view.findViewById(R.id.textView_all_count);
+        textViewCurrentCount = view.findViewById(R.id.textView_current_count);
+        progressBar = view.findViewById(R.id.progressBar);
+        return view;
     }
 
     @Override
     public void startChecking() {
-
+        // TODO: 2019/1/11 show a  progressBar
     }
 
     @Override
@@ -228,21 +287,34 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void updateAllCount(int allCount) {
-
+        stationCount = allCount;
+        textViewAllCount.setText(String.format(getString(R.string.all_station_count), allCount));
+        progressBar.setProgress(0);
     }
 
     @Override
     public void updateProgress(int progress) {
-
+        double percent = progress * 100.0 / stationCount;
+        textViewCurrentCount.setText(String.format(getString(R.string.current_station_count), progress));
+        progressBar.setProgress((int) percent);
     }
 
     @Override
     public void openNetWorkSetting() {
-
+        tip("网络异常");
     }
 
     @Override
     public void tip(String tip) {
+        Toast.makeText(this, tip, Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void finishUpdate() {
+        AlertDialog alertDialog = updatingDialog;
+        alertDialog.setCancelable(true);
+        Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        positiveButton.setEnabled(true);
+        positiveButton.setText(R.string.finish_update);
     }
 }

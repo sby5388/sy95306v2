@@ -1,4 +1,4 @@
-package com.by5388.sy95306v2.bean.second;
+package com.by5388.sy95306v2.bean.thrid;
 
 import android.text.TextUtils;
 

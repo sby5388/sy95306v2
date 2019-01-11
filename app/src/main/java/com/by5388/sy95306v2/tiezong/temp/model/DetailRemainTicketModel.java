@@ -1,31 +1,26 @@
 package com.by5388.sy95306v2.tiezong.temp.model;
 
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.by5388.sy95306v2.database.DataBaseApiImpl;
+import com.by5388.sy95306v2.database.IShenYangDbApi;
 import com.by5388.sy95306v2.shenyang.bean.Station;
 import com.by5388.sy95306v2.shenyang.bean.TrainDetail;
+import com.by5388.sy95306v2.shenyang.net.api.SyNetTools;
+import com.by5388.sy95306v2.shenyang.net.api.SyService;
+import com.by5388.sy95306v2.tiezong.api.pass.code.GetPassCodeImpl;
+import com.by5388.sy95306v2.tiezong.api.pass.code.IGetPassCodeService;
 import com.by5388.sy95306v2.tiezong.bean.TzResult;
 import com.by5388.sy95306v2.tiezong.bean.yp.success.SuccessDataBean;
 import com.by5388.sy95306v2.tiezong.bean.yp.success.TzDataBean;
-import com.by5388.sy95306v2.database.DataBaseTempApi;
-import com.by5388.sy95306v2.database.IShenYangStationDb;
-import com.by5388.sy95306v2.tiezong.api.pass.code.GetPassCodeImpl;
-import com.by5388.sy95306v2.tiezong.api.pass.code.IGetPassCodeService;
-import com.by5388.sy95306v2.tiezong.api.cookie.ReceivedCookieInterceptor;
-import com.by5388.sy95306v2.shenyang.net.api.SyNetTools;
-import com.by5388.sy95306v2.shenyang.net.api.SyService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
-import okhttp3.Cookie;
 
 /**
  * @author by5388  on 2018/8/20.
@@ -33,12 +28,12 @@ import okhttp3.Cookie;
 public class DetailRemainTicketModel implements IDetailRemainTicketModel {
     private final IGetPassCodeService service;
     private final SyService syService;
-    private final IShenYangStationDb db;
+    private final IShenYangDbApi db;
 
     public DetailRemainTicketModel() {
         service = new GetPassCodeImpl();
         syService = new SyNetTools().getRetrofit().create(SyService.class);
-        db = DataBaseTempApi.getInstance();
+        db = DataBaseApiImpl.getInstance();
     }
 
     @Override

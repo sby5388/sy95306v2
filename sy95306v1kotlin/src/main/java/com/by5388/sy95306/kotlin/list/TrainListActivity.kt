@@ -20,12 +20,12 @@ import com.by5388.sy95306.kotlin.list.view.TrainListAdapter
 import kotlinx.android.synthetic.main.activity_train_detail.*
 
 class TrainListActivity : AppCompatActivity(), IListView, ListOnClickListener {
-    var date: Int? = null
-    var presenter: IListPresenter? = null
-    var adapter: TrainListAdapter? = null
+    private var date: Int? = null
+    private var presenter: IListPresenter? = null
+    private var adapter: TrainListAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_train_detail)
+        setContentView(R.layout.activity_train_list)
         if (supportActionBar != null) {
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }

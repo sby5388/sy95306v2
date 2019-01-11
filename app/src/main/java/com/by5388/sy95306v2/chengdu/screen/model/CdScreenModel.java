@@ -3,8 +3,8 @@ package com.by5388.sy95306v2.chengdu.screen.model;
 import com.by5388.sy95306v2.chengdu.bean.screen.ScreenArriveDetail;
 import com.by5388.sy95306v2.chengdu.bean.screen.ScreenLeaveDetail;
 import com.by5388.sy95306v2.chengdu.bean.screen.ScreenStation;
-import com.by5388.sy95306v2.database.DataBaseTempApi;
-import com.by5388.sy95306v2.database.ICdScreenStationDb;
+import com.by5388.sy95306v2.database.DataBaseApiImpl;
+import com.by5388.sy95306v2.database.IChengDuDbApi;
 import com.by5388.sy95306v2.chengdu.screen.CdScreenItem;
 import com.by5388.sy95306v2.chengdu.api.ICdQuery;
 import com.by5388.sy95306v2.chengdu.api.QueryCd;
@@ -21,11 +21,11 @@ import io.reactivex.functions.Function;
  */
 public class CdScreenModel implements ICdScreenModel {
     private final ICdQuery query;
-    private final ICdScreenStationDb service;
+    private final IChengDuDbApi service;
 
     public CdScreenModel() {
         query = new QueryCd();
-        service = DataBaseTempApi.getInstance();
+        service = DataBaseApiImpl.getInstance();
     }
 
     @Override

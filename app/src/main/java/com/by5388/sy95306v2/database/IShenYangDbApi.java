@@ -12,7 +12,7 @@ import io.reactivex.Observable;
  * @author by5388  on 2018/7/21.
  */
 
-public interface IShenYangStationDb {
+public interface IShenYangDbApi {
 
     /**
      * 删除所有车站数据
@@ -29,7 +29,7 @@ public interface IShenYangStationDb {
      * @param stations 车站集合
      * @return 进度值
      */
-    Observable<Integer> addStations(List<Station> stations);
+    Observable<Integer> insertStationList(List<Station> stations);
 
     /**
      * 搜索单个:name,
@@ -54,5 +54,11 @@ public interface IShenYangStationDb {
      * @return 车站集合
      */
     List<Station> selectStationList(String key);
+
+    /**
+     * 是否存在数据
+     * @return true:空
+     */
+    boolean isEmpty();
 
 }

@@ -19,8 +19,8 @@ import com.by5388.sy95306.kotlin.detail.view.IDetailView
 import kotlinx.android.synthetic.main.activity_train_detail.*
 
 class TrainDetailActivity : AppCompatActivity(), IDetailView {
-    var presenter: IDetailPresenter? = null
-    var adapter: DetailAdapter? = null
+    private var presenter: IDetailPresenter? = null
+    private var adapter: DetailAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_train_detail)

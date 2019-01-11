@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".main.fragment.ListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:id="@+id/buttonTestList"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="list" />
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <EditText
+            android:hint="@string/fromStation"
+            android:id="@+id/editTextFromStation"
+            style="@style/editText_list_fragment" />
+
+        <ImageView
+            android:id="@+id/imageViewSwap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_swap_image_view"
+            android:contentDescription="@string/swap"
+             />
+
+        <EditText
+            android:hint="@string/toStation"
+            android:id="@+id/editTextEndStation"
+            style="@style/editText_list_fragment" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonSelectDate"
+            style="@style/editText_list_fragment"
+            tools:text="20190110" />
+
+        <Button
+            android:id="@+id/buttonQuery"
+            style="@style/editText_list_fragment"
+            tools:text="@string/query" />
+
+    </LinearLayout>
+
+</LinearLayout>
