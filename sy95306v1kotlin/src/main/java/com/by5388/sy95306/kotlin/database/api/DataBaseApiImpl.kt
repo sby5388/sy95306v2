@@ -17,7 +17,7 @@ import com.by5388.sy95306.kotlin.database.api.StationTable.TableStation.TABLE_NA
 import io.reactivex.Observable
 
 /**
- * 单例
+ * TODO 单例
  * @author  by5388  on 2019/1/7.
  */
 class DataBaseApiImpl : DataBaseApi {
@@ -35,11 +35,13 @@ class DataBaseApiImpl : DataBaseApi {
         val stationList: MutableList<Station> = ArrayList()
         val cursor = db.query(TABLE_NAME, null, null, null, null, null, null)
         if (cursor != null) {
-            cursor.moveToFirst()
-            while (cursor.moveToNext()) {
-                stationList.add(getStation(cursor))
+            if (cursor.count > 0) {
+                cursor.moveToFirst()
+                while (cursor.moveToNext()) {
+                    stationList.add(getStation(cursor))
+                }
+                cursor.close()
             }
-            cursor.close()
         }
         return stationList
     }
@@ -47,17 +49,21 @@ class DataBaseApiImpl : DataBaseApi {
 
     override fun deleteStationList() = db.delete(TABLE_NAME, null, emptyArray<String>())
 
-    override fun getStationByName(name: String): Station {
+    override fun getStationByName(name: String): Station? {
         val selection = "$STATION_NAME = ?"
         val selectionArgs = arrayOf(name)
         val cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, null)
-        var station = Station(-1, "", "", "", "", "", -1)
         if (cursor != null) {
-            cursor.moveToFirst()
-            station = getStation(cursor)
-            cursor.close()
+            if (cursor.count > 0) {
+                cursor.moveToFirst()
+                val station = getStation(cursor)
+                cursor.close()
+                return station
+            }else{
+                cursor.close()
+            }
         }
-        return station
+        return null
     }
 
     override fun getStationByKeyWord(keyWord: String): List<Station> {
@@ -66,13 +72,32 @@ class DataBaseApiImpl : DataBaseApi {
         val selectionArgs = arrayOf("%$keyWord%", "%$keyWord%", "%$keyWord%", "%$keyWord%")
         val cursor = db.query(true, TABLE_NAME, null, selection, selectionArgs, null, null, null, null)
         if (cursor != null) {
-            cursor.moveToFirst()
-            while (cursor.moveToNext()) {
-                stationList.add(getStation(cursor))
+            if (cursor.count > 0) {
+                cursor.moveToFirst()
+                while (cursor.moveToNext()) {
+                    stationList.add(getStation(cursor))
+                }
             }
             cursor.close()
         }
         return stationList
+    }
+
+    override fun getStationByCode(code: String): Station? {
+        val selection = "$NAME_UPPER = ?"
+        val selectionArgs = arrayOf(code)
+        val cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, null)
+        if (cursor != null) {
+            if (cursor.count > 0) {
+                cursor.moveToFirst()
+                val station = getStation(cursor)
+                cursor.close()
+                return station
+            }else{
+                cursor.close()
+            }
+        }
+        return null
     }
 
     override fun isEmpty(): Boolean {

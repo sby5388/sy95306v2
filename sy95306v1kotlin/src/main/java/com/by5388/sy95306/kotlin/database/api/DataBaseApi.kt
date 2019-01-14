@@ -14,8 +14,9 @@ interface DataBaseApi {
      * delete all data
      */
     fun deleteStationList(): Int
-    fun getStationByName(name: String): Station
+    fun getStationByName(name: String): Station?
     fun getStationByKeyWord(keyWord: String): List<Station>
     fun insertStationList(stationList: List<Station>): Observable<Int>
     fun isEmpty():Boolean
+    fun getStationByCode(code: String): Station?
 }

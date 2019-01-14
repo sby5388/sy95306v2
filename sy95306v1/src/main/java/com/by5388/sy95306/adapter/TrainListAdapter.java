@@ -1,7 +1,6 @@
 package com.by5388.sy95306.adapter;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -163,13 +162,7 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.View
     private static void setStartStationIcon(@NonNull TrainNumber trainNumber, @NonNull TextView textView, @NonNull Context context) {
         if (trainNumber.isFirstStation()) {
             textView.setText(R.string.station_start);
-            // TODO: 2018/7/15 过时方法
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                textView.setBackgroundColor(context.getResources().getColor(R.color.detail_top_lly_bg, null));
-            } else {
-                textView.setBackgroundColor(context.getResources().getColor(R.color.detail_top_lly_bg));
-            }
-
+            textView.setBackgroundColor(context.getResources().getColor(R.color.detail_top_lly_bg));
         } else {
             textView.setText(R.string.station_pass);
             textView.setBackgroundColor(context.getResources().getColor(R.color.station_time));

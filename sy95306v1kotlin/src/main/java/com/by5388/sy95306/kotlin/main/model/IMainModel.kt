@@ -16,10 +16,29 @@ interface IMainModel {
     /**
      * 已经更新的数量
      */
-    fun updateProgress(): Observable<Int>
+    fun insertStationList(): Observable<Int>
 
     /**
      * 检查网络状态
      */
     fun getNetWordStatus(): Observable<Int>
+
+    /**
+     * 车站总数量
+     *
+     * @return 总数量
+     */
+    fun getStationCount(): Observable<Int>
+
+    /**
+     * 清空数据库
+     *
+     * @return 0:清空完成
+     */
+    fun clearData(): Observable<Int>
+
+    /**
+     * 更新完成，更新版本号
+     */
+    fun finishUpdate()
 }

@@ -11,8 +11,8 @@ import java.io.InputStream
  */
 interface IStationTool {
     fun getStationCount(stationList: String, stationListFile: StringBuilder): Int
-    fun getTextLineWithVersion(inputStream: InputStream): String?
-    fun getVersion(text: String): String
+//    fun getTextLineWithVersion(inputStream: InputStream): String?
+    fun getVersion(inputStream: InputStream): String
     fun getStationList(stationText: String): List<Station>
     fun getStationList(inputStream: InputStream): String
 }

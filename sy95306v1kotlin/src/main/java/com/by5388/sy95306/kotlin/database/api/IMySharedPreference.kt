@@ -6,4 +6,5 @@ package com.by5388.sy95306.kotlin.database.api
 interface IMySharedPreference {
     fun put(key: String, obj: Any)
     fun get(key: String, obj: Any): Any
+    fun contains(key: String): Boolean
 }

@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.by5388.sy95306.kotlin.R
+import com.by5388.sy95306.kotlin.bean.Station
 import com.by5388.sy95306.kotlin.bean.TrainNumber
 import com.by5388.sy95306.kotlin.common.getDescription
 import com.by5388.sy95306.kotlin.common.getSpendTime
 import com.by5388.sy95306.kotlin.common.getTime
+import com.by5388.sy95306.kotlin.database.api.DataBaseApi
+import com.by5388.sy95306.kotlin.database.api.DataBaseApiImpl
 
 /**
  * @author  by5388  on 2019/1/7.
@@ -24,6 +27,14 @@ class TrainListAdapter(private val context: Context, private val listener: ListO
      */
     private var trainNumberList: List<TrainNumber> = ArrayList()
     private val allPriceFormat: String = context.resources.getString(R.string.all_price)
+
+    private val stationList: MutableList<Station>
+    private val api: DataBaseApi
+
+    init {
+        stationList = ArrayList()
+        api = DataBaseApiImpl()
+    }
 
     fun setTrainNumberList(list: List<TrainNumber>) {
         trainNumberList = list
@@ -41,11 +52,11 @@ class TrainListAdapter(private val context: Context, private val listener: ListO
         val trainNumber = trainNumberList[position]
         holder!!.trainNumberName.text = trainNumber.trainCode
         holder.description.text = getDescription(trainNumber)
-        holder.startStationName.text = trainNumber.shangChe
-        holder.endStationName.text = trainNumber.xiaChe
+        holder.startStationName.text = getStationName(trainNumber.shangChe)
+        holder.endStationName.text = getStationName(trainNumber.xiaChe)
 
-//        setStartStationIcon(trainNumber, holder.imageViewStart, context)
-//        setEndStationIcon(trainNumber, holder.imageViewEnd, context)
+        setStartStationIcon(trainNumber, holder.imageViewStart)
+        setEndStationIcon(trainNumber, holder.imageViewEnd)
 
         holder.startStationTime.text = getTime(trainNumber.startTime)
         holder.endStationTime.text = getTime(trainNumber.arriveTime)
@@ -58,6 +69,41 @@ class TrainListAdapter(private val context: Context, private val listener: ListO
         holder.price.text = String.format(allPriceFormat, price1, price2, price3, price4)
         holder.rootView.tag = position
         holder.rootView.setOnClickListener(this)
+    }
+
+    private fun setEndStationIcon(number: TrainNumber, textView: TextView) {
+        if (number.zhongDao == number.xiaChe) {
+            textView.setText(R.string.zhong_dao);
+            textView.setBackgroundColor(context.resources.getColor(R.color.zhong_dao))
+        } else {
+            textView.setText(R.string.guo_lu);
+            textView.setBackgroundColor(context.resources.getColor(R.color.guo_lu))
+        }
+    }
+
+    private fun setStartStationIcon(number: TrainNumber, textView: TextView) {
+        if (number.shiFa == number.shangChe) {
+            textView.setText(R.string.shi_fa);
+            textView.setBackgroundColor(context.resources.getColor(R.color.shi_fa))
+        } else {
+            textView.setText(R.string.guo_lu);
+            textView.setBackgroundColor(context.resources.getColor(R.color.guo_lu))
+        }
+    }
+
+
+    private fun getStationName(code: String): String {
+        for (station in stationList) {
+            if (station.nameUpper == code) {
+                return station.name
+            }
+        }
+        val stationTemp = api.getStationByCode(code)
+        if (stationTemp != null) {
+            stationList.add(stationTemp)
+            return stationTemp.name
+        }
+        return code
     }
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -50,9 +50,12 @@ class MySharedPreferencesImpl private constructor() : IMySharedPreference {
         }
     }
 
+    override fun contains(key: String): Boolean {
+        return sharedPreferences.contains(key)
+    }
 
     companion object {
-        private const val FILE_NAME = "trainVersion"
+        private const val FILE_NAME = "stationVersion"
         @JvmStatic
         fun getInstance(): IMySharedPreference = MySharedPreferencesImpl()
     }

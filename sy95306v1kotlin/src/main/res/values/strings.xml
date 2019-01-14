@@ -18,4 +18,14 @@
     <string name="swap">交换</string>
     <string name="fromStation">出发</string>
     <string name="toStation">到达</string>
+    <string name="title_update_tip">是否更新</string>
+    <string name="message_update_tip">获取最新最全的车站列表</string>
+    <string name="error_try_again">重试</string>
+    <string name="is_update_data">已是最新数据</string>
+    <string name="updateing">正在更新中</string>
+    <string name="all_station_count">车站总数：%1$d</string>
+    <string name="current_station_count">已更新数量：%1$d</string>
+    <string name="shi_fa">始</string>
+    <string name="zhong_dao">终</string>
+    <string name="guo_lu">过</string>
 </resources>

@@ -12,22 +12,21 @@
         android:orientation="horizontal">
 
         <EditText
-            android:hint="@string/fromStation"
-            android:id="@+id/editTextFromStation"
-            style="@style/editText_list_fragment" />
+            android:id="@+id/editTextFrom"
+            style="@style/editText_list_fragment"
+            android:hint="@string/fromStation" />
 
         <ImageView
             android:id="@+id/imageViewSwap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/bg_swap_image_view"
             android:contentDescription="@string/swap"
-             />
+            android:src="@drawable/bg_swap_image_view" />
 
         <EditText
-            android:hint="@string/toStation"
-            android:id="@+id/editTextEndStation"
-            style="@style/editText_list_fragment" />
+            android:id="@+id/editTextTo"
+            style="@style/editText_list_fragment"
+            android:hint="@string/toStation" />
 
     </LinearLayout>
 
@@ -44,7 +43,7 @@
         <Button
             android:id="@+id/buttonQuery"
             style="@style/editText_list_fragment"
-            tools:text="@string/query" />
+            android:text="@string/query" />
 
     </LinearLayout>
 

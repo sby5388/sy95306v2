@@ -31,12 +31,18 @@ class StationTool : IStationTool {
         return stringBuilder.toString()
     }
 
+    // TODO: date这里需要重新测试
     override fun getStationList(stationText: String): List<Station> {
+        println("获取车站")
+
         val stationParam = 6
         val stationList: MutableList<Station> = ArrayList()
         val stationItems: List<String> = stationText.split("@")
+        println("车站数量 = ${stationItems.size}")
         for (item in stationItems) {
-            val params = item.split("\\|");
+            val params = item.split("\\|".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
+            println("参数长度数量 = ${params.size}")
+//            fixme 参数长度等于1，错误
             if (stationParam == params.size) {
                 stationList.add(Station(
                         -1,
@@ -48,11 +54,13 @@ class StationTool : IStationTool {
                         params[5].toInt()))
             }
         }
+        println(stationList.size)
         return stationList
     }
 
-    override fun getVersion(text: String): String {
-        val parts = text.split(" ")
+    override fun getVersion(inputStream: InputStream): String {
+        val text = getTextLineWithVersion(inputStream)
+        val parts = text!!.split(" ")
         if (parts.size >= 3) {
             val part2 = parts[2]
             val part2s = part2.split("\"")
@@ -68,7 +76,7 @@ class StationTool : IStationTool {
     }
 
 
-    override fun getTextLineWithVersion(inputStream: InputStream): String? {
+    private fun getTextLineWithVersion(inputStream: InputStream): String? {
         val reader = InputStreamReader(inputStream)
         val bufferedReader = BufferedReader(reader)
         var temp: String? = null

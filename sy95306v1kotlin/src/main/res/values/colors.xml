@@ -22,4 +22,7 @@
     <color name="detail_top_lly_bg">#458B74</color>
     <color name="detail_second_lly_bg">#E0EEE0</color>
     <color name="lly_bottom_bg">#C1C1C1</color>
+    <color name="shi_fa">#458B74</color>
+    <color name="guo_lu">#63B8FF</color>
+    <color name="zhong_dao">#CD2626</color>
 </resources>

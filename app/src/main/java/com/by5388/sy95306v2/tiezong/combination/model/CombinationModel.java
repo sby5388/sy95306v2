@@ -77,7 +77,6 @@ public class CombinationModel implements ICombinationModel {
         SuccessDataBean result = new SuccessDataBean();
         result.setFlag(successDataBean.isFlag());
         result.setIsThrough(successDataBean.getIsThrough());
-        // FIXME: 2018/8/25 应当使用深拷贝
         List<TzDataBean> dataBeans = new ArrayList<>();
         for (TzDataBean data : successDataBean.getDatas()) {
             if (data.getStation_train_code().contains(trainCode)) {
