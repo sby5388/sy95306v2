@@ -30,10 +30,6 @@ public class CombinationModel implements ICombinationModel {
     private final SyService syService;
     private final IShenYangDbApi db;
 
-    // TODO: 2019/1/9 把验证码部分去掉，模糊查询采用12306的api  而不是  沈阳95306的
-    
-    
-    
     public CombinationModel() {
         service = new GetPassCodeImpl();
         syService = new SyNetTools().getRetrofit().create(SyService.class);

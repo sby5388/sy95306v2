@@ -3,9 +3,12 @@ package com.by5388.sy95306v2.shanghai;
 import android.os.Bundle;
 
 import com.by5388.sy95306v2.base.BaseTopFragment;
-import com.by5388.sy95306v2.base.adapter.MyViewPagerAdapter;
+import com.by5388.sy95306v2.bean.MyViewPager;
 import com.by5388.sy95306v2.shanghai.number.ShanghaiNumberFragment;
 import com.by5388.sy95306v2.shanghai.p2p.ShanghaiP2pFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 上海集团的查询页面：2个
@@ -21,10 +24,12 @@ public class ShanghaiFragment extends BaseTopFragment {
         return fragment;
     }
 
-    @Override
-    protected void initFragments(MyViewPagerAdapter adapter) {
-        adapter.addFragment(ShanghaiP2pFragment.newInstance(), "车次查询");
-        adapter.addFragment(ShanghaiNumberFragment.newInstance(), "车次查询");
-    }
 
+    @Override
+    protected List<MyViewPager> getViewPagerFragmentList() {
+        List<MyViewPager> list = new ArrayList<>();
+        list.add(new MyViewPager(ShanghaiP2pFragment.newInstance(), "车次查询"));
+        list.add(new MyViewPager(ShanghaiNumberFragment.newInstance(), "车次查询"));
+        return list;
+    }
 }

@@ -3,11 +3,14 @@ package com.by5388.sy95306v2.guangzhou;
 import android.os.Bundle;
 
 import com.by5388.sy95306v2.base.BaseTopFragment;
-import com.by5388.sy95306v2.base.adapter.MyViewPagerAdapter;
+import com.by5388.sy95306v2.bean.MyViewPager;
 import com.by5388.sy95306v2.guangzhou.late.GzLateFragment;
 import com.by5388.sy95306v2.guangzhou.number.GzTrainNumberFragment;
 import com.by5388.sy95306v2.guangzhou.p2p.GzP2pFragment;
 import com.by5388.sy95306v2.guangzhou.screen.StationScreenFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 广铁集团的查询页面：2个
@@ -23,11 +26,14 @@ public class GuangzhouFragment extends BaseTopFragment {
         return fragment;
     }
 
+
     @Override
-    protected void initFragments(MyViewPagerAdapter adapter) {
-        adapter.addFragment(GzP2pFragment.newInstance(), "站站查询");
-        adapter.addFragment(GzTrainNumberFragment.newInstance(), "车次查询");
-        adapter.addFragment(StationScreenFragment.newInstance(), "车站大屏幕");
-        adapter.addFragment(GzLateFragment.newInstance(), "正晚点查询");
+    protected List<MyViewPager> getViewPagerFragmentList() {
+        List<MyViewPager> list = new ArrayList<>();
+        list.add(new MyViewPager(GzP2pFragment.newInstance(), "站站查询"));
+        list.add(new MyViewPager(GzTrainNumberFragment.newInstance(), "车次查询"));
+        list.add(new MyViewPager(StationScreenFragment.newInstance(), "车站大屏幕"));
+        list.add(new MyViewPager(GzLateFragment.newInstance(), "正晚点查询"));
+        return list;
     }
 }

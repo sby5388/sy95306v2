@@ -5,7 +5,10 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.base.adapter.MyViewPagerAdapter;
+import com.by5388.sy95306v2.base.adapter.FragmentAdapter;
+import com.by5388.sy95306v2.bean.MyViewPager;
+
+import java.util.List;
 
 /**
  * 沈阳95306 查询页面：包括2个子Fragment
@@ -16,21 +19,20 @@ import com.by5388.sy95306v2.base.adapter.MyViewPagerAdapter;
 public abstract class BaseTopFragment extends BaseFragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private MyViewPagerAdapter adapter;
+    private FragmentAdapter adapter;
 
     @Override
     protected final void initData() {
         //getChildFragmentManager
-        adapter = new MyViewPagerAdapter(getChildFragmentManager());
-        initFragments(adapter);
+        adapter = new FragmentAdapter(getChildFragmentManager(), getViewPagerFragmentList());
     }
 
     /**
-     * 添加子fragment
+     * 数据源
      *
-     * @param adapter 显示数据
+     * @return
      */
-    protected abstract void initFragments(MyViewPagerAdapter adapter);
+    protected abstract List<MyViewPager> getViewPagerFragmentList();
 
 
     @Override

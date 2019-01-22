@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.by5388.sy95306v2.bean.MyViewPager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,22 +15,13 @@ import java.util.List;
  * @author by5388
  * @date 20180727
  */
-public class MyViewPagerAdapter extends FragmentPagerAdapter {
+public class FragmentAdapter extends FragmentPagerAdapter {
     private final List<MyViewPager> viewPagers;
 
 
-    public MyViewPagerAdapter(@NonNull FragmentManager manager) {
-        super(manager);
-        viewPagers = new ArrayList<>();
-    }
-
-    public MyViewPagerAdapter(@NonNull FragmentManager manager,@NonNull List<MyViewPager> viewPagers) {
+    public FragmentAdapter(@NonNull FragmentManager manager, @NonNull List<MyViewPager> viewPagers) {
         super(manager);
         this.viewPagers = viewPagers;
-    }
-
-    public void addFragment(@NonNull Fragment fragment, @NonNull String title) {
-        viewPagers.add(new MyViewPager(fragment, title));
     }
 
 

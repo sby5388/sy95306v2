@@ -17,10 +17,10 @@ public class TzNumberTest {
         System.out.println("start-----");
         IGetPassCodeService service = new GetPassCodeImpl();
         service.getListNumberDataBean(
-                "6i000D31080C",
+                "6i000D22860B",
                 "IOQ",
                 "AOH",
-                "2019-01-23")
+                "2019-01-24")
                 .subscribe(numberDataBeans -> {
                     System.out.println("start");
                     for (NumberDataBean bean : numberDataBeans) {

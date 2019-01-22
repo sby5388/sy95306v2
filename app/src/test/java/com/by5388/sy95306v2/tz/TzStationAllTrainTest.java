@@ -8,7 +8,7 @@ import com.by5388.sy95306v2.tiezong.bean.temp.DataBeanX;
 
 import org.junit.Test;
 
-import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -20,9 +20,9 @@ public class TzStationAllTrainTest {
     @Test
     public void testTzStationAllTrain() {
         IGetPassCodeService service = new GetPassCodeImpl();
-        String date = "2019-01-12";
-        String stationName = "饶平";
-        String stationCode = "RVQ";
+        final String date = "2019-01-25";
+        final String stationName = "饶平";
+        final String stationCode = "RVQ";
         service.getStationAllTrain(date, stationName, stationCode)
                 .subscribe(new Observer<TzResult<DataBeanX>>() {
                     @Override
@@ -32,7 +32,9 @@ public class TzStationAllTrainTest {
 
                     @Override
                     public void onNext(TzResult<DataBeanX> dataBeanXTzResult) {
-                        showResult(dataBeanXTzResult);
+                        if (true) {
+                            showResult(dataBeanXTzResult, stationName);
+                        }
                     }
 
                     @Override
@@ -47,30 +49,30 @@ public class TzStationAllTrainTest {
                 });
 
 //        service.getStationAllTrain(date, stationName, stationCode)
-//                .flatMap(new Function<TzResult<DataBeanX>, ObservableSource<DataBean>>() {
+//                .flatMap(new Function<TzResult<DataBeanX>, ObservableSource<DataSimpleBean>>() {
 //                    @Override
-//                    public ObservableSource<DataBean> apply(TzResult<DataBeanX> dataBeanXTzResult) {
-//                        List<DataBean> dataBeanList = dataBeanXTzResult.getData().getData();
-//                        for (DataBean dataBean : dataBeanList) {
+//                    public ObservableSource<DataSimpleBean> apply(TzResult<DataBeanX> dataBeanXTzResult) {
+//                        List<DataSimpleBean> dataBeanList = dataBeanXTzResult.getSimpleBeanList().getSimpleBeanList();
+//                        for (DataSimpleBean dataBean : dataBeanList) {
 //                            return Observable.just(dataBean);
 //                        }
 //                        return null;
 //                    }
 //                })
-//                .filter(new Predicate<DataBean>() {
+//                .filter(new Predicate<DataSimpleBean>() {
 //                    @Override
-//                    public boolean test(DataBean dataBean) {
+//                    public boolean test(DataSimpleBean dataBean) {
 //                        return stationName.equals(dataBean.getStationName());
 //                    }
 //                })
-//                .subscribe(new Observer<DataBean>() {
+//                .subscribe(new Observer<DataSimpleBean>() {
 //                    @Override
 //                    public void onSubscribe(Disposable d) {
 //
 //                    }
 //
 //                    @Override
-//                    public void onNext(DataBean dataBean) {
+//                    public void onNext(DataSimpleBean dataBean) {
 //                        if (dataBean == null) {
 //                            return;
 //                        }
@@ -89,12 +91,13 @@ public class TzStationAllTrainTest {
 //                });
     }
 
-    private void showResult(TzResult<DataBeanX> dataBeanXTzResult) {
+    private void showResult(TzResult<DataBeanX> dataBeanXTzResult, String stationName2) {
         if (dataBeanXTzResult == null || !dataBeanXTzResult.isStatus()) {
             System.err.println("empty");
             return;
         }
         DataBeanX dataBeanX = dataBeanXTzResult.getData();
+        List<DataBean> dataBeansList = dataBeanX.getData();
         for (String stationName : dataBeanX.getSameStations()) {
             System.out.println(stationName);
             for (DataBean dataBean : dataBeanX.getData()) {

@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.base.BaseFragment;
-import com.by5388.sy95306v2.base.adapter.MyViewPagerAdapter;
+import com.by5388.sy95306v2.base.adapter.FragmentAdapter;
 import com.by5388.sy95306v2.tiezong.combination.CombinationFragment;
 import com.by5388.sy95306v2.tiezong.remainticket.RemainTicketFragment;
 import com.by5388.sy95306v2.tiezong.zzcx.ZzCxFragment;
@@ -21,7 +21,7 @@ import com.by5388.sy95306v2.tiezong.zzcx.ZzCxFragment;
 public class TzFragment extends BaseFragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private MyViewPagerAdapter adapter;
+    private FragmentAdapter adapter;
 
 
     public TzFragment() {
@@ -37,7 +37,7 @@ public class TzFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        adapter = new MyViewPagerAdapter(getChildFragmentManager());
+        adapter = new FragmentAdapter(getChildFragmentManager());
         adapter.addFragment(ZzCxFragment.newInstance(), "余票查询");
         adapter.addFragment(RemainTicketFragment.newInstance(), "余票查询2");
         adapter.addFragment(CombinationFragment.newInstance(), "联合查询");

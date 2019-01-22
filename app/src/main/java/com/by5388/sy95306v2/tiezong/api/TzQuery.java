@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2.tiezong.api;
 
-import com.by5388.sy95306v2.tiezong.api.late.LateNetTools;
-import com.by5388.sy95306v2.tiezong.api.late.LateService;
+import com.by5388.sy95306v2.tiezong.api.late.TzLateNetTools;
+import com.by5388.sy95306v2.tiezong.api.late.TzLateService;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -15,7 +15,7 @@ import io.reactivex.Observable;
  * @author by5388  on 2018/8/14.
  */
 public class TzQuery {
-    private static final LateService SERVICE = new LateNetTools().getRetrofit().create(LateService.class);
+    private static final TzLateService SERVICE = new TzLateNetTools().getRetrofit().create(TzLateService.class);
     /**
      * 到达
      */

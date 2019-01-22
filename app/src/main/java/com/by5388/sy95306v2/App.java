@@ -18,4 +18,6 @@ public class App extends Application {
         super.onCreate();
         instance = this;
     }
+    // TODO: 2019/1/22  通过车票口查询接口相关的API也可以获得相关的车次、检票口信息
+    // TODO: 2019/1/22 https://www.12306.cn/index/view/infos/ticket_check.html
 }

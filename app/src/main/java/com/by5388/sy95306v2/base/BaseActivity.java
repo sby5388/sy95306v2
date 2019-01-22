@@ -50,13 +50,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // TODO: 2018/7/29  
-//            case R.id.save:
-//                doAction(ACTION_SAVE);
-//                break;
-//            case R.id.share:
-//                doAction(ACTION_SHARE);
-//                break;
             case android.R.id.home:
                 finish();
                 break;
@@ -69,6 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //强制竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(getLayoutViewID());
         if (isShowActionBar()) {

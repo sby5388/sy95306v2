@@ -3,10 +3,13 @@ package com.by5388.sy95306v2.chengdu;
 import android.os.Bundle;
 
 import com.by5388.sy95306v2.base.BaseTopFragment;
-import com.by5388.sy95306v2.base.adapter.MyViewPagerAdapter;
+import com.by5388.sy95306v2.bean.MyViewPager;
 import com.by5388.sy95306v2.chengdu.late.CdLateFragment;
 import com.by5388.sy95306v2.chengdu.screen.CdScreenFragment;
 import com.by5388.sy95306v2.chengdu.yupiao.CdRemainTicketFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 成都 查询页面：包括3个子Fragment
@@ -24,11 +27,11 @@ public class ChengduFragment extends BaseTopFragment {
 
 
     @Override
-    protected void initFragments(MyViewPagerAdapter adapter) {
-        adapter.addFragment(CdScreenFragment.newInstance(), "车站大屏幕");
-        adapter.addFragment(CdRemainTicketFragment.newInstance(), "余票查询");
-        adapter.addFragment(CdLateFragment.newInstance(), "晚点查询");
+    protected List<MyViewPager> getViewPagerFragmentList() {
+        List<MyViewPager> list = new ArrayList<>();
+        list.add(new MyViewPager(CdScreenFragment.newInstance(), "车站大屏幕"));
+        list.add(new MyViewPager(CdRemainTicketFragment.newInstance(), "余票查询"));
+        list.add(new MyViewPager(CdLateFragment.newInstance(), "晚点查询"));
+        return list;
     }
-
-
 }

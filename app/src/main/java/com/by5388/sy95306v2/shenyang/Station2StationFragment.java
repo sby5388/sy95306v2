@@ -118,7 +118,7 @@ public class Station2StationFragment extends BaseShenYangFragment implements Upd
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+
         switch (requestCode) {
             case END_STATION_CODE:
             case START_STATION_CODE:
@@ -127,7 +127,7 @@ public class Station2StationFragment extends BaseShenYangFragment implements Upd
                 }
                 break;
             default:
-                break;
+                super.onActivityResult(requestCode, resultCode, data);;
         }
     }
 

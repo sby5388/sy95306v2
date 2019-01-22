@@ -17,10 +17,10 @@ import io.reactivex.functions.Function;
  * @author by5388  on 2018/8/17.
  */
 public class GetPassCodeImpl implements IGetPassCodeService {
-    private final IPassCodeService service;
+    private final TieZongService service;
 
     public GetPassCodeImpl() {
-        service = new PassCodeNetTools().getRetrofit().create(IPassCodeService.class);
+        service = new PassCodeNetTools().getRetrofit().create(TieZongService.class);
     }
 
     @Override

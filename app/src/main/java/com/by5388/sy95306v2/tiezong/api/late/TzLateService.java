@@ -11,7 +11,7 @@ import retrofit2.http.Query;
  * @author by5388  on 2018/6/11.
  */
 
-public interface LateService {
+public interface TzLateService {
     /**
      * 车站名称
      */

@@ -12,12 +12,12 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- * 获取图片验证码
+ * 铁总12306 查询api
  *
  * @author by5388  on 2018/6/11.
  */
 
-public interface IPassCodeService {
+public interface TieZongService {
     //    https://kyfw.12306.cn/otn/zzzcx/
     //    https://kyfw.12306.cn/otn/passcodeNew/checkRandCodeAnsyn
     //    https://kyfw.12306.cn/otn/passcodeNew/getPassCodeNew
@@ -39,7 +39,20 @@ public interface IPassCodeService {
      * 换乘站：这里为空
      */
     String CHANGE_STATION_TEXT = "changeStationText";
-
+    /**
+     * 中转查询
+     */
+    String ZZ_CX = "zzzcx/query";
+    /**
+     * 获取新的验证码
+     */
+    @SuppressWarnings("all")
+    String GET_NEW_VERIFICATION_CODE = "passcodeNew/getPassCodeNew";
+    /**
+     * 检验验证码
+     */
+    @SuppressWarnings("all")
+    String CHECK_VERIFICATION_CODE = "passcodeNew/checkRandCodeAnsyn";
 
     /**
      * 中转查询：实际是余票查询
@@ -57,7 +70,7 @@ public interface IPassCodeService {
      * @param changeStationText 中转站，此处为空
      * @return 结果，可能是成功也可能是失败
      */
-    @GET("zzzcx/query")
+    @GET(ZZ_CX)
     Observable<TzResult<SuccessDataBean>> getZzCxData(
             @Query(QUERY_DATA) String queryDate,
             @Query(FROM_STATION) String fromStationCode,
@@ -80,7 +93,7 @@ public interface IPassCodeService {
      */
     @SuppressWarnings("unused")
     @Deprecated
-    @GET("passcodeNew/getPassCodeNew")
+    @GET(GET_NEW_VERIFICATION_CODE)
     Observable<ResponseBody> getNewPassCode(
             @Query(MODULE) String module,
             @Query(RAND) String rand,
@@ -94,7 +107,7 @@ public interface IPassCodeService {
      * @param randCode 验证码
      * @return 结果
      */
-    @GET("passcodeNew/checkRandCodeAnsyn")
+    @GET(CHECK_VERIFICATION_CODE)
     Observable<TzResult<PassCodeDataBean>> checkRandCodeAnsyn(
             @Query(RAND) String rand,
             @Query(RAND_CODE) String randCode
@@ -136,9 +149,12 @@ public interface IPassCodeService {
             @Query(RAND_CODE) String randCode
     );
 
-    /**
-     * 车次查询
+    /*
+     * TODO 车次模糊查询
      */
 
 
+    /*
+     *TODO  车次停站查询
+     */
 }
