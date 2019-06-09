@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -45,7 +44,7 @@ public class Tools {
     /**
      * 城市选择列表：默认的城市
      */
-    private static final String[] STATION_NAME_UPPER = {
+    public static final String[] STATION_NAME_UPPER = {
             "BJP", "SHH", "TJP", "GZQ",
             "CQW", "CSQ", "CDW", "HHC",
             "HBB", "HFH", "NCG", "NJH",
@@ -80,68 +79,32 @@ public class Tools {
     private final static String REG_ABC = "^[a-zA-Z]*$";
 
 
-    public static void getDefaultStation(@NonNull List<Station> emptyStations) {
-        DataBaseApi dataBaseService = DataBaseTempApiImpl.getInstance();
-        Disposable disposable = Observable.fromArray(STATION_NAME_UPPER)
-                .map(dataBaseService::selectStationByNameUpper)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(station -> emptyStations.add(station));
-                .subscribe(emptyStations::add);
-
-    }
-
-    private static Observable<List<Station>> getObservableByString2(@NonNull Context context, String string) {
-        DataBaseApi dataBaseService = DataBaseTempApiImpl.getInstance();
-
-
-        return Observable.create(e -> {
-            List<Station> stations;
-            if (regNumber(string)) {
-                //TODO  数字没有任何意义
-                //数字
-                stations = new ArrayList<>();
-            } else {
-                //字母+中文
-                stations = dataBaseService.selectStationList(string);
-            }
-            e.onNext(stations);
-            e.onComplete();
-        });
-    }
-
     /**
      * 新的筛选条件：nameFirst/name/nameEn/nameLower，去掉数字
      */
     private static Observable<List<Station>> getObservableByString(String string) {
-        DataBaseApi dataBaseService = DataBaseTempApiImpl.getInstance();
         if (regNumber(string)) {
             List<Station> empty = new ArrayList<>();
             return Observable.just(empty);
         }
+        DataBaseApi dataBaseService = DataBaseTempApiImpl.getInstance();
         List<Station> mStationList = dataBaseService.selectStationList(string);
         return Observable.just(mStationList);
     }
 
-    public static void refreshStationData(@NonNull Context context, String string, StationAdapter adapter) {
-        Observable<List<Station>> observable = getObservableByString(string);
-        updateStationData(observable, adapter);
-    }
-
-    /**
-     * 刷新数据
-     *
-     * @param observable 获取到的车站列表
-     * @param adapter    设配器
-     */
-    private static void updateStationData(@NonNull Observable<List<Station>> observable, StationAdapter adapter) {
-        observable.subscribeOn(Schedulers.io())
+    public static void refreshStationData(String string, StationAdapter adapter) {
+        if (regNumber(string)) {
+            return;
+        }
+        DataBaseApi dataBaseService = DataBaseTempApiImpl.getInstance();
+        Observable.just(dataBaseService.selectStationList(string))
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(adapter::setStations);
     }
 
 
-    private static boolean regNumber(String string) {
+    public static boolean regNumber(String string) {
         Pattern p = Pattern.compile(REG_NUMBER, Pattern.CASE_INSENSITIVE);
         Matcher matcher = p.matcher(string);
         return matcher.matches();

@@ -7,10 +7,15 @@ import android.view.View;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.base.BaseFragment;
+import com.by5388.sy95306v2.base.BaseTopFragment;
 import com.by5388.sy95306v2.base.adapter.FragmentAdapter;
+import com.by5388.sy95306v2.bean.MyViewPager;
 import com.by5388.sy95306v2.tiezong.combination.CombinationFragment;
 import com.by5388.sy95306v2.tiezong.remainticket.RemainTicketFragment;
 import com.by5388.sy95306v2.tiezong.zzcx.ZzCxFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 铁总查询页面：包括2个子Fragment
@@ -18,11 +23,17 @@ import com.by5388.sy95306v2.tiezong.zzcx.ZzCxFragment;
  * @author by5388  on 2018/7/28.
  */
 
-public class TzFragment extends BaseFragment {
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private FragmentAdapter adapter;
+public class TzFragment extends BaseTopFragment {
 
+    @Override
+    protected List<MyViewPager> getViewPagerFragmentList() {
+        List<MyViewPager> list = new ArrayList<>();
+        list.add(new MyViewPager(ZzCxFragment.newInstance(), "余票查询"));
+        list.add(new MyViewPager(RemainTicketFragment.newInstance(), "余票查询2"));
+        list.add(new MyViewPager(CombinationFragment.newInstance(), "联合查询"));
+        // TODO: 2019/1/23 增加其他的车次查询等
+        return list;
+    }
 
     public TzFragment() {
     }
@@ -34,31 +45,5 @@ public class TzFragment extends BaseFragment {
         fragment.setArguments(args);
         return fragment;
     }
-
-    @Override
-    protected void initData() {
-        adapter = new FragmentAdapter(getChildFragmentManager());
-        adapter.addFragment(ZzCxFragment.newInstance(), "余票查询");
-        adapter.addFragment(RemainTicketFragment.newInstance(), "余票查询2");
-        adapter.addFragment(CombinationFragment.newInstance(), "联合查询");
-    }
-
-    @Override
-    protected void loadData() {
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-    }
-
-    @Override
-    protected int getLayoutID() {
-        return R.layout.fragment_shen_yang;
-    }
-
-    @Override
-    protected void initView(View view) {
-        viewPager = view.findViewById(R.id.view_pager_shen_yang);
-        tabLayout = view.findViewById(R.id.tab_layout_shen_yang);
-    }
-
 
 }

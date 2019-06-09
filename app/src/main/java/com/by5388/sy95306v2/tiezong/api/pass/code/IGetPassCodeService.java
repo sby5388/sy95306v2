@@ -1,7 +1,5 @@
 package com.by5388.sy95306v2.tiezong.api.pass.code;
 
-import android.graphics.Bitmap;
-
 import com.by5388.sy95306v2.tiezong.bean.TzResult;
 import com.by5388.sy95306v2.tiezong.bean.number.NumberDataBean;
 import com.by5388.sy95306v2.tiezong.bean.number.NumberListDataBean;
@@ -28,6 +26,8 @@ public interface IGetPassCodeService {
      * @param toStationName   目的站
      * @param randCode        验证码
      * @return 结果，可能是成功也可能是失败
+     * @see #getRemainTicketData(String, String, String, String)
+     * @deprecated
      */
     Observable<TzResult<SuccessDataBean>> getZzCxData(
             String queryDate,
@@ -43,8 +43,8 @@ public interface IGetPassCodeService {
      * 车次查询：
      *
      * @param trainNo         车次的全称，6k0000D92200
-     * @param fromStationCOde 出发站电报码，估计没啥用，待验证
-     * @param toStationCOde   目的站电报码，估计没啥用，待验证
+     * @param fromStationCOde 出发站电报码
+     * @param toStationCOde   目的站电报码
      * @param date            日期，格式yyyy-MM-dd
      * @return 数据， {@link NumberListDataBean}
      */
@@ -68,5 +68,19 @@ public interface IGetPassCodeService {
             String stationCode
     );
 
+    /**
+     * 获取余票信息
+     *
+     * @param isStudent     类型有成人票（普通）："ADULT"、学生票:"0X00" 2种
+     * @param queryDate   日期
+     * @param fromStation 出发车站电报码
+     * @param toStation   到达车站电报码
+     * @return
+     */
+    Observable<TzResult<SuccessDataBean>> getRemainTicketData(boolean isStudent,
+                                                              String queryDate,
+                                                              String fromStation,
+                                                              String toStation
+    );
 
 }

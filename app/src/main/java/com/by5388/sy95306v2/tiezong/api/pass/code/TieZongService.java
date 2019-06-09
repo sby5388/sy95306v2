@@ -1,13 +1,11 @@
 package com.by5388.sy95306v2.tiezong.api.pass.code;
 
 import com.by5388.sy95306v2.tiezong.bean.TzResult;
-import com.by5388.sy95306v2.tiezong.bean.check.PassCodeDataBean;
 import com.by5388.sy95306v2.tiezong.bean.number.NumberListDataBean;
 import com.by5388.sy95306v2.tiezong.bean.temp.DataBeanX;
 import com.by5388.sy95306v2.tiezong.bean.yp.success.SuccessDataBean;
 
 import io.reactivex.Observable;
-import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -69,7 +67,10 @@ public interface TieZongService {
      * @param randCode          验证码
      * @param changeStationText 中转站，此处为空
      * @return 结果，可能是成功也可能是失败
+     * @deprecated  已经无效的，
+     * @see #getRemainTicketData(String, String, String, String)
      */
+    @Deprecated
     @GET(ZZ_CX)
     Observable<TzResult<SuccessDataBean>> getZzCxData(
             @Query(QUERY_DATA) String queryDate,
@@ -81,44 +82,13 @@ public interface TieZongService {
             @Query(CHANGE_STATION_TEXT) String changeStationText
     );
 
-    /**
-     * 获取图片验证码
-     * module=other&rand=sjrand&0.4185230006624856
-     *
-     * @param module       固定值："other"
-     * @param rand         固定值："sjrand"
-     * @param randomNumber 随机数
-     * @return 获取图片验证码
-     * @deprecated 不需要
-     */
-    @SuppressWarnings("unused")
-    @Deprecated
-    @GET(GET_NEW_VERIFICATION_CODE)
-    Observable<ResponseBody> getNewPassCode(
-            @Query(MODULE) String module,
-            @Query(RAND) String rand,
-            @Query(VALUE) double randomNumber
-    );
-
-    /**
-     * 检验验证码
-     *
-     * @param rand     固定值："sjrand"
-     * @param randCode 验证码
-     * @return 结果
-     */
-    @GET(CHECK_VERIFICATION_CODE)
-    Observable<TzResult<PassCodeDataBean>> checkRandCodeAnsyn(
-            @Query(RAND) String rand,
-            @Query(RAND_CODE) String randCode
-    );
 
     /**
      * 车站车次查询：
      *
      * @param trainNo         车次的全称，6k0000D92200
-     * @param fromStationCode 出发站电报码，估计没啥用，待验证
-     * @param toStationCode   目的站电报码，估计没啥用，待验证
+     * @param fromStationCode 出发站电报码
+     * @param toStationCode   目的站电报码
      * @param date            日期，格式yyyy-MM-dd
      * @return 数据， {@link NumberListDataBean}
      */
@@ -157,4 +127,20 @@ public interface TieZongService {
     /*
      *TODO  车次停站查询
      */
+
+    /**
+     * 获取余票信息
+     * @param type 类型有成人票（普通）："ADULT"、学生票:"0X00" 2种
+     * @param queryDate 日期
+     * @param fromStation 出发车站电报码
+     * @param toStation 到达车站电报码
+     * @return
+     */
+    @GET("query")
+    Observable<TzResult<SuccessDataBean>> getRemainTicketData(@Query("purpose_codes") String type,
+                                           @Query("queryDate")String queryDate,
+                                           @Query("from_station")String fromStation,
+                                           @Query("to_station")String toStation
+                                           );
+
 }

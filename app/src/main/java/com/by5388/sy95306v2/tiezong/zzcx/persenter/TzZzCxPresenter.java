@@ -1,5 +1,7 @@
 package com.by5388.sy95306v2.tiezong.zzcx.persenter;
 
+import android.util.Log;
+
 import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.tiezong.bean.yp.success.SuccessDataBean;
 import com.by5388.sy95306v2.tiezong.bean.yp.success.TzDataBean;
@@ -19,6 +21,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author by5388  on 2018/8/20.
  */
 public class TzZzCxPresenter implements ITzZzCxPresenter {
+    public static final String TAG = "TzZzCxPresenter";
     private Disposable listDisposable;
     private final Consumer<Throwable> throwableConsumer;
 
@@ -31,6 +34,7 @@ public class TzZzCxPresenter implements ITzZzCxPresenter {
         this.view = view;
         this.model = new TzZzCxModel();
         this.throwableConsumer = throwable -> {
+            Log.e(TAG, "TzZzCxPresenter: ", throwable);
             view.showError(throwable.getLocalizedMessage());
             view.finishQuery();
         };

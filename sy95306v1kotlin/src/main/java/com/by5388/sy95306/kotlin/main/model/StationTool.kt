@@ -79,7 +79,7 @@ class StationTool : IStationTool {
     private fun getTextLineWithVersion(inputStream: InputStream): String? {
         val reader = InputStreamReader(inputStream)
         val bufferedReader = BufferedReader(reader)
-        var temp: String? = null
+        var temp: String?
         try {
             do {
                 temp = bufferedReader.readLine()

@@ -4,11 +4,18 @@ import android.support.annotation.NonNull;
 
 import com.by5388.sy95306.bean.Station;
 import com.by5388.sy95306.bean.TrainNumber;
+import com.by5388.sy95306.database.DataBaseApi;
+import com.by5388.sy95306.database.DataBaseTempApiImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 静态的数据
@@ -19,7 +26,6 @@ import java.util.Map;
 public class StaticData {
     @SuppressWarnings("unused")
     private final static String TAG = "StaticData";
-    private static List<Station> defaultStations;
     public static final String[] TYPES = {"全部", "高铁", "动车", "特快", "普快", "其他"};
     public static final boolean[] SELECTED = {true, true, true, true, true, true};
 
@@ -110,13 +116,5 @@ public class StaticData {
         trainType.put("D", "动车");
     }
 
-
-    public static List<Station> getDefaultStations() {
-        if (null == defaultStations) {
-            defaultStations = new ArrayList<>();
-            Tools.getDefaultStation(defaultStations);
-        }
-        return defaultStations;
-    }
 
 }

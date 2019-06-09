@@ -48,10 +48,12 @@ public class DataBaseTempApiImpl implements DataBaseApi {
     public Station selectStationByNameUpper(String nameUpper) {
         Cursor cursor = db.rawQuery("select * from station where nameUpper = ?", new String[]{nameUpper});
         Station station = new Station();
-        if (cursor.moveToFirst()) {
-            station = getStation(cursor);
+        if (cursor != null) {
+            if (cursor.getCount() > 0 && cursor.moveToFirst()) {
+                station = getStation(cursor);
+            }
+            cursor.close();
         }
-        cursor.close();
         return station;
     }
 

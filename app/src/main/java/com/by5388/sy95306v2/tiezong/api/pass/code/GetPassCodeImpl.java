@@ -18,15 +18,17 @@ import io.reactivex.functions.Function;
  */
 public class GetPassCodeImpl implements IGetPassCodeService {
     private final TieZongService service;
+    private final TieZongService service2;
 
     public GetPassCodeImpl() {
         service = new PassCodeNetTools().getRetrofit().create(TieZongService.class);
+        service2 = new PassCodeNetTools2().getRetrofit().create(TieZongService.class);
     }
 
     @Override
     public Observable<TzResult<SuccessDataBean>> getZzCxData(String queryDate, String fromStationCode, String toStationCode, String fromStationName, String toStationName, String randCode) {
-        final String changeStationText = "";
-        return service.getZzCxData(queryDate, fromStationCode, toStationCode, fromStationName, toStationName, randCode, changeStationText);
+        final boolean isStudent = false;
+        return getRemainTicketData(isStudent, queryDate, fromStationCode, toStationCode);
     }
 
     @Override
@@ -55,5 +57,15 @@ public class GetPassCodeImpl implements IGetPassCodeService {
     public Observable<TzResult<DataBeanX>> getStationAllTrain(String date, String stationName, String stationCode) {
         final String randCode = "";
         return service.getStationAllTrain(date, stationName, stationCode, randCode);
+    }
+
+    @Override
+    public Observable<TzResult<SuccessDataBean>> getRemainTicketData(boolean isStudent, String queryDate, String fromStation, String toStation) {
+        //成人票
+        final String typeAdult = "ADULT";
+        //学生票
+        final String typeStudent = "0X00";
+        String type = isStudent ? typeStudent : typeAdult;
+        return service2.getRemainTicketData(type, queryDate, fromStation, toStation);
     }
 }

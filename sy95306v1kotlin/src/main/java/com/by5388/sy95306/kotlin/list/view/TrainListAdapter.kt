@@ -1,6 +1,7 @@
 package com.by5388.sy95306.kotlin.list.view
 
 import android.content.Context
+import android.os.Build
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -74,20 +75,28 @@ class TrainListAdapter(private val context: Context, private val listener: ListO
     private fun setEndStationIcon(number: TrainNumber, textView: TextView) {
         if (number.zhongDao == number.xiaChe) {
             textView.setText(R.string.zhong_dao);
-            textView.setBackgroundColor(context.resources.getColor(R.color.zhong_dao))
+            textView.setBackgroundColor(getColor(R.color.zhong_dao))
         } else {
             textView.setText(R.string.guo_lu);
-            textView.setBackgroundColor(context.resources.getColor(R.color.guo_lu))
+            textView.setBackgroundColor(getColor(R.color.guo_lu))
+        }
+    }
+
+    private fun getColor(color: Int): Int {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return context.resources.getColor(color, null);
+        }else{
+            return context.resources.getColor(color,null);
         }
     }
 
     private fun setStartStationIcon(number: TrainNumber, textView: TextView) {
         if (number.shiFa == number.shangChe) {
             textView.setText(R.string.shi_fa);
-            textView.setBackgroundColor(context.resources.getColor(R.color.shi_fa))
+            textView.setBackgroundColor(getColor(R.color.shi_fa))
         } else {
             textView.setText(R.string.guo_lu);
-            textView.setBackgroundColor(context.resources.getColor(R.color.guo_lu))
+            textView.setBackgroundColor(getColor(R.color.guo_lu))
         }
     }
 

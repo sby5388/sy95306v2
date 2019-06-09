@@ -23,7 +23,7 @@ public class TzTrainCodeVagueQuery {
     public void testVague() {
         BaseNetTools tools = new TzTrainCodeNetTools();
         TzTrainCodeService service = tools.getRetrofit().create(TzTrainCodeService.class);
-        final String keyWord = "D228";
+        final String keyWord = "D2283";
         final String date = "20190215";
         service.getSimpleTrainCodeList(keyWord, date)
                 .subscribe(new Observer<ResultQueryTrainCode>() {

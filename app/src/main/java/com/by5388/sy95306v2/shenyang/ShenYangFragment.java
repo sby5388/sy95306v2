@@ -3,7 +3,10 @@ package com.by5388.sy95306v2.shenyang;
 import android.os.Bundle;
 
 import com.by5388.sy95306v2.base.BaseTopFragment;
-import com.by5388.sy95306v2.base.adapter.FragmentAdapter;
+import com.by5388.sy95306v2.bean.MyViewPager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 沈阳95306 查询页面：包括2个子Fragment
@@ -12,10 +15,13 @@ import com.by5388.sy95306v2.base.adapter.FragmentAdapter;
  */
 
 public class ShenYangFragment extends BaseTopFragment {
+
     @Override
-    protected void initFragments(FragmentAdapter adapter) {
-        adapter.addFragment(Station2StationFragment.newInstance(), "站站查询");
-        adapter.addFragment(SyTrainNumberFragment.newInstance(), "车次查询");
+    protected List<MyViewPager> getViewPagerFragmentList() {
+        List<MyViewPager> list = new ArrayList<>();
+        list.add(new MyViewPager(Station2StationFragment.newInstance(), "站站查询"));
+        list.add(new MyViewPager(SyTrainNumberFragment.newInstance(), "车次查询"));
+        return list;
     }
 
     public static ShenYangFragment newInstance() {

@@ -20,7 +20,7 @@ public class TzStationAllTrainTest {
     @Test
     public void testTzStationAllTrain() {
         IGetPassCodeService service = new GetPassCodeImpl();
-        final String date = "2019-01-25";
+        final String date = "2019-01-26";
         final String stationName = "饶平";
         final String stationCode = "RVQ";
         service.getStationAllTrain(date, stationName, stationCode)
