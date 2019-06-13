@@ -10,7 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.guangzhou.bean.station.TrainsBean;
+import com.by5388.sy95306v2.module.guangzhou.bean.station.TrainsBean;
 import com.by5388.sy95306v2.dialog.adapter.DetailAdapter;
 
 import java.util.ArrayList;

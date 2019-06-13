@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.tiezong.BaseTzFragment;
+import com.by5388.sy95306v2.module.tiezong.BaseTzFragment;
 import com.by5388.sy95306v2.tiezong.ticket.check.adapter.TicketCheckAdapter;
 
 /**

@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
 import com.by5388.sy95306v2.App;
-import com.by5388.sy95306v2.chengdu.bean.screen.ScreenStation;
-import com.by5388.sy95306v2.shenyang.bean.Station;
+import com.by5388.sy95306v2.module.chengdu.bean.screen.ScreenStation;
+import com.by5388.sy95306v2.module.shenyang.bean.Station;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -19,7 +19,7 @@ import java.util.List;
 public abstract class BaseTopFragment extends BaseFragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private FragmentAdapter adapter;
+    protected FragmentAdapter adapter;
 
     @Override
     protected final void initData() {

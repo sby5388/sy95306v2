@@ -1,8 +1,8 @@
 package com.by5388.sy95306v2;
 
-import com.by5388.sy95306v2.chengdu.api.ICdQuery;
-import com.by5388.sy95306v2.chengdu.api.QueryCd;
-import com.by5388.sy95306v2.chengdu.bean.screen.ScreenArriveDetail;
+import com.by5388.sy95306v2.module.chengdu.api.ICdQuery;
+import com.by5388.sy95306v2.module.chengdu.api.QueryCd;
+import com.by5388.sy95306v2.module.chengdu.bean.screen.ScreenArriveDetail;
 
 import org.junit.Test;
 

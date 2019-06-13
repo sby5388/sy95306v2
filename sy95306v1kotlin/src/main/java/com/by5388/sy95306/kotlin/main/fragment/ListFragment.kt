@@ -2,6 +2,7 @@ package com.by5388.sy95306.kotlin.main.fragment
 
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -68,12 +69,15 @@ class ListFragment : BaseFragment() {
     }
 
     companion object {
+//        @JvmStatic
+//        fun newInstance() =
+//                ListFragment().apply {
+//                    arguments = Bundle().apply {
+//                    }
+//                }
         @JvmStatic
-        fun newInstance() =
-                ListFragment().apply {
-                    arguments = Bundle().apply {
-                    }
-                }
+        fun newInstance():Fragment = ListFragment()
+
     }
 
 }

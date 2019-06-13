@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.database;
 
-import com.by5388.sy95306v2.shenyang.bean.Station;
+import com.by5388.sy95306v2.module.shenyang.bean.Station;
 
 import java.util.List;
 

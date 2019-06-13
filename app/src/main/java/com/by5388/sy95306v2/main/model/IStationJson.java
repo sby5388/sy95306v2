@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.main.model;
 
-import com.by5388.sy95306v2.shenyang.bean.Station;
+import com.by5388.sy95306v2.module.shenyang.bean.Station;
 
 import java.io.InputStream;
 import java.util.List;
@@ -39,6 +39,7 @@ public interface IStationJson {
      * todo 算法待优化
      */
     String getVersion(final String lineString);
+    String getVersion(InputStream inputStream);
 
     /**
      * 提取车站列表

@@ -2,9 +2,9 @@ package com.by5388.sy95306v2.combination;
 
 import android.support.annotation.NonNull;
 
-import com.by5388.sy95306v2.shenyang.bean.TrainDetail;
-import com.by5388.sy95306v2.shenyang.net.api.SyNetTools;
-import com.by5388.sy95306v2.shenyang.net.api.SyService;
+import com.by5388.sy95306v2.module.shenyang.bean.TrainDetail;
+import com.by5388.sy95306v2.module.shenyang.net.api.SyNetTools;
+import com.by5388.sy95306v2.module.shenyang.net.api.SyService;
 
 import org.junit.Test;
 

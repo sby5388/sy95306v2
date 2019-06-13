@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2;
 
-import com.by5388.sy95306v2.tiezong.bean.TzResult;
-import com.by5388.sy95306v2.tiezong.bean.yp.success.SuccessDataBean;
+import com.by5388.sy95306v2.module.tiezong.bean.TzResult;
+import com.by5388.sy95306v2.module.tiezong.bean.yp.success.SuccessDataBean;
 import com.google.gson.Gson;
 
 import org.junit.Test;

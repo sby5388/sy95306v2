@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".shenyang.list.TrainNumberListActivity">
+    tools:context=".module.shenyang.list.TrainNumberListActivity">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/lly_top_show"

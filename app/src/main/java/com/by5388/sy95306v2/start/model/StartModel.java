@@ -102,6 +102,7 @@ public class StartModel implements IStartModel {
                     String stationVersion = json.getVersion(json.jsonToString(inputStream));
                     getVersion = stationVersion;
                     emitter.onNext(Double.parseDouble(stationVersion));
+                    inputStream.close();
                 } else {
                     emitter.onNext(currentVersion);
                 }

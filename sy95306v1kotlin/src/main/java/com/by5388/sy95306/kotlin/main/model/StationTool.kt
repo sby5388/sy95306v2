@@ -41,8 +41,6 @@ class StationTool : IStationTool {
         println("车站数量 = ${stationItems.size}")
         for (item in stationItems) {
             val params = item.split("\\|".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
-            println("参数长度数量 = ${params.size}")
-//            fixme 参数长度等于1，错误
             if (stationParam == params.size) {
                 stationList.add(Station(
                         -1,

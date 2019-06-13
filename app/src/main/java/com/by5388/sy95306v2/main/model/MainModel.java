@@ -104,7 +104,8 @@ public class MainModel implements IStartModel, IMainModel {
                 connection.setRequestMethod("GET");
                 if (HTTP_OK == connection.getResponseCode()) {
                     InputStream inputStream = connection.getInputStream();
-                    String stationVersion = json.getVersion(json.jsonToString(inputStream));
+//                    String stationVersion = json.getVersion(json.jsonToString(inputStream));
+                    String stationVersion = json.getVersion(inputStream);
                     getVersion = stationVersion;
                     emitter.onNext(Double.parseDouble(stationVersion));
                 } else {

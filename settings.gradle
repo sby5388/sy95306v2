@@ -1,5 +1,6 @@
-include ':app', ':trainapi'
+include ':app'
+//include':trainapi'
 //include ':base'
-include':trainapi'
+//include':trainapi'
 //include ':sy95306v1kotlin'
 //include ':sy95306v1'

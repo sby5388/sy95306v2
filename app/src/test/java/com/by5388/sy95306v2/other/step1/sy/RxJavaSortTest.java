@@ -1,18 +1,19 @@
 package com.by5388.sy95306v2.other.step1.sy;
 
-import com.by5388.sy95306v2.shenyang.list.model.ITrainListModel;
-import com.by5388.sy95306v2.shenyang.list.model.TrainListModel;
-import com.by5388.sy95306v2.shenyang.list.model.sort.BaseTrainNumberSort;
-import com.by5388.sy95306v2.shenyang.bean.TrainNumber;
+import com.by5388.sy95306v2.module.shenyang.list.model.ITrainListModel;
+import com.by5388.sy95306v2.module.shenyang.list.model.TrainListModel;
+import com.by5388.sy95306v2.module.shenyang.list.model.sort.BaseTrainNumberSort;
+import com.by5388.sy95306v2.module.shenyang.bean.TrainNumber;
 
 import org.junit.Test;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Predicate;
 import io.reactivex.internal.util.AppendOnlyLinkedArrayList;
 
-import static com.by5388.sy95306v2.shenyang.list.model.sort.BaseTrainNumberSort.SORT_BY_START_TIME;
+import static com.by5388.sy95306v2.module.shenyang.list.model.sort.BaseTrainNumberSort.SORT_BY_START_TIME;
 
 /**
  * @author by5388  on 2018/11/13.
@@ -22,7 +23,7 @@ public class RxJavaSortTest {
     @Test
     public void testRxJavaSortTest() {
         // TODO: 2018/11/13 如何把一个Observable<List<T>> 变成多个的Observable<T>？
-        int date = 20181228;
+        int date = 20190502;
         String toStation = "IOQ";
         String fromStation = "CBQ";
 
@@ -42,11 +43,13 @@ public class RxJavaSortTest {
         for (TrainNumber number : trainNumbers) {
             if (number != null) {
                 Observable.just(number)
-                        .filter((AppendOnlyLinkedArrayList.NonThrowingPredicate<TrainNumber>) number12 ->
-                                        number12.isFirstStation()
-//                                        ||number12.isLastStation()
-                        )
-                        //fromStation.equals(number12.getFST()) && (number12.getSTCODE().startsWith("D7") || number12.getSTCODE().startsWith("G6")))
+                        .filter((AppendOnlyLinkedArrayList.NonThrowingPredicate<TrainNumber>) TrainNumber::isFirstStation)
+                        .filter(new Predicate<TrainNumber>() {
+                            @Override
+                            public boolean test(TrainNumber trainNumber) throws Exception {
+                                return trainNumber.isFirstStation();
+                            }
+                        })
                         .subscribe(number1 -> {
                          //todo  输出总数
                             System.out.println("-------");

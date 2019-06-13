@@ -20,7 +20,7 @@ public class PassCodeNetTools2 extends BaseNetTools {
     private static final String BASE_URL = "https://www.12306.cn/kfzmpt/lcxxcx/";
     private static final String TAG = "PassCodeNetTools";
 
-    PassCodeNetTools2() {
+    public PassCodeNetTools2() {
     }
 
 

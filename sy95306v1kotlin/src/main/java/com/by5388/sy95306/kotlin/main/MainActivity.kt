@@ -142,6 +142,7 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener, IMainV
             val positiveButton: Button = updatingDialog!!.getButton(DialogInterface.BUTTON_POSITIVE)
             positiveButton.isEnabled = true
         }
+        updatingDialog!!.dismiss()
     }
 
     override fun onDestroy() {

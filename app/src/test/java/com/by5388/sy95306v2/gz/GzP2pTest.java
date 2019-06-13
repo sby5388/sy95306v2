@@ -2,12 +2,12 @@ package com.by5388.sy95306v2.gz;
 
 import android.support.annotation.NonNull;
 
-import com.by5388.sy95306v2.guangzhou.bean.GzResultData;
-import com.by5388.sy95306v2.guangzhou.bean.station.DataBeanP2P;
-import com.by5388.sy95306v2.guangzhou.bean.station.StationsBean;
-import com.by5388.sy95306v2.guangzhou.bean.station.TrainsBean;
-import com.by5388.sy95306v2.guangzhou.p2p.model.GzP2pModel;
-import com.by5388.sy95306v2.guangzhou.p2p.model.IGzP2pModel;
+import com.by5388.sy95306v2.module.guangzhou.bean.GzResultData;
+import com.by5388.sy95306v2.module.guangzhou.bean.station.DataBeanP2P;
+import com.by5388.sy95306v2.module.guangzhou.bean.station.StationsBean;
+import com.by5388.sy95306v2.module.guangzhou.bean.station.TrainsBean;
+import com.by5388.sy95306v2.module.guangzhou.p2p.model.GzP2pModel;
+import com.by5388.sy95306v2.module.guangzhou.p2p.model.IGzP2pModel;
 
 import org.junit.Test;
 

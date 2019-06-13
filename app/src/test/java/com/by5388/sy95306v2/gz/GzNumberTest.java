@@ -2,11 +2,11 @@ package com.by5388.sy95306v2.gz;
 
 import android.support.annotation.NonNull;
 
-import com.by5388.sy95306v2.guangzhou.bean.GzResultData;
-import com.by5388.sy95306v2.guangzhou.bean.StationInfoBean;
-import com.by5388.sy95306v2.guangzhou.bean.station.TrainsBean;
-import com.by5388.sy95306v2.guangzhou.number.model.ITrainNumberModel;
-import com.by5388.sy95306v2.guangzhou.number.model.TrainNumberModel;
+import com.by5388.sy95306v2.module.guangzhou.bean.GzResultData;
+import com.by5388.sy95306v2.module.guangzhou.bean.StationInfoBean;
+import com.by5388.sy95306v2.module.guangzhou.bean.station.TrainsBean;
+import com.by5388.sy95306v2.module.guangzhou.number.model.ITrainNumberModel;
+import com.by5388.sy95306v2.module.guangzhou.number.model.TrainNumberModel;
 
 import org.junit.Test;
 

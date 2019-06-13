@@ -2,7 +2,7 @@ package com.by5388.sy95306v2.main.model;
 
 import android.util.Log;
 
-import com.by5388.sy95306v2.shenyang.bean.Station;
+import com.by5388.sy95306v2.module.shenyang.bean.Station;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,18 +16,25 @@ import java.util.List;
  */
 public class StationJson implements IStationJson {
     private final static String FILE_NAME = "/otn/resources/js/framework/station_name.js?station_version=";
+    // TODO: 2019/3/26 仅仅作为一个表达式，而是应该包含数据
+
+
+    private int mCount = 0;
+    private String longString;
 
     @Override
-    public int getStationCount(String stationList,StringBuilder stationListFile) {
+    public int getStationCount(String stationList, StringBuilder stationListFile) {
+        mCount = 0;
         String stationListFileTemp = "";
         final int minLength = 2;
         String[] newList = stationList.split("'");
         if (newList.length > minLength) {
             stationListFileTemp = newList[1];
-            stationListFile.delete(0,stationListFile.length());
+            stationListFile.delete(0, stationListFile.length());
             stationListFile.append(stationListFileTemp);
         }
         String[] stationNames = stationListFileTemp.split("@");
+        mCount = stationNames.length;
         return stationNames.length;
     }
 
@@ -70,7 +77,13 @@ public class StationJson implements IStationJson {
     }
 
     @Override
+    public String getVersion(InputStream inputStream) {
+        return getVersion(jsonToString(inputStream));
+    }
+
+    @Override
     public List<Station> getCityList(String cityList) {
+        mCount = 0;
         List<Station> stations = new ArrayList<>();
         String[] stationNames = cityList.split("@");
         for (String stationName : stationNames) {
@@ -78,6 +91,7 @@ public class StationJson implements IStationJson {
             if (itemCity.length == 6) {
                 stations.add(new Station(itemCity[0], itemCity[1], itemCity[2],
                         itemCity[3], itemCity[4], Integer.parseInt(itemCity[5])));
+                mCount++;
             }
         }
         return stations;

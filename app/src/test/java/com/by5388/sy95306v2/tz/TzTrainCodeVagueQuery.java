@@ -1,10 +1,10 @@
 package com.by5388.sy95306v2.tz;
 
 import com.by5388.sy95306v2.base.BaseNetTools;
-import com.by5388.sy95306v2.tiezong.api.train.code.TzTrainCodeNetTools;
-import com.by5388.sy95306v2.tiezong.api.train.code.TzTrainCodeService;
-import com.by5388.sy95306v2.tiezong.bean.temp2.DataSimpleBean;
-import com.by5388.sy95306v2.tiezong.bean.temp2.ResultQueryTrainCode;
+import com.by5388.sy95306v2.module.tiezong.api.train.code.TzTrainCodeNetTools;
+import com.by5388.sy95306v2.module.tiezong.api.train.code.TzTrainCodeService;
+import com.by5388.sy95306v2.module.tiezong.bean.temp2.DataSimpleBean;
+import com.by5388.sy95306v2.module.tiezong.bean.temp2.ResultQueryTrainCode;
 
 import org.junit.Test;
 

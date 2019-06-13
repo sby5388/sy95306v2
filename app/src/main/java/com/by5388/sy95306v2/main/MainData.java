@@ -3,11 +3,11 @@ package com.by5388.sy95306v2.main;
 import android.support.v4.app.Fragment;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.chengdu.ChengduFragment;
-import com.by5388.sy95306v2.guangzhou.GuangzhouFragment;
-import com.by5388.sy95306v2.shanghai.ShanghaiFragment;
-import com.by5388.sy95306v2.shenyang.ShenYangFragment;
-import com.by5388.sy95306v2.tiezong.TzFragment;
+import com.by5388.sy95306v2.module.chengdu.ChengduFragment;
+import com.by5388.sy95306v2.module.guangzhou.GuangzhouFragment;
+import com.by5388.sy95306v2.module.shanghai.ShanghaiFragment;
+import com.by5388.sy95306v2.module.shenyang.ShenYangFragment;
+import com.by5388.sy95306v2.module.tiezong.TzFragment;
 
 import java.util.ArrayList;
 import java.util.List;
