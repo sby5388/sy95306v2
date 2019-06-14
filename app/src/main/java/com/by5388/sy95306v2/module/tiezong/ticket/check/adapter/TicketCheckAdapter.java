@@ -1,4 +1,4 @@
-package com.by5388.sy95306v2.tiezong.ticket.check.adapter;
+package com.by5388.sy95306v2.module.tiezong.ticket.check.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

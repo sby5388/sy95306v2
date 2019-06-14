@@ -1,8 +1,10 @@
 package com.by5388.sy95306v2.tiezong.api.pass.code;
 
-import com.by5388.sy95306v2.tiezong.bean.TzResult;
-import com.by5388.sy95306v2.tiezong.bean.yp.success.SuccessDataBean;
-import com.by5388.sy95306v2.tiezong.bean.yp.success.TzDataBean;
+import com.by5388.sy95306v2.module.tiezong.api.pass.code.PassCodeNetTools2;
+import com.by5388.sy95306v2.module.tiezong.api.pass.code.TieZongService;
+import com.by5388.sy95306v2.module.tiezong.bean.TzResult;
+import com.by5388.sy95306v2.module.tiezong.bean.yp.success.SuccessDataBean;
+import com.by5388.sy95306v2.module.tiezong.bean.yp.success.TzDataBean;
 
 import org.junit.Before;
 import org.junit.Test;

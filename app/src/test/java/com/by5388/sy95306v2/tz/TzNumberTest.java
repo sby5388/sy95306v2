@@ -1,8 +1,8 @@
 package com.by5388.sy95306v2.tz;
 
-import com.by5388.sy95306v2.module.tiezong.bean.number.NumberDataBean;
 import com.by5388.sy95306v2.module.tiezong.api.pass.code.GetPassCodeImpl;
-import com.by5388.sy95306v2.module.tiezong.api.pass.code.IGetPassCodeService;
+import com.by5388.sy95306v2.module.tiezong.bean.number.NumberDataBean;
+import com.by5388.sy95306v2.tiezong.api.pass.code.IGetPassCodeService;
 
 import org.junit.Test;
 
@@ -20,11 +20,11 @@ public class TzNumberTest {
                 "AOH",
                 "2019-01-50")
                 .subscribe(numberDataBeans -> {
-                    System.out.println("start");
-                    for (NumberDataBean bean : numberDataBeans) {
-                        System.out.println(bean.getStationName());
-                    }
-                }, throwable -> System.err.println(throwable.getLocalizedMessage()),
+                            System.out.println("start");
+                            for (NumberDataBean bean : numberDataBeans) {
+                                System.out.println(bean.getStationName());
+                            }
+                        }, throwable -> System.err.println(throwable.getLocalizedMessage()),
                         () -> System.out.println("finish-------------"));
     }
 }

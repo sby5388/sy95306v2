@@ -1,4 +1,4 @@
-package com.by5388.sy95306v2.tiezong.api.pass.code;
+package com.by5388.sy95306v2.module.tiezong.api.pass.code;
 
 import com.by5388.sy95306v2.base.BaseNetTools;
 

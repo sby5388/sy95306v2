@@ -1,4 +1,4 @@
-package com.by5388.sy95306v2.tiezong.ticket.check;
+package com.by5388.sy95306v2.module.tiezong.ticket.check;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,7 +10,7 @@ import android.widget.ListView;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.module.tiezong.BaseTzFragment;
-import com.by5388.sy95306v2.tiezong.ticket.check.adapter.TicketCheckAdapter;
+import com.by5388.sy95306v2.module.tiezong.ticket.check.adapter.TicketCheckAdapter;
 
 /**
  * @author admin  on 2019/1/24.
