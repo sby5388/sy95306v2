@@ -1,13 +1,11 @@
 package com.by5388.sy95306v2.module.tiezong.api.pass.code;
 
 import com.by5388.sy95306v2.module.tiezong.bean.TzResult;
-import com.by5388.sy95306v2.module.tiezong.bean.check.PassCodeDataBean;
 import com.by5388.sy95306v2.module.tiezong.bean.number.NumberListDataBean;
 import com.by5388.sy95306v2.module.tiezong.bean.temp.DataBeanX;
 import com.by5388.sy95306v2.module.tiezong.bean.yp.success.SuccessDataBean;
 
 import io.reactivex.Observable;
-import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -69,8 +67,8 @@ public interface TieZongService {
      * @param randCode          验证码
      * @param changeStationText 中转站，此处为空
      * @return 结果，可能是成功也可能是失败
-     * @deprecated  已经无效的，
      * @see #getRemainTicketData(String, String, String, String)
+     * @deprecated 已经无效的，
      */
     @Deprecated
     @GET(ZZ_CX)
@@ -132,17 +130,18 @@ public interface TieZongService {
 
     /**
      * 获取余票信息
-     * @param type 类型有成人票（普通）："ADULT"、学生票:"0X00" 2种
-     * @param queryDate 日期
+     *
+     * @param type        类型有成人票（普通）："ADULT"、学生票:"0X00" 2种
+     * @param queryDate   日期
      * @param fromStation 出发车站电报码
-     * @param toStation 到达车站电报码
+     * @param toStation   到达车站电报码
      * @return
      */
     @GET("query")
     Observable<TzResult<SuccessDataBean>> getRemainTicketData(@Query("purpose_codes") String type,
-                                           @Query("queryDate")String queryDate,
-                                           @Query("from_station")String fromStation,
-                                           @Query("to_station")String toStation
-                                           );
+                                                              @Query("queryDate") String queryDate,
+                                                              @Query("from_station") String fromStation,
+                                                              @Query("to_station") String toStation
+    );
 
 }

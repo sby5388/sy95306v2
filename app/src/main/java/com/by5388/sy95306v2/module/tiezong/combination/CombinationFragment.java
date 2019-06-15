@@ -93,6 +93,7 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
     }
 
     private void switchStations() {
+        // TODO: 2019/6/14 需要增加交换文本的动画
         String to = toStation.getText().toString().trim();
         toStation.setText(fromStation.getText().toString().trim());
         fromStation.setText(to);

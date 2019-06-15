@@ -1,8 +1,8 @@
 package com.by5388.sy95306v2.setting;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.preference.PreferenceManager;
 
 import com.by5388.sy95306v2.App;
 
@@ -12,12 +12,8 @@ import java.util.Map;
  * @author by5388  on 2018/7/30.
  */
 
-public class SettingSharedPreferences<T> implements ISettingSharedPreferences {
-    private static final String FILE_NAME = "by5388";
-    private final SharedPreferences sharedPreferences;
-
+public final class SettingSharedPreferences implements ISettingSharedPreferences {
     private SettingSharedPreferences() {
-        sharedPreferences = App.getInstance().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
     }
 
     public static SettingSharedPreferences getInstance() {
@@ -26,6 +22,7 @@ public class SettingSharedPreferences<T> implements ISettingSharedPreferences {
 
     @Override
     public void put(String key, Object object) {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(App.getInstance());
         Editor editor = sharedPreferences.edit();
         if (object instanceof String) {
             editor.putString(key, (String) object);
@@ -45,6 +42,7 @@ public class SettingSharedPreferences<T> implements ISettingSharedPreferences {
 
     @Override
     public Object getSharedPreference(String key, Object defaultObject) {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(App.getInstance());
         if (defaultObject instanceof String) {
             return sharedPreferences.getString(key, (String) defaultObject);
         } else if (defaultObject instanceof Integer) {
@@ -63,6 +61,7 @@ public class SettingSharedPreferences<T> implements ISettingSharedPreferences {
 
     @Override
     public void remove(String key) {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(App.getInstance());
         sharedPreferences
                 .edit()
                 .remove(key)
@@ -71,6 +70,7 @@ public class SettingSharedPreferences<T> implements ISettingSharedPreferences {
 
     @Override
     public void clear() {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(App.getInstance());
         sharedPreferences
                 .edit()
                 .clear()
@@ -79,11 +79,13 @@ public class SettingSharedPreferences<T> implements ISettingSharedPreferences {
 
     @Override
     public boolean contains(String key) {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(App.getInstance());
         return sharedPreferences.contains(key);
     }
 
     @Override
     public Map<String, ?> getAll() {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(App.getInstance());
         return sharedPreferences.getAll();
     }
 

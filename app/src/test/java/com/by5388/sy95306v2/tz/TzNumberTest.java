@@ -18,7 +18,7 @@ public class TzNumberTest {
                 "6i000D22880C",
                 "IOQ",
                 "AOH",
-                "2019-01-50")
+                "2019-06-20")
                 .subscribe(numberDataBeans -> {
                             System.out.println("start");
                             for (NumberDataBean bean : numberDataBeans) {

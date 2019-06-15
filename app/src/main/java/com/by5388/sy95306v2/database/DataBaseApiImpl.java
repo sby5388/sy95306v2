@@ -20,17 +20,26 @@ import io.reactivex.Observable;
 
 public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
     public static final String TAG = "DataBaseApiImpl";
+    private MyDataBaseHelper mHelper;
     private static final int SUCCESS = 1;
     private static final int FAIL = 0;
     private static ContentValues values;
-    private final SQLiteDatabase db;
     private final String[] columns = new String[]{StationTable.TableStation.STATION_NAME, StationTable.TableStation.NAME_UPPER};
 
     private DataBaseApiImpl() {
-        MyDataBaseHelper helper = new MyDataBaseHelper(App.getInstance());
-        db = helper.getWritableDatabase();
+        System.out.println("实例化数据库");
+        mHelper = new MyDataBaseHelper(App.getInstance());
         values = new ContentValues();
     }
+
+    private SQLiteDatabase getDb() {
+        return mHelper.getWritableDatabase();
+    }
+
+    private void closeDb() {
+        mHelper.getWritableDatabase().close();
+    }
+
 
     public static DataBaseApiImpl getInstance() {
         return SingletonHandler.INSTANCE;
@@ -40,6 +49,7 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
     @Override
     public boolean cdStationIsEmpty() {
         boolean isEmpty = true;
+        final SQLiteDatabase db = getDb();
         Cursor cursor = db.rawQuery("select count(*) from " + CdStationTable.TableStation.TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             long result = cursor.getLong(0);
@@ -48,32 +58,39 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
             }
         }
         cursor.close();
+        closeDb();
         return isEmpty;
     }
 
     @Override
     public List<ScreenStation> getCdScreenStations() {
         List<ScreenStation> stationList = new ArrayList<>();
+        final SQLiteDatabase db = getDb();
         Cursor cursor = db.rawQuery("select * from " + CdStationTable.TableStation.TABLE_NAME, null);
         while (cursor.moveToNext()) {
             ScreenStation station = getScreenStation(cursor);
             stationList.add(station);
         }
         cursor.close();
+        closeDb();
         return stationList;
     }
 
     @Override
     public int deleteAllCdScreenStations() {
         String deleteSql = "delete from " + CdStationTable.TableStation.TABLE_NAME;
+        final SQLiteDatabase db = getDb();
         db.execSQL(deleteSql);
+        db.close();
         return 0;
     }
 
     @Override
     public void addCdScreenStation(ScreenStation station) {
         ContentValues values = getValues(station);
+        final SQLiteDatabase db = getDb();
         db.insert(CdStationTable.TableStation.TABLE_NAME, null, values);
+        db.close();
     }
 
     @NonNull
@@ -122,6 +139,7 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
     }
 
     public List<Station> getStations() {
+        final SQLiteDatabase db = getDb();
         List<Station> stations = new ArrayList<>();
         String selection = "";
         String[] selectionArgs = {};
@@ -133,13 +151,16 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
             }
             cursor.close();
         }
+        closeDb();
         return stations;
     }
 
     @Override
     public int deleteAllStation() {
-        String deleteSql = "delete from station";
+        final SQLiteDatabase db = getDb();
+        final String deleteSql = "delete from station";
         db.execSQL(deleteSql);
+        closeDb();
         return 0;
     }
 
@@ -147,8 +168,9 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
     @Override
     public Station selectStationByNameUpper(String nameUpper) {
         Station station = new Station();
+        final SQLiteDatabase db = getDb();
         String selection = StationTable.TableStation.NAME_UPPER + " = ?";
-        String[] selectionArgs = new String[]{nameUpper};
+        final String[] selectionArgs = new String[]{nameUpper};
         Cursor cursor = db.query(true, StationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
                 null, null, null, null);
         if (cursor != null) {
@@ -157,6 +179,7 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
             }
             cursor.close();
         }
+        db.close();
         return station;
     }
 
@@ -165,6 +188,7 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
         Station station = new Station();
         String selection = StationTable.TableStation.STATION_NAME + " = ?";
         String[] selectionArgs = new String[]{stationName};
+        final SQLiteDatabase db = getDb();
         Cursor cursor = db.query(true, StationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
                 null, null, null, null);
         if (cursor != null) {
@@ -173,11 +197,13 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
             }
             cursor.close();
         }
+        db.close();
         return station;
     }
 
     @Override
     public Observable<Integer> insertStationList(List<Station> stations) {
+        final SQLiteDatabase db = getDb();
         return Observable.create(emitter -> {
             if (!emitter.isDisposed()) {
                 int currentUpdateCount = 1;
@@ -193,6 +219,7 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 emitter.onNext(currentUpdateCount);
+                closeDb();
                 emitter.onComplete();
             }
         });
@@ -208,7 +235,8 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
                 StationTable.TableStation.NAME_FIRST + " like ? or " +
                 StationTable.TableStation.NAME_EN + " like ? or " +
                 StationTable.TableStation.STATION_NAME + " like ? ";
-        String[] selectionArgs = new String[]{"%" + key + "%", "%" + key + "%", "%" + key + "%", "%" + key + "%"};
+        final String[] selectionArgs = new String[]{"%" + key + "%", "%" + key + "%", "%" + key + "%", "%" + key + "%"};
+        final SQLiteDatabase db = getDb();
         Cursor cursor = db.query(true, StationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
                 null, null, null, null);
         if (cursor != null) {
@@ -217,6 +245,7 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
             }
             cursor.close();
         }
+        closeDb();
         return stationList;
     }
 
@@ -227,13 +256,16 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
     @Override
     public boolean isEmpty() {
         boolean empty = true;
+        final SQLiteDatabase db = getDb();
         Cursor cursor = db.rawQuery("select * from " + StationTable.TableStation.TABLE_NAME, null);
         if (cursor != null) {
+            cursor.moveToFirst();
             if (cursor.getCount() > 0) {
                 empty = false;
             }
             cursor.close();
         }
-        return false;
+        closeDb();
+        return empty;
     }
 }

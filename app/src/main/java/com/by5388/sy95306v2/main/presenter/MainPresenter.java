@@ -50,12 +50,9 @@ public class MainPresenter implements IMainPresenter {
         disposable.add(model.getStationCount()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer mInteger) {
-                        view.updateAllCount(mInteger);
-                        clearData();
-                    }
+                .subscribe(mInteger -> {
+                    view.updateAllCount(mInteger);
+                    clearData();
                 })
         );
 
@@ -65,12 +62,9 @@ public class MainPresenter implements IMainPresenter {
         disposable.add(model.clearData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer mInteger) throws Exception {
-                        if (0 == mInteger) {
-                            insertData();
-                        }
+                .subscribe(mInteger -> {
+                    if (0 == mInteger) {
+                        insertData();
                     }
                 })
         );
@@ -80,22 +74,9 @@ public class MainPresenter implements IMainPresenter {
         disposable.add(model.insertData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer progress) {
-                        view.updateProgress(progress);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable mThrowable) {
-                        view.tip("异常");
-                    }
-                }, new Action() {
-                    @Override
-                    public void run() {
-                        view.finishUpdate();
-                        model.finishUpdate();
-                    }
+                .subscribe(view::updateProgress, mThrowable -> view.tip("异常"), () -> {
+                    view.finishUpdate();
+                    model.finishUpdate();
                 })
         );
     }

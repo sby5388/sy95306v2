@@ -134,7 +134,7 @@ public class StartModel implements IStartModel {
     }
 
     @Override
-    public boolean getNetWordCanUse() {
+    public boolean getNetStatus() {
         ConnectivityManager manager = (ConnectivityManager) App.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (null == manager) {
             return false;

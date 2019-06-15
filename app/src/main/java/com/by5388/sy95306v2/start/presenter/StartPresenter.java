@@ -105,7 +105,7 @@ public class StartPresenter implements IStartPresenter {
 
     @Override
     public void checkNetworkStatus() {
-        boolean isConnected = model.getNetWordCanUse();
+        boolean isConnected = model.getNetStatus();
         if (!isConnected) {
             //网络不可用-->设置
             view.openNetWorkSetting();

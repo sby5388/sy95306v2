@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // TODO: 2019/6/15 加载过慢，日志显示耗时1040毫秒
         super.onCreate(savedInstanceState);
         //竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -114,16 +115,16 @@ public class MainActivity extends AppCompatActivity
     private void initData() {
         fragments = new ArrayList<>();
         fragments.add(ShenYangFragment.newInstance());
-        fragments.add(GuangzhouFragment.newInstance());
-        fragments.add(ShanghaiFragment.newInstance());
+//        fragments.add(GuangzhouFragment.newInstance());
+//        fragments.add(ShanghaiFragment.newInstance());
         fragments.add(TzFragment.newInstance());
-        fragments.add(ChengduFragment.newInstance());
+//        fragments.add(ChengduFragment.newInstance());
         titles = new ArrayList<>();
         titles.add(TITLE_SHEN_YANG);
-        titles.add(TITLE_GZ);
-        titles.add(TITLE_SH);
+//        titles.add(TITLE_GZ);
+//        titles.add(TITLE_SH);
         titles.add(TITLE_TZ);
-        titles.add(TITLE_CD);
+//        titles.add(TITLE_CD);
 
         fragmentManager = getSupportFragmentManager();
         presenter = new MainPresenter(this);
@@ -255,8 +256,6 @@ public class MainActivity extends AppCompatActivity
 
                 }
             });
-//            Button positiveButton = updatingDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-//            positiveButton.setEnabled(false);
             updatingDialog.setCancelable(false);
             updatingDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
@@ -311,7 +310,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void finishUpdate() {
-        AlertDialog alertDialog = updatingDialog;
+        final AlertDialog alertDialog = updatingDialog;
         alertDialog.setCancelable(true);
         Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
         positiveButton.setEnabled(true);

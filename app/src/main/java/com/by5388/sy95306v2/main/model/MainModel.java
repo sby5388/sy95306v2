@@ -139,7 +139,7 @@ public class MainModel implements IStartModel, IMainModel {
     }
 
     @Override
-    public boolean getNetWordCanUse() {
+    public boolean getNetStatus() {
         ConnectivityManager manager = (ConnectivityManager) App.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (null == manager) {
             return false;
@@ -159,5 +159,10 @@ public class MainModel implements IStartModel, IMainModel {
     @Override
     public void finishUpdate() {
         preferences.put(START_NAME_SHARED_PREFERENCES, defaultStationVersion);
+    }
+
+    @Override
+    public boolean getNetWordCanUse() {
+        return getNetStatus();
     }
 }

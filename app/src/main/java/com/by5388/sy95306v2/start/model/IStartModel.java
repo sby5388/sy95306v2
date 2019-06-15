@@ -34,7 +34,7 @@ public interface IStartModel {
      *
      * @return 网络是否可用
      */
-    boolean getNetWordCanUse();
+    boolean getNetStatus();
 
     /**
      * 清空数据库

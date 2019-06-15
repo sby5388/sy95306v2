@@ -29,9 +29,9 @@ public class CombinationTest {
 
     @Test
     public void test() {
-        String fromStationName = "厦门北";
-        int date = 20190708;
-        String trainCode = "D2286";
+        final String fromStationName = "厦门北";
+        final int date = 20190708;
+        final String trainCode = "D2286";
         getObservable(date, trainCode)
                 .subscribe(getSyConsumer(fromStationName), getThrowableConsumer());
 

@@ -1,6 +1,5 @@
 package com.by5388.sy95306v2.module.tiezong.bean;
 
-import com.by5388.sy95306v2.module.tiezong.bean.check.PassCodeDataBean;
 import com.by5388.sy95306v2.module.tiezong.bean.number.NumberListDataBean;
 import com.by5388.sy95306v2.module.tiezong.bean.temp.DataBeanX;
 import com.by5388.sy95306v2.module.tiezong.bean.yp.fail.FailDataBean;
@@ -24,7 +23,6 @@ public class TzResult<T> {
      * validateMessages : {}
      * data::T ,
      *
-     * @see PassCodeDataBean 包括图片验证码校验、
      * @see SuccessDataBean 中转查询中的得到直达车次,为成功
      * @see FailDataBean 没有直达车次为失败的
      * @see NumberListDataBean 车次查询结果
