@@ -1,10 +1,13 @@
 package com.by5388.sy95306v2.t201906;
 
+import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
+
+import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,7 +15,7 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Administrator  on 2019/6/15.
@@ -27,7 +30,6 @@ public final class QueryThread extends HandlerThread implements IQueryThread {
     public QueryThread(Handler responseHandler) {
         super(TAG);
         mResponseHandler = responseHandler;
-        start();
         getLooper();
     }
 
@@ -38,6 +40,7 @@ public final class QueryThread extends HandlerThread implements IQueryThread {
 
     @Override
     public void queryTicketPrices(String date, String from, String to, String type) {
+        // TODO: 2019/6/17 没有检查网络状态！ 当网络状态不可用时，联网照成了闪退！-->使用前应当检测网络状态
         mRequestHandler.post(new TicketPricesRunnable(date, from, to, type));
     }
 
@@ -79,10 +82,12 @@ public final class QueryThread extends HandlerThread implements IQueryThread {
     }
 
     private static void getData(String urlSpecial) throws IOException {
-        URL url = new URL(urlSpecial);
+        Log.d(TAG, "getData: url = " + urlSpecial);
+        final URL url = new URL(urlSpecial);
         final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            TrafficStats.setThreadStatsTag(100);
             final InputStream inputStream = connection.getInputStream();
             final int responseCode = connection.getResponseCode();
             if (responseCode != HttpURLConnection.HTTP_OK) {
@@ -98,8 +103,15 @@ public final class QueryThread extends HandlerThread implements IQueryThread {
             outputStream.close();
             final byte[] byteArray = outputStream.toByteArray();
             final String s = new String(byteArray);
-            Log.d(TAG, "getData: " + Arrays.toString(byteArray));
+//            Log.d(TAG, "getData: " + Arrays.toString(byteArray));
             Log.d(TAG, "getData: " + s);
+            Gson gson = new Gson();
+            // TODO: 2019/9/12 String ->gson -->JavaBean
+            final TrainResult trainResult = gson.fromJson(s, TrainResult.class);
+            final List<TrainResult.DataBean> data = trainResult.data;
+            for (TrainResult.DataBean bean : data) {
+                System.out.println(bean.queryLeftNewDTO.toString());
+            }
         } finally {
             connection.disconnect();
         }

@@ -107,6 +107,8 @@ public class StationJson implements IStationJson {
             while ((line = bufReader.readLine()) != null) {
                 stringBuilder.append(line);
             }
+            bufReader.close();
+            inputReader.close();
             return stringBuilder.toString();
         } catch (Exception e) {
             return "";

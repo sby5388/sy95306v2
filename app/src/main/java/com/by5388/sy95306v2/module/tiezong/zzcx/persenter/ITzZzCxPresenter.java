@@ -15,10 +15,8 @@ public interface ITzZzCxPresenter {
      * @param date        日期
      * @param fromStation 出发站名
      * @param toStation   到达站名
-     * @param randCode    验证码
      */
-    void getTrainList(String date, String fromStation, String toStation, String randCode);
-
+    void getTrainList(String date, String fromStation, String toStation);
 
 
 }

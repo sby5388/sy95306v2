@@ -13,10 +13,9 @@ public interface IDetailRemainTicketPresenter extends ITzZzCxPresenter {
      * @param date        日期
      * @param fromStation 出发站名
      * @param toStation   到达站名
-     * @param randCode    验证码
      * @param trainCode   车次
      */
-    void getOnlyOneTrainList(String date, String fromStation, String toStation, String randCode, String trainCode);
+    void getOnlyOneTrainList(String date, String fromStation, String toStation, String trainCode);
 
 
     /**
@@ -24,10 +23,9 @@ public interface IDetailRemainTicketPresenter extends ITzZzCxPresenter {
      *
      * @param date      日期
      * @param toStation 到达站名
-     * @param randCode  验证码
      * @param trainCode 车次
      */
-    void getTrainListByEmptyFromStation(String date, String toStation, String randCode, String trainCode);
+    void getTrainListByEmptyFromStation(String date, String toStation, String trainCode);
 
     /**
      * 中转查询，获取列车信息 :没有车次
@@ -35,17 +33,15 @@ public interface IDetailRemainTicketPresenter extends ITzZzCxPresenter {
      * @param date        日期
      * @param fromStation 出发站名
      * @param toStation   到达站名
-     * @param randCode    验证码
      */
-    void getTrainListByEmptyTrainCode(String date, String fromStation, String toStation, String randCode);
+    void getTrainListByEmptyTrainCode(String date, String fromStation, String toStation);
 
     /**
      * 中转查询，获取列车信息:没有目的站
      *
      * @param date        日期
      * @param fromStation 出发站名
-     * @param randCode    验证码
      * @param trainCode   车次
      */
-    void getTrainListByEmptyToStation(String date, String fromStation, String randCode, String trainCode);
+    void getTrainListByEmptyToStation(String date, String fromStation, String trainCode);
 }

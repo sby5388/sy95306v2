@@ -6,9 +6,9 @@ import com.by5388.sy95306v2.database.DataBaseApiImpl;
 import com.by5388.sy95306v2.database.IShenYangDbApi;
 import com.by5388.sy95306v2.module.shenyang.bean.Station;
 import com.by5388.sy95306v2.module.tiezong.api.pass.code.GetPassCodeImpl;
+import com.by5388.sy95306v2.module.tiezong.api.pass.code.IGetPassCodeService;
 import com.by5388.sy95306v2.module.tiezong.bean.TzResult;
 import com.by5388.sy95306v2.module.tiezong.bean.yp.success.SuccessDataBean;
-import com.by5388.sy95306v2.tiezong.api.pass.code.IGetPassCodeService;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -34,11 +34,11 @@ public class TzZzCxModel implements ITzZzCxModel {
     }
 
     @Override
-    public Observable<SuccessDataBean> getResult(String queryDate, String fromStationName, String toStationName, String randCode) {
+    public Observable<SuccessDataBean> getResult(String queryDate, String fromStationName, String toStationName) {
         String fromStationCode = db.selectStationByName(fromStationName).getNameUpper();
         String toStationCode = db.selectStationByName(toStationName).getNameUpper();
         return service.getZzCxData(queryDate, fromStationCode,
-                toStationCode, fromStationName, toStationName, randCode)
+                toStationCode, fromStationName, toStationName)
                 .flatMap((Function<TzResult<SuccessDataBean>, ObservableSource<SuccessDataBean>>) successDataBeanTzResult -> Observable.just(successDataBeanTzResult.getData()));
 
     }

@@ -1,4 +1,4 @@
-package com.by5388.sy95306v2.tiezong.api.pass.code;
+package com.by5388.sy95306v2.module.tiezong.api.pass.code;
 
 import com.by5388.sy95306v2.module.tiezong.bean.TzResult;
 import com.by5388.sy95306v2.module.tiezong.bean.number.NumberDataBean;
@@ -24,7 +24,6 @@ public interface IGetPassCodeService {
      * @param toStationCode   目的站，电报码
      * @param fromStationName 出发站
      * @param toStationName   目的站
-     * @param randCode        验证码
      * @return 结果，可能是成功也可能是失败
      * @see #getRemainTicketData(boolean, String, String, String)
      * @deprecated
@@ -34,8 +33,7 @@ public interface IGetPassCodeService {
             String fromStationCode,
             String toStationCode,
             String fromStationName,
-            String toStationName,
-            String randCode
+            String toStationName
     );
 
 
@@ -71,7 +69,7 @@ public interface IGetPassCodeService {
     /**
      * 获取余票信息
      *
-     * @param isStudent     类型有成人票（普通）："ADULT"、学生票:"0X00" 2种
+     * @param isStudent   类型有成人票（普通）："ADULT"、学生票:"0X00" 2种
      * @param queryDate   日期
      * @param fromStation 出发车站电报码
      * @param toStation   到达车站电报码

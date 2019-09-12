@@ -24,10 +24,9 @@ public interface ITzZzCxModel {
      * @param queryDate       查询的日期
      * @param fromStationName 出发站
      * @param toStationName   目的站
-     * @param randCode        验证码
      * @return 结果
      */
     Observable<SuccessDataBean> getResult(String queryDate, String fromStationName,
-                                          String toStationName, String randCode);
+                                          String toStationName);
 
 }

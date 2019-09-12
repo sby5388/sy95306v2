@@ -88,8 +88,7 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
         String date = buttonDate.getText().toString().trim();
         String fromStation = this.fromStation.getText().toString().trim();
         String toStation = this.toStation.getText().toString().trim();
-        String randCode = "";
-        presenter.getTrainList(date, fromStation, toStation, randCode);
+        presenter.getTrainList(date, fromStation, toStation);
         adapter.setTickets(EMPTY_LIST);
     }
 

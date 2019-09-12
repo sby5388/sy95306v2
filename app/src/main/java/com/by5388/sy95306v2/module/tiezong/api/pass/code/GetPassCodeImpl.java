@@ -5,7 +5,7 @@ import com.by5388.sy95306v2.module.tiezong.bean.number.NumberDataBean;
 import com.by5388.sy95306v2.module.tiezong.bean.number.NumberListDataBean;
 import com.by5388.sy95306v2.module.tiezong.bean.temp.DataBeanX;
 import com.by5388.sy95306v2.module.tiezong.bean.yp.success.SuccessDataBean;
-import com.by5388.sy95306v2.tiezong.api.pass.code.IGetPassCodeService;
+import com.by5388.sy95306v2.module.tiezong.api.pass.code.IGetPassCodeService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class GetPassCodeImpl implements IGetPassCodeService {
     }
 
     @Override
-    public Observable<TzResult<SuccessDataBean>> getZzCxData(String queryDate, String fromStationCode, String toStationCode, String fromStationName, String toStationName, String randCode) {
+    public Observable<TzResult<SuccessDataBean>> getZzCxData(String queryDate, String fromStationCode, String toStationCode, String fromStationName, String toStationName) {
         final boolean isStudent = false;
         return getRemainTicketData(isStudent, queryDate, fromStationCode, toStationCode);
     }
@@ -56,8 +56,7 @@ public class GetPassCodeImpl implements IGetPassCodeService {
 
     @Override
     public Observable<TzResult<DataBeanX>> getStationAllTrain(String date, String stationName, String stationCode) {
-        final String randCode = "";
-        return service.getStationAllTrain(date, stationName, stationCode, randCode);
+        return service.getStationAllTrain(date, stationName, stationCode);
     }
 
     @Override

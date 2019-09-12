@@ -10,10 +10,10 @@ import com.by5388.sy95306v2.module.shenyang.bean.TrainDetail;
 import com.by5388.sy95306v2.module.shenyang.net.api.SyNetTools;
 import com.by5388.sy95306v2.module.shenyang.net.api.SyService;
 import com.by5388.sy95306v2.module.tiezong.api.pass.code.GetPassCodeImpl;
+import com.by5388.sy95306v2.module.tiezong.api.pass.code.IGetPassCodeService;
 import com.by5388.sy95306v2.module.tiezong.bean.TzResult;
 import com.by5388.sy95306v2.module.tiezong.bean.yp.success.SuccessDataBean;
 import com.by5388.sy95306v2.module.tiezong.bean.yp.success.TzDataBean;
-import com.by5388.sy95306v2.tiezong.api.pass.code.IGetPassCodeService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,16 +45,16 @@ public class CombinationModel implements ICombinationModel {
 
 
     @Override
-    public Observable<SuccessDataBean> getResult(String queryDate, String fromStationName, String toStationName, String randCode) {
+    public Observable<SuccessDataBean> getResult(String queryDate, String fromStationName, String toStationName) {
         String fromStationCode = db.selectStationByName(fromStationName).getNameUpper();
         String toStationCode = db.selectStationByName(toStationName).getNameUpper();
-        return service.getZzCxData(queryDate, fromStationCode, toStationCode, fromStationName, toStationName, randCode)
+        return service.getZzCxData(queryDate, fromStationCode, toStationCode, fromStationName, toStationName)
                 .flatMap((Function<TzResult<SuccessDataBean>, ObservableSource<SuccessDataBean>>) successDataBeanTzResult -> Observable.just(successDataBeanTzResult.getData()));
     }
 
     @Override
-    public Observable<SuccessDataBean> getOnlyResult(String queryDate, String fromStationName, String toStationName, String randCode, String trainCode) {
-        return getResult(queryDate, fromStationName, toStationName, randCode)
+    public Observable<SuccessDataBean> getOnlyResult(String queryDate, String fromStationName, String toStationName, String trainCode) {
+        return getResult(queryDate, fromStationName, toStationName)
                 .flatMap((Function<SuccessDataBean, ObservableSource<SuccessDataBean>>) successDataBean -> {
                     SuccessDataBean result = getSuccessDataBeanByTrainCode(successDataBean, trainCode);
                     return Observable.just(result);

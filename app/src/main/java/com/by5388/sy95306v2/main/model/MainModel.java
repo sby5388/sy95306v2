@@ -67,6 +67,7 @@ public class MainModel implements IStartModel, IMainModel {
 
     @Override
     public Observable<Integer> getStationCount() {
+        // TODO: 2019/9/10 网络不可用时，出现了闪退，所以应当检查网络，甚至注册网络监听者
         final String serverPath = "https://kyfw.12306.cn";
         final String stationListVersionPath = FILE_NAME + getVersion;
         return Observable.create(emitter -> {
@@ -75,12 +76,18 @@ public class MainModel implements IStartModel, IMainModel {
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setConnectTimeout(TIME_OUT);
                 connection.setRequestMethod("GET");
-                if (HTTP_OK == connection.getResponseCode()) {
-                    InputStream inputStream = connection.getInputStream();
-                    String stationVersionName = json.getCityList(inputStream);
-                    int count = json.getStationCount(stationVersionName, stationListFile);
-                    emitter.onNext(count);
-                } else {
+                try {
+                    if (HTTP_OK == connection.getResponseCode()) {
+                        InputStream inputStream = connection.getInputStream();
+                        String stationVersionName = json.getCityList(inputStream);
+                        int count = json.getStationCount(stationVersionName, stationListFile);
+                        inputStream.close();
+                        emitter.onNext(count);
+                    } else {
+                        emitter.onError(new NetworkErrorException());
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "getStationCount: ", e);
                     emitter.onError(new NetworkErrorException());
                 }
                 emitter.onComplete();

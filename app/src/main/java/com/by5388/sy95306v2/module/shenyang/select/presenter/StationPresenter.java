@@ -35,6 +35,8 @@ public class StationPresenter implements IStationPresenter {
             }
             view.setStations(stations);
         };
+        // TODO: 2019/9/10 需要对异常的原因给以明示
+
         throwableConsumer = throwable -> view.showErrorMessage(throwable.getLocalizedMessage());
 
     }

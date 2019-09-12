@@ -1,7 +1,5 @@
 package com.by5388.sy95306v2.module.tiezong.api.version2;
 
-import com.by5388.sy95306v2.module.tiezong.bean.ValidateMessagesBean;
-
 import java.util.List;
 
 /**
@@ -22,16 +20,6 @@ public class Temp {
     private boolean status;
     private int httpstatus;
     private DataBeanX data;
-    private ValidateMessagesBean validateMessages;
-    private List<?> messages;
-
-    public String getValidateMessagesShowId() {
-        return validateMessagesShowId;
-    }
-
-    public void setValidateMessagesShowId(String validateMessagesShowId) {
-        this.validateMessagesShowId = validateMessagesShowId;
-    }
 
     public boolean isStatus() {
         return status;
@@ -55,22 +43,6 @@ public class Temp {
 
     public void setData(DataBeanX data) {
         this.data = data;
-    }
-
-    public ValidateMessagesBean getValidateMessages() {
-        return validateMessages;
-    }
-
-    public void setValidateMessages(ValidateMessagesBean validateMessages) {
-        this.validateMessages = validateMessages;
-    }
-
-    public List<?> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<?> messages) {
-        this.messages = messages;
     }
 
     public static class DataBeanX {

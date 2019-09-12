@@ -19,11 +19,10 @@ public interface IDetailRemainTicketModel extends ITzZzCxModel {
      * @param queryDate       查询的日期
      * @param fromStationName 出发站
      * @param toStationName   目的站
-     * @param randCode        验证码
      * @param trainCode       车次
      * @return 结果
      */
-    Observable<SuccessDataBean> getOnLyResult(String queryDate, String fromStationName, String toStationName, String randCode, String trainCode);
+    Observable<SuccessDataBean> getOnLyResult(String queryDate, String fromStationName, String toStationName,String trainCode);
 
     /**
      * 车次查询:第二个页面使用、第一个页面查询后的条目点击事件也是这个

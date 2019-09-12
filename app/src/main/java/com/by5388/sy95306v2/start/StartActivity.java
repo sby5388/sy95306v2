@@ -27,6 +27,7 @@ import com.by5388.sy95306v2.start.view.IStartView;
  * @author by5388
  * @date 20180621
  */
+@Deprecated
 public class StartActivity extends BaseActivity implements IStartView {
     private final static String TAG = "StartActivity";
     /**

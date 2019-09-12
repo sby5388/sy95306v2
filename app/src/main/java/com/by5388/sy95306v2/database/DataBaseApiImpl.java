@@ -18,16 +18,16 @@ import io.reactivex.Observable;
  * @author by5388  on 2018/7/21.
  */
 
-public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
+public final class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
     public static final String TAG = "DataBaseApiImpl";
     private MyDataBaseHelper mHelper;
     private static final int SUCCESS = 1;
     private static final int FAIL = 0;
     private static ContentValues values;
-    private final String[] columns = new String[]{StationTable.TableStation.STATION_NAME, StationTable.TableStation.NAME_UPPER};
+    private final String[] columns = new String[]{CommonStationTable.TableStation.STATION_NAME, CommonStationTable.TableStation.NAME_UPPER};
 
     private DataBaseApiImpl() {
-        System.out.println("实例化数据库");
+        //System.out.println("实例化数据库");
         mHelper = new MyDataBaseHelper(App.getInstance());
         values = new ContentValues();
     }
@@ -116,15 +116,16 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
         return station;
     }
 
-    private static ContentValues getValues(Station station) {
-        ContentValues values = DataBaseApiImpl.values;
+    private static ContentValues getValues(final Station station) {
+        final ContentValues values = DataBaseApiImpl.values;
+        // TODO: 2019/9/12 重新利用
         values.clear();
-        values.put(StationTable.TableStation.NAME_FIRST, station.getNameFirst());
-        values.put(StationTable.TableStation.STATION_NAME, station.getName());
-        values.put(StationTable.TableStation.NAME_UPPER, station.getNameUpper());
-        values.put(StationTable.TableStation.NAME_EN, station.getNameEn());
-        values.put(StationTable.TableStation.NAME_LOWER, station.getNameLower());
-        values.put(StationTable.TableStation.STATION_CODE, station.getCode());
+        values.put(CommonStationTable.TableStation.NAME_FIRST, station.getNameFirst());
+        values.put(CommonStationTable.TableStation.STATION_NAME, station.getName());
+        values.put(CommonStationTable.TableStation.NAME_UPPER, station.getNameUpper());
+        values.put(CommonStationTable.TableStation.NAME_EN, station.getNameEn());
+        values.put(CommonStationTable.TableStation.NAME_LOWER, station.getNameLower());
+        values.put(CommonStationTable.TableStation.STATION_CODE, station.getCode());
         return values;
     }
 
@@ -143,7 +144,7 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
         List<Station> stations = new ArrayList<>();
         String selection = "";
         String[] selectionArgs = {};
-        Cursor cursor = db.query(true, StationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
+        Cursor cursor = db.query(true, CommonStationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
                 null, null, null, null);
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -169,9 +170,9 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
     public Station selectStationByNameUpper(String nameUpper) {
         Station station = new Station();
         final SQLiteDatabase db = getDb();
-        String selection = StationTable.TableStation.NAME_UPPER + " = ?";
+        String selection = CommonStationTable.TableStation.NAME_UPPER + " = ?";
         final String[] selectionArgs = new String[]{nameUpper};
-        Cursor cursor = db.query(true, StationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
+        Cursor cursor = db.query(true, CommonStationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
                 null, null, null, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -186,10 +187,10 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
     @Override
     public Station selectStationByName(String stationName) {
         Station station = new Station();
-        String selection = StationTable.TableStation.STATION_NAME + " = ?";
+        String selection = CommonStationTable.TableStation.STATION_NAME + " = ?";
         String[] selectionArgs = new String[]{stationName};
         final SQLiteDatabase db = getDb();
-        Cursor cursor = db.query(true, StationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
+        Cursor cursor = db.query(true, CommonStationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
                 null, null, null, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -210,7 +211,7 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
                 db.beginTransaction();
                 for (Station station : stations) {
                     ContentValues values = getValues(station);
-                    db.insert(StationTable.TableStation.TABLE_NAME, null, values);
+                    db.insert(CommonStationTable.TableStation.TABLE_NAME, null, values);
                     if (currentUpdateCount % 50 == 0) {
                         emitter.onNext(currentUpdateCount);
                     }
@@ -231,13 +232,13 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
     public List<Station> selectStationList(String key) {
         List<Station> stationList = new ArrayList<>();
 
-        String selection = StationTable.TableStation.NAME_LOWER + " like ? or " +
-                StationTable.TableStation.NAME_FIRST + " like ? or " +
-                StationTable.TableStation.NAME_EN + " like ? or " +
-                StationTable.TableStation.STATION_NAME + " like ? ";
+        String selection = CommonStationTable.TableStation.NAME_LOWER + " like ? or " +
+                CommonStationTable.TableStation.NAME_FIRST + " like ? or " +
+                CommonStationTable.TableStation.NAME_EN + " like ? or " +
+                CommonStationTable.TableStation.STATION_NAME + " like ? ";
         final String[] selectionArgs = new String[]{"%" + key + "%", "%" + key + "%", "%" + key + "%", "%" + key + "%"};
         final SQLiteDatabase db = getDb();
-        Cursor cursor = db.query(true, StationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
+        Cursor cursor = db.query(true, CommonStationTable.TableStation.TABLE_NAME, columns, selection, selectionArgs,
                 null, null, null, null);
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -254,10 +255,10 @@ public class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
     }
 
     @Override
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         boolean empty = true;
         final SQLiteDatabase db = getDb();
-        Cursor cursor = db.rawQuery("select * from " + StationTable.TableStation.TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("select * from " + CommonStationTable.TableStation.TABLE_NAME, null);
         if (cursor != null) {
             cursor.moveToFirst();
             if (cursor.getCount() > 0) {

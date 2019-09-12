@@ -19,11 +19,10 @@ public interface ICombinationModel extends ITzZzCxModel {
      * @param queryDate       查询的日期
      * @param fromStationName 出发站
      * @param toStationName   目的站
-     * @param randCode        验证码
      * @param trainCode       车次
      * @return 结果
      */
-    Observable<SuccessDataBean> getOnlyResult(String queryDate, String fromStationName, String toStationName, String randCode, String trainCode);
+    Observable<SuccessDataBean> getOnlyResult(String queryDate, String fromStationName, String toStationName, String trainCode);
 
 
     /**

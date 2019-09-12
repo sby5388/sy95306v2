@@ -55,7 +55,7 @@ public class TzZzCxPresenter implements ITzZzCxPresenter {
     }
 
     @Override
-    public void getTrainList(String date, String fromStation, String toStation, String randCode) {
+    public void getTrainList(String date, String fromStation, String toStation) {
         if (model.isErrorStationName(fromStation)) {
             view.showError(fromStation + " 不正确");
             return;
@@ -65,7 +65,7 @@ public class TzZzCxPresenter implements ITzZzCxPresenter {
             return;
         }
         view.startQuery();
-        listDisposable = model.getResult(date, fromStation, toStation, randCode)
+        listDisposable = model.getResult(date, fromStation, toStation)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(resultConsumer
@@ -73,6 +73,9 @@ public class TzZzCxPresenter implements ITzZzCxPresenter {
                 );
     }
 
+    private void temp() {
+        System.out.println("this  just is  a TAGl");
+    }
 
     @Override
     public void unSubscribe() {

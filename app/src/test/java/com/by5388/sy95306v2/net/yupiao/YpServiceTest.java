@@ -29,7 +29,7 @@ public class YpServiceTest {
     public void setUp() throws Exception {
         Retrofit retrofit = new YpNetTools().getRetrofit();
         mSubject = retrofit.create(YpService.class);
-        mQueryParam = new QueryParam("深圳北", "饶平", "2019-06-20");
+        mQueryParam = new QueryParam("深圳北", "饶平", "2019-09-20");
     }
 
     @Test
@@ -38,8 +38,8 @@ public class YpServiceTest {
         mSubject.getYpMessage(mQueryParam.toString(), mQueryParam.getDate())
                 .flatMap((Function<SecondResult, ObservableSource<List<SecondRemainTicketData>>>) result -> {
                     if (null == result) {
-                        System.err.println(new NullPointerException());
-                        return Observable.just(new ArrayList<>());
+                        throw new RuntimeException("结果异常");
+//                        return Observable.just(new ArrayList<>());
                     }
                     return Observable.just(getRemainTicketData(result.getData()));
                 })
@@ -47,18 +47,13 @@ public class YpServiceTest {
                     List<IRemainingTicket> list = new ArrayList<>(tzYpData);
                     return Observable.just(list);
                 })
-                .subscribe(new Consumer<List<IRemainingTicket>>() {
-                    @Override
-                    public void accept(List<IRemainingTicket> iRemainingTickets) throws Exception {
-                        for (IRemainingTicket remainingTicket : iRemainingTickets) {
-                            System.out.println(remainingTicket.getCode());
-                        }
+                .subscribe(iRemainingTickets -> {
+                    for (IRemainingTicket remainingTicket : iRemainingTickets) {
+                        System.out.println(remainingTicket.getCode());
                     }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        System.err.println(throwable);
-                    }
+                }, throwable -> {
+                    System.err.println(throwable);
+                    throw new Exception(throwable);
                 });
     }
 

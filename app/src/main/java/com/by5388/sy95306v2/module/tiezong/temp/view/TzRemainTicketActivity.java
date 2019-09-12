@@ -41,7 +41,7 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
     private IDetailRemainTicketPresenter presenter;
     private final List<TzDataBean> dataBeans = new ArrayList<>();
     private TextInputEditText fromStation, toStation, trainCode;
-    private Button  buttonDate;
+    private Button buttonDate;
     private MyListener dateListener;
     private Calendar calendar;
 
@@ -83,7 +83,7 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
     }
 
     private void switchStations() {
-        String to = toStation.getText().toString().trim();
+        final String to = toStation.getText().toString().trim();
         toStation.setText(fromStation.getText().toString().trim());
         fromStation.setText(to);
     }
@@ -105,32 +105,31 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
     private void searchTrainNumber() {
         adapter.setBeans(new ArrayList<>());
         dataBeans.clear();
-        String date = buttonDate.getText().toString().trim();
-        String fromStation = this.fromStation.getText().toString().trim();
-        String toStation = this.toStation.getText().toString().trim();
-        String randCode = "";
-        String trainCode = this.trainCode.getText().toString().trim();
+        final String date = buttonDate.getText().toString().trim();
+        final String fromStation = this.fromStation.getText().toString().trim();
+        final String toStation = this.toStation.getText().toString().trim();
+        final String trainCode = this.trainCode.getText().toString().trim();
 
         boolean isNotEmptyFromStation = !TextUtils.isEmpty(fromStation);
         boolean isNotEmptyToStation = !TextUtils.isEmpty(toStation);
         boolean isNotEmptyTrainCode = !TextUtils.isEmpty(trainCode);
         //组合0：三个都不为空
         if (isNotEmptyFromStation && isNotEmptyToStation && isNotEmptyTrainCode) {
-            presenter.getOnlyOneTrainList(date, fromStation, toStation, randCode, trainCode);
+            presenter.getOnlyOneTrainList(date, fromStation, toStation, trainCode);
             return;
         }
         //组合1：出发+目的：列出所有的车次信息
         if (isNotEmptyFromStation && isNotEmptyToStation) {
-            presenter.getTrainListByEmptyTrainCode(date, fromStation, toStation, randCode);
+            presenter.getTrainListByEmptyTrainCode(date, fromStation, toStation);
             return;
         }
         //组合2：没有出发站
         if (isNotEmptyToStation && isNotEmptyTrainCode) {
-            presenter.getTrainListByEmptyFromStation(date, toStation, randCode, trainCode);
+            presenter.getTrainListByEmptyFromStation(date, toStation, trainCode);
             return;
         }//组合3：没有目的站
         if (isNotEmptyFromStation && isNotEmptyTrainCode) {
-            presenter.getTrainListByEmptyToStation(date, fromStation, randCode, trainCode);
+            presenter.getTrainListByEmptyToStation(date, fromStation, trainCode);
             return;
         }
         showError("请至少填写2个信息");
@@ -155,24 +154,24 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
         boolean isNotEmptyTrainCode = !TextUtils.isEmpty(trainCode);
         //组合0：三个都不为空
         if (isNotEmptyFromStation && isNotEmptyToStation && isNotEmptyTrainCode) {
-            presenter.getOnlyOneTrainList(date, fromStation, toStation, randCode, trainCode);
+            presenter.getOnlyOneTrainList(date, fromStation, toStation, trainCode);
             Log.d(IDetailRemainTicketView.TAG, "searchTrainNumber: 0");
             return;
         }
         //组合1：出发+目的：列出所有的车次信息
         if (isNotEmptyFromStation && isNotEmptyToStation) {
-            presenter.getTrainListByEmptyTrainCode(date, fromStation, toStation, randCode);
+            presenter.getTrainListByEmptyTrainCode(date, fromStation, toStation);
             Log.d(IDetailRemainTicketView.TAG, "searchTrainNumber: 1");
             return;
         }
         //组合2：没有出发站
         if (isNotEmptyToStation && isNotEmptyTrainCode) {
-            presenter.getTrainListByEmptyFromStation(date, toStation, randCode, trainCode);
+            presenter.getTrainListByEmptyFromStation(date, toStation, trainCode);
             Log.d(IDetailRemainTicketView.TAG, "searchTrainNumber: 2");
             return;
         }//组合3：没有目的站
         if (isNotEmptyFromStation && isNotEmptyTrainCode) {
-            presenter.getTrainListByEmptyToStation(date, fromStation, randCode, trainCode);
+            presenter.getTrainListByEmptyToStation(date, fromStation, trainCode);
             Log.d(IDetailRemainTicketView.TAG, "searchTrainNumber: 3");
             return;
         }

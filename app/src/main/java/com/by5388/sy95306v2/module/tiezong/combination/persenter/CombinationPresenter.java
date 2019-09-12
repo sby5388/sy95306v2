@@ -71,7 +71,7 @@ public class CombinationPresenter implements ICombinationPresenter {
     }
 
     @Override
-    public void getTrainList(String date, String fromStation, String toStation, String randCode) {
+    public void getTrainList(String date, String fromStation, String toStation) {
         if (model.isErrorStationName(fromStation)) {
             view.showError(fromStation + " 不正确");
             return;
@@ -81,12 +81,12 @@ public class CombinationPresenter implements ICombinationPresenter {
             return;
         }
         view.startQuery();
-        bindData(model.getResult(date, fromStation, toStation, randCode));
+        bindData(model.getResult(date, fromStation, toStation));
     }
 
 
     @Override
-    public void getOnlyOneTrainList(String date, String fromStation, String toStation, String randCode, String trainCode) {
+    public void getOnlyOneTrainList(String date, String fromStation, String toStation, String trainCode) {
         if (model.isErrorStationName(fromStation)) {
             view.showError(fromStation + " 不正确");
             return;
@@ -97,11 +97,11 @@ public class CombinationPresenter implements ICombinationPresenter {
         }
         view.startQuery();
 
-        bindData(model.getOnlyResult(date, fromStation, toStation, randCode, trainCode));
+        bindData(model.getOnlyResult(date, fromStation, toStation, trainCode));
     }
 
     @Override
-    public void getTrainListByEmptyToStation(String date, String fromStation, String randCode, String trainCode) {
+    public void getTrainListByEmptyToStation(String date, String fromStation, String trainCode) {
         if (model.isErrorStationName(fromStation)) {
             view.showError(fromStation + " 不正确");
             return;
@@ -126,13 +126,13 @@ public class CombinationPresenter implements ICombinationPresenter {
                         System.out.println(names.get(i));
                         newNames.add(names.get(i));
                     }
-                    getToStationDetailData(date, fromStation, randCode, trainCode, newNames);
+                    getToStationDetailData(date, fromStation, trainCode, newNames);
                 }, throwableConsumer));
     }
 
 
     @Override
-    public void getTrainListByEmptyFromStation(String date, String toStation, String randCode, String trainCode) {
+    public void getTrainListByEmptyFromStation(String date, String toStation, String trainCode) {
         if (model.isErrorStationName(toStation)) {
             view.showError(toStation + " 不正确");
             return;
@@ -159,14 +159,14 @@ public class CombinationPresenter implements ICombinationPresenter {
                     for (int i = 0; i < position - 1; i++) {
                         newNames.add(names.get(i));
                     }
-                    getFromStationDetailData(date, toStation, randCode, trainCode, newNames);
+                    getFromStationDetailData(date, toStation, trainCode, newNames);
                 }, throwableConsumer));
     }
 
 
     @Override
-    public void getTrainListByEmptyTrainCode(String date, String fromStation, String toStation, String randCode) {
-        getTrainList(date, fromStation, toStation, randCode);
+    public void getTrainListByEmptyTrainCode(String date, String fromStation, String toStation) {
+        getTrainList(date, fromStation, toStation);
     }
 
 
@@ -178,18 +178,18 @@ public class CombinationPresenter implements ICombinationPresenter {
     }
 
 
-    private void getToStationDetailData(String date, String fromStation, String randCode, String trainCode, @NonNull List<String> names) {
+    private void getToStationDetailData(String date, String fromStation, String trainCode, @NonNull List<String> names) {
         mDisposable.add(Observable.fromIterable(names)
-                .flatMap((Function<String, ObservableSource<SuccessDataBean>>) toStation -> model.getOnlyResult(date, fromStation, toStation, randCode, trainCode))
+                .flatMap((Function<String, ObservableSource<SuccessDataBean>>) toStation -> model.getOnlyResult(date, fromStation, toStation, trainCode))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(addConsumer, throwableConsumer));
     }
 
-    private void getFromStationDetailData(String date, String toStation, String randCode, String trainCode, @NonNull List<String> names) {
+    private void getFromStationDetailData(String date, String toStation, String trainCode, @NonNull List<String> names) {
         mDisposable.add(Observable.fromIterable(names)
                 .flatMap((Function<String, ObservableSource<SuccessDataBean>>) fromStation ->
-                        model.getOnlyResult(date, fromStation, toStation, randCode, trainCode))
+                        model.getOnlyResult(date, fromStation, toStation, trainCode))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(addConsumer, throwableConsumer));

@@ -68,15 +68,15 @@ public class StationModel implements IStationModel {
     }
 
     private static boolean regNumber(String string) {
-        Pattern p = Pattern.compile(REG_NUMBER, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = p.matcher(string);
+        final Pattern p = Pattern.compile(REG_NUMBER, Pattern.CASE_INSENSITIVE);
+        final Matcher matcher = p.matcher(string);
         return matcher.matches();
     }
 
     @Deprecated
     private static boolean regEnglish(String string) {
-        Pattern p = Pattern.compile(REG_ABC, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = p.matcher(string);
+        final Pattern p = Pattern.compile(REG_ABC, Pattern.CASE_INSENSITIVE);
+        final Matcher matcher = p.matcher(string);
         return matcher.matches();
     }
 

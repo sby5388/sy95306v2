@@ -7,19 +7,23 @@ import android.support.annotation.NonNull;
  * @author by5388  on 2018/7/21.
  */
 
-final class StationTable {
+final class CommonStationTable {
 
     static void createTableStation(@NonNull SQLiteDatabase db) {
-        String string = "create table " + TableStation.TABLE_NAME + "("
-                + TableStation.ID + "  integer primary key autoincrement,"
-                + TableStation.NAME_FIRST + ","
-                + TableStation.STATION_NAME + " ,"
-                + TableStation.NAME_UPPER + ","
-                + TableStation.NAME_EN + ","
-                + TableStation.NAME_LOWER + ","
-                + TableStation.STATION_CODE
-                + ");";
-        db.execSQL(string);
+        try {
+            String string = "create table " + TableStation.TABLE_NAME + "("
+                    + TableStation.ID + "  integer primary key autoincrement,"
+                    + TableStation.NAME_FIRST + ","
+                    + TableStation.STATION_NAME + " ,"
+                    + TableStation.NAME_UPPER + ","
+                    + TableStation.NAME_EN + ","
+                    + TableStation.NAME_LOWER + ","
+                    + TableStation.STATION_CODE
+                    + ");";
+            db.execSQL(string);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     static class TableStation {

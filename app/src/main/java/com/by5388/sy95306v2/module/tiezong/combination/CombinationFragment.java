@@ -1,5 +1,6 @@
 package com.by5388.sy95306v2.module.tiezong.combination;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
@@ -17,6 +18,7 @@ import com.by5388.sy95306v2.module.tiezong.BaseTzFragment;
 import com.by5388.sy95306v2.module.tiezong.combination.persenter.CombinationPresenter;
 import com.by5388.sy95306v2.module.tiezong.combination.persenter.ICombinationPresenter;
 import com.by5388.sy95306v2.module.tiezong.combination.view.ICombinationView;
+import com.by5388.sy95306v2.module.tiezong.detail.TzDetailActivity;
 import com.by5388.sy95306v2.module.tiezong.remainticket.temp.RemainTicketAdapter;
 import com.by5388.sy95306v2.module.tiezong.temp.view.TzRemainTicketActivity;
 
@@ -39,6 +41,7 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
     private MyListener dateListener;
     private Calendar calendar;
     private ICombinationPresenter presenter;
+    private String textDate = null;
 
     public static CombinationFragment newInstance() {
         CombinationFragment fragment = new CombinationFragment();
@@ -61,10 +64,17 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
         buttonDate.setText(getData(calendar));
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            // TODO: 2019/1/9  
-//            IRemainingTicket iRemainingTicket = adapter.getItem(position);
-//            iRemainingTicket.getCode()
-//            startActivity(TzDetailActivity.newIntent(this));
+            // TODO: 2019/1/9
+            if (TextUtils.isEmpty(textDate)) {
+                return;
+            }
+            IRemainingTicket iRemainingTicket = adapter.getItem(position);
+            Context context = getContext();
+            String trainCode = iRemainingTicket.getCode();
+            String fromStationCode = iRemainingTicket.getFromStation();
+            String toStationCode = iRemainingTicket.getToStation();
+            String date = textDate;
+            startActivity(TzDetailActivity.newIntent(context, trainCode, fromStationCode, toStationCode, date));
         });
     }
 
@@ -105,7 +115,6 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
         String date = buttonDate.getText().toString().trim();
         String fromStation = this.fromStation.getText().toString().trim();
         String toStation = this.toStation.getText().toString().trim();
-        String randCode = "";
         String trainCode = this.trainCode.getText().toString().trim();
 
         boolean isNotEmptyFromStation = !TextUtils.isEmpty(fromStation);
@@ -113,24 +122,28 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
         boolean isNotEmptyTrainCode = !TextUtils.isEmpty(trainCode);
         //组合0：三个都不为空
         if (isNotEmptyFromStation && isNotEmptyToStation && isNotEmptyTrainCode) {
-            presenter.getOnlyOneTrainList(date, fromStation, toStation, randCode, trainCode);
+            textDate = date;
+            presenter.getOnlyOneTrainList(date, fromStation, toStation, trainCode);
             Log.d(TAG, "searchTrainNumber: 0");
             return;
         }
         //组合1：出发+目的：列出所有的车次信息
         if (isNotEmptyFromStation && isNotEmptyToStation) {
-            presenter.getTrainListByEmptyTrainCode(date, fromStation, toStation, randCode);
+            textDate = date;
+            presenter.getTrainListByEmptyTrainCode(date, fromStation, toStation);
             Log.d(TAG, "searchTrainNumber: 1");
             return;
         }
         //组合2：没有出发站
         if (isNotEmptyToStation && isNotEmptyTrainCode) {
-            presenter.getTrainListByEmptyFromStation(date, toStation, randCode, trainCode);
+            textDate = date;
+            presenter.getTrainListByEmptyFromStation(date, toStation, trainCode);
             Log.d(TAG, "searchTrainNumber: 2");
             return;
         }//组合3：没有目的站
         if (isNotEmptyFromStation && isNotEmptyTrainCode) {
-            presenter.getTrainListByEmptyToStation(date, fromStation, randCode, trainCode);
+            textDate = date;
+            presenter.getTrainListByEmptyToStation(date, fromStation, trainCode);
             Log.d(TAG, "searchTrainNumber: 3");
             return;
         }

@@ -25,11 +25,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.module.chengdu.ChengduFragment;
-import com.by5388.sy95306v2.module.guangzhou.GuangzhouFragment;
 import com.by5388.sy95306v2.main.presenter.IMainPresenter;
 import com.by5388.sy95306v2.main.presenter.MainPresenter;
 import com.by5388.sy95306v2.main.view.IMainView;
+import com.by5388.sy95306v2.module.chengdu.ChengduFragment;
+import com.by5388.sy95306v2.module.guangzhou.GuangzhouFragment;
 import com.by5388.sy95306v2.module.shanghai.ShanghaiFragment;
 import com.by5388.sy95306v2.module.shenyang.ShenYangFragment;
 import com.by5388.sy95306v2.module.tiezong.TzFragment;
@@ -46,6 +46,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IMainView {
     // TODO: 2019/1/24  移除没有使用到的页面，
+    // TODO: 2019/9/10 恢复移除的页面
     /**
      * 记录用户首次点击返回键的时间
      */
@@ -77,21 +78,23 @@ public class MainActivity extends AppCompatActivity
     private TextView textViewAllCount, textViewCurrentCount;
     private ProgressBar progressBar;
     private int stationCount = 0;
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO: 2019/6/15 加载过慢，日志显示耗时1040毫秒
+        // TODO: 2019/7/8 加载过慢，1199毫秒
         super.onCreate(savedInstanceState);
         //竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mainView = findViewById(R.id.container_main);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -115,16 +118,16 @@ public class MainActivity extends AppCompatActivity
     private void initData() {
         fragments = new ArrayList<>();
         fragments.add(ShenYangFragment.newInstance());
-//        fragments.add(GuangzhouFragment.newInstance());
-//        fragments.add(ShanghaiFragment.newInstance());
+        fragments.add(GuangzhouFragment.newInstance());
+        fragments.add(ShanghaiFragment.newInstance());
         fragments.add(TzFragment.newInstance());
-//        fragments.add(ChengduFragment.newInstance());
+        fragments.add(ChengduFragment.newInstance());
         titles = new ArrayList<>();
         titles.add(TITLE_SHEN_YANG);
-//        titles.add(TITLE_GZ);
-//        titles.add(TITLE_SH);
+        titles.add(TITLE_GZ);
+        titles.add(TITLE_SH);
         titles.add(TITLE_TZ);
-//        titles.add(TITLE_CD);
+        titles.add(TITLE_CD);
 
         fragmentManager = getSupportFragmentManager();
         presenter = new MainPresenter(this);
@@ -146,12 +149,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            return;
         }
+        super.onBackPressed();
     }
 
     @Override
@@ -180,8 +182,7 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -214,19 +215,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void notifyUpdate() {
         //使用一个对话框来提供升级的入口
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        new AlertDialog.Builder(this)
                 .setTitle(R.string.isUpdating)
                 .setMessage(R.string.update_tip)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        presenter.startUpdate();
-                    }
-                })
+                .setPositiveButton(android.R.string.ok, (dialog1, which) -> presenter.startUpdate())
                 .setNegativeButton(android.R.string.cancel, null)
-                .create();
-        dialog.show();
-        dialog.setCancelable(true);
+                .setCancelable(true)
+                .show();
     }
 
     @Override
@@ -242,13 +237,7 @@ public class MainActivity extends AppCompatActivity
             updatingDialog = new AlertDialog.Builder(this)
                     .setTitle(R.string.updating)
                     .setView(getDialogView())
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // TODO: 2019/1/11 刷新Fragment
-                            dialog.dismiss();
-                        }
-                    })
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
                     .create();
             updatingDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                 @Override
@@ -257,11 +246,8 @@ public class MainActivity extends AppCompatActivity
                 }
             });
             updatingDialog.setCancelable(false);
-            updatingDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    // TODO: 2019/1/11 刷新Fragment
-                }
+            updatingDialog.setOnCancelListener(dialog -> {
+                // TODO: 2019/1/11 刷新Fragment
             });
         }
     }

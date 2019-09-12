@@ -38,6 +38,7 @@ public class MainPresenter implements IMainPresenter {
                         view.finishChecked();
                     }
                 }, throwable -> {
+                    view.openNetWorkSetting();
                     view.tip("请重试");
                 })
         );

@@ -10,7 +10,7 @@ import android.widget.ListView;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.module.tiezong.api.pass.code.GetPassCodeImpl;
 import com.by5388.sy95306v2.module.tiezong.bean.number.NumberDataBean;
-import com.by5388.sy95306v2.tiezong.api.pass.code.IGetPassCodeService;
+import com.by5388.sy95306v2.module.tiezong.api.pass.code.IGetPassCodeService;
 
 import java.util.List;
 
@@ -84,8 +84,8 @@ public class TzDetailActivity extends AppCompatActivity {
     }
 
 
-    public static Intent newIntent(Context mContext, String trainCode, String fromStationCode, String toStationCode, String date) {
-        Intent intent = new Intent(mContext, TzDetailActivity.class);
+    public static Intent newIntent(Context context, String trainCode, String fromStationCode, String toStationCode, String date) {
+        Intent intent = new Intent(context, TzDetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString(TRAIN_NO, trainCode);
         bundle.putString(FROM_STATION_CODE, fromStationCode);

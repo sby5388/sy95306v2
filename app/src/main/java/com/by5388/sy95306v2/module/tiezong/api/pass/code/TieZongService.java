@@ -108,15 +108,13 @@ public interface TieZongService {
      * @param date        日期  格式：yyyy-MM-dd
      * @param stationName 车站中文名，如“饶平”
      * @param stationCode 车站电报码，如 “RVQ”
-     * @param randCode    随机数，可为空
      * @return 某个车站（包括同城车站）当天的所有车次
      */
     @GET("czxx/query")
     Observable<TzResult<DataBeanX>> getStationAllTrain(
             @Query("train_start_date") String date,
             @Query("train_station_name") String stationName,
-            @Query("train_station_code") String stationCode,
-            @Query(RAND_CODE) String randCode
+            @Query("train_station_code") String stationCode
     );
 
     /*

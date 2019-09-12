@@ -82,7 +82,9 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/startTime"
                 android:src="@drawable/ic_up"
-                app:layout_constraintLeft_toRightOf="@+id/textView_menu_1" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/textView_menu_1"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="2dp"
@@ -120,8 +122,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/startTime"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/textView_menu_2"
 
-                app:layout_constraintLeft_toRightOf="@+id/textView_menu_2" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="2dp"
@@ -158,7 +162,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/startTime"
-                app:layout_constraintLeft_toRightOf="@+id/textView_menu_3" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/textView_menu_3"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="2dp"
@@ -195,7 +201,9 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/startTime"
                 android:src="@drawable/ic_filter"
-                app:layout_constraintLeft_toRightOf="@+id/textView_menu_filter" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/textView_menu_filter"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
 

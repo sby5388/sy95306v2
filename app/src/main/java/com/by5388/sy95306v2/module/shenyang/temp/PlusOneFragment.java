@@ -38,7 +38,7 @@ public class PlusOneFragment extends Fragment {
     private PlusOneButton mPlusOneButton;
 
     private OnFragmentInteractionListener mListener;
-    private IQueryThread mIQueryThread;
+    private QueryThread mIQueryThread;
     private Button testButton;
 
     public PlusOneFragment() {
@@ -71,6 +71,7 @@ public class PlusOneFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         mIQueryThread = new QueryThread(new Handler());
+        mIQueryThread.start();
     }
 
     @Override
@@ -88,7 +89,7 @@ public class PlusOneFragment extends Fragment {
 
 
     private void test() {
-        final String date = "2019-06-15";
+        final String date = "2019-10-11";
         final String from = "RVQ";
         final String to = "GZQ";
         final String type = "1";

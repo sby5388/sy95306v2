@@ -18,7 +18,7 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        StationTable.createTableStation(db);
+        CommonStationTable.createTableStation(db);
         CdStationTable.createTableStation(db);
     }
 

@@ -14,6 +14,7 @@ import com.by5388.sy95306v2.MyListener;
 
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author by5388  on 2018/7/28.
@@ -65,7 +66,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 往后延长60天
      */
-    private static final long MAX_TIME = 5184000000L;
+    private static final long MAX_TIME = TimeUnit.DAYS.toMillis(60);
 
     protected final void selectDate(MyListener dateListener, Calendar calendarData) {
         //  这里要记录已经选择的日期

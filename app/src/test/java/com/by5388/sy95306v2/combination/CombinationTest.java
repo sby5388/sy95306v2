@@ -22,7 +22,7 @@ import io.reactivex.functions.Function;
 public class CombinationTest {
     private static int count = 0;
 
-    private Observable<List<TrainDetail>> getObservable(int date, String trainCode) {
+    private Observable<List<TrainDetail>> getObservable(final int date, final String trainCode) {
         SyService syService = new SyNetTools().getRetrofit().create(SyService.class);
         return syService.getTrainByTrainCode(date, trainCode);
     }
@@ -30,7 +30,7 @@ public class CombinationTest {
     @Test
     public void test() {
         final String fromStationName = "厦门北";
-        final int date = 20190708;
+        final int date = 20191008;
         final String trainCode = "D2286";
         getObservable(date, trainCode)
                 .subscribe(getSyConsumer(fromStationName), getThrowableConsumer());
@@ -43,7 +43,7 @@ public class CombinationTest {
         return throwable -> System.err.println(throwable.getLocalizedMessage());
     }
 
-    private Consumer<List<TrainDetail>> getSyConsumer(String fromStationName) {
+    private Consumer<List<TrainDetail>> getSyConsumer(final String fromStationName) {
         return trainDetails -> {
             List<String> names = new ArrayList<>();
             for (TrainDetail detail : trainDetails) {
@@ -54,7 +54,7 @@ public class CombinationTest {
             System.out.println(position);
             if (position < 0) {
                 System.err.println("错误");
-                return;
+                throw new RuntimeException("名字不正确");
             }
             List<String> newNames = new ArrayList<>();
             for (int i = position + 1; i < names.size(); i++) {
@@ -86,7 +86,7 @@ public class CombinationTest {
 
     private void getDetailData(@NonNull List<String> names) {
         Observable.fromIterable(names)
-                .flatMap((Function<String, ObservableSource<Person>>) s -> Observable.just(new Person(s))).subscribe(person -> System.err.println(person));
+                .flatMap((Function<String, ObservableSource<Person>>) s -> Observable.just(new Person(s))).subscribe(System.err::println);
     }
 
 }
