@@ -35,6 +35,7 @@ public class TzFragment extends BaseTopFragment {
         list.add(new MyViewPager(ZzCxFragment.newInstance(), "余票查询"));
         list.add(new MyViewPager(RemainTicketFragment.newInstance(), "余票查询2"));
         list.add(new MyViewPager(CombinationFragment.newInstance(), "联合查询"));
+        list.add(new MyViewPager(TrainCodeQueryFragment.newInstance(), "车次查询"));
         return list;
     }
 }

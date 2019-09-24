@@ -89,7 +89,7 @@ public final class SettingSharedPreferences implements ISettingSharedPreferences
         return sharedPreferences.getAll();
     }
 
-    private static class SingletonHandler {
+    private static final class SingletonHandler {
         private static final SettingSharedPreferences INSTANCE = new SettingSharedPreferences();
     }
 }

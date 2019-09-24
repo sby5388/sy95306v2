@@ -42,7 +42,7 @@ public final class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
 
 
     public static DataBaseApiImpl getInstance() {
-        return SingletonHandler.INSTANCE;
+        return SingletonHolder.INSTANCE;
     }
 
 
@@ -250,7 +250,7 @@ public final class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
         return stationList;
     }
 
-    private static class SingletonHandler {
+    private static class SingletonHolder {
         private static final DataBaseApiImpl INSTANCE = new DataBaseApiImpl();
     }
 

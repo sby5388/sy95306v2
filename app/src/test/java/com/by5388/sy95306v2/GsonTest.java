@@ -17,17 +17,15 @@ public class GsonTest<T> {
         try {
             TzResult<SuccessDataBean> tzResult = gson.fromJson(result, TzResult.class);
 
-        System.out.println(tzResult.isStatus());
-        System.out.println(tzResult.getData());
+            System.out.println(tzResult.isStatus());
+            System.out.println(tzResult.getData());
 
-        SuccessDataBean dataBean = tzResult.getData();
-        System.out.println(dataBean.isFlag());
-        }catch (Exception e){
+            SuccessDataBean dataBean = tzResult.getData();
+            System.out.println(dataBean.isFlag());
+        } catch (Exception e) {
             e.fillInStackTrace();
         }
     }
-
-
 
 
 }

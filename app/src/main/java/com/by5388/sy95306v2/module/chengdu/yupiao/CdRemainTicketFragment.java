@@ -1,5 +1,6 @@
 package com.by5388.sy95306v2.module.chengdu.yupiao;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
@@ -8,9 +9,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.IRemainingTicket;
-import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.module.chengdu.BaseCdFragment;
 import com.by5388.sy95306v2.module.chengdu.yupiao.persenter.CdRemainTicketPresenter;
 import com.by5388.sy95306v2.module.chengdu.yupiao.persenter.ICdRemainTicketPresenter;
@@ -36,7 +37,7 @@ public class CdRemainTicketFragment extends BaseCdFragment implements ICdRemainT
     private RemainTicketAdapter adapter;
     private ICdRemainTicketPresenter presenter;
     private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
-    private MyListener dateListener;
+    private DatePickerDialog.OnDateSetListener dateListener;
     private Calendar calendar;
 
 
@@ -74,7 +75,7 @@ public class CdRemainTicketFragment extends BaseCdFragment implements ICdRemainT
         buttonSearch = view.findViewById(R.id.button_query);
         buttonDate = view.findViewById(R.id.button_query_date);
         buttonSearch.setOnClickListener(v -> searchTrainNumber());
-        buttonDate.setOnClickListener(v -> selectDate(dateListener, calendar));
+        buttonDate.setOnClickListener(v -> selectDate(this, calendar));
         view.findViewById(R.id.imageView).setOnClickListener(v -> switchStations());
     }
 

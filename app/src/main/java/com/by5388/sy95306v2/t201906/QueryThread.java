@@ -15,21 +15,27 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 
 /**
  * @author Administrator  on 2019/6/15.
  */
 public final class QueryThread extends HandlerThread implements IQueryThread {
+    // TODO: 2019/9/16 要对转化部分抽取出来
     public static final String TAG = "QueryThread";
     private final Handler mResponseHandler;
     private Handler mRequestHandler;
     private static final String BASE_PATH = "https://www.12306.cn/kfzmpt/";
     private final static Uri BASE_URI = Uri.parse(BASE_PATH);
+    private final Callback mCallback;
 
-    public QueryThread(Handler responseHandler) {
+    public interface Callback {
+        void push(TrainResult result);
+    }
+
+    public QueryThread(Handler responseHandler, Callback callback) {
         super(TAG);
         mResponseHandler = responseHandler;
+        mCallback = callback;
         getLooper();
     }
 
@@ -40,8 +46,9 @@ public final class QueryThread extends HandlerThread implements IQueryThread {
 
     @Override
     public void queryTicketPrices(String date, String from, String to, String type) {
-        // TODO: 2019/6/17 没有检查网络状态！ 当网络状态不可用时，联网照成了闪退！-->使用前应当检测网络状态
-        mRequestHandler.post(new TicketPricesRunnable(date, from, to, type));
+        // TODO: 2019/6/17 没有检查网络状态！ 当网络状态不可用时，联网造成了闪退！-->使用前应当检测网络状态
+        // FIXME: 2019/9/24
+        mRequestHandler.post(new TicketPricesRunnable(date, from, to, type, this));
     }
 
 
@@ -50,12 +57,14 @@ public final class QueryThread extends HandlerThread implements IQueryThread {
         private final String from;
         private final String to;
         private final String type;
+        private final WeakReference<QueryThread> mReference;
 
-        TicketPricesRunnable(String date, String from, String to, String type) {
+        TicketPricesRunnable(String date, String from, String to, String type, QueryThread thread) {
             this.date = date;
             this.from = from;
             this.to = to;
             this.type = type;
+            mReference = new WeakReference<>(thread);
         }
 
         @Override
@@ -73,7 +82,10 @@ public final class QueryThread extends HandlerThread implements IQueryThread {
                     .build();
             final String path = uri.toString();
             try {
-                getData(path);
+                final QueryThread queryThread = mReference.get();
+                if (queryThread != null) {
+                    queryThread.getData(path);
+                }
             } catch (Exception e) {
                 System.err.println(e.getLocalizedMessage());
             }
@@ -81,7 +93,7 @@ public final class QueryThread extends HandlerThread implements IQueryThread {
         }
     }
 
-    private static void getData(String urlSpecial) throws IOException {
+    private void getData(String urlSpecial) throws IOException {
         Log.d(TAG, "getData: url = " + urlSpecial);
         final URL url = new URL(urlSpecial);
         final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -108,10 +120,20 @@ public final class QueryThread extends HandlerThread implements IQueryThread {
             Gson gson = new Gson();
             // TODO: 2019/9/12 String ->gson -->JavaBean
             final TrainResult trainResult = gson.fromJson(s, TrainResult.class);
-            final List<TrainResult.DataBean> data = trainResult.data;
-            for (TrainResult.DataBean bean : data) {
-                System.out.println(bean.queryLeftNewDTO.toString());
+            if (mCallback != null) {
+                // TODO: 2019/9/16 切回主线程
+                mResponseHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mCallback.push(trainResult);
+                    }
+                });
             }
+//            final List<TrainResult.DataBean> data = trainResult.data;
+//            for (TrainResult.DataBean bean : data) {
+//                System.out.println(bean.queryLeftNewDTO.toString());
+//            }
+
         } finally {
             connection.disconnect();
         }

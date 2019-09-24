@@ -29,7 +29,7 @@ public class YpServiceTest {
     public void setUp() throws Exception {
         Retrofit retrofit = new YpNetTools().getRetrofit();
         mSubject = retrofit.create(YpService.class);
-        mQueryParam = new QueryParam("深圳北", "饶平", "2019-09-20");
+        mQueryParam = new QueryParam("深圳北", "饶平", "2019-10-01");
     }
 
     @Test

@@ -33,6 +33,7 @@ import com.by5388.sy95306v2.module.guangzhou.GuangzhouFragment;
 import com.by5388.sy95306v2.module.shanghai.ShanghaiFragment;
 import com.by5388.sy95306v2.module.shenyang.ShenYangFragment;
 import com.by5388.sy95306v2.module.tiezong.TzFragment;
+import com.by5388.sy95306v2.mvp.FragmentDisplayManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +45,7 @@ import java.util.List;
  * @date 20180727
  */
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, IMainView {
-    // TODO: 2019/1/24  移除没有使用到的页面，
-    // TODO: 2019/9/10 恢复移除的页面
+        implements NavigationView.OnNavigationItemSelectedListener, IMainView, FragmentDisplayManager {
     /**
      * 记录用户首次点击返回键的时间
      */
@@ -301,5 +300,10 @@ public class MainActivity extends AppCompatActivity
         Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
         positiveButton.setEnabled(true);
         positiveButton.setText(R.string.finish_update);
+    }
+
+    @Override
+    public void onFragmentAttach(Fragment fragment) {
+
     }
 }

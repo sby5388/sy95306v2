@@ -65,7 +65,7 @@ public class GetPassCodeImpl implements IGetPassCodeService {
         final String typeAdult = "ADULT";
         //学生票
         final String typeStudent = "0X00";
-        String type = isStudent ? typeStudent : typeAdult;
+        final String type = isStudent ? typeStudent : typeAdult;
         return service2.getRemainTicketData(type, queryDate, fromStation, toStation);
     }
 }

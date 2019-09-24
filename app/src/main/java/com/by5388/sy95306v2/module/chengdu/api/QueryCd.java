@@ -52,7 +52,7 @@ public class QueryCd implements ICdQuery {
     }
 
     /**
-     * string->车站集合
+     * SQL_CREATE_TABLE->车站集合
      *
      * @param result 网络返回结果
      * @return 车站集合
@@ -87,19 +87,21 @@ public class QueryCd implements ICdQuery {
         if (null == yPService) {
             yPService = new CdYpNetTools().getRetrofit().create(CdYpService.class);
         }
+        //QB mean quanbu ?全部
         final String queryType = "QB";
         return yPService.queryYp(fromStation, toStation, date, queryType)
                 .flatMap((Function<CdYpTop, ObservableSource<List<CdRemainTicketDetailBean>>>) cdYpTop -> {
+                    final ArrayList<CdRemainTicketDetailBean> objects = new ArrayList<>();
                     if (null == cdYpTop) {
-                        return Observable.just(new ArrayList<>());
+                        return Observable.just(objects);
                     }
                     CdAllResultDataBean dataBean = cdYpTop.getData();
                     if (null == dataBean) {
-                        return Observable.just(new ArrayList<>());
+                        return Observable.just(objects);
                     }
                     List<CdRemainTicketDetailBean> list = dataBean.getDatas();
                     if (null == list || list.isEmpty()) {
-                        return Observable.just(new ArrayList<>());
+                        return Observable.just(objects);
                     }
                     return Observable.just(list);
                 });
@@ -145,19 +147,20 @@ public class QueryCd implements ICdQuery {
         return lateService
                 .lateTimeCCDetail(typeCode, gson.toJson(params), emptyJson, emptyJson, userMessage)
                 .flatMap((Function<CdLateResultTop, ObservableSource<List<CdTrainAllNodeBean>>>) top -> {
+                    final ArrayList<CdTrainAllNodeBean> objects = new ArrayList<>();
                     if (null == top || !top.isStatus()) {
                         println("empty");
-                        return Observable.just(new ArrayList<>());
+                        return Observable.just(objects);
                     }
                     try {
                         CdLateDetail detail = gson.fromJson(top.getData(), CdLateDetail.class);
                         if (!detail.isStatus()) {
-                            return Observable.just(new ArrayList<>());
+                            return Observable.just(objects);
                         }
                         return Observable.just(detail.getTrainAllNode());
                     } catch (Exception e) {
                         println(e.getLocalizedMessage());
-                        return Observable.just(new ArrayList<>());
+                        return Observable.just(objects);
                     }
                 });
     }

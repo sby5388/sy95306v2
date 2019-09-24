@@ -107,7 +107,7 @@ public class CombinationPresenter implements ICombinationPresenter {
             return;
         }
         view.startQuery();
-        String newDate = date.replaceAll("-", "");
+        final String newDate = date.replaceAll("-", "");
         mDisposable.add(model.getTrainByTrainCode(Integer.parseInt(newDate), trainCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

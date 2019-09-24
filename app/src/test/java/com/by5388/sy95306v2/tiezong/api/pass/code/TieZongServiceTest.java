@@ -28,7 +28,7 @@ public class TieZongServiceTest {
     @Test
     public void getRemainTicketDataTest() {
         final String type = "ADULT";
-        final String queryDate = "2019-07-04";
+        final String queryDate = "2019-10-14";
         final String fromStation = "CBQ";
         final String RaoPingStation = "RVQ";
         final String toStation = "GZQ";

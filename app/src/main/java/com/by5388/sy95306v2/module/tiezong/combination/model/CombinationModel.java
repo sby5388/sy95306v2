@@ -26,6 +26,7 @@ import io.reactivex.functions.Function;
  * @author by5388  on 2018/8/20.
  */
 public class CombinationModel implements ICombinationModel {
+    // TODO: 2019/9/19 这里要修改 SyService
     private final IGetPassCodeService service;
     private final SyService syService;
     private final IShenYangDbApi db;
@@ -86,7 +87,7 @@ public class CombinationModel implements ICombinationModel {
 
     @Override
     public Observable<List<TrainDetail>> getTrainByTrainCode(int date, String trainCode) {
-
+        // TODO: 2019/9/19 这里要修改成 Tz 12306的API
         return syService.getTrainByTrainCode(date, trainCode);
     }
 }

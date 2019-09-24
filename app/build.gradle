@@ -48,4 +48,6 @@ dependencies {
     //butterKnife：引入的2个缺一不可
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+//  todo 20190919 增加测试模式下的内容
+    testImplementation 'org.xerial:sqlite-jdbc:3.7.2'
 }

@@ -4,7 +4,7 @@ import com.by5388.sy95306v2.module.tiezong.api.pass.code.GetPassCodeImpl;
 import com.by5388.sy95306v2.module.tiezong.bean.TzResult;
 import com.by5388.sy95306v2.module.tiezong.bean.temp.DataBean;
 import com.by5388.sy95306v2.module.tiezong.bean.temp.DataBeanX;
-import com.by5388.sy95306v2.tiezong.api.pass.code.IGetPassCodeService;
+import com.by5388.sy95306v2.module.tiezong.api.pass.code.IGetPassCodeService;
 
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ public class TzStationAllTrainTest {
     @Test
     public void testTzStationAllTrain() {
         IGetPassCodeService service = new GetPassCodeImpl();
-        final String date = "2019-01-26";
+        final String date = "2019-09-26";
         final String stationName = "饶平";
         final String stationCode = "RVQ";
         service.getStationAllTrain(date, stationName, stationCode)

@@ -51,8 +51,7 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener, IMainV
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId == radioButton0.id) {
                 viewPager.setCurrentItem(0, true)
-            }
-            if (checkedId == radioButton1.id) {
+            }else if (checkedId == radioButton1.id) {
                 viewPager.setCurrentItem(1, true)
             }
         }

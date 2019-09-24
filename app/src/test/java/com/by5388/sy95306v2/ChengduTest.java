@@ -18,7 +18,7 @@ public class ChengduTest {
     public void testChengdu() {
         ICdQuery query = new QueryCd();
         String stationCode = "ICW";
-        String date = "2019-01-11";
+        String date = "2019-09-23";
 //        date = date.replace("-","");
         query.getArriveDetail(stationCode, date)
                 .subscribe(new Consumer<List<ScreenArriveDetail>>() {

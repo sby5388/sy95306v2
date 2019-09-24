@@ -2,7 +2,7 @@ package com.by5388.sy95306v2.tz;
 
 import com.by5388.sy95306v2.module.tiezong.api.pass.code.GetPassCodeImpl;
 import com.by5388.sy95306v2.module.tiezong.bean.number.NumberDataBean;
-import com.by5388.sy95306v2.tiezong.api.pass.code.IGetPassCodeService;
+import com.by5388.sy95306v2.module.tiezong.api.pass.code.IGetPassCodeService;
 
 import org.junit.Test;
 

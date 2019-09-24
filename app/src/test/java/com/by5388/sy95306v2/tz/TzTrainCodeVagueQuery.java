@@ -23,8 +23,8 @@ public class TzTrainCodeVagueQuery {
     public void testVague() {
         BaseNetTools tools = new TzTrainCodeNetTools();
         TzTrainCodeService service = tools.getRetrofit().create(TzTrainCodeService.class);
-        final String keyWord = "D2283";
-        final String date = "20190615";
+        final String keyWord = "D7515";
+        final String date = "20191015";
         service.getSimpleTrainCodeList(keyWord, date)
                 .subscribe(new Observer<ResultQueryTrainCode>() {
                     @Override
@@ -39,7 +39,7 @@ public class TzTrainCodeVagueQuery {
 
                     @Override
                     public void onError(Throwable e) {
-                        System.err.println(e.getLocalizedMessage());
+                        throw new RuntimeException(e);
                     }
 
                     @Override
@@ -71,6 +71,6 @@ public class TzTrainCodeVagueQuery {
     }
 
     private void showError(int error) {
-        System.err.println(error);
+        throw new RuntimeException("" + error);
     }
 }

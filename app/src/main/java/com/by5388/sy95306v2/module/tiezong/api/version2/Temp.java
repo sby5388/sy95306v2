@@ -45,6 +45,7 @@ public class Temp {
         this.data = data;
     }
 
+
     public static class DataBeanX {
         private List<DataBean> data;
 

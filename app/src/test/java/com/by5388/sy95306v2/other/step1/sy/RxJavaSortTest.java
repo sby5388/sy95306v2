@@ -23,7 +23,7 @@ public class RxJavaSortTest {
     @Test
     public void testRxJavaSortTest() {
         // TODO: 2018/11/13 如何把一个Observable<List<T>> 变成多个的Observable<T>？
-        int date = 20190502;
+        int date = 20191002;
         String toStation = "IOQ";
         String fromStation = "CBQ";
 

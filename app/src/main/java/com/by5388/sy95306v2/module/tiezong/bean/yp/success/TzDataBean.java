@@ -112,6 +112,64 @@ public class TzDataBean implements IRemainingTicket, Cloneable {
         return wz_num;
     }
 
+    @Override
+    public String toString() {
+        return "TzDataBean{" +
+                "train_no='" + train_no + '\'' +
+                ", station_train_code='" + station_train_code + '\'' +
+                ", start_station_telecode='" + start_station_telecode + '\'' +
+                ", start_station_name='" + start_station_name + '\'' +
+                ", end_station_telecode='" + end_station_telecode + '\'' +
+                ", end_station_name='" + end_station_name + '\'' +
+                ", from_station_telecode='" + from_station_telecode + '\'' +
+                ", from_station_name='" + from_station_name + '\'' +
+                ", to_station_telecode='" + to_station_telecode + '\'' +
+                ", to_station_name='" + to_station_name + '\'' +
+                ", start_time='" + start_time + '\'' +
+                ", arrive_time='" + arrive_time + '\'' +
+                ", day_difference='" + day_difference + '\'' +
+                ", train_class_name='" + train_class_name + '\'' +
+                ", lishi='" + lishi + '\'' +
+                ", canWebBuy='" + canWebBuy + '\'' +
+                ", lishiValue='" + lishiValue + '\'' +
+                ", yp_info='" + yp_info + '\'' +
+                ", exchange_train_flag='" + exchange_train_flag + '\'' +
+                ", control_train_day='" + control_train_day + '\'' +
+                ", start_train_date='" + start_train_date + '\'' +
+                ", seat_feature='" + seat_feature + '\'' +
+                ", yp_ex='" + yp_ex + '\'' +
+                ", train_seat_feature='" + train_seat_feature + '\'' +
+                ", train_type_code='" + train_type_code + '\'' +
+                ", start_province_code='" + start_province_code + '\'' +
+                ", start_city_code='" + start_city_code + '\'' +
+                ", end_province_code='" + end_province_code + '\'' +
+                ", end_city_code='" + end_city_code + '\'' +
+                ", seat_types='" + seat_types + '\'' +
+                ", location_code='" + location_code + '\'' +
+                ", from_station_no='" + from_station_no + '\'' +
+                ", to_station_no='" + to_station_no + '\'' +
+                ", control_day=" + control_day +
+                ", sale_time='" + sale_time + '\'' +
+                ", is_support_card='" + is_support_card + '\'' +
+                ", controlled_train_flag='" + controlled_train_flag + '\'' +
+                ", controlled_train_message='" + controlled_train_message + '\'' +
+                ", rw_num='" + rw_num + '\'' +
+                ", srrb_num='" + srrb_num + '\'' +
+                ", gg_num='" + gg_num + '\'' +
+                ", gr_num='" + gr_num + '\'' +
+                ", qt_num='" + qt_num + '\'' +
+                ", rz_num='" + rz_num + '\'' +
+                ", tz_num='" + tz_num + '\'' +
+                ", wz_num='" + wz_num + '\'' +
+                ", yb_num='" + yb_num + '\'' +
+                ", yw_num='" + yw_num + '\'' +
+                ", yz_num='" + yz_num + '\'' +
+                ", ze_num='" + ze_num + '\'' +
+                ", zy_num='" + zy_num + '\'' +
+                ", swz_num='" + swz_num + '\'' +
+                '}';
+    }
+
     /**
      * train_no : 65000D753300
      * station_train_code : D7533
