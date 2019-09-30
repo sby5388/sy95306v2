@@ -33,7 +33,7 @@
         <activity android:name=".module.shenyang.select.SelectStationActivity" />
         <activity android:name=".module.shenyang.detail.TrainDetailActivity" />
         <activity android:name=".module.shenyang.list.TrainNumberListActivity" />
-        <activity android:name=".module.tiezong.temp.view.TzRemainTicketActivity" />
+        <activity android:name=".module.tiezong.tzTrainCodeResult.view.TzRemainTicketActivity" />
         <activity android:name=".module.tiezong.detail.TzDetailActivity" />
     </application>
 

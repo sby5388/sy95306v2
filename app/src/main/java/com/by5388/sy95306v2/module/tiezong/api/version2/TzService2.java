@@ -9,9 +9,9 @@ import retrofit2.http.Query;
  */
 public interface TzService2 {
     @GET("queryTrainInfo/query")
-    Observable<Temp> getTrainDetail(@Query("leftTicketDTO.train_no") String trainNo,
-                                    @Query("leftTicketDTO.train_date") String trainDate,
-                                    @Query("rand_code") String randCode
+    Observable<TzTrainCodeResult> getTrainDetail(@Query("leftTicketDTO.train_no") String trainNo,
+                                                 @Query("leftTicketDTO.train_date") String trainDate,
+                                                 @Query("rand_code") String randCode
 
     );
 }

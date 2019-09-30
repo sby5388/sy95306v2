@@ -15,7 +15,7 @@ public class TzResult<T> {
 
     /**
      * status : true
-     * httpstatus : 200
+     * mHttpStatus : 200
      * data::T ,
      *
      * @see SuccessDataBean 中转查询中的得到直达车次,为成功

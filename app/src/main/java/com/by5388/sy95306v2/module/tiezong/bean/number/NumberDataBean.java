@@ -22,25 +22,25 @@ public class NumberDataBean {
      * stationNo : 01
      * isEnabled : false
      */
-    @SerializedName("start_station_name")
+    @SerializedName("mStartStationName")
     private String startStationName;
-    @SerializedName("arrive_time")
+    @SerializedName("mArriveTime")
     private String arriveTime;
-    @SerializedName("station_train_code")
+    @SerializedName("mStationTrainCode")
     private String stationTrainCode;
-    @SerializedName("station_name")
+    @SerializedName("mStationName")
     private String stationName;
-    @SerializedName("train_class_name")
+    @SerializedName("mTrainClassName")
     private String trainClassName;
     @SerializedName("service_type")
     private String serviceType;
-    @SerializedName("start_time")
+    @SerializedName("mStartTime")
     private String startTime;
     @SerializedName("stopover_time")
     private String stopoverTime;
     @SerializedName("end_station_name")
     private String endStationName;
-    @SerializedName("station_no")
+    @SerializedName("mStationNo")
     private String stationNo;
     private boolean isEnabled;
 

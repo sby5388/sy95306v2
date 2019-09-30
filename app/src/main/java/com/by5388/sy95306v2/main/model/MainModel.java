@@ -34,7 +34,7 @@ public class MainModel implements IStartModel, IMainModel {
      * -->TODO 页面应当替换成12306手机版的
      */
     private final static String BUY_TICKET_PAGE = "https://kyfw.12306.cn/otn/leftTicket/init";
-    private final static String FILE_NAME = "/otn/resources/js/framework/station_name.js?station_version=";
+    private final static String FILE_NAME = "/otn/resources/js/framework/mStationName.js?station_version=";
 
     private final static String START_NAME_SHARED_PREFERENCES = "stationVersion";
     private final static int TIME_OUT = 5000;

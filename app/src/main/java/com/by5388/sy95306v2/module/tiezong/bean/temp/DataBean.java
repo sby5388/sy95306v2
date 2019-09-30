@@ -48,7 +48,7 @@ public class DataBean {
     private String trainNo;
     @SerializedName("start_station_telecode")
     private String startStationTelephoneCode;
-    @SerializedName("start_station_name")
+    @SerializedName("mStartStationName")
     private String startStationName;
     @SerializedName("start_start_time")
     private String startStartTime;
@@ -64,31 +64,31 @@ public class DataBean {
     private String trainTypeName;
     @SerializedName("train_class_code")
     private String trainClassCode;
-    @SerializedName("train_class_name")
+    @SerializedName("mTrainClassName")
     private String trainClassName;
     @SerializedName("seat_types")
     private String seatTypes;
     @SerializedName("service_type")
     private String serviceType;
-    @SerializedName("station_no")
+    @SerializedName("mStationNo")
     private String stationNo;
     @SerializedName("display_station_no")
     private String displayStationNo;
-    @SerializedName("station_name")
+    @SerializedName("mStationName")
     private String stationName;
     @SerializedName("station_telecode")
     private String stationTelephoneCode;
-    @SerializedName("station_train_code")
+    @SerializedName("mStationTrainCode")
     private String stationTrainCode;
     @SerializedName("bureau_code")
     private String bureauCode;
-    @SerializedName("arrive_day_diff")
+    @SerializedName("mArriveDayDiff")
     private String arriveDayDiff;
-    @SerializedName("arrive_time")
+    @SerializedName("mArriveTime")
     private String arriveTime;
     @SerializedName("update_arrive_time")
     private String updateArriveTime;
-    @SerializedName("start_time")
+    @SerializedName("mStartTime")
     private String startTime;
     @SerializedName("update_start_time")
     private String updateStartTime;
@@ -106,7 +106,7 @@ public class DataBean {
     private String sameCityCode;
     @SerializedName("stopover_time")
     private String stopoverTime;
-    @SerializedName("running_time")
+    @SerializedName("mRunningTime")
     private String runningTime;
 
     public void setStartTrainDate(String startTrainDate) {

@@ -15,7 +15,7 @@ import java.util.List;
  * @author by5388  on 2019/1/2.
  */
 public class StationJson implements IStationJson {
-    private final static String FILE_NAME = "/otn/resources/js/framework/station_name.js?station_version=";
+    private final static String FILE_NAME = "/otn/resources/js/framework/mStationName.js?station_version=";
     // TODO: 2019/3/26 仅仅作为一个表达式，而是应该包含数据
 
 

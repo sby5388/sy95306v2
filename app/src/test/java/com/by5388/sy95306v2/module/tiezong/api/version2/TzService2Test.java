@@ -13,6 +13,7 @@ import retrofit2.Retrofit;
  */
 public class TzService2Test {
 
+    private static final int HTTP_OK = 200;
     private TzService2 mSubjects;
 //https://www.12306.cn/kfzmpt/queryTrainInfo/query
 
@@ -25,15 +26,18 @@ public class TzService2Test {
     @Test
     public void getTrainDetail() {
         final String trainNo = "D7515";
-        final String trainDate = "2019-09-22";
+        final String trainDate = "2019-10-10";
         String randCode = "";
         mSubjects.getTrainDetail(trainNo, trainDate, randCode)
-                .subscribe(new Consumer<Temp>() {
+                .subscribe(new Consumer<TzTrainCodeResult>() {
                                @Override
-                               public void accept(Temp temp) throws Exception {
-                                   final List<Temp.DataBeanX.DataBean> dataBeans = temp.getData().getData();
-                                   for (Temp.DataBeanX.DataBean bean : dataBeans) {
-                                       System.out.println(bean.getStation_name() + " : " + bean.getArrive_day_str() + " : " + bean.getTrain_class_name());
+                               public void accept(TzTrainCodeResult tzTrainCodeResult) throws Exception {
+                                   if (!tzTrainCodeResult.status || tzTrainCodeResult.mHttpStatus != HTTP_OK) {
+                                       throw new Exception("没有获取到正确的数值");
+                                   }
+                                   final List<TzTrainCodeResult.DataBeanX.DataBean> dataBeans = tzTrainCodeResult.data.data;
+                                   for (TzTrainCodeResult.DataBeanX.DataBean bean : dataBeans) {
+                                       System.out.println(bean.mStationName + " : " + bean.mArriveTime + " : " + bean.mStartTime);
                                    }
                                }
                            }

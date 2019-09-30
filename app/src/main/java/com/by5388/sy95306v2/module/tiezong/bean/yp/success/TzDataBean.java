@@ -116,19 +116,19 @@ public class TzDataBean implements IRemainingTicket, Cloneable {
     public String toString() {
         return "TzDataBean{" +
                 "train_no='" + train_no + '\'' +
-                ", station_train_code='" + station_train_code + '\'' +
+                ", mStationTrainCode='" + station_train_code + '\'' +
                 ", start_station_telecode='" + start_station_telecode + '\'' +
-                ", start_station_name='" + start_station_name + '\'' +
+                ", mStartStationName='" + start_station_name + '\'' +
                 ", end_station_telecode='" + end_station_telecode + '\'' +
                 ", end_station_name='" + end_station_name + '\'' +
                 ", from_station_telecode='" + from_station_telecode + '\'' +
                 ", from_station_name='" + from_station_name + '\'' +
                 ", to_station_telecode='" + to_station_telecode + '\'' +
                 ", to_station_name='" + to_station_name + '\'' +
-                ", start_time='" + start_time + '\'' +
-                ", arrive_time='" + arrive_time + '\'' +
+                ", mStartTime='" + start_time + '\'' +
+                ", mArriveTime='" + arrive_time + '\'' +
                 ", day_difference='" + day_difference + '\'' +
-                ", train_class_name='" + train_class_name + '\'' +
+                ", mTrainClassName='" + train_class_name + '\'' +
                 ", lishi='" + lishi + '\'' +
                 ", canWebBuy='" + canWebBuy + '\'' +
                 ", lishiValue='" + lishiValue + '\'' +
@@ -172,19 +172,19 @@ public class TzDataBean implements IRemainingTicket, Cloneable {
 
     /**
      * train_no : 65000D753300
-     * station_train_code : D7533
+     * mStationTrainCode : D7533
      * start_station_telecode : GGQ
-     * start_station_name : 广州东
+     * mStartStationName : 广州东
      * end_station_telecode : CBQ
      * end_station_name : 潮汕
      * from_station_telecode : GGQ
      * from_station_name : 广州东
      * to_station_telecode : CBQ
      * to_station_name : 潮汕
-     * start_time : 11:30
-     * arrive_time : 14:47
+     * mStartTime : 11:30
+     * mArriveTime : 14:47
      * day_difference : 0
-     * train_class_name : 动车
+     * mTrainClassName : 动车
      * lishi : 03:17
      * canWebBuy : N
      * lishiValue : 197

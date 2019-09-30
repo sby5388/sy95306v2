@@ -19,7 +19,7 @@ public class DataSimpleBean {
     private String date;
     @SerializedName("from_station")
     private String fromStation;
-    @SerializedName("station_train_code")
+    @SerializedName("mStationTrainCode")
     private String trainCodeSimple;
     @SerializedName("to_station")
     private String toStation;

@@ -11,8 +11,8 @@ public class CdRemainTicketDetailBean implements IRemainingTicket {
     private final static String EMPTY = "0";
     private final static String RESULT_EMPTY = "";
     /**
-     * station_train_code : G2926
-     * start_station_name : 深圳北
+     * mStationTrainCode : G2926
+     * mStartStationName : 深圳北
      * to_station_name : 贵阳北
      * lishi : 04:58
      * yz_num : 0
@@ -20,8 +20,8 @@ public class CdRemainTicketDetailBean implements IRemainingTicket {
      * rz_num : 0
      * rw_num : 0
      * wz_num : 0
-     * start_time : 07:58
-     * arrive_time : 12:56
+     * mStartTime : 07:58
+     * mArriveTime : 12:56
      * zy_num : 4
      * ze_num : 0
      * fzx : 01
