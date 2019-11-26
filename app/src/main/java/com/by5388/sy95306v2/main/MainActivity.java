@@ -68,9 +68,9 @@ public class MainActivity extends AppCompatActivity
 
     private List<Fragment> fragments = new ArrayList<>();
     private List<Integer> titles = new ArrayList<>();
-    private FragmentManager fragmentManager;
+    private FragmentManager mFragmentManager;
     private View mainView;
-    private IMainPresenter presenter;
+    private IMainPresenter mPresenter;
 
     private AlertDialog updatingDialog;
 
@@ -103,19 +103,20 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void loadData() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         for (Fragment fragment : fragments) {
             fragmentTransaction.add(R.id.container_main, fragment);
             fragmentTransaction.hide(fragment);
         }
         fragmentTransaction.commit();
         changeFragment(SHEN_YANG);
-        presenter.checkUpdate();
+        mPresenter.checkUpdate();
     }
 
     private void initData() {
         fragments = new ArrayList<>();
+        // TODO: 2019/11/26 一开始就初始化这么多的数据 需要处理
+        // FIXME: 2019/11/26
         fragments.add(ShenYangFragment.newInstance());
         fragments.add(GuangzhouFragment.newInstance());
         fragments.add(ShanghaiFragment.newInstance());
@@ -128,15 +129,15 @@ public class MainActivity extends AppCompatActivity
         titles.add(TITLE_TZ);
         titles.add(TITLE_CD);
 
-        fragmentManager = getSupportFragmentManager();
-        presenter = new MainPresenter(this);
+        mFragmentManager = getSupportFragmentManager();
+        mPresenter = new MainPresenter(this);
     }
 
     private void changeFragment(int position) {
         if (position >= fragments.size()) {
             return;
         }
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         for (Fragment fragment : fragments) {
             fragmentTransaction.hide(fragment);
         }
@@ -212,19 +213,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void notifyUpdate() {
+    public void onNotifyUpdate() {
         //使用一个对话框来提供升级的入口
         new AlertDialog.Builder(this)
                 .setTitle(R.string.isUpdating)
                 .setMessage(R.string.update_tip)
-                .setPositiveButton(android.R.string.ok, (dialog1, which) -> presenter.startUpdate())
+                .setPositiveButton(android.R.string.ok, (dialog1, which) -> mPresenter.startUpdate())
                 .setNegativeButton(android.R.string.cancel, null)
                 .setCancelable(true)
                 .show();
     }
 
     @Override
-    public void showUpdating() {
+    public void onShowUpdating() {
         checkUpdatingDialog();
         AlertDialog alertDialog = updatingDialog;
         alertDialog.show();
@@ -238,12 +239,6 @@ public class MainActivity extends AppCompatActivity
                     .setView(getDialogView())
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
                     .create();
-            updatingDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface dialog) {
-
-                }
-            });
             updatingDialog.setCancelable(false);
             updatingDialog.setOnCancelListener(dialog -> {
                 // TODO: 2019/1/11 刷新Fragment
@@ -260,13 +255,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void startChecking() {
-        // TODO: 2019/1/11 show a  progressBar
+    public void onStartChecking() {
+        Toast.makeText(this, R.string.check_updating, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void finishChecked() {
-
+    public void onFinishChecked() {
+        Toast.makeText(this, R.string.lastest_version, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -285,16 +280,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void openNetWorkSetting() {
-        tip("网络异常");
+        onTip("网络异常");
     }
 
     @Override
-    public void tip(String tip) {
+    public void onTip(String tip) {
         Toast.makeText(this, tip, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void finishUpdate() {
+    public void onFinishUpdate() {
         final AlertDialog alertDialog = updatingDialog;
         alertDialog.setCancelable(true);
         Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);

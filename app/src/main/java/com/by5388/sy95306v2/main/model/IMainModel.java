@@ -28,13 +28,6 @@ public interface IMainModel {
     Observable<Boolean> isNeedUpdate();
 
     /**
-     * 网络是否可用
-     *
-     * @return 网络是否可用
-     */
-    boolean getNetWordCanUse();
-
-    /**
      * 清空数据库
      *
      * @return 0:清空完成
@@ -44,5 +37,5 @@ public interface IMainModel {
     /**
      * 更新完成，更新版本号
      */
-    void finishUpdate();
+    void onFinishUpdate();
 }

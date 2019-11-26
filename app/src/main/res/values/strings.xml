@@ -87,6 +87,8 @@
     <string name="title_guang_zhou">广铁12306</string>
     <string name="title_shang_hai">上海12306</string>
     <string name="about">关于</string>
+    <string name="check_updating">正在检查更新…</string>
+    <string name="lastest_version">已是最新版本</string>
 
 
 </resources>

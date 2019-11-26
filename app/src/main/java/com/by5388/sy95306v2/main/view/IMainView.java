@@ -9,17 +9,17 @@ public interface IMainView {
     /**
      * 通知更新
      */
-    void notifyUpdate();
+    void onNotifyUpdate();
 
     /**
      * 开始检查
      */
-    void startChecking();
+    void onStartChecking();
 
     /**
      * 检查完成
      */
-    void finishChecked();
+    void onFinishChecked();
 
 
     /**
@@ -46,15 +46,15 @@ public interface IMainView {
      *
      * @param tip 提示
      */
-    void tip(String tip);
+    void onTip(String tip);
 
     /**
      * 打开进度对话框（升级中）
      */
-    void showUpdating();
+    void onShowUpdating();
 
     /**
      * 升级完成
      */
-    void finishUpdate();
+    void onFinishUpdate();
 }

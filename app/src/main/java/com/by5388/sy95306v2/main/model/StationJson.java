@@ -15,7 +15,8 @@ import java.util.List;
  * @author by5388  on 2019/1/2.
  */
 public class StationJson implements IStationJson {
-    private final static String FILE_NAME = "/otn/resources/js/framework/mStationName.js?station_version=";
+    private final static String FILE_NAME_old = "/otn/resources/js/framework/stationName.js?station_version=";
+    private final static String FILE_NAME = "/otn/resources/js/framework/station_name.js?station_version=";
     // TODO: 2019/3/26 仅仅作为一个表达式，而是应该包含数据
 
 
@@ -40,12 +41,14 @@ public class StationJson implements IStationJson {
 
     @Override
     public String jsonToString(InputStream is) {
-        InputStreamReader reader = new InputStreamReader(is);
-        BufferedReader bufferedReader = new BufferedReader(reader);
+        final InputStreamReader reader = new InputStreamReader(is);
+        final BufferedReader bufferedReader = new BufferedReader(reader);
         String line;
         try {
             while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
                 if (line.contains(FILE_NAME)) {
+                    System.err.println("找到匹配的数据");
                     break;
                 }
             }
@@ -78,7 +81,10 @@ public class StationJson implements IStationJson {
 
     @Override
     public String getVersion(InputStream inputStream) {
-        return getVersion(jsonToString(inputStream));
+        final String lineString = jsonToString(inputStream);
+        System.out.println("lineString = " + lineString);
+        return getVersion(lineString);
+
     }
 
     @Override

@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:padding="@dimen/detail_padding"
-            android:text="@string/arriveTime"
+            android:text="@string/endTime"
             android:textSize="@dimen/detail_text_size"
             app:layout_constraintHorizontal_weight="20"
             app:layout_constraintLeft_toRightOf="@+id/stationName"

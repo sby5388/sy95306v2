@@ -1,17 +1,12 @@
 package com.by5388.sy95306v2.main.model;
 
-import android.accounts.NetworkErrorException;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.by5388.sy95306v2.App;
 import com.by5388.sy95306v2.database.DataBaseApiImpl;
 import com.by5388.sy95306v2.database.IShenYangDbApi;
+import com.by5388.sy95306v2.exception.NetworkException;
 import com.by5388.sy95306v2.setting.ISettingSharedPreferences;
 import com.by5388.sy95306v2.setting.SettingSharedPreferences;
-import com.by5388.sy95306v2.start.model.IStartModel;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -27,14 +22,14 @@ import static java.net.HttpURLConnection.HTTP_OK;
  *
  * @author by5388  on 2019/1/2.
  */
-public class MainModel implements IStartModel, IMainModel {
+public class MainModel implements IMainModel {
     private final static String TAG = "MainModel";
     /**
      * 12306购票页面，包含了车站的信息
      * -->TODO 页面应当替换成12306手机版的
      */
     private final static String BUY_TICKET_PAGE = "https://kyfw.12306.cn/otn/leftTicket/init";
-    private final static String FILE_NAME = "/otn/resources/js/framework/mStationName.js?station_version=";
+    private final static String FILE_NAME = "/otn/resources/js/framework/station_name.js?station_version=";
 
     private final static String START_NAME_SHARED_PREFERENCES = "stationVersion";
     private final static int TIME_OUT = 5000;
@@ -47,7 +42,7 @@ public class MainModel implements IStartModel, IMainModel {
      * 当前的版本号：20180730时网站上的最新版
      */
     private static String defaultStationVersion = "0.0";
-    private String getVersion = "";
+    private String mVersion = "";
     private final ISettingSharedPreferences preferences;
     private final IShenYangDbApi service;
     private final IStationJson json;
@@ -65,14 +60,20 @@ public class MainModel implements IStartModel, IMainModel {
         return service.insertStationList(json.getCityList(stationListFile.toString()));
     }
 
+    // TODO: 2019/11/26 不易读懂，需要拆分
     @Override
     public Observable<Integer> getStationCount() {
+
+        Log.e(TAG, "getStationCount: ", new Exception());
         // TODO: 2019/9/10 网络不可用时，出现了闪退，所以应当检查网络，甚至注册网络监听者
         final String serverPath = "https://kyfw.12306.cn";
-        final String stationListVersionPath = FILE_NAME + getVersion;
+        final String stationListVersionPath = FILE_NAME + mVersion;
         return Observable.create(emitter -> {
             if (!emitter.isDisposed()) {
-                URL url = new URL(serverPath + stationListVersionPath);
+                final String spec = serverPath + stationListVersionPath;
+                Log.d(TAG, "getStationCount: spec = " + spec);
+
+                URL url = new URL(spec);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setConnectTimeout(TIME_OUT);
                 connection.setRequestMethod("GET");
@@ -84,11 +85,11 @@ public class MainModel implements IStartModel, IMainModel {
                         inputStream.close();
                         emitter.onNext(count);
                     } else {
-                        emitter.onError(new NetworkErrorException());
+                        emitter.onError(new NetworkException());
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "getStationCount: ", e);
-                    emitter.onError(new NetworkErrorException());
+                    emitter.onError(new NetworkException());
                 }
                 emitter.onComplete();
             }
@@ -99,6 +100,7 @@ public class MainModel implements IStartModel, IMainModel {
     public Observable<Boolean> isNeedUpdate() {
         boolean isEmpty = service.isEmpty();
         if (isEmpty) {
+            Log.d(TAG, "isNeedUpdate: 本地为空");
             return Observable.just(true);
         }
         double currentVersion = getCurrentVersion();
@@ -111,9 +113,9 @@ public class MainModel implements IStartModel, IMainModel {
                 connection.setRequestMethod("GET");
                 if (HTTP_OK == connection.getResponseCode()) {
                     InputStream inputStream = connection.getInputStream();
-//                    String stationVersion = json.getVersion(json.jsonToString(inputStream));
+//                    String stationVersion = json.mVersion(json.jsonToString(inputStream));
                     String stationVersion = json.getVersion(inputStream);
-                    getVersion = stationVersion;
+                    mVersion = stationVersion;
                     emitter.onNext(Double.parseDouble(stationVersion));
                 } else {
                     emitter.onNext(currentVersion);
@@ -146,16 +148,6 @@ public class MainModel implements IStartModel, IMainModel {
     }
 
     @Override
-    public boolean getNetStatus() {
-        ConnectivityManager manager = (ConnectivityManager) App.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (null == manager) {
-            return false;
-        }
-        NetworkInfo info = manager.getActiveNetworkInfo();
-        return null != info && info.isAvailable();
-    }
-
-    @Override
     public Observable<Integer> clearData() {
         return Observable.create(emitter -> {
             emitter.onNext(service.deleteAllStation());
@@ -164,12 +156,8 @@ public class MainModel implements IStartModel, IMainModel {
     }
 
     @Override
-    public void finishUpdate() {
+    public void onFinishUpdate() {
         preferences.put(START_NAME_SHARED_PREFERENCES, defaultStationVersion);
     }
 
-    @Override
-    public boolean getNetWordCanUse() {
-        return getNetStatus();
-    }
 }
