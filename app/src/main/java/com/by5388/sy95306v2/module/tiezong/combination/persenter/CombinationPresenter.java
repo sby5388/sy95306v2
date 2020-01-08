@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.module.tiezong.combination.persenter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.by5388.sy95306v2.bean.IRemainingTicket;

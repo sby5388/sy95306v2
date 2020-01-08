@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2.database;
 
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * 成都铁路局部分

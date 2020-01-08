@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.bean;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * @author by5388  on 2018/8/2.

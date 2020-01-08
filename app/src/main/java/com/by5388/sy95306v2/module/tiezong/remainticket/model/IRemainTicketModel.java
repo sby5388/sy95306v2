@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.module.tiezong.remainticket.model;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.bean.thrid.QueryParam;

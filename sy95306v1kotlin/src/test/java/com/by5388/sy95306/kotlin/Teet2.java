@@ -2,7 +2,7 @@ package com.by5388.sy95306.kotlin;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * @author by5388  on 2019/1/14.

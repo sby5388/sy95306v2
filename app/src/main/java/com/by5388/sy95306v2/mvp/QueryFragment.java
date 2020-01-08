@@ -2,7 +2,7 @@ package com.by5388.sy95306v2.mvp;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
+import com.google.android.material.textfield.TextInputEditText;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;

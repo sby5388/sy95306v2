@@ -1,6 +1,6 @@
 package com.by5388.sy95306.common;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.by5388.sy95306.bean.Station;
 import com.by5388.sy95306.bean.TrainNumber;

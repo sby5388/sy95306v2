@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.gz;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.by5388.sy95306v2.module.guangzhou.bean.GzResultData;
 import com.by5388.sy95306v2.module.guangzhou.bean.StationInfoBean;

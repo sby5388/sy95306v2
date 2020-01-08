@@ -2,8 +2,8 @@ package com.android.train;
 
 import android.content.Context;
 import android.os.Handler;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.train.bean.QueryDetail;
 import com.android.train.net.api.QueryThread;

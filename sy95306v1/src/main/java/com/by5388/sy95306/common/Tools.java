@@ -1,7 +1,7 @@
 package com.by5388.sy95306.common;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.by5388.sy95306.adapter.StationAdapter;
 import com.by5388.sy95306.bean.Station;

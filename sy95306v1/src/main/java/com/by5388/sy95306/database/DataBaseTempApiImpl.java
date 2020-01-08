@@ -3,7 +3,7 @@ package com.by5388.sy95306.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.by5388.sy95306.App;
 import com.by5388.sy95306.StartActivity;

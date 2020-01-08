@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2.database;
 
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * @author by5388  on 2018/7/21.

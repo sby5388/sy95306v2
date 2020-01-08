@@ -2,8 +2,8 @@ package com.by5388.sy95306v2.module.chengdu.late;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
+import androidx.annotation.NonNull;
+import com.google.android.material.textfield.TextInputEditText;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;

@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2.module.guangzhou.p2p;
 
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
+import com.google.android.material.textfield.TextInputEditText;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;

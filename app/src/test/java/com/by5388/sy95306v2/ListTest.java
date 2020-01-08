@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.junit.Test;
 

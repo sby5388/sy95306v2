@@ -26,7 +26,7 @@
             tools:text="G5" />
 
         <!--起始时间-->
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/lly_start_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -72,9 +72,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView_start_station_name"
                 tools:text="07:00" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <!--消耗时间-->
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/lly_spend_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -103,9 +103,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView_train_description"
                 tools:text="4小时40分" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <!--到达时间-->
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/lly_end_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView_end_station"
                 tools:text="11:40" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>

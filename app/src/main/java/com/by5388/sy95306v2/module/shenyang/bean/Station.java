@@ -1,6 +1,6 @@
 package com.by5388.sy95306v2.module.shenyang.bean;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * 车站：用于选择出发站、终点站，车次返回后的名称
