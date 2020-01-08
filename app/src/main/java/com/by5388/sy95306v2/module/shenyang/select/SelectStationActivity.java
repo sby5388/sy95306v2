@@ -2,8 +2,10 @@ package com.by5388.sy95306v2.module.shenyang.select;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -30,9 +32,10 @@ import java.util.List;
  */
 public class SelectStationActivity extends BaseActivity implements IStationView,
         AdapterView.OnItemClickListener, TextWatcher {
+    private static final String TAG = "SelectStationActivity";
+    private Toast mToast;
 
     private GridView mGridView;
-    EditText stationName;
     private IStationPresenter presenter;
     private StationAdapter adapter;
 
@@ -40,7 +43,7 @@ public class SelectStationActivity extends BaseActivity implements IStationView,
     protected void initView() {
         mGridView = findViewById(R.id.gridView_city);
         mGridView.setOnItemClickListener(this);
-        stationName = findViewById(R.id.edit_text_select_city_name);
+        EditText stationName = findViewById(R.id.edit_text_select_city_name);
         stationName.addTextChangedListener(this);
 
     }
@@ -86,6 +89,8 @@ public class SelectStationActivity extends BaseActivity implements IStationView,
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
+        // TODO: 2020/1/8 需要设置触发频率
+
         presenter.getStation(s.toString());
     }
 
@@ -95,8 +100,12 @@ public class SelectStationActivity extends BaseActivity implements IStationView,
     }
 
     @Override
-    public void showErrorMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void showErrorMessage(@NonNull String message) {
+        if (mToast != null) {
+            mToast.cancel();
+        }
+        mToast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        mToast.show();
     }
 
 

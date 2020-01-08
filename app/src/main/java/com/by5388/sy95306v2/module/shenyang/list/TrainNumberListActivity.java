@@ -16,15 +16,15 @@ import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.base.BaseActivity;
+import com.by5388.sy95306v2.dialog.TrainFilterDialog;
+import com.by5388.sy95306v2.dialog.TrainFilterDialog.UpdateFilterDataCallBack;
+import com.by5388.sy95306v2.module.shenyang.adapter.TrainListAdapter;
+import com.by5388.sy95306v2.module.shenyang.bean.Station;
+import com.by5388.sy95306v2.module.shenyang.bean.TrainNumber;
 import com.by5388.sy95306v2.module.shenyang.detail.TrainDetailActivity;
 import com.by5388.sy95306v2.module.shenyang.list.presenter.ITrainListPresenter;
 import com.by5388.sy95306v2.module.shenyang.list.presenter.TrainListPresenter;
 import com.by5388.sy95306v2.module.shenyang.list.view.ITrainListView;
-import com.by5388.sy95306v2.module.shenyang.adapter.TrainListAdapter;
-import com.by5388.sy95306v2.module.shenyang.bean.Station;
-import com.by5388.sy95306v2.module.shenyang.bean.TrainNumber;
-import com.by5388.sy95306v2.dialog.TrainFilterDialog;
-import com.by5388.sy95306v2.dialog.TrainFilterDialog.UpdateFilterDataCallBack;
 import com.by5388.sy95306v2.module.shenyang.net.api.SyService;
 
 import java.util.ArrayList;
@@ -41,17 +41,12 @@ import butterknife.OnClick;
  */
 
 public class TrainNumberListActivity extends BaseActivity implements ITrainListView, UpdateFilterDataCallBack {
-    private TrainFilterDialog dialog;
-
     @BindViews({R.id.image_view_1, R.id.image_view_2, R.id.image_view_3})
     List<ImageView> imageViews;
     @BindView(R.id.textView_show_time)
     TextView textViewDate;
-    @BindViews({R.id.lly_menu_start_time, R.id.lly_menu_spend_time, R.id.lly_menu_end_time, R.id.lly_menu_filter})
+    @BindViews({R.id.lly_menu_start_time, R.id.lly_menu_spend_time, R.id.lly_menu_end_time})
     List<ConstraintLayout> constraintLayouts;
-    @BindView(R.id.textView_train_count)
-
-    TextView textViewCount;
     @BindView(R.id.recycler_View_train_list)
 
     RecyclerView recyclerView;
@@ -66,6 +61,10 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
     TextView stationNames;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
+    private TrainFilterDialog dialog;
+    private SortType mDefaultSortType = SortType.StartTime;
+    private SortType mSortType = mDefaultSortType;
+    private TextView textViewCount;
     /**
      * 默认起始车站：沈阳北站
      */
@@ -88,6 +87,11 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
      * 默认起始
      */
     private int defaultPosition = 0;
+
+    /**
+     * TODO 20191126 加载完成,避免空数据时 点击闪退
+     */
+    private boolean mLoaded = false;
 
     /**
      * 进入 TrainNumberListActivity
@@ -117,11 +121,13 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
     protected void initData() {
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra(DATA_BUNDLE);
-        if (null != bundle) {
-            selectedDate = bundle.getInt(SyService.TRAIN_DATE);
-            fromStationCode = bundle.getString(SyService.FROM_STATION);
-            toStationCode = bundle.getString(SyService.TO_STATION);
+        if (bundle == null) {
+            finish();
+            return;
         }
+        selectedDate = bundle.getInt(SyService.TRAIN_DATE);
+        fromStationCode = bundle.getString(SyService.FROM_STATION);
+        toStationCode = bundle.getString(SyService.TO_STATION);
         presenter = new TrainListPresenter(this);
 
         TrainOnClickListener listener = (view, position) -> {
@@ -135,16 +141,115 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
         adapter = new TrainListAdapter(new ArrayList<>(), this, listener);
     }
 
-    @OnClick({R.id.lly_menu_start_time, R.id.lly_menu_spend_time, R.id.lly_menu_end_time, R.id.lly_menu_filter})
+
+    @Override
+    protected void initView() {
+        ButterKnife.bind(this);
+        findViewById(R.id.lly_menu_filter).setOnClickListener(v -> showFilterDialog());
+        if (false) {
+            // TODO: 2019/11/26 未实现，继续使用原来的api
+            findViewById(R.id.lly_menu_start_time).setOnClickListener(this::sortTrainNumber);
+            findViewById(R.id.lly_menu_spend_time).setOnClickListener(this::sortTrainNumber);
+            findViewById(R.id.lly_menu_end_time).setOnClickListener(this::sortTrainNumber);
+        }
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                R.color.colorPrimaryDark, R.color.colorAccent,
+                R.color.colorAccent);
+        swipeRefreshLayout.setOnRefreshListener(this::loadData);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        textViewCount = findViewById(R.id.textView_train_count);
+    }
+
+    @Override
+    protected void loadData() {
+        textViewDate.setText(String.valueOf(selectedDate));
+        stationNames.setText(presenter.getStationNames(fromStationCode, toStationCode));
+        recyclerView.setAdapter(adapter);
+        presenter.getTrainList(selectedDate, fromStationCode, toStationCode);
+    }
+
+    @Override
+    public void updateTrainList(List<TrainNumber> numbers) {
+        adapter.setTrainNumbers(numbers);
+        String show = "共" + numbers.size() + "列";
+        textViewCount.setText(show);
+        mLoaded = true;
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+
+    @Override
+    public void showLoading() {
+        mLoaded = false;
+        swipeRefreshLayout.setRefreshing(true);
+        recyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void finishLoading() {
+        swipeRefreshLayout.setRefreshing(false);
+        recyclerView.setVisibility(View.VISIBLE);
+        mLoaded = true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (null != presenter) {
+            presenter.unSubscribe();
+            presenter = null;
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    protected boolean isShowActionBar() {
+        return true;
+    }
+
+    @Override
+    public void updateFilterData() {
+        presenter.sortTrainList(defaultPosition, isUp);
+    }
+
+    @OnClick({R.id.lly_menu_start_time, R.id.lly_menu_spend_time, R.id.lly_menu_end_time})
     public void sortTrainNumber(ConstraintLayout view) {
-        int position = constraintLayouts.indexOf(view);
-        final int showFilter = 3;
-        if (showFilter == position) {
-            showFilterDialog();
+        if (!mLoaded) {
             return;
         }
+        int position = constraintLayouts.indexOf(view);
         sortTrainNumber(position);
     }
+
+    private void sortTrainNumber(View view) {
+        if (!mLoaded) {
+            Toast.makeText(this, "请稍候", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final int id = view.getId();
+        final SortType sortType = getSortType(id);
+        // TODO: 2019/11/26
+
+    }
+
+    private SortType getSortType(int viewId) {
+        switch (viewId) {
+            case R.id.lly_menu_spend_time:
+                return SortType.SpeedTime;
+            case R.id.lly_menu_end_time:
+                return SortType.ArriveTime;
+            case R.id.lly_menu_start_time:
+            default:
+                return SortType.StartTime;
+        }
+    }
+
 
     /**
      * 跟换图片 后台处理排序
@@ -152,6 +257,10 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
      * @param position 位置
      */
     private void sortTrainNumber(int position) {
+        if (!mLoaded) {
+            Toast.makeText(this, "请稍候", Toast.LENGTH_SHORT).show();
+            return;
+        }
         ImageView view = imageViews.get(position);
         if (defaultPosition == position) {
             if (isUp) {
@@ -177,6 +286,9 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
      * 筛选对话框
      */
     private void showFilterDialog() {
+        if (!mLoaded) {
+            return;
+        }
         if (null == dialog) {
             dialog = new TrainFilterDialog(this, this);
         }
@@ -186,67 +298,4 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
         dialog.refresh().show();
     }
 
-    @Override
-    protected void initView() {
-        ButterKnife.bind(this);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
-                R.color.colorPrimaryDark, R.color.colorAccent,
-                R.color.colorAccent);
-        swipeRefreshLayout.setOnRefreshListener(this::loadData);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-    }
-
-    @Override
-    protected void loadData() {
-        textViewDate.setText(String.valueOf(selectedDate));
-        stationNames.setText(presenter.getStationNames(fromStationCode, toStationCode));
-        recyclerView.setAdapter(adapter);
-        presenter.getTrainList(selectedDate, fromStationCode, toStationCode);
-    }
-
-    @Override
-    public void updateTrainList(List<TrainNumber> numbers) {
-        adapter.setTrainNumbers(numbers);
-        String show = "共" + numbers.size() + "列";
-        textViewCount.setText(show);
-    }
-
-    @Override
-    public void showErrorMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        finish();
-    }
-
-
-    @Override
-    public void showLoading() {
-        swipeRefreshLayout.setRefreshing(true);
-        recyclerView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void finishLoading() {
-        swipeRefreshLayout.setRefreshing(false);
-        recyclerView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (null != presenter) {
-            presenter.unSubscribe();
-            presenter = null;
-        }
-        super.onDestroy();
-    }
-
-    @Override
-    protected boolean isShowActionBar() {
-        return true;
-    }
-
-    @Override
-    public void updateFilterData() {
-        presenter.sortTrainList(defaultPosition, isUp);
-    }
 }

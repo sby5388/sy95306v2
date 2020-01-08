@@ -2,6 +2,7 @@ package com.by5388.sy95306v2.main.presenter;
 
 import android.util.Log;
 
+import com.by5388.sy95306v2.database.IShenYangDbApi;
 import com.by5388.sy95306v2.exception.NetworkException;
 import com.by5388.sy95306v2.main.model.IMainModel;
 import com.by5388.sy95306v2.main.model.MainModel;
@@ -17,31 +18,31 @@ import io.reactivex.schedulers.Schedulers;
 public class MainPresenter implements IMainPresenter {
     private static final String TAG = MainPresenter.class.getSimpleName();
 
-    private final IMainView view;
-    private final IMainModel model;
-    private final CompositeDisposable disposable;
+    private final IMainView mMainView;
+    private final IMainModel mModel;
+    private final CompositeDisposable mDisposable;
 
     public MainPresenter(IMainView view) {
-        this.view = view;
-        this.model = new MainModel();
-        this.disposable = new CompositeDisposable();
+        this.mMainView = view;
+        this.mModel = new MainModel();
+        this.mDisposable = new CompositeDisposable();
     }
 
     @Override
     public void checkUpdate() {
-        view.onStartChecking();
-        disposable.add(model.isNeedUpdate()
+        mMainView.onStartChecking();
+        mDisposable.add(mModel.isNeedUpdate()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(isNeedUpdate -> {
                     if (isNeedUpdate) {
-                        view.onNotifyUpdate();
+                        mMainView.onNotifyUpdate();
                     } else {
-                        view.onFinishChecked();
+                        mMainView.onFinishChecked();
                     }
                 }, throwable -> {
-                    view.openNetWorkSetting();
-                    view.onTip("请重试");
+                    mMainView.openNetWorkSetting();
+                    mMainView.onTip("请重试");
                 })
         );
 
@@ -49,18 +50,18 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void startUpdate() {
-        view.onShowUpdating();
+        mMainView.onShowUpdating();
         // TODO: 2019/11/26 对异常没有处理，导致闪退
-        disposable.add(model.getStationCount()
+        mDisposable.add(mModel.getStationCount()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mInteger -> {
-                    view.updateAllCount(mInteger);
+                    mMainView.updateAllCount(mInteger);
                     clearData();
                 }, throwable -> {
                     if (throwable instanceof NetworkException) {
                         Log.e(TAG, "startUpdate: ", throwable);
-                        view.onTip(throwable.getLocalizedMessage());
+                        mMainView.onTip(throwable.getLocalizedMessage());
                     }
                 })
         );
@@ -68,11 +69,11 @@ public class MainPresenter implements IMainPresenter {
     }
 
     private void clearData() {
-        disposable.add(model.clearData()
+        mDisposable.add(mModel.clearData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mInteger -> {
-                    if (0 == mInteger) {
+                .subscribe(result -> {
+                    if (IShenYangDbApi.ACTION_DELETE_SUCCESS == result) {
                         insertData();
                     }
                 })
@@ -80,13 +81,15 @@ public class MainPresenter implements IMainPresenter {
     }
 
     private void insertData() {
-        disposable.add(model.insertData()
+        mDisposable.add(mModel.insertData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(view::updateProgress, mThrowable -> view.onTip("异常"), () -> {
-                    view.onFinishUpdate();
-                    model.onFinishUpdate();
-                })
+                .subscribe(mMainView::updateProgress,
+                        throwable -> mMainView.onTip("异常"),
+                        () -> {
+                            mMainView.onFinishUpdate();
+                            mModel.onFinishUpdate();
+                        })
         );
     }
 }

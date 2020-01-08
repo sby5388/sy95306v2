@@ -1,6 +1,7 @@
 package com.by5388.sy95306v2.module.shenyang.list.model;
 
 import com.by5388.sy95306v2.database.DataBaseApiImpl;
+import com.by5388.sy95306v2.module.shenyang.list.SortType;
 import com.by5388.sy95306v2.module.shenyang.list.model.sort.BaseTrainNumberSort;
 import com.by5388.sy95306v2.module.shenyang.bean.Station;
 import com.by5388.sy95306v2.module.shenyang.bean.TrainNumber;
@@ -108,5 +109,10 @@ public class TrainListModel implements ITrainListModel {
             return "";
         }
         return startStation.getName() + "-" + endStation.getName();
+    }
+
+    @Override
+    public Observable<List<TrainNumber>> sortTrainNumber(List<TrainNumber> trainNumbers, SortType sortType, boolean isUp) {
+        return null;
     }
 }

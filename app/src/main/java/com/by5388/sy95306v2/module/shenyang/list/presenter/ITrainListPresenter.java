@@ -1,5 +1,9 @@
 package com.by5388.sy95306v2.module.shenyang.list.presenter;
 
+import android.support.annotation.NonNull;
+
+import com.by5388.sy95306v2.module.shenyang.list.SortType;
+
 /**
  * @author by5388  on 2018/7/29.
  */
@@ -24,7 +28,9 @@ public interface ITrainListPresenter {
      *
      * @param method 排序规则
      * @param isUp   向上：向下
+     * @deprecated Use {@link #sortData(SortType, boolean)} instead
      */
+    @Deprecated
     void sortTrainList(int method, boolean isUp);
 
     /**
@@ -35,4 +41,12 @@ public interface ITrainListPresenter {
      * @return
      */
     String getStationNames(String fromStationCode, String toStationCode);
+
+    /**
+     * 新的排序
+     *
+     * @param sortType
+     * @param isUp
+     */
+    void sortData(@NonNull SortType sortType, boolean isUp);
 }

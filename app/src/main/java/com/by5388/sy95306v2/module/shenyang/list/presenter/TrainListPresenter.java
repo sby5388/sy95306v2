@@ -1,5 +1,8 @@
 package com.by5388.sy95306v2.module.shenyang.list.presenter;
 
+import android.support.annotation.NonNull;
+
+import com.by5388.sy95306v2.module.shenyang.list.SortType;
 import com.by5388.sy95306v2.module.shenyang.list.model.ITrainListModel;
 import com.by5388.sy95306v2.module.shenyang.list.model.TrainListModel;
 import com.by5388.sy95306v2.module.shenyang.list.view.ITrainListView;
@@ -79,5 +82,10 @@ public class TrainListPresenter implements ITrainListPresenter {
     @Override
     public String getStationNames(String fromStationCode, String toStationCode) {
         return model.getStationNames(fromStationCode, toStationCode);
+    }
+
+    @Override
+    public void sortData(@NonNull SortType sortType, boolean isUp) {
+        // TODO: 2019/11/26
     }
 }

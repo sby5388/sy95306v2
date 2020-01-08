@@ -50,4 +50,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 //  todo 20190919 增加测试模式下的内容
     testImplementation 'org.xerial:sqlite-jdbc:3.7.2'
+//    todo 20191216 参考其他应用的解析库
+    implementation 'org.jsoup:jsoup:1.12.1'
 }

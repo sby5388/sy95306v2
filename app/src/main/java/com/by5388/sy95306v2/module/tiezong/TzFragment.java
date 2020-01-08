@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.by5388.sy95306v2.base.BaseTopFragment;
 import com.by5388.sy95306v2.bean.MyViewPager;
 import com.by5388.sy95306v2.module.tiezong.combination.CombinationFragment;
-import com.by5388.sy95306v2.module.tiezong.remainticket.RemainTicketFragment;
 import com.by5388.sy95306v2.module.tiezong.zzcx.ZzCxFragment;
 
 import java.util.ArrayList;
@@ -33,7 +32,6 @@ public class TzFragment extends BaseTopFragment {
     protected List<MyViewPager> getViewPagerFragmentList() {
         List<MyViewPager> list = new ArrayList<>();
         list.add(new MyViewPager(ZzCxFragment.newInstance(), "余票查询"));
-        list.add(new MyViewPager(RemainTicketFragment.newInstance(), "余票查询2"));
         list.add(new MyViewPager(CombinationFragment.newInstance(), "联合查询"));
         list.add(new MyViewPager(TrainCodeQueryFragment.newInstance(), "车次查询"));
         return list;

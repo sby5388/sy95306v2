@@ -8,6 +8,8 @@ import com.by5388.sy95306v2.exception.NetworkException;
 import com.by5388.sy95306v2.setting.ISettingSharedPreferences;
 import com.by5388.sy95306v2.setting.SettingSharedPreferences;
 
+import org.jsoup.Jsoup;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -63,16 +65,12 @@ public class MainModel implements IMainModel {
     // TODO: 2019/11/26 不易读懂，需要拆分
     @Override
     public Observable<Integer> getStationCount() {
-
-        Log.e(TAG, "getStationCount: ", new Exception());
         // TODO: 2019/9/10 网络不可用时，出现了闪退，所以应当检查网络，甚至注册网络监听者
         final String serverPath = "https://kyfw.12306.cn";
         final String stationListVersionPath = FILE_NAME + mVersion;
         return Observable.create(emitter -> {
             if (!emitter.isDisposed()) {
                 final String spec = serverPath + stationListVersionPath;
-                Log.d(TAG, "getStationCount: spec = " + spec);
-
                 URL url = new URL(spec);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setConnectTimeout(TIME_OUT);
@@ -100,7 +98,6 @@ public class MainModel implements IMainModel {
     public Observable<Boolean> isNeedUpdate() {
         boolean isEmpty = service.isEmpty();
         if (isEmpty) {
-            Log.d(TAG, "isNeedUpdate: 本地为空");
             return Observable.just(true);
         }
         double currentVersion = getCurrentVersion();

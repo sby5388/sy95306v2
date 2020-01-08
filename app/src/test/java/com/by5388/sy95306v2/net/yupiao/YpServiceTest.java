@@ -29,7 +29,7 @@ public class YpServiceTest {
     public void setUp() throws Exception {
         Retrofit retrofit = new YpNetTools().getRetrofit();
         mSubject = retrofit.create(YpService.class);
-        mQueryParam = new QueryParam("深圳北", "饶平", "2019-10-01");
+        mQueryParam = new QueryParam( "饶平","深圳北", "2020-01-22");
     }
 
     @Test
@@ -39,7 +39,6 @@ public class YpServiceTest {
                 .flatMap((Function<SecondResult, ObservableSource<List<SecondRemainTicketData>>>) result -> {
                     if (null == result) {
                         throw new RuntimeException("结果异常");
-//                        return Observable.just(new ArrayList<>());
                     }
                     return Observable.just(getRemainTicketData(result.getData()));
                 })

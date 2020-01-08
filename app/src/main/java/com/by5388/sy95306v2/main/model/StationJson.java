@@ -2,12 +2,14 @@ package com.by5388.sy95306v2.main.model;
 
 import android.util.Log;
 
+import com.by5388.sy95306v2.App;
 import com.by5388.sy95306v2.module.shenyang.bean.Station;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import java.util.List;
  * @author by5388  on 2019/1/2.
  */
 public class StationJson implements IStationJson {
+
     private final static String FILE_NAME_old = "/otn/resources/js/framework/stationName.js?station_version=";
     private final static String FILE_NAME = "/otn/resources/js/framework/station_name.js?station_version=";
     // TODO: 2019/3/26 仅仅作为一个表达式，而是应该包含数据
@@ -46,9 +49,9 @@ public class StationJson implements IStationJson {
         String line;
         try {
             while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
+                out(line);
                 if (line.contains(FILE_NAME)) {
-                    System.err.println("找到匹配的数据");
+                    out("找到匹配的数据");
                     break;
                 }
             }
@@ -82,7 +85,7 @@ public class StationJson implements IStationJson {
     @Override
     public String getVersion(InputStream inputStream) {
         final String lineString = jsonToString(inputStream);
-        System.out.println("lineString = " + lineString);
+        out("lineString = " + lineString);
         return getVersion(lineString);
 
     }
@@ -106,7 +109,7 @@ public class StationJson implements IStationJson {
     @Override
     public String getCityList(InputStream inputStream) {
         try {
-            InputStreamReader inputReader = new InputStreamReader(inputStream, "utf8");
+            InputStreamReader inputReader = new InputStreamReader(inputStream, Charset.forName("utf-8"));
             BufferedReader bufReader = new BufferedReader(inputReader);
             String line;
             StringBuilder stringBuilder = new StringBuilder();
@@ -119,5 +122,12 @@ public class StationJson implements IStationJson {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    private static void out(String s) {
+        if (!App.DEBUG) {
+            return;
+        }
+        System.out.println(s);
     }
 }

@@ -1,6 +1,7 @@
 package com.by5388.sy95306v2.module.shenyang.list.model;
 
 import com.by5388.sy95306v2.module.shenyang.bean.TrainNumber;
+import com.by5388.sy95306v2.module.shenyang.list.SortType;
 
 import java.util.List;
 
@@ -41,4 +42,7 @@ public interface ITrainListModel {
      * @return
      */
     String getStationNames(String fromStationCode, String toStationCode);
+
+
+    Observable<List<TrainNumber>> sortTrainNumber(List<TrainNumber> trainNumbers, SortType sortType, boolean isUp);
 }

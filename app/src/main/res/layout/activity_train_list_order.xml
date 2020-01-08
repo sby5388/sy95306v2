@@ -31,8 +31,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textColor="@color/search_text"
-            app:layout_constraintLeft_toRightOf="@+id/textView_show_time"
-            app:layout_constraintRight_toLeftOf="@+id/textView_train_count"
+            app:layout_constraintLeft_toRightOf="@id/textView_show_time"
+            app:layout_constraintRight_toLeftOf="@id/textView_train_count"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="53" />
 
@@ -54,7 +54,7 @@
         android:background="@color/menu_bg"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lly_top_show">
+        app:layout_constraintTop_toBottomOf="@id/lly_top_show">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/lly_menu_start_time"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintHorizontal_weight="25"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/lly_menu_spend_time"
+            app:layout_constraintRight_toLeftOf="@id/lly_menu_spend_time"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -83,7 +83,7 @@
                 android:contentDescription="@string/startTime"
                 android:src="@drawable/ic_up"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView_menu_1"
+                app:layout_constraintLeft_toRightOf="@id/textView_menu_1"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.constraint.ConstraintLayout
@@ -102,8 +102,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintHorizontal_weight="25"
-            app:layout_constraintLeft_toRightOf="@+id/lly_menu_start_time"
-            app:layout_constraintRight_toLeftOf="@+id/lly_menu_end_time"
+            app:layout_constraintLeft_toRightOf="@id/lly_menu_start_time"
+            app:layout_constraintRight_toLeftOf="@id/lly_menu_end_time"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/startTime"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView_menu_2"
+                app:layout_constraintLeft_toRightOf="@id/textView_menu_2"
 
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,8 +142,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintHorizontal_weight="25"
-            app:layout_constraintLeft_toRightOf="@+id/lly_menu_spend_time"
-            app:layout_constraintRight_toLeftOf="@+id/lly_menu_filter"
+            app:layout_constraintLeft_toRightOf="@id/lly_menu_spend_time"
+            app:layout_constraintRight_toLeftOf="@id/lly_menu_filter"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -163,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/startTime"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView_menu_3"
+                app:layout_constraintLeft_toRightOf="@id/textView_menu_3"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.constraint.ConstraintLayout
@@ -181,7 +181,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintHorizontal_weight="25"
-            app:layout_constraintLeft_toRightOf="@+id/lly_menu_end_time"
+            app:layout_constraintLeft_toRightOf="@id/lly_menu_end_time"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -202,7 +202,7 @@
                 android:contentDescription="@string/startTime"
                 android:src="@drawable/ic_filter"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView_menu_filter"
+                app:layout_constraintLeft_toRightOf="@id/textView_menu_filter"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
@@ -218,7 +218,7 @@
         app:layout_constraintBottom_toTopOf="@+id/empty_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lly_second_menu">
+        app:layout_constraintTop_toBottomOf="@id/lly_second_menu">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_View_train_list"

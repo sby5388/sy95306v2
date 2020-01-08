@@ -18,6 +18,7 @@ public class App extends Application {
     private static App instance;
     private ConnectivityManager mConnectivityManager;
     private boolean mEnableNetwork = false;
+    public static boolean DEBUG = BuildConfig.DEBUG;
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override

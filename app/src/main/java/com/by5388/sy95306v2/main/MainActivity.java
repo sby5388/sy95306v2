@@ -121,13 +121,13 @@ public class MainActivity extends AppCompatActivity
         fragments.add(GuangzhouFragment.newInstance());
         fragments.add(ShanghaiFragment.newInstance());
         fragments.add(TzFragment.newInstance());
-        fragments.add(ChengduFragment.newInstance());
+//        fragments.add(ChengduFragment.newInstance());
         titles = new ArrayList<>();
         titles.add(TITLE_SHEN_YANG);
         titles.add(TITLE_GZ);
         titles.add(TITLE_SH);
         titles.add(TITLE_TZ);
-        titles.add(TITLE_CD);
+//        titles.add(TITLE_CD);
 
         mFragmentManager = getSupportFragmentManager();
         mPresenter = new MainPresenter(this);
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity
                 changeFragment(TIE_ZONG);
                 break;
             case R.id.nav_cd_12306:
-                changeFragment(CHENG_DU);
+//                changeFragment(CHENG_DU);
                 break;
             case R.id.about:
                 // TODO: 2018/11/12  show about dialog

@@ -3,7 +3,7 @@ package com.by5388.sy95306v2.base.adapter;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.by5388.sy95306v2.bean.MyViewPager;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * @author by5388
  * @date 20180727
  */
-public class FragmentAdapter extends FragmentPagerAdapter {
+public class FragmentAdapter extends FragmentStatePagerAdapter {
     private final List<MyViewPager> viewPagers;
 
 

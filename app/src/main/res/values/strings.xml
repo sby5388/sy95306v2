@@ -89,6 +89,8 @@
     <string name="about">关于</string>
     <string name="check_updating">正在检查更新…</string>
     <string name="lastest_version">已是最新版本</string>
+    <string name="bei_jing_nan">北京南</string>
+    <string name="shang_hai_hong_qiao">上海虹桥</string>
 
 
 </resources>

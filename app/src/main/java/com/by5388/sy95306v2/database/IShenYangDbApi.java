@@ -13,10 +13,12 @@ import io.reactivex.Observable;
  */
 
 public interface IShenYangDbApi {
+    int ACTION_DELETE_SUCCESS =  0;
 
     /**
      * 删除所有车站数据
      *
+     * {@link #ACTION_DELETE_SUCCESS}
      * @return 0:成功
      */
     int deleteAllStation();

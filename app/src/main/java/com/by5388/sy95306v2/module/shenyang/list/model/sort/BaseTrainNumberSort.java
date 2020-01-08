@@ -25,18 +25,17 @@ public abstract class BaseTrainNumberSort implements Comparator<TrainNumber> {
 
 
     public static BaseTrainNumberSort getTrainNumberSort(boolean isUp, int position) {
-        BaseTrainNumberSort sort = StartTimeSort.getInstance();
+        BaseTrainNumberSort sort;
         switch (position) {
-            case SORT_BY_START_TIME:
-                sort = StartTimeSort.getInstance();
-                break;
             case SORT_BY_SPEND_TIME:
                 sort = SpeedTimeSort.getInstance();
                 break;
             case SORT_BY_ARRIVE_TIME:
                 sort = ArriveTimeSort.getInstance();
                 break;
+            case SORT_BY_START_TIME:
             default:
+                sort = StartTimeSort.getInstance();
                 break;
         }
         return sort.setUp(isUp);

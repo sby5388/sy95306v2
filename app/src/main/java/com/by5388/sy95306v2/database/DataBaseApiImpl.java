@@ -162,7 +162,7 @@ public final class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
         final String deleteSql = "delete from station";
         db.execSQL(deleteSql);
         closeDb();
-        return 0;
+        return ACTION_DELETE_SUCCESS;
     }
 
 
