@@ -32,7 +32,7 @@ public class GuangzhouFragment extends BaseTopFragment {
         List<MyViewPager> list = new ArrayList<>();
         list.add(new MyViewPager(GzP2pFragment.newInstance(), "站站查询"));
         list.add(new MyViewPager(GzTrainNumberFragment.newInstance(), "车次查询"));
-        list.add(new MyViewPager(StationScreenFragment.newInstance(), "车站大屏幕"));
+//        list.add(new MyViewPager(StationScreenFragment.newInstance(), "车站大屏幕"));
         list.add(new MyViewPager(GzLateFragment.newInstance(), "正晚点查询"));
         return list;
     }

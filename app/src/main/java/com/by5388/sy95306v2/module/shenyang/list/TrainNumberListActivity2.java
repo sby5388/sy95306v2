@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 public class TrainNumberListActivity2 extends AppCompatActivity {
     private static final String KEY_TRAIN_PARAM = "KEY_TRAIN_PARAM";
 
+    @NonNull
     public static Intent newIntent(final Context context, final int selectedDate, final Station fromStation, final Station toStation) {
         final Intent intent = new Intent(context, TrainNumberListActivity2.class);
         final Bundle bundle = new Bundle();

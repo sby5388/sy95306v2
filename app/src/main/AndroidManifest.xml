@@ -45,9 +45,6 @@
         <activity
             android:name=".module.shenyang.detail.TrainDetailActivity"
             android:label="@string/label_query_by_train_code" />
-        <activity
-            android:name=".module.shenyang.list.TrainNumberListActivity"
-            android:label="@string/label_query_by_city" />
         <activity android:name=".module.tiezong.temp.view.TzRemainTicketActivity" />
         <activity android:name=".module.tiezong.detail.TzDetailActivity" />
 

@@ -37,6 +37,6 @@ public class TieZongServiceTest {
                     }
 
 
-                }, throwable -> System.out.println(throwable));
+                }, System.out::println);
     }
 }

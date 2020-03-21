@@ -1,7 +1,6 @@
 package com.by5388.sy95306v2.module.shenyang.list.model;
 
 import com.by5388.sy95306v2.module.shenyang.bean.TrainNumber;
-import com.by5388.sy95306v2.module.shenyang.list.SortType;
 
 import java.util.List;
 

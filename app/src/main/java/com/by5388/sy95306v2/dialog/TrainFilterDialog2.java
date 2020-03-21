@@ -51,18 +51,12 @@ public class TrainFilterDialog2 extends DialogFragment {
         }
         return new AlertDialog.Builder(context)
                 .setTitle("选择类型")
-                .setMultiChoiceItems(getTitles(), getChecks(), new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        //TODO 虽然这个方法 是空的，但是没有的话会出异常
-                    }
+                .setMultiChoiceItems(getTitles(), getChecks(), (dialog, which, isChecked) -> {
+                    //TODO 虽然这个方法 是空的，但是没有的话会出异常
                 })
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mTrainType.updateCheck(mShowBooleans);
-                        sendResult();
-                    }
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    mTrainType.updateCheck(mShowBooleans);
+                    sendResult();
                 })
                 .setNegativeButton(android.R.string.cancel, null)
                 .setCancelable(true)

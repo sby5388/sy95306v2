@@ -18,28 +18,21 @@ import com.by5388.sy95306v2.common.Tools;
 import com.by5388.sy95306v2.database.DataBaseApiImpl;
 import com.by5388.sy95306v2.database.IShenYangDbApi;
 import com.by5388.sy95306v2.dialog.ITrainType;
-import com.by5388.sy95306v2.dialog.TrainFilterDialog;
-import com.by5388.sy95306v2.dialog.TrainFilterDialog.UpdateFilterDataCallBack;
 import com.by5388.sy95306v2.dialog.TrainFilterDialog2;
 import com.by5388.sy95306v2.dialog.TrainType;
-import com.by5388.sy95306v2.dialog.bean.FilterBean;
-import com.by5388.sy95306v2.dialog.bean.FilterData;
 import com.by5388.sy95306v2.main.MainFragment;
 import com.by5388.sy95306v2.module.shenyang.bean.Station;
 import com.by5388.sy95306v2.module.shenyang.list.TrainNumberListActivity2;
 import com.by5388.sy95306v2.module.shenyang.select.SelectStationActivity;
 
 import java.util.Calendar;
-import java.util.List;
 import java.util.Objects;
-
-import static com.by5388.sy95306v2.dialog.bean.FilterData.isAllSelect;
 
 /**
  * @author by5388  on 2018/7/28.
  */
 
-public class Station2StationFragment extends BaseShenYangFragment implements UpdateFilterDataCallBack {
+public class Station2StationFragment extends BaseShenYangFragment {
 
     public static final String TAG = "FirstFragment";
     public static final String DATA_BUNDLE = "bundle";
@@ -248,24 +241,6 @@ public class Station2StationFragment extends BaseShenYangFragment implements Upd
     @Override
     protected void loadData() {
 
-    }
-
-    @Override
-    public void updateFilterData() {
-        if (isAllSelect()) {
-            buttonSelectType.setText("全部");
-            return;
-        }
-        //TODO
-        List<FilterBean> beans = FilterData.getFilterItems();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (FilterBean bean : beans) {
-            if (bean.isSelected()) {
-                stringBuilder.append(bean.getItemName());
-                stringBuilder.append(";");
-            }
-        }
-        buttonSelectType.setText(stringBuilder.toString());
     }
 
     @Override

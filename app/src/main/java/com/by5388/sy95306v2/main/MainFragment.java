@@ -42,7 +42,6 @@ public class MainFragment extends Fragment
     private static final int REQUEST_CODE_UPDATE_STATION_LIST = 200;
     private static final String TAG_SHEN_YANG = ShenYangFragment.class.getName();
     private static final String TAG_TIE_ZONG = TzFragment.class.getName();
-    private View mainView;
     private DrawerLayout mDrawerLayout;
 
     @Override
@@ -85,7 +84,7 @@ public class MainFragment extends Fragment
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
         assert activity != null;
         activity.setSupportActionBar(toolbar);
-        mainView = view.findViewById(R.id.container_main);
+        View mainView = view.findViewById(R.id.container_main);
         mDrawerLayout = view.findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity,
                 mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

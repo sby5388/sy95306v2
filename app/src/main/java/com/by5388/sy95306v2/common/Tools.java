@@ -143,12 +143,7 @@ public class Tools {
 
     public static void openSetting(Context context, View v) {
         Snackbar.make(v, "网络不可用，请打开网络", Snackbar.LENGTH_SHORT)
-                .setAction("打开设置", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        context.startActivity(new Intent("android.settings.SETTINGS"));
-                    }
-                }).show();
+                .setAction("打开设置", v1 -> context.startActivity(new Intent("android.settings.SETTINGS"))).show();
     }
 
 

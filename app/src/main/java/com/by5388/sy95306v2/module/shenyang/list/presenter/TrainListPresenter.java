@@ -1,14 +1,12 @@
 package com.by5388.sy95306v2.module.shenyang.list.presenter;
 
 import com.by5388.sy95306v2.module.shenyang.bean.TrainNumber;
-import com.by5388.sy95306v2.module.shenyang.list.SortType;
 import com.by5388.sy95306v2.module.shenyang.list.model.ITrainListModel;
 import com.by5388.sy95306v2.module.shenyang.list.model.TrainListModel;
 import com.by5388.sy95306v2.module.shenyang.list.view.ITrainListView;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -82,8 +80,4 @@ public class TrainListPresenter implements ITrainListPresenter {
         return model.getStationNames(fromStationCode, toStationCode);
     }
 
-    @Override
-    public void sortData(@NonNull SortType sortType, boolean isUp) {
-        // TODO: 2019/11/26
-    }
 }

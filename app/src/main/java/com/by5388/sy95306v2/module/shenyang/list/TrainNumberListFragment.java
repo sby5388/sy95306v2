@@ -84,9 +84,6 @@ public class TrainNumberListFragment extends Fragment
      */
     private boolean mLoaded = false;
 
-    private TextView mTextView1;
-    private TextView mTextView2;
-    private TextView mTextView3;
     private List<TextView> mTextViews = new ArrayList<>(3);
 
     public static TrainNumberListFragment newInstance(int selectedDate, Station fromStation, Station toStation) {
@@ -155,15 +152,15 @@ public class TrainNumberListFragment extends Fragment
         mRecyclerView = view.findViewById(R.id.recycler_View_train_list);
         mStationNames = view.findViewById(R.id.textView_show_city);
         mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-        mTextView1 = view.findViewById(R.id.textView_menu_1);
-        mTextView2 = view.findViewById(R.id.textView_menu_2);
-        mTextView3 = view.findViewById(R.id.textView_menu_3);
-        mTextViews.add(mTextView1);
-        mTextViews.add(mTextView2);
-        mTextViews.add(mTextView3);
-        mTextView1.setOnClickListener(v -> sortTrainNumber(0));
-        mTextView2.setOnClickListener(v -> sortTrainNumber(1));
-        mTextView3.setOnClickListener(v -> sortTrainNumber(2));
+        TextView textView1 = view.findViewById(R.id.textView_menu_1);
+        TextView textView2 = view.findViewById(R.id.textView_menu_2);
+        TextView textView3 = view.findViewById(R.id.textView_menu_3);
+        mTextViews.add(textView1);
+        mTextViews.add(textView2);
+        mTextViews.add(textView3);
+        textView1.setOnClickListener(v -> sortTrainNumber(0));
+        textView2.setOnClickListener(v -> sortTrainNumber(1));
+        textView3.setOnClickListener(v -> sortTrainNumber(2));
 
 
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,

@@ -31,7 +31,6 @@ public class UpdateDialogFragment extends DialogFragment implements IMainView {
     public static final String TAG = MainPresenter.class.getSimpleName();
     private IMainPresenter mPresenter;
     private AlertDialog mAlertDialog;
-    private View mRootView;
     private Handler mHandler = new Handler();
 
     /**
@@ -39,7 +38,6 @@ public class UpdateDialogFragment extends DialogFragment implements IMainView {
      */
     private View mViewVisible;
 
-    private View mViewChecking;
     private View mViewChecked;
     private View mViewUpdating;
     private View mViewUpdateFinish;
@@ -84,11 +82,8 @@ public class UpdateDialogFragment extends DialogFragment implements IMainView {
                 .setTitle(R.string.check_updating)
                 .setView(createMainView())
                 .setCancelable(false)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
 
-                    }
                 })
                 .create();
         mPresenter.checkUpdate();
@@ -99,21 +94,21 @@ public class UpdateDialogFragment extends DialogFragment implements IMainView {
     private View createMainView() {
         final Context context = getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
-        mRootView = inflater.inflate(R.layout.dialog_update, new LinearLayout(context), false);
-        mViewChecking = mRootView.findViewById(R.id.view_checking);
-        mViewChecked = mRootView.findViewById(R.id.view_checked);
-        mViewUpdating = mRootView.findViewById(R.id.view_updating);
-        mViewUpdateFinish = mRootView.findViewById(R.id.view_update_finish);
-        mProgressBar = mRootView.findViewById(R.id.progress_horizontal);
-        mTextViewSummary = mRootView.findViewById(R.id.textView_show_update_summary);
-        mTextViewUpdating = mRootView.findViewById(R.id.textView_show_update_progress);
-        mButtonOk = mRootView.findViewById(R.id.button_ok);
-        mButtonCancel = mRootView.findViewById(R.id.button_cancel);
+        View rootView = inflater.inflate(R.layout.dialog_update, new LinearLayout(context), false);
+        View viewChecking = rootView.findViewById(R.id.view_checking);
+        mViewChecked = rootView.findViewById(R.id.view_checked);
+        mViewUpdating = rootView.findViewById(R.id.view_updating);
+        mViewUpdateFinish = rootView.findViewById(R.id.view_update_finish);
+        mProgressBar = rootView.findViewById(R.id.progress_horizontal);
+        mTextViewSummary = rootView.findViewById(R.id.textView_show_update_summary);
+        mTextViewUpdating = rootView.findViewById(R.id.textView_show_update_progress);
+        mButtonOk = rootView.findViewById(R.id.button_ok);
+        mButtonCancel = rootView.findViewById(R.id.button_cancel);
         mButtonCancel.setOnClickListener(v -> this.dismiss());
         mButtonOk.setOnClickListener(v -> handleButton());
-        mViewVisible = mViewChecking;
+        mViewVisible = viewChecking;
 
-        return mRootView;
+        return rootView;
     }
 
 
