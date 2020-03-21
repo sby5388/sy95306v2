@@ -1,9 +1,9 @@
 package com.by5388.sy95306v2.module.chengdu.late.model;
 
-import com.by5388.sy95306v2.module.chengdu.bean.late.CdLateStation;
-import com.by5388.sy95306v2.module.chengdu.bean.late.CdTrainAllNodeBean;
 import com.by5388.sy95306v2.module.chengdu.api.ICdQuery;
 import com.by5388.sy95306v2.module.chengdu.api.QueryCd;
+import com.by5388.sy95306v2.module.chengdu.bean.late.CdLateStation;
+import com.by5388.sy95306v2.module.chengdu.bean.late.CdTrainAllNodeBean;
 
 import java.util.List;
 

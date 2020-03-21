@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn="@layout/activity_main">
 
     <group android:checkableBehavior="single">
         <item
@@ -9,21 +9,25 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/shen_yang" />
         <item
+            android:id="@+id/nav_tz_12306"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/title_tie_zong" />
+        <item
             android:id="@+id/nav_guang_tie"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/guang_zhou" />
+            android:title="@string/guang_zhou"
+            android:visible="@bool/release" />
         <item
             android:id="@+id/nav_shang_hai"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/shang_hai" />
-        <item
-            android:id="@+id/nav_tz_12306"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/title_tie_zhong" />
+            android:title="@string/shang_hai"
+            android:visible="@bool/release" />
+
         <item
             android:id="@+id/nav_cd_12306"
             android:icon="@drawable/ic_menu_share"
-            android:title="@string/title_cheng_du" />
+            android:title="@string/title_cheng_du"
+            android:visible="@bool/release" />
     </group>
 
     <item android:title="Communicate">

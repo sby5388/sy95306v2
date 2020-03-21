@@ -33,8 +33,6 @@ public class TrainNumber {
     };
 
 
-
-
     /**
      * DAYD : 0
      * STIME : 0940
@@ -103,7 +101,17 @@ public class TrainNumber {
     private String SST;
     private String TCCODE;
 
-
+    /**
+     * 计算时间
+     *
+     * @param time 时间字符串
+     * @return 对应的时间：分钟
+     */
+    private static int calculatorTime(String time) {
+        int hour = Integer.parseInt(time.substring(0, 2));
+        int minute = Integer.parseInt(time.substring(2, 4));
+        return hour * MINUTE_OF_HOUR + minute;
+    }
 
     public String getDAYD() {
         return DAYD;
@@ -417,17 +425,5 @@ public class TrainNumber {
             }
         }
         return TCCODE;
-    }
-
-    /**
-     * 计算时间
-     *
-     * @param time 时间字符串
-     * @return 对应的时间：分钟
-     */
-    private static int calculatorTime(String time) {
-        int hour = Integer.parseInt(time.substring(0, 2));
-        int minute = Integer.parseInt(time.substring(2, 4));
-        return hour * MINUTE_OF_HOUR + minute;
     }
 }

@@ -46,7 +46,7 @@ public interface IMainView {
      *
      * @param tip 提示
      */
-    void onTip(String tip);
+    void onErrorTip(String tip);
 
     /**
      * 打开进度对话框（升级中）

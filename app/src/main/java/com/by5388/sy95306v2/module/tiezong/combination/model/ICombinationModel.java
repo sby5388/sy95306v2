@@ -35,5 +35,4 @@ public interface ICombinationModel extends ITzZzCxModel {
     Observable<List<TrainDetail>> getTrainByTrainCode(int date, String trainCode);
 
 
-
 }

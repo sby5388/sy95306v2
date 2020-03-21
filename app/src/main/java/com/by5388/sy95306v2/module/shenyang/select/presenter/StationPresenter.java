@@ -2,10 +2,10 @@ package com.by5388.sy95306v2.module.shenyang.select.presenter;
 
 import android.text.TextUtils;
 
+import com.by5388.sy95306v2.module.shenyang.bean.Station;
 import com.by5388.sy95306v2.module.shenyang.select.model.IStationModel;
 import com.by5388.sy95306v2.module.shenyang.select.model.StationModel;
 import com.by5388.sy95306v2.module.shenyang.select.view.IStationView;
-import com.by5388.sy95306v2.module.shenyang.bean.Station;
 
 import java.util.List;
 
@@ -22,15 +22,15 @@ import io.reactivex.schedulers.Schedulers;
 public class StationPresenter implements IStationPresenter {
 
     private final IStationModel model;
-    private Disposable disposable;
     private final Consumer<List<Station>> consumer;
     private final Consumer<Throwable> throwableConsumer;
+    private Disposable disposable;
 
     public StationPresenter(IStationView view) {
         this.model = new StationModel();
         consumer = stations -> {
             if (stations == null || stations.isEmpty()) {
-                view.showErrorMessage("名字异常");
+                //view.showErrorMessage("名字异常");
                 return;
             }
             view.setStations(stations);

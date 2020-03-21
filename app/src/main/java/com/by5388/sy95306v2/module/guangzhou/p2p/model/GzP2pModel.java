@@ -1,9 +1,9 @@
 package com.by5388.sy95306v2.module.guangzhou.p2p.model;
 
-import com.by5388.sy95306v2.module.guangzhou.bean.GzResultData;
-import com.by5388.sy95306v2.module.guangzhou.bean.station.DataBeanP2P;
 import com.by5388.sy95306v2.module.guangzhou.api.GzNetTools;
 import com.by5388.sy95306v2.module.guangzhou.api.GzService;
+import com.by5388.sy95306v2.module.guangzhou.bean.GzResultData;
+import com.by5388.sy95306v2.module.guangzhou.bean.station.DataBeanP2P;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;

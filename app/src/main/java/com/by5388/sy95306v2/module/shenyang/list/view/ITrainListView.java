@@ -29,12 +29,12 @@ public interface ITrainListView {
     /**
      * 加载中
      */
-    void showLoading();
+    void onStartLoading();
 
     /**
      * 完成加载
      */
-    void finishLoading();
+    void onFinishLoading();
 
 
 }

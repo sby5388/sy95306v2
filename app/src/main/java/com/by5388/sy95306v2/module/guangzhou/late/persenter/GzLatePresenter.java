@@ -21,13 +21,9 @@ public class GzLatePresenter implements IGzLatePresenter {
     private final IGzLateModel model;
     private final IGzLateView view;
     private final Consumer<Throwable> throwableConsumer;
+    private final Consumer<List<GzLateDataBean>> consumer;
     private List<GzLateDataBean> currentBeans;
     private Disposable disposable;
-    private final Consumer<List<GzLateDataBean>> consumer;
-
-    private void setCurrentBeans(List<GzLateDataBean> currentBeans) {
-        this.currentBeans = currentBeans;
-    }
 
     public GzLatePresenter(IGzLateView view) {
         this.view = view;
@@ -50,6 +46,10 @@ public class GzLatePresenter implements IGzLatePresenter {
             }
             getLateDetail(0);
         };
+    }
+
+    private void setCurrentBeans(List<GzLateDataBean> currentBeans) {
+        this.currentBeans = currentBeans;
     }
 
     @Override

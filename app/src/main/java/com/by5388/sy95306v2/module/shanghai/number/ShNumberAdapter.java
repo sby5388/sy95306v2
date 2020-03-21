@@ -1,8 +1,6 @@
 package com.by5388.sy95306v2.module.shanghai.number;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +9,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.by5388.sy95306v2.R;
+import com.by5388.sy95306v2.module.shanghai.api.ShNetTools;
+import com.by5388.sy95306v2.module.shanghai.api.ShanghaiService;
 import com.by5388.sy95306v2.module.shanghai.bean.InfoBeanDelay;
 import com.by5388.sy95306v2.module.shanghai.bean.QueryMethod;
 import com.by5388.sy95306v2.module.shanghai.bean.ShanghaiTrainNumber;
-import com.by5388.sy95306v2.module.shanghai.api.ShNetTools;
-import com.by5388.sy95306v2.module.shanghai.api.ShanghaiService;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -30,9 +30,9 @@ import retrofit2.Retrofit;
 
 public class ShNumberAdapter extends RecyclerView.Adapter {
     private static final String TAG = "ShNumberAdapter";
-    private List<ShanghaiTrainNumber> numbers;
     private final LayoutInflater inflater;
     private final ShanghaiService shanghaiService;
+    private List<ShanghaiTrainNumber> numbers;
 
     public ShNumberAdapter(Context context, List<ShanghaiTrainNumber> numbers) {
         this.numbers = numbers;

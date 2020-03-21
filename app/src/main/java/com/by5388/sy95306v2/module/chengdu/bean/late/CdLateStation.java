@@ -45,6 +45,36 @@ public class CdLateStation {
      */
     private String mileage;
 
+    private CdLateStation(String[] params) {
+        this.trainCode = params[0];
+        this.serialNumber = params[1];
+        this.stationName = params[2];
+        this.stationCode = params[3];
+        this.arriveTime = params[4];
+        this.leaveTime = params[5];
+        this.dateDistance = params[6];
+        this.mileage = params[7];
+    }
+
+    private CdLateStation() {
+        this.trainCode = EMPTY;
+        this.serialNumber = EMPTY;
+        this.stationName = EMPTY;
+        this.stationCode = EMPTY;
+        this.arriveTime = EMPTY;
+        this.leaveTime = EMPTY;
+        this.dateDistance = EMPTY;
+        this.mileage = EMPTY;
+    }
+
+    public static CdLateStation getStation(String[] params) {
+        final int length = 8;
+        if (null == params || params.length != length) {
+            return new CdLateStation();
+        }
+        return new CdLateStation(params);
+    }
+
     public String getTrainCode() {
         return trainCode;
     }
@@ -107,38 +137,6 @@ public class CdLateStation {
 
     public void setMileage(String mileage) {
         this.mileage = mileage;
-    }
-
-    public static CdLateStation getStation(String[] params) {
-        final int length = 8;
-        if (null == params || params.length != length) {
-            return new CdLateStation();
-        }
-        return new CdLateStation(params);
-    }
-
-
-    private CdLateStation(String[] params) {
-        this.trainCode = params[0];
-        this.serialNumber = params[1];
-        this.stationName = params[2];
-        this.stationCode = params[3];
-        this.arriveTime = params[4];
-        this.leaveTime = params[5];
-        this.dateDistance = params[6];
-        this.mileage = params[7];
-    }
-
-
-    private CdLateStation() {
-        this.trainCode = EMPTY;
-        this.serialNumber = EMPTY;
-        this.stationName = EMPTY;
-        this.stationCode = EMPTY;
-        this.arriveTime = EMPTY;
-        this.leaveTime = EMPTY;
-        this.dateDistance = EMPTY;
-        this.mileage = EMPTY;
     }
 
     @Override

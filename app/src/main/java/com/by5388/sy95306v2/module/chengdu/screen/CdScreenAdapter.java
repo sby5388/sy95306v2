@@ -16,8 +16,8 @@ import java.util.List;
  */
 
 class CdScreenAdapter extends BaseAdapter {
-    private List<CdScreenItem> screenItems;
     private final LayoutInflater inflater;
+    private List<CdScreenItem> screenItems;
 
     CdScreenAdapter(Context context, List<CdScreenItem> screenItems) {
         this.inflater = LayoutInflater.from(context);

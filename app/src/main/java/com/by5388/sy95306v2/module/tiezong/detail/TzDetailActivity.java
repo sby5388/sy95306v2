@@ -3,17 +3,17 @@ package com.by5388.sy95306v2.module.tiezong.detail;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.module.tiezong.api.pass.code.GetPassCodeImpl;
-import com.by5388.sy95306v2.module.tiezong.bean.number.NumberDataBean;
 import com.by5388.sy95306v2.module.tiezong.api.pass.code.IGetPassCodeService;
+import com.by5388.sy95306v2.module.tiezong.bean.number.NumberDataBean;
 
 import java.util.List;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -29,6 +29,17 @@ public class TzDetailActivity extends AppCompatActivity {
     private static final String FROM_STATION_CODE = "fromStationCode";
     private static final String TO_STATION_CODE = "toStationCode";
     private static final String DATE = "date";
+
+    public static Intent newIntent(Context context, String trainCode, String fromStationCode, String toStationCode, String date) {
+        Intent intent = new Intent(context, TzDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(TRAIN_NO, trainCode);
+        bundle.putString(FROM_STATION_CODE, fromStationCode);
+        bundle.putString(TO_STATION_CODE, toStationCode);
+        bundle.putString(DATE, date);
+        intent.putExtra(BUNDLE_NAME, bundle);
+        return intent;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,17 +92,5 @@ public class TzDetailActivity extends AppCompatActivity {
                 });
 
 
-    }
-
-
-    public static Intent newIntent(Context context, String trainCode, String fromStationCode, String toStationCode, String date) {
-        Intent intent = new Intent(context, TzDetailActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString(TRAIN_NO, trainCode);
-        bundle.putString(FROM_STATION_CODE, fromStationCode);
-        bundle.putString(TO_STATION_CODE, toStationCode);
-        bundle.putString(DATE, date);
-        intent.putExtra(BUNDLE_NAME, bundle);
-        return intent;
     }
 }

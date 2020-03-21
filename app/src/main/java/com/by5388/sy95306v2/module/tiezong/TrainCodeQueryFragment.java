@@ -12,8 +12,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.by5388.sy95306v2.App;
 import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
+import com.by5388.sy95306v2.common.Tools;
 import com.by5388.sy95306v2.module.tiezong.api.version2.TzNetTools2;
 import com.by5388.sy95306v2.module.tiezong.api.version2.TzService2;
 import com.by5388.sy95306v2.module.tiezong.api.version2.TzTrainCodeResult;
@@ -25,8 +27,6 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
@@ -36,20 +36,17 @@ import retrofit2.Retrofit;
 public class TrainCodeQueryFragment extends BaseTzFragment {
 
     private TzService2 mService2;
-
-    public static BaseTzFragment newInstance() {
-        return new TrainCodeQueryFragment();
-    }
-
     private Button mButtonDate;
     private Button mButtonQuery;
     private EditText mEditText;
-    private ListView mListView;
     private MyListener dateListener;
     private Calendar mCalendar;
     private MyAdapter mAdapter;
     private Disposable mDisposable;
 
+    public static BaseTzFragment newInstance() {
+        return new TrainCodeQueryFragment();
+    }
 
     @Override
     public void updateView(int year, int month, int dayOfMonth) {
@@ -82,19 +79,23 @@ public class TrainCodeQueryFragment extends BaseTzFragment {
     @Override
     protected void initView(View view) {
         mButtonDate = view.findViewById(R.id.button_select_date);
-        mButtonDate.setOnClickListener(v -> {
-            selectDate(dateListener, mCalendar);
-        });
+        mButtonDate.setOnClickListener(v -> selectDate(dateListener, mCalendar));
         mButtonDate.setText(getData(Calendar.getInstance()));
         mButtonQuery = view.findViewById(R.id.button_query);
         mEditText = view.findViewById(R.id.input_train_code);
-        mListView = view.findViewById(R.id.listView_result);
+        ListView listView = view.findViewById(R.id.listView_result);
         mButtonQuery.setOnClickListener(v -> query());
-        mListView.setAdapter(mAdapter);
+        listView.setAdapter(mAdapter);
 
     }
 
     private void query() {
+        // TODO: 2020/3/17 检查网络
+        final boolean networkEnable = App.getInstance().networkEnable();
+        if (!networkEnable) {
+            Tools.openSetting(getContext(), mEditText);
+            return;
+        }
         final String trainNo = mEditText.getText().toString().trim();
         if (TextUtils.isEmpty(trainNo)) {
             Toast.makeText(getContext(), "输入为空", Toast.LENGTH_SHORT).show();
@@ -106,28 +107,17 @@ public class TrainCodeQueryFragment extends BaseTzFragment {
         mDisposable = mService2.getTrainDetail(trainNo, trainDate, randCode)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<TzTrainCodeResult>() {
-                    @Override
-                    public void accept(TzTrainCodeResult tzTrainCodeResult) throws Exception {
-                        if (!tzTrainCodeResult.status || tzTrainCodeResult.mHttpStatus != HttpURLConnection.HTTP_OK) {
-                            throw new Exception("没有获取到正确的数值");
-                        }
-                        final List<TzTrainCodeResult.DataBeanX.DataBean> data = tzTrainCodeResult.data.data;
-                        mAdapter.setDataBeans(data);
+                .subscribe(tzTrainCodeResult -> {
+                    if (!tzTrainCodeResult.status || tzTrainCodeResult.mHttpStatus != HttpURLConnection.HTTP_OK) {
+                        throw new Exception("没有获取到正确的数值");
+                    }
+                    final List<TzTrainCodeResult.DataBeanX.DataBean> data = tzTrainCodeResult.data.data;
+                    mAdapter.setDataBeans(data);
 
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        mButtonQuery.setEnabled(true);
-                        Toast.makeText(getContext(), throwable.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }, new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mButtonQuery.setEnabled(true);
-                    }
-                });
+                }, throwable -> {
+                    mButtonQuery.setEnabled(true);
+                    Toast.makeText(getContext(), throwable.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }, () -> mButtonQuery.setEnabled(true));
     }
 
     @Override
@@ -135,6 +125,35 @@ public class TrainCodeQueryFragment extends BaseTzFragment {
         super.onDestroyView();
         if (mDisposable != null && !mDisposable.isDisposed()) {
             mDisposable.dispose();
+        }
+    }
+
+    private static class ViewHolder {
+
+        final TextView stationName;
+        final TextView stayTime;
+        final TextView stationNum;
+        final TextView arrive;
+        final TextView endTime;
+        final TextView startTime;
+        final TextView delay;
+        final ProgressBar progressBar;
+
+        private ViewHolder(View view) {
+            stationName = view.findViewById(R.id.stationName);
+            stayTime = view.findViewById(R.id.stayTime);
+            stationNum = view.findViewById(R.id.stationNum);
+            arrive = view.findViewById(R.id.arrive_time);
+            endTime = view.findViewById(R.id.endTime);
+            startTime = view.findViewById(R.id.startTime);
+            delay = view.findViewById(R.id.textView_delay);
+            progressBar = view.findViewById(R.id.progressBar);
+        }
+
+        private void bind(TzTrainCodeResult.DataBeanX.DataBean dataBean) {
+            stationName.setText(dataBean.mStationName);
+            arrive.setText(dataBean.mArriveTime);
+            startTime.setText(dataBean.mStartTime);
         }
     }
 
@@ -181,35 +200,6 @@ public class TrainCodeQueryFragment extends BaseTzFragment {
             }
             mDataBeans = dataBeans;
             notifyDataSetChanged();
-        }
-    }
-
-    private static class ViewHolder {
-
-        final TextView stationName;
-        final TextView stayTime;
-        final TextView stationNum;
-        final TextView arrive;
-        final TextView endTime;
-        final TextView startTime;
-        final TextView delay;
-        final ProgressBar progressBar;
-
-        private ViewHolder(View view) {
-            stationName = view.findViewById(R.id.stationName);
-            stayTime = view.findViewById(R.id.stayTime);
-            stationNum = view.findViewById(R.id.stationNum);
-            arrive = view.findViewById(R.id.arrive_time);
-            endTime = view.findViewById(R.id.endTime);
-            startTime = view.findViewById(R.id.startTime);
-            delay = view.findViewById(R.id.textView_delay);
-            progressBar = view.findViewById(R.id.progressBar);
-        }
-
-        private void bind(TzTrainCodeResult.DataBeanX.DataBean dataBean) {
-            stationName.setText(dataBean.mStationName);
-            arrive.setText(dataBean.mArriveTime);
-            startTime.setText(dataBean.mStartTime);
         }
     }
 

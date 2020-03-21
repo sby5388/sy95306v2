@@ -1,6 +1,5 @@
 package com.by5388.sy95306v2.module.shenyang.detail.model;
 
-import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.by5388.sy95306v2.module.shenyang.bean.TrainDetail;
@@ -11,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 

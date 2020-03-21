@@ -1,22 +1,22 @@
 package com.by5388.sy95306v2.module.guangzhou.number;
 
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputEditText;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.module.guangzhou.bean.station.TrainsBean;
 import com.by5388.sy95306v2.dialog.ITrainDetailView;
 import com.by5388.sy95306v2.dialog.TrainDetailDialog;
-import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.module.guangzhou.BaseGzFragment;
+import com.by5388.sy95306v2.module.guangzhou.bean.station.TrainsBean;
 import com.by5388.sy95306v2.module.guangzhou.number.perserter.ITrainNumberPresenter;
 import com.by5388.sy95306v2.module.guangzhou.number.perserter.TrainNumberPresenter;
 import com.by5388.sy95306v2.module.guangzhou.number.view.ITrainNumberView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -65,9 +65,11 @@ public class TicketCheckAdapter extends BaseAdapter {
         private TextView stationName;
         private TextView checkPlace;
         private TextView trainCode;
+
         ViewHolder(View convertView) {
 
         }
+
         void bind(ITicketCheck item) {
         }
     }

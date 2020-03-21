@@ -2,25 +2,33 @@ package com.by5388.sy95306v2.base;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 
+import com.by5388.sy95306v2.App;
+
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
 
 /**
  * @author by5388  on 2018/7/28.
  */
 
 public abstract class BaseFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
+    /**
+     * 往后延长60天
+     */
+    private static final long MAX_TIME = TimeUnit.DAYS.toMillis(60);
     private Calendar mCalendar;
-
     private DatePickerDialog mDialog;
 
     @Override
@@ -37,10 +45,14 @@ public abstract class BaseFragment extends Fragment implements DatePickerDialog.
     @Nullable
     @Override
     public final View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutID(), container, false);
+        return inflater.inflate(getLayoutID(), container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initView(view);
         loadData();
-        return view;
     }
 
     /**
@@ -62,12 +74,6 @@ public abstract class BaseFragment extends Fragment implements DatePickerDialog.
      * @param view 布局
      */
     protected abstract void initView(View view);
-
-    /**
-     * 往后延长60天
-     */
-    private static final long MAX_TIME = TimeUnit.DAYS.toMillis(60);
-
 
     protected final void selectDate(DatePickerDialog.OnDateSetListener dateListener, Calendar calendarData) {
         if (mDialog == null) {
@@ -109,5 +115,13 @@ public abstract class BaseFragment extends Fragment implements DatePickerDialog.
         picker.setMaxDate(mCalendar.getTimeInMillis() + MAX_TIME);
         // 设置最小日期
         picker.setMinDate(mCalendar.getTimeInMillis());
+    }
+
+    public void toast(String s) {
+        App.getInstance().toast(s);
+    }
+
+    public void toast(@StringRes int id) {
+        App.getInstance().toast(id);
     }
 }

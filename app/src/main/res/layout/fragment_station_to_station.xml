@@ -11,8 +11,8 @@
         android:background="@color/search_bg"
         android:gravity="center_horizontal"
         android:padding="15dp"
-        android:paddingBottom="5dp"
         android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:text="@string/first_title"
         android:textColor="#fff"
         android:textSize="22sp"
@@ -49,11 +49,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:focusable="true"
                 android:id="@+id/textView_input_start_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:focusable="true"
                 android:gravity="center_horizontal"
                 android:text="@string/app_name"
                 android:textSize="22sp"
@@ -63,11 +63,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
-            android:focusable="true"
             android:id="@+id/imageView_exchange"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:contentDescription="@string/app_name"
+            android:focusable="true"
             android:src="@drawable/ic_switch"
             app:layout_constraintBottom_toBottomOf="@+id/panel_start_city"
             app:layout_constraintLeft_toRightOf="@+id/panel_start_city"
@@ -75,11 +75,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:focusable="true"
             android:id="@+id/panel_end_city"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_city_input"
+            android:focusable="true"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toRightOf="@+id/imageView_exchange"
             app:layout_constraintRight_toRightOf="parent"

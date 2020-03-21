@@ -1,16 +1,17 @@
 package com.by5388.sy95306v2.module.shenyang;
 
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputEditText;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.module.shenyang.detail.TrainDetailActivity;
+import com.by5388.sy95306v2.App;
 import com.by5388.sy95306v2.MyListener;
+import com.by5388.sy95306v2.R;
+import com.by5388.sy95306v2.common.Tools;
+import com.by5388.sy95306v2.module.shenyang.detail.TrainDetailActivity;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
 
@@ -78,10 +79,16 @@ public final class SyTrainNumberFragment extends BaseShenYangFragment {
     private void search() {
         String code = trainCode.getText().toString();
         if (TextUtils.isEmpty(code)) {
-            Toast.makeText(getContext(), "请输入车次", Toast.LENGTH_SHORT).show();
+            toast("请输入车次");
             return;
         }
         // TODO: 2018/7/28
+        // TODO: 2020/3/17 检查网络
+        final boolean networkEnable = App.getInstance().networkEnable();
+        if (!networkEnable) {
+            Tools.openSetting(getContext(), trainCode);
+            return;
+        }
         startActivity(TrainDetailActivity.newIntent(getContext(), selectedDate, code));
 
     }

@@ -10,7 +10,6 @@ import java.io.IOException;
  * @author Administrator  on 2019/12/20.
  */
 public class VersionTool {
-    private String mVersion = "un-know";
 
 
     public void loadData(String url) throws IOException {
@@ -20,6 +19,6 @@ public class VersionTool {
     }
 
     public String getVersion() {
-        return mVersion;
+        return "un-know";
     }
 }

@@ -4,20 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.base.BaseActivity;
 import com.by5388.sy95306v2.dialog.TrainFilterDialog;
 import com.by5388.sy95306v2.dialog.TrainFilterDialog.UpdateFilterDataCallBack;
+import com.by5388.sy95306v2.dialog.TrainFilterDialog2;
 import com.by5388.sy95306v2.module.shenyang.adapter.TrainListAdapter;
 import com.by5388.sy95306v2.module.shenyang.bean.Station;
 import com.by5388.sy95306v2.module.shenyang.bean.TrainNumber;
@@ -29,7 +24,13 @@ import com.by5388.sy95306v2.module.shenyang.net.api.SyService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindBitmap;
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -41,6 +42,7 @@ import butterknife.OnClick;
  */
 
 public class TrainNumberListActivity extends BaseActivity implements ITrainListView, UpdateFilterDataCallBack {
+    private static final int REQUEST_CODE_FILTER = 2000;
     @BindViews({R.id.image_view_1, R.id.image_view_2, R.id.image_view_3})
     List<ImageView> imageViews;
     @BindView(R.id.textView_show_time)
@@ -48,7 +50,6 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
     @BindViews({R.id.lly_menu_start_time, R.id.lly_menu_spend_time, R.id.lly_menu_end_time})
     List<ConstraintLayout> constraintLayouts;
     @BindView(R.id.recycler_View_train_list)
-
     RecyclerView recyclerView;
     @BindBitmap(R.drawable.ic_up)
 
@@ -87,7 +88,6 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
      * 默认起始
      */
     private int defaultPosition = 0;
-
     /**
      * TODO 20191126 加载完成,避免空数据时 点击闪退
      */
@@ -180,20 +180,20 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
 
     @Override
     public void showErrorMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        toast(message);
         finish();
     }
 
 
     @Override
-    public void showLoading() {
+    public void onStartLoading() {
         mLoaded = false;
         swipeRefreshLayout.setRefreshing(true);
         recyclerView.setVisibility(View.GONE);
     }
 
     @Override
-    public void finishLoading() {
+    public void onFinishLoading() {
         swipeRefreshLayout.setRefreshing(false);
         recyclerView.setVisibility(View.VISIBLE);
         mLoaded = true;
@@ -206,11 +206,6 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
             presenter = null;
         }
         super.onDestroy();
-    }
-
-    @Override
-    protected boolean isShowActionBar() {
-        return true;
     }
 
     @Override
@@ -229,7 +224,7 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
 
     private void sortTrainNumber(View view) {
         if (!mLoaded) {
-            Toast.makeText(this, "请稍候", Toast.LENGTH_SHORT).show();
+            toast("请稍候");
             return;
         }
         final int id = view.getId();
@@ -258,7 +253,7 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
      */
     private void sortTrainNumber(int position) {
         if (!mLoaded) {
-            Toast.makeText(this, "请稍候", Toast.LENGTH_SHORT).show();
+            toast("请稍候");
             return;
         }
         ImageView view = imageViews.get(position);
@@ -289,6 +284,16 @@ public class TrainNumberListActivity extends BaseActivity implements ITrainListV
         if (!mLoaded) {
             return;
         }
+        // TODO: 2020/3/19 调试新的类型筛选
+        if (true) {
+
+            final TrainFilterDialog2 trainFilterDialog2 = TrainFilterDialog2.newInstance();
+            //trainFilterDialog2.setTargetFragment(this, REQUEST_CODE_FILTER);
+            trainFilterDialog2.show(Objects.requireNonNull(getSupportFragmentManager()), TrainFilterDialog2.class.getName());
+            return;
+        }
+
+
         if (null == dialog) {
             dialog = new TrainFilterDialog(this, this);
         }

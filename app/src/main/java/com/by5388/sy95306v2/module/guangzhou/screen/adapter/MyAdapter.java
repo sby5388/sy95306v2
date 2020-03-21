@@ -1,8 +1,6 @@
 package com.by5388.sy95306v2.module.guangzhou.screen.adapter;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +10,9 @@ import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.module.guangzhou.screen.view.IScreenView;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @author by5388  on 2018/8/3.
@@ -51,6 +52,11 @@ public class MyAdapter extends RecyclerView.Adapter implements View.OnClickListe
         return stationNames.size();
     }
 
+    @Override
+    public void onClick(View v) {
+        view.showStationScreen((int) v.getTag());
+    }
+
     static class MyViewHolder extends RecyclerView.ViewHolder {
         final Button name;
 
@@ -58,10 +64,5 @@ public class MyAdapter extends RecyclerView.Adapter implements View.OnClickListe
             super(itemView);
             name = itemView.findViewById(R.id.button_name);
         }
-    }
-
-    @Override
-    public void onClick(View v) {
-        view.showStationScreen((int) v.getTag());
     }
 }

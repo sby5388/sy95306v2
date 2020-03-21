@@ -17,10 +17,6 @@ import com.by5388.sy95306v2.module.tiezong.ticket.check.adapter.TicketCheckAdapt
  */
 public class TicketCheckFragment extends BaseTzFragment implements TextWatcher {
     private BaseAdapter mAdapter;
-    private EditText mEditText;
-    private Button mButtonQuery;
-    private Button mButtonDate;
-    private ListView mListView;
 
     @Override
     public void updateView(int year, int month, int dayOfMonth) {
@@ -44,14 +40,14 @@ public class TicketCheckFragment extends BaseTzFragment implements TextWatcher {
 
     @Override
     protected void initView(View view) {
-        mListView = view.findViewById(R.id.listView);
-        mEditText = view.findViewById(R.id.editText_train_code);
-        mButtonDate = view.findViewById(R.id.button_query_date);
-        mButtonQuery = view.findViewById(R.id.button_query);
-        mListView.setAdapter(mAdapter);
+        ListView listView = view.findViewById(R.id.listView);
+        EditText editText = view.findViewById(R.id.editText_train_code);
+        Button buttonDate = view.findViewById(R.id.button_query_date);
+        Button buttonQuery = view.findViewById(R.id.button_query);
+        listView.setAdapter(mAdapter);
 
-        mEditText.addTextChangedListener(this);
-        mButtonQuery.setOnClickListener(v-> queryTicket());
+        editText.addTextChangedListener(this);
+        buttonQuery.setOnClickListener(v -> queryTicket());
     }
 
     private void queryTicket() {

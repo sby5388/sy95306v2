@@ -17,8 +17,8 @@ import java.util.List;
  */
 
 public class TempStationAdapter extends BaseAdapter {
-    private List<StationsBean> stationsBeans;
     private final LayoutInflater inflater;
+    private List<StationsBean> stationsBeans;
 
     public TempStationAdapter(Context context, List<StationsBean> stationsBeans) {
         this.inflater = LayoutInflater.from(context);

@@ -48,6 +48,7 @@ public interface ISettingSharedPreferences {
 
     /**
      * 所有的键值对
+     *
      * @return 返回所有的键值对
      */
     Map<String, ?> getAll();

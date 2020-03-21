@@ -1,9 +1,9 @@
 package com.by5388.sy95306v2.module.shenyang.detail.presenter;
 
+import com.by5388.sy95306v2.module.shenyang.bean.TrainDetail;
 import com.by5388.sy95306v2.module.shenyang.detail.model.DetailModel;
 import com.by5388.sy95306v2.module.shenyang.detail.model.IDetailModel;
 import com.by5388.sy95306v2.module.shenyang.detail.view.IDetailView;
-import com.by5388.sy95306v2.module.shenyang.bean.TrainDetail;
 
 import java.util.List;
 
@@ -22,9 +22,9 @@ public class DetailPresenter implements IDetailPresenter {
 
     private final IDetailView view;
     private final IDetailModel model;
-    private Disposable disposable;
     private final Consumer<List<TrainDetail>> consumer;
     private final Consumer<Throwable> throwableConsumer;
+    private Disposable disposable;
 
     public DetailPresenter(IDetailView view) {
         this.view = view;

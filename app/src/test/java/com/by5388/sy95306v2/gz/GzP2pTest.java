@@ -1,7 +1,5 @@
 package com.by5388.sy95306v2.gz;
 
-import androidx.annotation.NonNull;
-
 import com.by5388.sy95306v2.module.guangzhou.bean.GzResultData;
 import com.by5388.sy95306v2.module.guangzhou.bean.station.DataBeanP2P;
 import com.by5388.sy95306v2.module.guangzhou.bean.station.StationsBean;
@@ -13,6 +11,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -28,7 +27,7 @@ public class GzP2pTest {
         IGzP2pModel model = new GzP2pModel();
 
         Disposable disposable = model.getTrainByStation(fromStation, toStation, date)
-                .subscribe(dataBeanP2PGzResultData -> show(dataBeanP2PGzResultData), throwable -> System.err.println(throwable.getLocalizedMessage()));
+                .subscribe(this::show, throwable -> System.err.println(throwable.getLocalizedMessage()));
     }
 
     private void show(GzResultData<DataBeanP2P> dataBeanP2PGzResultData) {

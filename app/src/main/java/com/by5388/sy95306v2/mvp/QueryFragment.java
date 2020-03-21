@@ -2,7 +2,6 @@ package com.by5388.sy95306v2.mvp;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputEditText;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +9,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.IRemainingTicket;
 import com.by5388.sy95306v2.module.tiezong.remainticket.temp.RemainTicketAdapter;
 import com.by5388.sy95306v2.t201906.TrainResult;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,21 +30,10 @@ public class QueryFragment extends CommonFragment<QueryPresenter, QueryPresenter
         implements MyListener.UpdateDate, QueryPresenter.QueryUi {
     private TextInputEditText fromStation, toStation;
     private Button buttonSearch, buttonDate;
-    private ListView mListView;
     private Calendar calendar;
     private MyListener dateListener;
     private RemainTicketAdapter mAdapter;
     private DatePickerDialog mDialog;
-
-    @Override
-    public QueryPresenter createPresenter() {
-        return QueryPresenter.getInstance();
-    }
-
-    @Override
-    public QueryPresenter.QueryUi getUI() {
-        return this;
-    }
 
     public QueryFragment() {
     }
@@ -55,6 +43,16 @@ public class QueryFragment extends CommonFragment<QueryPresenter, QueryPresenter
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public QueryPresenter createPresenter() {
+        return QueryPresenter.getInstance();
+    }
+
+    @Override
+    public QueryPresenter.QueryUi getUI() {
+        return this;
     }
 
     @Override
@@ -72,8 +70,8 @@ public class QueryFragment extends CommonFragment<QueryPresenter, QueryPresenter
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_plus_one, container, false);
 
-        mListView = view.findViewById(R.id.listView_train_code);
-        mListView.setAdapter(mAdapter);
+        ListView listView = view.findViewById(R.id.listView_train_code);
+        listView.setAdapter(mAdapter);
         fromStation = view.findViewById(R.id.textView_from_station);
         toStation = view.findViewById(R.id.textView_to_station);
         buttonSearch = view.findViewById(R.id.button_query);
@@ -195,7 +193,7 @@ public class QueryFragment extends CommonFragment<QueryPresenter, QueryPresenter
     @Override
     public void onFailQuery(String s) {
         buttonSearch.setEnabled(true);
-        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+        toast(s);
     }
 
     @Override

@@ -2,7 +2,11 @@ package com.by5388.sy95306v2.mvp;
 
 import android.content.Context;
 import android.os.Bundle;
+
+import com.by5388.sy95306v2.App;
+
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -14,7 +18,6 @@ public abstract class CommonFragment<T extends Presenter<U>, U extends Ui> exten
     // TODO: 2019/9/12 对于这个可以自定义某一些关键动作
     private static final String KEY_FRAGMENT_HIDDEN = "key_fragment_hidden";
     private T mPresenter;
-    private FragmentDisplayManager mManager;
 
     protected CommonFragment() {
         mPresenter = createPresenter();
@@ -64,10 +67,18 @@ public abstract class CommonFragment<T extends Presenter<U>, U extends Ui> exten
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof FragmentDisplayManager) {
-            mManager = (FragmentDisplayManager) context;
-            mManager.onFragmentAttach(this);
+            FragmentDisplayManager manager = (FragmentDisplayManager) context;
+            manager.onFragmentAttach(this);
         } else {
             throw new RuntimeException("Context must implement FragmentDisplayManager");
         }
+    }
+
+    public void toast(String s) {
+        App.getInstance().toast(s);
+    }
+
+    public void toast(@StringRes int id) {
+        App.getInstance().toast(id);
     }
 }

@@ -1,11 +1,11 @@
 package com.by5388.sy95306v2;
 
-import androidx.annotation.NonNull;
-
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 import static org.junit.Assert.assertEquals;
 

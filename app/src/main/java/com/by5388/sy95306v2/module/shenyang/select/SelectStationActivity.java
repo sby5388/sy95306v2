@@ -1,8 +1,8 @@
 package com.by5388.sy95306v2.module.shenyang.select;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -22,6 +22,8 @@ import com.by5388.sy95306v2.module.shenyang.select.view.IStationView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 /**
  * 选择车站
@@ -76,15 +78,10 @@ public class SelectStationActivity extends BaseActivity implements IStationView,
         Bundle bundle = new Bundle();
         bundle.putString(Station2StationFragment.DATA_STATION_CODE, station.getNameUpper());
         intent.putExtra(Station2StationFragment.DATA_BUNDLE, bundle);
-        setResult(Station2StationFragment.SUCCESS_CODE, intent);
+        setResult(Activity.RESULT_OK, intent);
         finish();
     }
 
-
-    @Override
-    protected boolean isShowActionBar() {
-        return true;
-    }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {

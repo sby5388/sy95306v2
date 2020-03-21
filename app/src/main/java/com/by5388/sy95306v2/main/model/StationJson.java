@@ -1,5 +1,6 @@
 package com.by5388.sy95306v2.main.model;
 
+import android.os.Build;
 import android.util.Log;
 
 import com.by5388.sy95306v2.App;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +25,18 @@ public class StationJson implements IStationJson {
     // TODO: 2019/3/26 仅仅作为一个表达式，而是应该包含数据
 
 
-    private int mCount = 0;
     private String longString;
+
+    private static void out(String s) {
+        // TODO: 2020/3/20
+        if (!App.DEBUG || true) {
+            return;
+        }
+        System.out.println(s);
+    }
 
     @Override
     public int getStationCount(String stationList, StringBuilder stationListFile) {
-        mCount = 0;
         String stationListFileTemp = "";
         final int minLength = 2;
         String[] newList = stationList.split("'");
@@ -37,8 +45,7 @@ public class StationJson implements IStationJson {
             stationListFile.delete(0, stationListFile.length());
             stationListFile.append(stationListFileTemp);
         }
-        String[] stationNames = stationListFileTemp.split("@");
-        mCount = stationNames.length;
+        final String[] stationNames = stationListFileTemp.split("@");
         return stationNames.length;
     }
 
@@ -91,8 +98,7 @@ public class StationJson implements IStationJson {
     }
 
     @Override
-    public List<Station> getCityList(String cityList) {
-        mCount = 0;
+    public List<Station> getWebPageContent(String cityList) {
         List<Station> stations = new ArrayList<>();
         String[] stationNames = cityList.split("@");
         for (String stationName : stationNames) {
@@ -100,34 +106,31 @@ public class StationJson implements IStationJson {
             if (itemCity.length == 6) {
                 stations.add(new Station(itemCity[0], itemCity[1], itemCity[2],
                         itemCity[3], itemCity[4], Integer.parseInt(itemCity[5])));
-                mCount++;
             }
         }
         return stations;
     }
 
     @Override
-    public String getCityList(InputStream inputStream) {
+    public String getWebPageContent(InputStream inputStream) {
         try {
-            InputStreamReader inputReader = new InputStreamReader(inputStream, Charset.forName("utf-8"));
-            BufferedReader bufReader = new BufferedReader(inputReader);
+            final Charset charset;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                charset = StandardCharsets.UTF_8;
+            } else {
+                charset = Charset.forName("UTF-8");
+            }
+            final BufferedReader bufReader = new BufferedReader(new InputStreamReader(inputStream, charset));
             String line;
-            StringBuilder stringBuilder = new StringBuilder();
+            final StringBuilder stringBuilder = new StringBuilder();
+            // TODO: 2020/3/21 获取网页的每一行
             while ((line = bufReader.readLine()) != null) {
                 stringBuilder.append(line);
             }
             bufReader.close();
-            inputReader.close();
             return stringBuilder.toString();
         } catch (Exception e) {
             return "";
         }
-    }
-
-    private static void out(String s) {
-        if (!App.DEBUG) {
-            return;
-        }
-        System.out.println(s);
     }
 }

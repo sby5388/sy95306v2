@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SwitchPreferenceCompat
+        app:defaultValue="true"
+        app:enabled="true"
+        app:key="switch_auto_check_station_list"
+        app:summaryOff="@string/check_update_auto_disable"
+        app:summaryOn="@string/check_update_auto_enable"
+        app:title="@string/check_update_when_start" />
+</PreferenceScreen>

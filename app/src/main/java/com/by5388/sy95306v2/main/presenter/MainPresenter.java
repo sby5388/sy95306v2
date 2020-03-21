@@ -1,7 +1,5 @@
 package com.by5388.sy95306v2.main.presenter;
 
-import android.util.Log;
-
 import com.by5388.sy95306v2.database.IShenYangDbApi;
 import com.by5388.sy95306v2.exception.NetworkException;
 import com.by5388.sy95306v2.main.model.IMainModel;
@@ -16,7 +14,6 @@ import io.reactivex.schedulers.Schedulers;
  * @author by5388  on 2019/1/2.
  */
 public class MainPresenter implements IMainPresenter {
-    private static final String TAG = MainPresenter.class.getSimpleName();
 
     private final IMainView mMainView;
     private final IMainModel mModel;
@@ -31,6 +28,7 @@ public class MainPresenter implements IMainPresenter {
     @Override
     public void checkUpdate() {
         mMainView.onStartChecking();
+
         mDisposable.add(mModel.isNeedUpdate()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -42,7 +40,7 @@ public class MainPresenter implements IMainPresenter {
                     }
                 }, throwable -> {
                     mMainView.openNetWorkSetting();
-                    mMainView.onTip("请重试");
+                    mMainView.onErrorTip("请重试");
                 })
         );
 
@@ -60,8 +58,7 @@ public class MainPresenter implements IMainPresenter {
                     clearData();
                 }, throwable -> {
                     if (throwable instanceof NetworkException) {
-                        Log.e(TAG, "startUpdate: ", throwable);
-                        mMainView.onTip(throwable.getLocalizedMessage());
+                        mMainView.onErrorTip(throwable.getLocalizedMessage());
                     }
                 })
         );
@@ -85,7 +82,7 @@ public class MainPresenter implements IMainPresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mMainView::updateProgress,
-                        throwable -> mMainView.onTip("异常"),
+                        throwable -> mMainView.onErrorTip("异常"),
                         () -> {
                             mMainView.onFinishUpdate();
                             mModel.onFinishUpdate();

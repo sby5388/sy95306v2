@@ -1,9 +1,9 @@
 package com.by5388.sy95306v2.module.guangzhou.late.model;
 
-import com.by5388.sy95306v2.module.guangzhou.bean.GzResultData;
-import com.by5388.sy95306v2.module.guangzhou.bean.late.GzLateDataBean;
 import com.by5388.sy95306v2.module.guangzhou.api.GzNetTools;
 import com.by5388.sy95306v2.module.guangzhou.api.GzService;
+import com.by5388.sy95306v2.module.guangzhou.bean.GzResultData;
+import com.by5388.sy95306v2.module.guangzhou.bean.late.GzLateDataBean;
 
 import java.util.ArrayList;
 import java.util.List;

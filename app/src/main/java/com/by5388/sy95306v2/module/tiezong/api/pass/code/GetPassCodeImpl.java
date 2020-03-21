@@ -5,7 +5,6 @@ import com.by5388.sy95306v2.module.tiezong.bean.number.NumberDataBean;
 import com.by5388.sy95306v2.module.tiezong.bean.number.NumberListDataBean;
 import com.by5388.sy95306v2.module.tiezong.bean.temp.DataBeanX;
 import com.by5388.sy95306v2.module.tiezong.bean.yp.success.SuccessDataBean;
-import com.by5388.sy95306v2.module.tiezong.api.pass.code.IGetPassCodeService;
 
 import java.util.ArrayList;
 import java.util.List;

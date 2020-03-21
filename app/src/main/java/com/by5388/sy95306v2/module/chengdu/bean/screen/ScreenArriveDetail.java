@@ -12,36 +12,6 @@ import com.google.gson.annotations.SerializedName;
 @SuppressWarnings("all")
 public class ScreenArriveDetail implements CdScreenItem {
 
-    @Override
-    public String getTrainCode() {
-        return trainCode;
-    }
-
-    @Override
-    public String getStartStation() {
-        return getStartStationName();
-    }
-
-    @Override
-    public String getEndStation() {
-        return getEndStationName();
-    }
-
-    @Override
-    public String getTime() {
-        return getLateArrive();
-    }
-
-    @Override
-    public String getPlace() {
-        return getStationExit();
-    }
-
-    @Override
-    public String getStatus() {
-        return getTrainStatus();
-    }
-
     /**
      * checkStatus : 停止检票,检票状态
      * DATE_ARR11 : 00:01
@@ -80,6 +50,40 @@ public class ScreenArriveDetail implements CdScreenItem {
     private String waitRoom;
     @SerializedName("WGQBZ")
     private String unKnow;
+
+    @Override
+    public String getTrainCode() {
+        return trainCode;
+    }
+
+    public void setTrainCode(String mTrainCode) {
+        trainCode = mTrainCode;
+    }
+
+    @Override
+    public String getStartStation() {
+        return getStartStationName();
+    }
+
+    @Override
+    public String getEndStation() {
+        return getEndStationName();
+    }
+
+    @Override
+    public String getTime() {
+        return getLateArrive();
+    }
+
+    @Override
+    public String getPlace() {
+        return getStationExit();
+    }
+
+    @Override
+    public String getStatus() {
+        return getTrainStatus();
+    }
 
     public String getCheckStatus() {
         return checkStatus;
@@ -151,10 +155,6 @@ public class ScreenArriveDetail implements CdScreenItem {
 
     public void setStationExit(String mStationExit) {
         stationExit = mStationExit;
-    }
-
-    public void setTrainCode(String mTrainCode) {
-        trainCode = mTrainCode;
     }
 
     public String getWaitRoom() {

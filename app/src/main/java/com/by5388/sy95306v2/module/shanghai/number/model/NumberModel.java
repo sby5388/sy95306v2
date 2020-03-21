@@ -1,10 +1,10 @@
 package com.by5388.sy95306v2.module.shanghai.number.model;
 
+import com.by5388.sy95306v2.module.shanghai.api.ShNetTools;
+import com.by5388.sy95306v2.module.shanghai.api.ShanghaiService;
 import com.by5388.sy95306v2.module.shanghai.bean.InfoBeanTrainNo;
 import com.by5388.sy95306v2.module.shanghai.bean.QueryMethod;
 import com.by5388.sy95306v2.module.shanghai.bean.ShanghaiTrainNumber;
-import com.by5388.sy95306v2.module.shanghai.api.ShNetTools;
-import com.by5388.sy95306v2.module.shanghai.api.ShanghaiService;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class NumberModel implements INumberModel {
 
 
     public NumberModel() {
-        Retrofit retrofit =new ShNetTools().getRetrofit();
+        Retrofit retrofit = new ShNetTools().getRetrofit();
         shanghaiService = retrofit.create(ShanghaiService.class);
     }
 

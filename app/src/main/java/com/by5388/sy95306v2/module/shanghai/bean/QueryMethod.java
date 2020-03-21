@@ -6,12 +6,6 @@ package com.by5388.sy95306v2.module.shanghai.bean;
  */
 public class QueryMethod<T> {
 
-    public QueryMethod(T t) {
-        this.info = t;
-        this.user = new UserBean();
-    }
-
-
     /**
      * T 1:车次查询
      *
@@ -32,6 +26,10 @@ public class QueryMethod<T> {
 
     private T info;
     private UserBean user;
+    public QueryMethod(T t) {
+        this.info = t;
+        this.user = new UserBean();
+    }
 
     public T getInfo() {
         return info;

@@ -1,13 +1,13 @@
 package com.by5388.sy95306v2.module.chengdu.screen.model;
 
+import com.by5388.sy95306v2.database.DataBaseApiImpl;
+import com.by5388.sy95306v2.database.IChengDuDbApi;
+import com.by5388.sy95306v2.module.chengdu.api.ICdQuery;
+import com.by5388.sy95306v2.module.chengdu.api.QueryCd;
 import com.by5388.sy95306v2.module.chengdu.bean.screen.ScreenArriveDetail;
 import com.by5388.sy95306v2.module.chengdu.bean.screen.ScreenLeaveDetail;
 import com.by5388.sy95306v2.module.chengdu.bean.screen.ScreenStation;
-import com.by5388.sy95306v2.database.DataBaseApiImpl;
-import com.by5388.sy95306v2.database.IChengDuDbApi;
 import com.by5388.sy95306v2.module.chengdu.screen.CdScreenItem;
-import com.by5388.sy95306v2.module.chengdu.api.ICdQuery;
-import com.by5388.sy95306v2.module.chengdu.api.QueryCd;
 
 import java.util.ArrayList;
 import java.util.List;

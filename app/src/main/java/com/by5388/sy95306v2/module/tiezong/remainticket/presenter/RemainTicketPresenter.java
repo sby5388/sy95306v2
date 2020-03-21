@@ -19,9 +19,9 @@ import io.reactivex.schedulers.Schedulers;
 public class RemainTicketPresenter implements IRemainTicketPresenter {
     private final IRemainTicketModel model;
     private final IRemainTicketView view;
-    private Disposable disposable;
     private final Consumer<List<IRemainingTicket>> consumer;
     private final Consumer<Throwable> throwableConsumer;
+    private Disposable disposable;
 
     public RemainTicketPresenter(IRemainTicketView view) {
         this.view = view;

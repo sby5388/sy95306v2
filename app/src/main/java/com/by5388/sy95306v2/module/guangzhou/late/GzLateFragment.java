@@ -1,7 +1,6 @@
 package com.by5388.sy95306v2.module.guangzhou.late;
 
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputEditText;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -11,13 +10,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.module.guangzhou.bean.late.GzLateStationInfoBean;
 import com.by5388.sy95306v2.MyListener;
+import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.module.guangzhou.BaseGzFragment;
+import com.by5388.sy95306v2.module.guangzhou.bean.late.GzLateStationInfoBean;
 import com.by5388.sy95306v2.module.guangzhou.late.persenter.GzLatePresenter;
 import com.by5388.sy95306v2.module.guangzhou.late.persenter.IGzLatePresenter;
 import com.by5388.sy95306v2.module.guangzhou.late.view.IGzLateView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;

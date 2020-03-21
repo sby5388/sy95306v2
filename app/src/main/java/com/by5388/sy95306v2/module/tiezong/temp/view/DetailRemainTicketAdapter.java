@@ -1,8 +1,6 @@
 package com.by5388.sy95306v2.module.tiezong.temp.view;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +11,16 @@ import com.by5388.sy95306v2.module.tiezong.bean.yp.success.TzDataBean;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * @author by5388  on 2018/8/28.
  */
 class DetailRemainTicketAdapter extends RecyclerView.Adapter {
 
-    private List<TzDataBean> beans;
     private final LayoutInflater inflater;
+    private List<TzDataBean> beans;
 
     DetailRemainTicketAdapter(Context context, List<TzDataBean> beans) {
         this.beans = beans;

@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-import io.reactivex.functions.Consumer;
 import retrofit2.Retrofit;
 
 /**
@@ -29,18 +28,15 @@ public class TzService2Test {
         final String trainDate = "2019-10-10";
         String randCode = "";
         mSubjects.getTrainDetail(trainNo, trainDate, randCode)
-                .subscribe(new Consumer<TzTrainCodeResult>() {
-                               @Override
-                               public void accept(TzTrainCodeResult tzTrainCodeResult) throws Exception {
-                                   if (!tzTrainCodeResult.status || tzTrainCodeResult.mHttpStatus != HTTP_OK) {
-                                       throw new Exception("没有获取到正确的数值");
-                                   }
-                                   final List<TzTrainCodeResult.DataBeanX.DataBean> dataBeans = tzTrainCodeResult.data.data;
-                                   for (TzTrainCodeResult.DataBeanX.DataBean bean : dataBeans) {
-                                       System.out.println(bean.mStationName + " : " + bean.mArriveTime + " : " + bean.mStartTime);
-                                   }
-                               }
-                           }
+                .subscribe(tzTrainCodeResult -> {
+                            if (!tzTrainCodeResult.status || tzTrainCodeResult.mHttpStatus != HTTP_OK) {
+                                throw new Exception("没有获取到正确的数值");
+                            }
+                            final List<TzTrainCodeResult.DataBeanX.DataBean> dataBeans = tzTrainCodeResult.data.data;
+                            for (TzTrainCodeResult.DataBeanX.DataBean bean : dataBeans) {
+                                System.out.println(bean.mStationName + " : " + bean.mArriveTime + " : " + bean.mStartTime);
+                            }
+                        }
 //                        , new Consumer<Throwable>() {
 //                            @Override
 //                            public void accept(Throwable throwable) throws Exception {

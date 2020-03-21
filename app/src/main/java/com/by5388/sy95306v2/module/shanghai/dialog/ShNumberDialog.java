@@ -1,12 +1,6 @@
 package com.by5388.sy95306v2.module.shanghai.dialog;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -24,6 +18,13 @@ import com.by5388.sy95306v2.module.shanghai.number.presenter.NumberPresenter;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * @author by5388  on 2018/8/10.
  */
@@ -33,14 +34,14 @@ public class ShNumberDialog implements IShNumberDialogView {
     private final ShNumberAdapter adapter;
     private final Context context;
     private final AlertDialog dialog;
+    private final LayoutInflater inflater;
+    private final INumberPresenter presenter;
+    private final List<ShanghaiTrainNumber> empty;
     private View dialogView;
     private View dialogTitleView;
     private RecyclerView recyclerView;
-    private final LayoutInflater inflater;
     private TextView trainCode, date, trainName, startTime, endTime;
-    private final INumberPresenter presenter;
     private ProgressBar progressBar;
-    private final List<ShanghaiTrainNumber> empty;
 
     public ShNumberDialog(Context context) {
         this.context = context;
@@ -55,6 +56,16 @@ public class ShNumberDialog implements IShNumberDialogView {
                 .setView(dialogView)
                 .setPositiveButton(R.string.ok, null)
                 .create();
+    }
+
+    private static String getTrainName(@NonNull List<ShanghaiTrainNumber> numbers) {
+        if (numbers.isEmpty()) {
+            return "";
+        }
+        if (numbers.size() == 1) {
+            return numbers.get(0).getStationName();
+        }
+        return numbers.get(0).getStationName() + "-" + numbers.get(numbers.size() - 1).getStationName();
     }
 
     private void initMainView() {
@@ -89,17 +100,6 @@ public class ShNumberDialog implements IShNumberDialogView {
         startTime.setText(numbers.get(0).getStartTime());
         endTime.setText(numbers.get(numbers.size() - 1).getEndTime());
     }
-
-    private static String getTrainName(@NonNull List<ShanghaiTrainNumber> numbers) {
-        if (numbers.isEmpty()) {
-            return "";
-        }
-        if (numbers.size() == 1) {
-            return numbers.get(0).getStationName();
-        }
-        return numbers.get(0).getStationName() + "-" + numbers.get(numbers.size() - 1).getStationName();
-    }
-
 
     @Override
     public void dismiss() {

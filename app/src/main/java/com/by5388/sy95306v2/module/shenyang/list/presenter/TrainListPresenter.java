@@ -1,15 +1,14 @@
 package com.by5388.sy95306v2.module.shenyang.list.presenter;
 
-import androidx.annotation.NonNull;
-
+import com.by5388.sy95306v2.module.shenyang.bean.TrainNumber;
 import com.by5388.sy95306v2.module.shenyang.list.SortType;
 import com.by5388.sy95306v2.module.shenyang.list.model.ITrainListModel;
 import com.by5388.sy95306v2.module.shenyang.list.model.TrainListModel;
 import com.by5388.sy95306v2.module.shenyang.list.view.ITrainListView;
-import com.by5388.sy95306v2.module.shenyang.bean.TrainNumber;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -26,10 +25,9 @@ public class TrainListPresenter implements ITrainListPresenter {
 
     private final ITrainListView view;
     private final ITrainListModel model;
-
-    private Disposable disposable;
     private final Consumer<List<TrainNumber>> consumer;
     private final Consumer<Throwable> throwableConsumer;
+    private Disposable disposable;
     /**
      * 全部的车次信息，未过滤
      */
@@ -45,7 +43,7 @@ public class TrainListPresenter implements ITrainListPresenter {
                 bindData(model.sortTrainNumber(trainNumbers, SORT_BY_START_TIME, true));
             } else {
                 view.updateTrainList(trainNumbers);
-                view.finishLoading();
+                view.onFinishLoading();
             }
         };
         throwableConsumer = throwable -> view.showErrorMessage(throwable.getLocalizedMessage());
@@ -54,7 +52,7 @@ public class TrainListPresenter implements ITrainListPresenter {
 
     @Override
     public void getTrainList(int date, String fromStation, String toStation) {
-        view.showLoading();
+        view.onStartLoading();
         bindData(model.getTrainNumber(date, fromStation, toStation));
     }
 
@@ -67,7 +65,7 @@ public class TrainListPresenter implements ITrainListPresenter {
 
     @Override
     public void sortTrainList(int method, boolean isUp) {
-        view.showLoading();
+        view.onStartLoading();
         bindData(model.sortTrainNumber(allTrainNumbers, method, isUp));
     }
 

@@ -2,9 +2,9 @@ package com.by5388.sy95306v2.module.shenyang.select.model;
 
 import android.text.TextUtils;
 
-import com.by5388.sy95306v2.module.shenyang.bean.Station;
 import com.by5388.sy95306v2.database.DataBaseApiImpl;
 import com.by5388.sy95306v2.database.IShenYangDbApi;
+import com.by5388.sy95306v2.module.shenyang.bean.Station;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,10 +57,8 @@ public class StationModel implements IStationModel {
      * 匹配英文
      */
     private final static String REG_ABC = "^[a-zA-Z]*$";
-
-    private List<Station> defaultStations;
-
     private final IShenYangDbApi dataBaseService;
+    private List<Station> defaultStations;
 
     public StationModel() {
         this.dataBaseService = DataBaseApiImpl.getInstance();

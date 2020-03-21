@@ -43,6 +43,4 @@ public interface ITrainListModel {
      */
     String getStationNames(String fromStationCode, String toStationCode);
 
-
-    Observable<List<TrainNumber>> sortTrainNumber(List<TrainNumber> trainNumbers, SortType sortType, boolean isUp);
 }

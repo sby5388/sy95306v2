@@ -1,7 +1,6 @@
 package com.by5388.sy95306v2.module.tiezong.remainticket.temp;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,20 +14,22 @@ import com.by5388.sy95306v2.bean.IRemainingTicket;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 /**
  * @author by5388  on 2018/8/13.
  */
 public class RemainTicketAdapter extends BaseAdapter {
 
+    private final static String EMPTY = "--";
+    private final static String EMPTY2 = "无";
     private final LayoutInflater inflater;
-    private List<IRemainingTicket> tickets;
     private final String rw;
     private final String yw;
     private final String rz;
     private final String yz;
     private final String wz;
-    private final static String EMPTY = "--";
-    private final static String EMPTY2 = "无";
+    private List<IRemainingTicket> tickets;
 
     public RemainTicketAdapter(@NonNull Context context) {
         this.inflater = LayoutInflater.from(context);

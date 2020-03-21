@@ -1,20 +1,7 @@
 package com.by5388.sy95306v2.main;
 
 import android.content.DialogInterface;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,18 +11,33 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.by5388.sy95306v2.App;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.main.presenter.IMainPresenter;
 import com.by5388.sy95306v2.main.presenter.MainPresenter;
 import com.by5388.sy95306v2.main.view.IMainView;
+import com.by5388.sy95306v2.module.chengdu.ChengduFragment;
 import com.by5388.sy95306v2.module.guangzhou.GuangzhouFragment;
 import com.by5388.sy95306v2.module.shanghai.ShanghaiFragment;
 import com.by5388.sy95306v2.module.shenyang.ShenYangFragment;
 import com.by5388.sy95306v2.module.tiezong.TzFragment;
 import com.by5388.sy95306v2.mvp.FragmentDisplayManager;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * 主页面
@@ -46,25 +48,23 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IMainView, FragmentDisplayManager {
     /**
-     * 记录用户首次点击返回键的时间
-     */
-    private long firstTime = 0;
-    /**
      * 2秒内双返回键直接退出
      */
     private static final int EXIT_TIME = 2000;
     private static final int TITLE_SHEN_YANG = R.string.title_shen_yang;
-    private static final int TITLE_TZ = R.string.title_tie_zhong;
+    private static final int TITLE_TZ = R.string.title_tie_zong;
     private static final int TITLE_CD = R.string.title_cheng_du;
     private static final int TITLE_GZ = R.string.title_guang_zhou;
     private static final int TITLE_SH = R.string.title_shang_hai;
-
     private static final int SHEN_YANG = 0;
-    private static final int GUANG_ZHOU = 1;
-    private static final int SHANG_HAI = 2;
-    private static final int TIE_ZONG = 3;
+    private static final int TIE_ZONG = 1;
+    private static final int GUANG_ZHOU = 2;
+    private static final int SHANG_HAI = 3;
     private static final int CHENG_DU = 4;
-
+    /**
+     * 记录用户首次点击返回键的时间
+     */
+    private long firstTime = 0;
     private List<Fragment> fragments = new ArrayList<>();
     private List<Integer> titles = new ArrayList<>();
     private FragmentManager mFragmentManager;
@@ -78,13 +78,15 @@ public class MainActivity extends AppCompatActivity
     private int stationCount = 0;
     private DrawerLayout mDrawerLayout;
 
+    private boolean mRelease = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO: 2019/6/15 加载过慢，日志显示耗时1040毫秒
         // TODO: 2019/7/8 加载过慢，1199毫秒
         super.onCreate(savedInstanceState);
+        mRelease = getResources().getBoolean(R.bool.release);
         //竖屏
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -117,16 +119,20 @@ public class MainActivity extends AppCompatActivity
         // TODO: 2019/11/26 一开始就初始化这么多的数据 需要处理
         // FIXME: 2019/11/26
         fragments.add(ShenYangFragment.newInstance());
-        fragments.add(GuangzhouFragment.newInstance());
-        fragments.add(ShanghaiFragment.newInstance());
         fragments.add(TzFragment.newInstance());
-//        fragments.add(ChengduFragment.newInstance());
+        if (mRelease) {
+            fragments.add(GuangzhouFragment.newInstance());
+            fragments.add(ShanghaiFragment.newInstance());
+            fragments.add(ChengduFragment.newInstance());
+        }
         titles = new ArrayList<>();
         titles.add(TITLE_SHEN_YANG);
-        titles.add(TITLE_GZ);
-        titles.add(TITLE_SH);
         titles.add(TITLE_TZ);
-//        titles.add(TITLE_CD);
+        if (mRelease) {
+            titles.add(TITLE_GZ);
+            titles.add(TITLE_SH);
+            titles.add(TITLE_CD);
+        }
 
         mFragmentManager = getSupportFragmentManager();
         mPresenter = new MainPresenter(this);
@@ -155,6 +161,7 @@ public class MainActivity extends AppCompatActivity
         super.onBackPressed();
     }
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -162,17 +169,17 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_shen_yang:
                 changeFragment(SHEN_YANG);
                 break;
+            case R.id.nav_tz_12306:
+                changeFragment(TIE_ZONG);
+                break;
             case R.id.nav_guang_tie:
                 changeFragment(GUANG_ZHOU);
                 break;
             case R.id.nav_shang_hai:
                 changeFragment(SHANG_HAI);
                 break;
-            case R.id.nav_tz_12306:
-                changeFragment(TIE_ZONG);
-                break;
             case R.id.nav_cd_12306:
-//                changeFragment(CHENG_DU);
+                changeFragment(CHENG_DU);
                 break;
             case R.id.about:
                 // TODO: 2018/11/12  show about dialog
@@ -255,12 +262,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onStartChecking() {
-        Toast.makeText(this, R.string.check_updating, Toast.LENGTH_SHORT).show();
+        App.getInstance().toast(R.string.check_updating);
     }
 
     @Override
     public void onFinishChecked() {
-        Toast.makeText(this, R.string.lastest_version, Toast.LENGTH_SHORT).show();
+        App.getInstance().toast(R.string.lastest_version);
     }
 
     @Override
@@ -279,11 +286,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void openNetWorkSetting() {
-        onTip("网络异常");
+        onErrorTip("网络异常");
     }
 
     @Override
-    public void onTip(String tip) {
+    public void onErrorTip(String tip) {
         Toast.makeText(this, tip, Toast.LENGTH_SHORT).show();
     }
 

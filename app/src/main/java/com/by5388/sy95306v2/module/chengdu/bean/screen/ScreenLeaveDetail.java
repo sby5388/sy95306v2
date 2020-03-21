@@ -11,37 +11,6 @@ import com.google.gson.annotations.SerializedName;
  */
 //@SuppressWarnings("all")
 public class ScreenLeaveDetail implements CdScreenItem {
-    @Override
-    public String getTrainCode() {
-        return trainCode;
-    }
-
-    @Override
-    public String getStartStation() {
-        return getStartStationName();
-    }
-
-    @Override
-    public String getEndStation() {
-        return getEndStationName();
-    }
-
-    @Override
-    public String getTime() {
-        return getTD_DATE_DEP11();
-    }
-
-    @Override
-    public String getPlace() {
-        return getCheckTicket();
-    }
-
-    @Override
-    public String getStatus() {
-        return getCheckStatus();
-    }
-
-
     /**
      * checkStatus : 正在检票
      * checkTicket : 3候5,第三候车室
@@ -92,6 +61,36 @@ public class ScreenLeaveDetail implements CdScreenItem {
     private String waitRoom;
     @SerializedName("WGQBZ")
     private String unKnow;
+
+    @Override
+    public String getTrainCode() {
+        return trainCode;
+    }
+
+    @Override
+    public String getStartStation() {
+        return getStartStationName();
+    }
+
+    @Override
+    public String getEndStation() {
+        return getEndStationName();
+    }
+
+    @Override
+    public String getTime() {
+        return getTD_DATE_DEP11();
+    }
+
+    @Override
+    public String getPlace() {
+        return getCheckTicket();
+    }
+
+    @Override
+    public String getStatus() {
+        return getCheckStatus();
+    }
 
     public String getCheckStatus() {
         return checkStatus;

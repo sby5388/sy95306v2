@@ -27,5 +27,4 @@ public class DataBeanP2P {
     }
 
 
-
 }

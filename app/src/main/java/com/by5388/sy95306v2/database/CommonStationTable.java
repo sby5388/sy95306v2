@@ -1,6 +1,7 @@
 package com.by5388.sy95306v2.database;
 
 import android.database.sqlite.SQLiteDatabase;
+
 import androidx.annotation.NonNull;
 
 /**

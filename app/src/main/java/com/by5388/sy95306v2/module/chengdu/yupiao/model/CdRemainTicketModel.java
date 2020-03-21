@@ -1,9 +1,9 @@
 package com.by5388.sy95306v2.module.chengdu.yupiao.model;
 
 import com.by5388.sy95306v2.bean.IRemainingTicket;
-import com.by5388.sy95306v2.module.chengdu.bean.yupiao.CdRemainTicketDetailBean;
 import com.by5388.sy95306v2.module.chengdu.api.ICdQuery;
 import com.by5388.sy95306v2.module.chengdu.api.QueryCd;
+import com.by5388.sy95306v2.module.chengdu.bean.yupiao.CdRemainTicketDetailBean;
 
 import java.util.ArrayList;
 import java.util.List;

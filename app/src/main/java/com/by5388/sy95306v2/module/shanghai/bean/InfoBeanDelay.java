@@ -11,6 +11,7 @@ public class InfoBeanDelay {
      */
     private String stationName;
     private String trainCode;
+
     public InfoBeanDelay(String stationName, String trainCode) {
         this.stationName = stationName;
         this.trainCode = trainCode;

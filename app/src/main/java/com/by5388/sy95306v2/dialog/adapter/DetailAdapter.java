@@ -1,7 +1,6 @@
 package com.by5388.sy95306v2.dialog.adapter;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,7 @@ import com.by5388.sy95306v2.module.tiezong.api.TzQuery;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -35,12 +35,11 @@ public class DetailAdapter extends BaseAdapter {
      * 离开
      */
     private static final int LEAVE = TzQuery.LEAVE;
-
-    private List<StationInfoBean> infoBeans;
     private final LayoutInflater inflater;
+    private final Consumer<Throwable> throwableConsumer;
+    private List<StationInfoBean> infoBeans;
     private String trainCode = "";
     private String date = "";
-    private final Consumer<Throwable> throwableConsumer;
     private String[][] status;
     private CompositeDisposable mDisposable;
 
@@ -50,6 +49,11 @@ public class DetailAdapter extends BaseAdapter {
         throwableConsumer = e -> Toast.makeText(context, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         status = new String[infoBeans.size()][2];
         mDisposable = new CompositeDisposable();
+    }
+
+    private static String getDate(String arrDate) {
+        // FIXME: 2018/8/20
+        return "2018-08-15";
     }
 
     public void setInfoBeans(@NonNull TrainsBean trainsBean) {
@@ -62,12 +66,6 @@ public class DetailAdapter extends BaseAdapter {
             notifyDataSetChanged();
         }
     }
-
-    private static String getDate(String arrDate) {
-        // FIXME: 2018/8/20 
-        return "2018-08-15";
-    }
-
 
     @Override
     public int getCount() {

@@ -7,7 +7,6 @@ package com.by5388.sy95306v2.module.guangzhou.number.perserter;
 public interface ITrainNumberPresenter {
 
 
-
     /**
      * 搜索
      *

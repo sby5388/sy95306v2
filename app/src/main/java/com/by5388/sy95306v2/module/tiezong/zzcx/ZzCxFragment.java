@@ -1,20 +1,21 @@
 package com.by5388.sy95306v2.module.tiezong.zzcx;
 
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputEditText;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.by5388.sy95306v2.App;
 import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.IRemainingTicket;
+import com.by5388.sy95306v2.common.Tools;
 import com.by5388.sy95306v2.module.tiezong.BaseTzFragment;
 import com.by5388.sy95306v2.module.tiezong.remainticket.temp.RemainTicketAdapter;
 import com.by5388.sy95306v2.module.tiezong.zzcx.persenter.ITzZzCxPresenter;
 import com.by5388.sy95306v2.module.tiezong.zzcx.persenter.TzZzCxPresenter;
 import com.by5388.sy95306v2.module.tiezong.zzcx.view.ITzZzCxView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,10 +32,10 @@ import java.util.Objects;
 public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
 
     private static final String TAG = "ZzCxFragment";
+    private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
     private TextInputEditText fromStation, toStation;
     private Button buttonDate;
     private RemainTicketAdapter adapter;
-    private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
     private MyListener dateListener;
     private Calendar calendar;
     private ITzZzCxPresenter presenter;
@@ -85,6 +86,12 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
     }
 
     private void searchTrainNumber() {
+        // TODO: 2020/3/17 检查网络
+        final boolean networkEnable = App.getInstance().networkEnable();
+        if (!networkEnable) {
+            Tools.openSetting(getContext(), buttonDate);
+            return;
+        }
         String date = buttonDate.getText().toString().trim();
         String fromStation = this.fromStation.getText().toString().trim();
         String toStation = this.toStation.getText().toString().trim();
@@ -109,7 +116,7 @@ public class ZzCxFragment extends BaseTzFragment implements ITzZzCxView {
 
     @Override
     public void showError(String tip) {
-        Toast.makeText(getContext(), tip, Toast.LENGTH_SHORT).show();
+        toast(tip);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.by5388.sy95306v2.module.guangzhou.number.model;
 
-import com.by5388.sy95306v2.module.guangzhou.bean.GzResultData;
-import com.by5388.sy95306v2.module.guangzhou.bean.station.TrainsBean;
 import com.by5388.sy95306v2.module.guangzhou.api.GzNetTools;
 import com.by5388.sy95306v2.module.guangzhou.api.GzService;
+import com.by5388.sy95306v2.module.guangzhou.bean.GzResultData;
+import com.by5388.sy95306v2.module.guangzhou.bean.station.TrainsBean;
 
 import java.util.List;
 

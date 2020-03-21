@@ -22,13 +22,11 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class TzZzCxPresenter implements ITzZzCxPresenter {
     public static final String TAG = "TzZzCxPresenter";
-    private Disposable listDisposable;
     private final Consumer<Throwable> throwableConsumer;
-
     private final Consumer<SuccessDataBean> resultConsumer;
-
     private final ITzZzCxModel model;
     private final ITzZzCxView view;
+    private Disposable listDisposable;
 
     public TzZzCxPresenter(ITzZzCxView view) {
         this.view = view;

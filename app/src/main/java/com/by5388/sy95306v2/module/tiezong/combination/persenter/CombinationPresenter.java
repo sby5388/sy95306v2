@@ -1,6 +1,5 @@
 package com.by5388.sy95306v2.module.tiezong.combination.persenter;
 
-import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.by5388.sy95306v2.bean.IRemainingTicket;
@@ -14,6 +13,7 @@ import com.by5388.sy95306v2.module.tiezong.combination.view.ICombinationView;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;

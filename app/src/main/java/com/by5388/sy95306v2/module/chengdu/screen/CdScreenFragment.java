@@ -8,12 +8,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.module.chengdu.bean.screen.ScreenStation;
 import com.by5388.sy95306v2.module.chengdu.BaseCdFragment;
+import com.by5388.sy95306v2.module.chengdu.bean.screen.ScreenStation;
 import com.by5388.sy95306v2.module.chengdu.screen.model.ICdScreenModel;
 import com.by5388.sy95306v2.module.chengdu.screen.persenter.CdScreenPresenter;
 import com.by5388.sy95306v2.module.chengdu.screen.persenter.ICdScreenPresenter;
@@ -34,6 +33,14 @@ import java.util.Objects;
  */
 public class CdScreenFragment extends BaseCdFragment implements ICdScreenView {
     private static final String TAG = "CdScreenFragment";
+    /**
+     * 出发
+     */
+    private static final int TYPE_LEAVE = ICdScreenModel.TYPE_LEAVE;
+    /**
+     * 到达
+     */
+    private static final int TYPE_ARRIVE = ICdScreenModel.TYPE_ARRIVE;
     private ICdScreenPresenter presenter;
     private CdScreenAdapter adapter;
     private Button buttonSearch;
@@ -47,15 +54,6 @@ public class CdScreenFragment extends BaseCdFragment implements ICdScreenView {
     private List<ScreenStation> stations;
     private ArrayAdapter<ScreenStation> arrayAdapter;
     private Calendar calendar;
-
-    /**
-     * 出发
-     */
-    private static final int TYPE_LEAVE = ICdScreenModel.TYPE_LEAVE;
-    /**
-     * 到达
-     */
-    private static final int TYPE_ARRIVE = ICdScreenModel.TYPE_ARRIVE;
 
     public static CdScreenFragment newInstance() {
         CdScreenFragment fragment = new CdScreenFragment();
@@ -101,13 +99,13 @@ public class CdScreenFragment extends BaseCdFragment implements ICdScreenView {
 
     private void query() {
         if (null == stations || stations.isEmpty()) {
-            Toast.makeText(getContext(), "加载中，请稍候", Toast.LENGTH_SHORT).show();
+            toast("加载中，请稍候");
             presenter.getScreenStation();
             return;
         }
         ScreenStation screenStation = arrayAdapter.getItem(spinner.getSelectedItemPosition());
         if (null == screenStation) {
-            Toast.makeText(getContext(), "加载中，请稍候", Toast.LENGTH_SHORT).show();
+            toast("加载中，请稍候");
             presenter.getScreenStation();
             return;
         }
@@ -148,7 +146,7 @@ public class CdScreenFragment extends BaseCdFragment implements ICdScreenView {
 
     @Override
     public void showError(String tip) {
-        Toast.makeText(getContext(), tip, Toast.LENGTH_SHORT).show();
+        toast(tip);
     }
 
     @Override
@@ -161,7 +159,7 @@ public class CdScreenFragment extends BaseCdFragment implements ICdScreenView {
         stations = screenStations;
         arrayAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_list_item_1, stations);
         spinner.setAdapter(arrayAdapter);
-        Toast.makeText(getContext(), "加载完成", Toast.LENGTH_SHORT).show();
+        toast("加载完成");
     }
 
     @Override

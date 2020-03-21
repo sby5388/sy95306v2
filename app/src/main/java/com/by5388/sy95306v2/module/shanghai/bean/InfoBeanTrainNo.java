@@ -6,12 +6,6 @@ package com.by5388.sy95306v2.module.shanghai.bean;
  */
 public class InfoBeanTrainNo {
 
-    public InfoBeanTrainNo(String trainCode, String trainDate) {
-        this.trainCode = trainCode;
-        this.trainDate = trainDate;
-        this.type = "1";
-    }
-
     /**
      * type : 1
      * trainCode : G2
@@ -22,6 +16,11 @@ public class InfoBeanTrainNo {
     private String type;
     private String trainCode;
     private String trainDate;
+    public InfoBeanTrainNo(String trainCode, String trainDate) {
+        this.trainCode = trainCode;
+        this.trainDate = trainDate;
+        this.type = "1";
+    }
 
     public String getType() {
         return type;

@@ -109,267 +109,267 @@ public class DataBean {
     @SerializedName("mRunningTime")
     private String runningTime;
 
-    public void setStartTrainDate(String startTrainDate) {
-        this.startTrainDate = startTrainDate;
-    }
-
-    public void setTrainNo(String trainNo) {
-        this.trainNo = trainNo;
-    }
-
-    public void setStartStationTelephoneCode(String startStationTelephoneCode) {
-        this.startStationTelephoneCode = startStationTelephoneCode;
-    }
-
-    public void setStartStationName(String startStationName) {
-        this.startStationName = startStationName;
-    }
-
-    public void setStartStartTime(String startStartTime) {
-        this.startStartTime = startStartTime;
-    }
-
-    public void setEndStationTelephoneCode(String endStationTelephoneCode) {
-        this.endStationTelephoneCode = endStationTelephoneCode;
-    }
-
-    public void setEndStationName(String endStationName) {
-        this.endStationName = endStationName;
-    }
-
-    public void setEndArriveTime(String endArriveTime) {
-        this.endArriveTime = endArriveTime;
-    }
-
-    public void setTrainTypeCode(String trainTypeCode) {
-        this.trainTypeCode = trainTypeCode;
-    }
-
-    public void setTrainTypeName(String trainTypeName) {
-        this.trainTypeName = trainTypeName;
-    }
-
-    public void setTrainClassCode(String trainClassCode) {
-        this.trainClassCode = trainClassCode;
-    }
-
-    public void setTrainClassName(String trainClassName) {
-        this.trainClassName = trainClassName;
-    }
-
-    public void setSeatTypes(String seatTypes) {
-        this.seatTypes = seatTypes;
-    }
-
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
-    }
-
-    public void setStationNo(String stationNo) {
-        this.stationNo = stationNo;
-    }
-
-    public void setDisplayStationNo(String displayStationNo) {
-        this.displayStationNo = displayStationNo;
-    }
-
-    public void setStationName(String stationName) {
-        this.stationName = stationName;
-    }
-
-    public void setStationTelephoneCode(String stationTelephoneCode) {
-        this.stationTelephoneCode = stationTelephoneCode;
-    }
-
-    public void setStationTrainCode(String stationTrainCode) {
-        this.stationTrainCode = stationTrainCode;
-    }
-
-    public void setBureauCode(String bureauCode) {
-        this.bureauCode = bureauCode;
-    }
-
-    public void setArriveDayDiff(String arriveDayDiff) {
-        this.arriveDayDiff = arriveDayDiff;
-    }
-
-    public void setArriveTime(String arriveTime) {
-        this.arriveTime = arriveTime;
-    }
-
-    public void setUpdateArriveTime(String updateArriveTime) {
-        this.updateArriveTime = updateArriveTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setUpdateStartTime(String updateStartTime) {
-        this.updateStartTime = updateStartTime;
-    }
-
-    public void setStartDayDiff(String startDayDiff) {
-        this.startDayDiff = startDayDiff;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setStopDate(String stopDate) {
-        this.stopDate = stopDate;
-    }
-
-    public void setStationTrainDate(String stationTrainDate) {
-        this.stationTrainDate = stationTrainDate;
-    }
-
-    public void setCityCode(String cityCode) {
-        this.cityCode = cityCode;
-    }
-
-    public void setSameCityCode(String sameCityCode) {
-        this.sameCityCode = sameCityCode;
-    }
-
-    public void setStopoverTime(String stopoverTime) {
-        this.stopoverTime = stopoverTime;
-    }
-
-    public void setRunningTime(String runningTime) {
-        this.runningTime = runningTime;
-    }
-
     public String getStartTrainDate() {
         return startTrainDate;
+    }
+
+    public void setStartTrainDate(String startTrainDate) {
+        this.startTrainDate = startTrainDate;
     }
 
     public String getTrainNo() {
         return trainNo;
     }
 
+    public void setTrainNo(String trainNo) {
+        this.trainNo = trainNo;
+    }
+
     public String getStartStationTelephoneCode() {
         return startStationTelephoneCode;
+    }
+
+    public void setStartStationTelephoneCode(String startStationTelephoneCode) {
+        this.startStationTelephoneCode = startStationTelephoneCode;
     }
 
     public String getStartStationName() {
         return startStationName;
     }
 
+    public void setStartStationName(String startStationName) {
+        this.startStationName = startStationName;
+    }
+
     public String getStartStartTime() {
         return startStartTime;
+    }
+
+    public void setStartStartTime(String startStartTime) {
+        this.startStartTime = startStartTime;
     }
 
     public String getEndStationTelephoneCode() {
         return endStationTelephoneCode;
     }
 
+    public void setEndStationTelephoneCode(String endStationTelephoneCode) {
+        this.endStationTelephoneCode = endStationTelephoneCode;
+    }
+
     public String getEndStationName() {
         return endStationName;
+    }
+
+    public void setEndStationName(String endStationName) {
+        this.endStationName = endStationName;
     }
 
     public String getEndArriveTime() {
         return endArriveTime;
     }
 
+    public void setEndArriveTime(String endArriveTime) {
+        this.endArriveTime = endArriveTime;
+    }
+
     public String getTrainTypeCode() {
         return trainTypeCode;
+    }
+
+    public void setTrainTypeCode(String trainTypeCode) {
+        this.trainTypeCode = trainTypeCode;
     }
 
     public String getTrainTypeName() {
         return trainTypeName;
     }
 
+    public void setTrainTypeName(String trainTypeName) {
+        this.trainTypeName = trainTypeName;
+    }
+
     public String getTrainClassCode() {
         return trainClassCode;
+    }
+
+    public void setTrainClassCode(String trainClassCode) {
+        this.trainClassCode = trainClassCode;
     }
 
     public String getTrainClassName() {
         return trainClassName;
     }
 
+    public void setTrainClassName(String trainClassName) {
+        this.trainClassName = trainClassName;
+    }
+
     public String getSeatTypes() {
         return seatTypes;
+    }
+
+    public void setSeatTypes(String seatTypes) {
+        this.seatTypes = seatTypes;
     }
 
     public String getServiceType() {
         return serviceType;
     }
 
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
+
     public String getStationNo() {
         return stationNo;
+    }
+
+    public void setStationNo(String stationNo) {
+        this.stationNo = stationNo;
     }
 
     public String getDisplayStationNo() {
         return displayStationNo;
     }
 
+    public void setDisplayStationNo(String displayStationNo) {
+        this.displayStationNo = displayStationNo;
+    }
+
     public String getStationName() {
         return stationName;
+    }
+
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
     }
 
     public String getStationTelephoneCode() {
         return stationTelephoneCode;
     }
 
+    public void setStationTelephoneCode(String stationTelephoneCode) {
+        this.stationTelephoneCode = stationTelephoneCode;
+    }
+
     public String getStationTrainCode() {
         return stationTrainCode;
+    }
+
+    public void setStationTrainCode(String stationTrainCode) {
+        this.stationTrainCode = stationTrainCode;
     }
 
     public String getBureauCode() {
         return bureauCode;
     }
 
+    public void setBureauCode(String bureauCode) {
+        this.bureauCode = bureauCode;
+    }
+
     public String getArriveDayDiff() {
         return arriveDayDiff;
+    }
+
+    public void setArriveDayDiff(String arriveDayDiff) {
+        this.arriveDayDiff = arriveDayDiff;
     }
 
     public String getArriveTime() {
         return arriveTime;
     }
 
+    public void setArriveTime(String arriveTime) {
+        this.arriveTime = arriveTime;
+    }
+
     public String getUpdateArriveTime() {
         return updateArriveTime;
+    }
+
+    public void setUpdateArriveTime(String updateArriveTime) {
+        this.updateArriveTime = updateArriveTime;
     }
 
     public String getStartTime() {
         return startTime;
     }
 
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
     public String getUpdateStartTime() {
         return updateStartTime;
+    }
+
+    public void setUpdateStartTime(String updateStartTime) {
+        this.updateStartTime = updateStartTime;
     }
 
     public String getStartDayDiff() {
         return startDayDiff;
     }
 
+    public void setStartDayDiff(String startDayDiff) {
+        this.startDayDiff = startDayDiff;
+    }
+
     public String getStartDate() {
         return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public String getStopDate() {
         return stopDate;
     }
 
+    public void setStopDate(String stopDate) {
+        this.stopDate = stopDate;
+    }
+
     public String getStationTrainDate() {
         return stationTrainDate;
+    }
+
+    public void setStationTrainDate(String stationTrainDate) {
+        this.stationTrainDate = stationTrainDate;
     }
 
     public String getCityCode() {
         return cityCode;
     }
 
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
+    }
+
     public String getSameCityCode() {
         return sameCityCode;
+    }
+
+    public void setSameCityCode(String sameCityCode) {
+        this.sameCityCode = sameCityCode;
     }
 
     public String getStopoverTime() {
         return stopoverTime;
     }
 
+    public void setStopoverTime(String stopoverTime) {
+        this.stopoverTime = stopoverTime;
+    }
+
     public String getRunningTime() {
         return runningTime;
+    }
+
+    public void setRunningTime(String runningTime) {
+        this.runningTime = runningTime;
     }
 }

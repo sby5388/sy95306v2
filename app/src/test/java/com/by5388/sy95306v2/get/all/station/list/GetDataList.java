@@ -14,16 +14,15 @@ import java.net.URL;
  * @author Administrator  on 2019/11/26.
  */
 public class GetDataList {
+    public static final String NEW_PATH = "https://kyfw.12306.cn/otn/resources/js/framework/station_name.js?station_version=1.9121";
+    public static final String OLD_PATH_0 = "https://kyfw.12306.cn/otn/resources/js/framework/stationName.js?station_version=";
+    public static final String OLD_PATH = "https://kyfw.12306.cn/otn/resources/js/framework/stationName.js?station_version=";
     // TODO: 2019/11/26
     private final static String FILE_NAME = "/otn/resources/js/framework/station_name.js?station_version=";
     private static final String PATH = "https://kyfw.12306.cn";
     private final static int TIME_OUT = 5000;
     private final IStationJson mJson;
     private final StringBuilder mStringBuilder;
-
-    public static final String NEW_PATH = "https://kyfw.12306.cn/otn/resources/js/framework/station_name.js?station_version=1.9121";
-    public static final String OLD_PATH_0 = "https://kyfw.12306.cn/otn/resources/js/framework/stationName.js?station_version=";
-    public static final String OLD_PATH = "https://kyfw.12306.cn/otn/resources/js/framework/stationName.js?station_version=";
 
     public GetDataList() {
         mJson = new StationJson();

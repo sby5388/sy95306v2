@@ -23,19 +23,15 @@ public class QueryPresenter extends Presenter<QueryPresenter.QueryUi> implements
     private QueryThread mIQueryThread;
     private IShenYangDbApi mApi;
 
-    public static QueryPresenter getInstance() {
-        return Singleton.INSTANCE;
-    }
-
-    private static final class Singleton {
-        private static final QueryPresenter INSTANCE = new QueryPresenter(App.getInstance());
-    }
-
     private QueryPresenter(Context context) {
         mApi = DataBaseApiImpl.getInstance();
         mIQueryThread = new QueryThread(new Handler(), this);
         mIQueryThread.start();
 
+    }
+
+    public static QueryPresenter getInstance() {
+        return Singleton.INSTANCE;
     }
 
     @Override
@@ -88,6 +84,10 @@ public class QueryPresenter extends Presenter<QueryPresenter.QueryUi> implements
         void onFailQuery(String s);
 
         void onResult(List<TrainResult.DataBean> result);
+    }
+
+    private static final class Singleton {
+        private static final QueryPresenter INSTANCE = new QueryPresenter(App.getInstance());
     }
 
 

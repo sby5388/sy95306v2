@@ -24,11 +24,11 @@ import butterknife.ButterKnife;
 @SuppressWarnings("unused")
 public class StationAdapter extends BaseAdapter {
     private final static String TAG = "StationAdapter";
+    private final LayoutInflater inflater;
     /**
      * 车站列表
      */
     private List<Station> stations;
-    private final LayoutInflater inflater;
 
     public StationAdapter(Context context, List<Station> stations) {
         this.stations = stations;

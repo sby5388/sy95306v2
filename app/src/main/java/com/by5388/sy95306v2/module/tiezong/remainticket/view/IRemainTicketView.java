@@ -14,6 +14,7 @@ public interface IRemainTicketView extends IBaseView {
 
     /**
      * 更新数据
+     *
      * @param remainTicketData 数据
      */
     void updateDate(List<IRemainingTicket> remainTicketData);

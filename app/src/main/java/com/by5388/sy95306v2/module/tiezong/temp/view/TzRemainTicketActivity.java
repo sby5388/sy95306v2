@@ -4,23 +4,21 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.textfield.TextInputEditText;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.by5388.sy95306v2.App;
 import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.base.BaseActivity;
+import com.by5388.sy95306v2.common.Tools;
 import com.by5388.sy95306v2.module.tiezong.bean.yp.success.TzDataBean;
 import com.by5388.sy95306v2.module.tiezong.temp.persenter.DetailRemainTicketPresenter;
 import com.by5388.sy95306v2.module.tiezong.temp.persenter.IDetailRemainTicketPresenter;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,6 +27,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * 铁总余票查询多功能界面
  *
@@ -36,18 +39,24 @@ import java.util.Locale;
  */
 public class TzRemainTicketActivity extends BaseActivity implements IDetailRemainTicketView, MyListener.UpdateDate {
 
-    private DetailRemainTicketAdapter adapter;
-
-    private IDetailRemainTicketPresenter presenter;
     private final List<TzDataBean> dataBeans = new ArrayList<>();
+    private DetailRemainTicketAdapter adapter;
+    private IDetailRemainTicketPresenter presenter;
     private TextInputEditText fromStation, toStation, trainCode;
     private Button buttonDate;
     private MyListener dateListener;
     private Calendar calendar;
 
-    @Override
-    protected boolean isShowActionBar() {
-        return true;
+    public static Intent toTzRemainTicketActivity(@NonNull Context context, String trainCode, String date, String fromStation, String toStation, String randCode) {
+        Intent intent = new Intent(context, TzRemainTicketActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(IDetailRemainTicketView.KEY_TRAIN_CODE, trainCode);
+        bundle.putString(IDetailRemainTicketView.KEY_DATE, date);
+        bundle.putString(IDetailRemainTicketView.KEY_FROM, fromStation);
+        bundle.putString(IDetailRemainTicketView.KEY_TO, toStation);
+        bundle.putString(IDetailRemainTicketView.KEY_RAND_CODE, randCode);
+        intent.putExtra(IDetailRemainTicketView.KEY_BUNDLE, bundle);
+        return intent;
     }
 
     @Override
@@ -103,6 +112,12 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
     }
 
     private void searchTrainNumber() {
+        // TODO: 2020/3/17 检查网络
+        final boolean networkEnable = App.getInstance().networkEnable();
+        if (!networkEnable) {
+            Tools.openSetting(this, buttonDate);
+            return;
+        }
         adapter.setBeans(new ArrayList<>());
         dataBeans.clear();
         final String date = buttonDate.getText().toString().trim();
@@ -178,7 +193,6 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
         showError("请至少填写2个信息");
     }
 
-
     @Override
     public void updateList(List<TzDataBean> dataBeans) {
         adapter.setBeans(dataBeans);
@@ -202,18 +216,6 @@ public class TzRemainTicketActivity extends BaseActivity implements IDetailRemai
         Log.d(IDetailRemainTicketView.TAG, "addIRemainingTicket: " + bean.getStation_train_code());
         dataBeans.add(bean);
         adapter.setBeans(dataBeans);
-    }
-
-    public static Intent toTzRemainTicketActivity(@NonNull Context context, String trainCode, String date, String fromStation, String toStation, String randCode) {
-        Intent intent = new Intent(context, TzRemainTicketActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString(IDetailRemainTicketView.KEY_TRAIN_CODE, trainCode);
-        bundle.putString(IDetailRemainTicketView.KEY_DATE, date);
-        bundle.putString(IDetailRemainTicketView.KEY_FROM, fromStation);
-        bundle.putString(IDetailRemainTicketView.KEY_TO, toStation);
-        bundle.putString(IDetailRemainTicketView.KEY_RAND_CODE, randCode);
-        intent.putExtra(IDetailRemainTicketView.KEY_BUNDLE, bundle);
-        return intent;
     }
 
     @Override

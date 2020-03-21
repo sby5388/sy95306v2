@@ -19,9 +19,9 @@ public class CdRemainTicketPresenter implements ICdRemainTicketPresenter {
 
     private final ICdRemainTicketView view;
     private final ICdRemainTicketModel model;
-    private Disposable disposable;
     private final Consumer<Throwable> throwableConsumer;
     private final Consumer<List<IRemainingTicket>> consumer;
+    private Disposable disposable;
 
     public CdRemainTicketPresenter(ICdRemainTicketView view) {
         this.view = view;

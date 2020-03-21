@@ -1,8 +1,6 @@
 package com.by5388.sy95306v2.dialog;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -10,10 +8,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.module.guangzhou.bean.station.TrainsBean;
 import com.by5388.sy95306v2.dialog.adapter.DetailAdapter;
+import com.by5388.sy95306v2.module.guangzhou.bean.station.TrainsBean;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * @author by5388  on 2018/8/2.
@@ -23,9 +24,9 @@ public class TrainDetailDialog implements ITrainDetailView {
     private final DetailAdapter adapter;
     private final Context context;
     private final AlertDialog dialog;
+    private final LayoutInflater inflater;
     private View dialogView;
     private View dialogTitleView;
-    private final LayoutInflater inflater;
     private TextView titleName, titleTime;
 
     public TrainDetailDialog(Context context) {

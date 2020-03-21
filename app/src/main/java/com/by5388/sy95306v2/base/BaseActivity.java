@@ -2,10 +2,14 @@ package com.by5388.sy95306v2.base;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.MenuItem;
+
+import com.by5388.sy95306v2.App;
+
 import androidx.annotation.LayoutRes;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.MenuItem;
 
 /**
  * @author by5388  on 2018/7/28.
@@ -13,15 +17,6 @@ import android.view.MenuItem;
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected static final String DATA_BUNDLE = "bundle";
-
-    public static final String DATA_STATION_CODE = "code";
-
-    /**
-     * 是否显示 actionBar
-     *
-     * @return 是否显示 actionBar
-     */
-    protected abstract boolean isShowActionBar();
 
 
     /**
@@ -49,12 +44,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-            default:
-                break;
+        if (item.getItemId() == android.R.id.home) {
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -63,17 +54,23 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //强制竖屏
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         setContentView(getLayoutViewID());
-        if (isShowActionBar()) {
-            ActionBar actionBar = getSupportActionBar();
-            if (null != actionBar) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-            }
+        ActionBar actionBar = getSupportActionBar();
+        if (null != actionBar) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
         initData();
         initView();
         loadData();
+    }
+
+    public void toast(String s) {
+        App.getInstance().toast(s);
+    }
+
+    public void toast(@StringRes int id) {
+        App.getInstance().toast(id);
     }
 
 }

@@ -1,10 +1,12 @@
 package com.by5388.sy95306v2.database;
 
 import android.database.sqlite.SQLiteDatabase;
+
 import androidx.annotation.NonNull;
 
 /**
  * 成都铁路局部分
+ *
  * @author by5388  on 2018/8/20.
  */
 final class CdStationTable {

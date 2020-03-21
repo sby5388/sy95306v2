@@ -1,22 +1,21 @@
 package com.by5388.sy95306v2.module.shanghai.p2p;
 
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputEditText;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.module.shanghai.bean.ShanghaiTrainP2P;
 import com.by5388.sy95306v2.MyListener;
+import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.module.shanghai.BaseShFragment;
+import com.by5388.sy95306v2.module.shanghai.bean.ShanghaiTrainP2P;
 import com.by5388.sy95306v2.module.shanghai.dialog.ShNumberDialog;
 import com.by5388.sy95306v2.module.shanghai.dialog.view.IShNumberDialogView;
 import com.by5388.sy95306v2.module.shanghai.p2p.presenter.IP2pPresenter;
 import com.by5388.sy95306v2.module.shanghai.p2p.presenter.P2pPresenter;
 import com.by5388.sy95306v2.module.shanghai.p2p.view.IP2pView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,13 +28,12 @@ import java.util.List;
 public class ShanghaiP2pFragment extends BaseShFragment implements IP2pView {
 
     public static final String TAG = "ShanghaiP2pFragment";
+    private final static List<ShanghaiTrainP2P> EMPTY_LIST = new ArrayList<>();
     private TextInputEditText fromStation, toStation;
     private Button buttonSearch, buttonDate;
     private ListView listView;
     private P2pAdapter adapter;
     private IShNumberDialogView detailDialog;
-
-    private final static List<ShanghaiTrainP2P> EMPTY_LIST = new ArrayList<>();
     private MyListener dateListener;
     private Calendar calendar;
 
@@ -67,7 +65,7 @@ public class ShanghaiP2pFragment extends BaseShFragment implements IP2pView {
 
     @Override
     public void showError(String tip) {
-        Toast.makeText(getContext(), tip, Toast.LENGTH_SHORT).show();
+        toast(tip);
     }
 
     @Override

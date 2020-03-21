@@ -16,17 +16,17 @@ import java.util.List;
  * @author by5388  on 2018/8/21.
  */
 class GzLateAdapter extends BaseAdapter {
-    private List<GzLateStationInfoBean> beans;
     private final LayoutInflater inflater;
-
-    public void setBeans(List<GzLateStationInfoBean> beans) {
-        this.beans = beans;
-        notifyDataSetChanged();
-    }
+    private List<GzLateStationInfoBean> beans;
 
     GzLateAdapter(Context context, List<GzLateStationInfoBean> beans) {
         this.beans = beans;
         this.inflater = LayoutInflater.from(context);
+    }
+
+    public void setBeans(List<GzLateStationInfoBean> beans) {
+        this.beans = beans;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -55,10 +55,7 @@ class GzLateAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.stationName.setText(bean.getStation());
-        holder.arriveTime.setText(bean.getTdTime());
-        holder.realTime.setText(bean.getSjTime());
-        holder.lateStatus.setText(bean.getLate());
+        holder.bindData(bean);
         return convertView;
     }
 
@@ -73,6 +70,13 @@ class GzLateAdapter extends BaseAdapter {
             arriveTime = view.findViewById(R.id.arriveTime);
             realTime = view.findViewById(R.id.realArriveTime);
             lateStatus = view.findViewById(R.id.lateStatus);
+        }
+
+        private void bindData(GzLateStationInfoBean bean) {
+            stationName.setText(bean.getStation());
+            arriveTime.setText(bean.getTdTime());
+            realTime.setText(bean.getSjTime());
+            lateStatus.setText(bean.getLate());
         }
     }
 }

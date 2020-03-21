@@ -22,7 +22,7 @@ public interface IDetailRemainTicketModel extends ITzZzCxModel {
      * @param trainCode       车次
      * @return 结果
      */
-    Observable<SuccessDataBean> getOnLyResult(String queryDate, String fromStationName, String toStationName,String trainCode);
+    Observable<SuccessDataBean> getOnLyResult(String queryDate, String fromStationName, String toStationName, String trainCode);
 
     /**
      * 车次查询:第二个页面使用、第一个页面查询后的条目点击事件也是这个

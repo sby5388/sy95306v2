@@ -38,13 +38,13 @@ import okhttp3.ResponseBody;
  */
 public class QueryCd implements ICdQuery {
     private static final String TAG = "QueryCd";
+    private static final String[] LOGIN_PARAM = {"10.192.111.79", "hhs", "hhs"};
+    private final Gson gson = new Gson();
+    private final String userMessage = gson.toJson(Arrays.asList(LOGIN_PARAM));
+    private final String emptyJson = gson.toJson(new ArrayList<>());
     private CdYpService yPService;
     private CdLateService lateService;
     private CdScreenService screenService;
-    private final Gson gson = new Gson();
-    private static final String[] LOGIN_PARAM = {"10.192.111.79", "hhs", "hhs"};
-    private final String userMessage = gson.toJson(Arrays.asList(LOGIN_PARAM));
-    private final String emptyJson = gson.toJson(new ArrayList<>());
 
 
     public QueryCd() {
@@ -81,6 +81,13 @@ public class QueryCd implements ICdQuery {
         return CdLateStation.getStation(params);
     }
 
+    private static void println(String tip) {
+        Log.e(TAG, "println: " + tip);
+    }
+
+    private static String replace(String original) {
+        return original.replace("[^0-9]", "").replace("-", "");
+    }
 
     @Override
     public Observable<List<CdRemainTicketDetailBean>> getCdRemainTicket(String fromStation, String toStation, String date) {
@@ -105,10 +112,6 @@ public class QueryCd implements ICdQuery {
                     }
                     return Observable.just(list);
                 });
-    }
-
-    private static void println(String tip) {
-        Log.e(TAG, "println: " + tip);
     }
 
     @Override
@@ -209,9 +212,5 @@ public class QueryCd implements ICdQuery {
         date = replace(date);
         List<String> params = Arrays.asList(date, stationCode);
         return screenService.getArriveDetail(typeCode, userMessage, gson.toJson(params), emptyJson, emptyJson);
-    }
-
-    private static String replace(String original) {
-        return original.replace("[^0-9]", "").replace("-", "");
     }
 }

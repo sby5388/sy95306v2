@@ -5,14 +5,6 @@ package com.by5388.sy95306v2.module.shanghai.bean;
  * @date 2018/8/8 16:30
  */
 public class UserBean {
-    UserBean() {
-        this.mac = "";
-        this.version = "";
-        this.phone = "";
-        this.device = "";
-        this.system = "1";
-    }
-
     /**
      * mac :
      * version :
@@ -27,6 +19,13 @@ public class UserBean {
     private String phone;
     private String device;
     private String system;
+    UserBean() {
+        this.mac = "";
+        this.version = "";
+        this.phone = "";
+        this.device = "";
+        this.system = "1";
+    }
 
     public String getMac() {
         return mac;

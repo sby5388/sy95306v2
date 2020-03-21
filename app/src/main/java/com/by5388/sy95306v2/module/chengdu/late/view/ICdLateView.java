@@ -33,7 +33,6 @@ public interface ICdLateView {
     void showDialog(List<String> trainDetail);
 
 
-
     /**
      * 更新晚点车次的详细信息
      *

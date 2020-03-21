@@ -1,18 +1,19 @@
 package com.by5388.sy95306v2.module.shenyang.adapter;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.module.shenyang.bean.TrainDetail;
 import com.by5388.sy95306v2.common.Tools;
+import com.by5388.sy95306v2.module.shenyang.bean.TrainDetail;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 车次停站详细信息-适配器
@@ -22,8 +23,8 @@ import java.util.List;
 
 public class TrainDetailListAdapter extends RecyclerView.Adapter<TrainDetailListAdapter.ViewHolder> implements View.OnClickListener {
 
-    private List<TrainDetail> details;
     private final LayoutInflater inflater;
+    private List<TrainDetail> details;
 
     public TrainDetailListAdapter(Context context, List<TrainDetail> details) {
         this.details = details;
@@ -67,10 +68,10 @@ public class TrainDetailListAdapter extends RecyclerView.Adapter<TrainDetailList
         RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         itemView.setLayoutParams(layoutParams);
         itemView.setOnClickListener(this);
-        return new TrainDetailListAdapter.ViewHolder(itemView);
+        return new ViewHolder(itemView);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         /**
          * 序号
          */

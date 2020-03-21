@@ -15,7 +15,6 @@ import io.reactivex.Observable;
  * @author by5388  on 2018/8/14.
  */
 public class TzQuery {
-    private static final TzLateService SERVICE = new TzLateNetTools().getRetrofit().create(TzLateService.class);
     /**
      * 到达
      */
@@ -24,6 +23,7 @@ public class TzQuery {
      * 离开
      */
     public static final int LEAVE = 1;
+    private static final TzLateService SERVICE = new TzLateNetTools().getRetrofit().create(TzLateService.class);
 
     /**
      * 统一的查询接口

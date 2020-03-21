@@ -39,6 +39,7 @@ public interface IStationJson {
      * todo 算法待优化
      */
     String getVersion(final String lineString);
+
     String getVersion(InputStream inputStream);
 
     /**
@@ -47,7 +48,7 @@ public interface IStationJson {
      * @param cityList 车站文字
      * @return 车站列表
      */
-    List<Station> getCityList(String cityList);
+    List<Station> getWebPageContent(String cityList);
 
     /**
      * inputStream to String
@@ -55,5 +56,5 @@ public interface IStationJson {
      * @param inputStream io
      * @return String
      */
-    String getCityList(InputStream inputStream);
+    String getWebPageContent(InputStream inputStream);
 }

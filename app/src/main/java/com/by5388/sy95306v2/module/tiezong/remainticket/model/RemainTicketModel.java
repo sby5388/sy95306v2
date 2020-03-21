@@ -1,6 +1,5 @@
 package com.by5388.sy95306v2.module.tiezong.remainticket.model;
 
-import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.by5388.sy95306v2.bean.IRemainingTicket;
@@ -13,6 +12,7 @@ import com.by5388.sy95306v2.net.yupiao.YpService;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;

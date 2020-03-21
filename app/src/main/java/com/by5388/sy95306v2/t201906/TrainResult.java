@@ -31,6 +31,9 @@ public class TrainResult {
     }
 
     public static class DataBean implements IRemainingTicket {
+        private final static String EMPTY = "--";
+        private final static String RESULT_EMPTY = "";
+        private final static String NO_NUMBER = "无";
         /**
          * queryLeftNewDTO : {"train_no":"6j000G634302","mStationTrainCode":"G6343","start_station_telecode":"CBQ","mStartStationName":"潮汕","end_station_telecode":"IZQ","end_station_name":"广州南","from_station_telecode":"CBQ","from_station_name":"潮汕","to_station_telecode":"IZQ","to_station_name":"广州南","mStartTime":"06:08","mArriveTime":"08:45","day_difference":"0","mTrainClassName":"","lishi":"02:37","is_support_card":"1","control_train_day":"20301231","start_train_date":"20190915","seat_feature":"O3M393","yp_ex":"O0M090","train_seat_feature":"3","controlled_train_flag":"0","controlled_train_message":"正常车次，不受控","from_station_no":"01","to_station_no":"05","seat_types":"OM9","gg_num":"-1","gr_num":"-1","rw_num":"-1","rz_num":"-1","tz_num":"-1","wz_num":"-1","yb_num":"-1","yw_num":"-1","yz_num":"-1","ze_num":"有","zy_num":"有","swz_num":"有","srrb_num":"-1","rw_price":"--","srrb_price":"--","yw_price":"--","gr_price":"--","yz_price":"--","rz_price":"--","zy_price":"02705","ze_price":"01815","tz_price":"--","gg_price":"--","yb_price":"--","bxyw_num":"-1","bxyw_price":"--","swz_price":"05195","hbyz_num":"-1","hbyz_price":"--","hbyw_num":"-1","hbyw_price":"--","bxrz_num":"-1","bxrz_price":"--","tdrz_num":"-1","tdrz_price":"--","errb_num":"-1","errb_price":"--","yrrb_num":"-1","yrrb_price":"--","ydsr_num":"-1","ydsr_price":"--","edsr_num":"-1","edsr_price":"--","hbrz_num":"-1","hbrz_price":"--","hbrw_num":"-1","hbrw_price":"--","ydrz_num":"-1","ydrz_price":"--","edrz_num":"-1","edrz_price":"--","wz_price":"--"}
          * buttonTextInfo :
@@ -38,10 +41,6 @@ public class TrainResult {
 
         public QueryLeftNewDTOBean queryLeftNewDTO;
         public String buttonTextInfo;
-
-        private final static String EMPTY = "--";
-        private final static String RESULT_EMPTY = "";
-        private final static String NO_NUMBER = "无";
 
         @Override
         public String getCode() {
@@ -104,110 +103,6 @@ public class TrainResult {
         }
 
         public static class QueryLeftNewDTOBean implements IRemainingTicket {
-
-            @Override
-            public String getCode() {
-                return station_train_code;
-            }
-
-            @Override
-            public String getFromStation() {
-                return from_station_name;
-            }
-
-            @Override
-            public String getToStation() {
-                return to_station_name;
-            }
-
-            @Override
-            public String getStartTime() {
-                return start_time;
-            }
-
-            @Override
-            public String getEndTime() {
-                return arrive_time;
-            }
-
-            @Override
-            public String getSpeedTime() {
-                return lishi;
-            }
-
-            @Override
-            public String getRw() {
-                if (EMPTY.equals(rw_num) || NO_NUMBER.equals(rw_num)) {
-                    return RESULT_EMPTY;
-                }
-                return rw_num;
-            }
-
-            @Override
-            public String getYw() {
-                if (EMPTY.equals(yw_num) || NO_NUMBER.equals(yw_num)) {
-                    return RESULT_EMPTY;
-                }
-                return yw_num;
-            }
-
-            @Override
-            public String getRz() {
-                String result = zy_num + rz_num;
-                return result.replaceAll("[^0-9]", "");
-            }
-
-            @Override
-            public String getYz() {
-                String result = ze_num + yz_num;
-                return result.replaceAll("[^0-9]", "");
-            }
-
-            @Override
-            public String getQt() {
-                StringBuilder builder = new StringBuilder();
-                //其他：商务座：swz
-                //特等座：tz_num
-
-                if (NO_NUMBER.equals(swz_num) || EMPTY.equals(swz_num)) {
-                    nothing();
-                } else {
-                    builder.append("商务座:");
-                    builder.append(swz_num);
-                }
-                if (NO_NUMBER.equals(tz_num) || EMPTY.equals(tz_num)) {
-                    nothing();
-                } else {
-                    if (!TextUtils.isEmpty(builder)) {
-                        builder.append(";");
-                    }
-                    builder.append("特等座:");
-                    builder.append(tz_num);
-                }
-                return builder.toString();
-            }
-
-            private void nothing() {
-
-            }
-
-            @Override
-            public String getWz() {
-                if (EMPTY.equals(wz_num) || NO_NUMBER.equals(wz_num)) {
-                    return RESULT_EMPTY;
-                }
-                return wz_num;
-            }
-
-
-            @Override
-            public String toString() {
-                return "{" +
-                        "'" + station_train_code + '\'' +
-                        ", '" + start_station_name + '\'' +
-                        ", '" + end_station_name + '\'' +
-                        '}';
-            }
 
             /**
              * train_no : 6j000G634302
@@ -368,6 +263,109 @@ public class TrainResult {
             public String seat_feature;
             public String yp_ex;
             public String train_seat_feature;
+
+            @Override
+            public String getCode() {
+                return station_train_code;
+            }
+
+            @Override
+            public String getFromStation() {
+                return from_station_name;
+            }
+
+            @Override
+            public String getToStation() {
+                return to_station_name;
+            }
+
+            @Override
+            public String getStartTime() {
+                return start_time;
+            }
+
+            @Override
+            public String getEndTime() {
+                return arrive_time;
+            }
+
+            @Override
+            public String getSpeedTime() {
+                return lishi;
+            }
+
+            @Override
+            public String getRw() {
+                if (EMPTY.equals(rw_num) || NO_NUMBER.equals(rw_num)) {
+                    return RESULT_EMPTY;
+                }
+                return rw_num;
+            }
+
+            @Override
+            public String getYw() {
+                if (EMPTY.equals(yw_num) || NO_NUMBER.equals(yw_num)) {
+                    return RESULT_EMPTY;
+                }
+                return yw_num;
+            }
+
+            @Override
+            public String getRz() {
+                String result = zy_num + rz_num;
+                return result.replaceAll("[^0-9]", "");
+            }
+
+            @Override
+            public String getYz() {
+                String result = ze_num + yz_num;
+                return result.replaceAll("[^0-9]", "");
+            }
+
+            @Override
+            public String getQt() {
+                StringBuilder builder = new StringBuilder();
+                //其他：商务座：swz
+                //特等座：tz_num
+
+                if (NO_NUMBER.equals(swz_num) || EMPTY.equals(swz_num)) {
+                    nothing();
+                } else {
+                    builder.append("商务座:");
+                    builder.append(swz_num);
+                }
+                if (NO_NUMBER.equals(tz_num) || EMPTY.equals(tz_num)) {
+                    nothing();
+                } else {
+                    if (!TextUtils.isEmpty(builder)) {
+                        builder.append(";");
+                    }
+                    builder.append("特等座:");
+                    builder.append(tz_num);
+                }
+                return builder.toString();
+            }
+
+            private void nothing() {
+
+            }
+
+            @Override
+            public String getWz() {
+                if (EMPTY.equals(wz_num) || NO_NUMBER.equals(wz_num)) {
+                    return RESULT_EMPTY;
+                }
+                return wz_num;
+            }
+
+            @Override
+            public String toString() {
+                return "{" +
+                        "'" + station_train_code + '\'' +
+                        ", '" + start_station_name + '\'' +
+                        ", '" + end_station_name + '\'' +
+                        '}';
+            }
         }
     }
 }

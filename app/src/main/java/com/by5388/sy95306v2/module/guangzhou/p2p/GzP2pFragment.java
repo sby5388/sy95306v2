@@ -1,25 +1,24 @@
 package com.by5388.sy95306v2.module.guangzhou.p2p;
 
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputEditText;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
+import com.by5388.sy95306v2.dialog.ITrainDetailView;
+import com.by5388.sy95306v2.dialog.TrainDetailDialog;
+import com.by5388.sy95306v2.module.guangzhou.BaseGzFragment;
 import com.by5388.sy95306v2.module.guangzhou.bean.station.DataBeanP2P;
 import com.by5388.sy95306v2.module.guangzhou.bean.station.StationsBean;
 import com.by5388.sy95306v2.module.guangzhou.bean.station.TrainsBean;
-import com.by5388.sy95306v2.dialog.ITrainDetailView;
-import com.by5388.sy95306v2.dialog.TrainDetailDialog;
-import com.by5388.sy95306v2.MyListener;
-import com.by5388.sy95306v2.module.guangzhou.BaseGzFragment;
 import com.by5388.sy95306v2.module.guangzhou.p2p.presenter.GzP2pPresenter;
 import com.by5388.sy95306v2.module.guangzhou.p2p.presenter.IGzP2pPresenter;
 import com.by5388.sy95306v2.module.guangzhou.p2p.view.IGzP2pView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,6 +32,7 @@ import java.util.List;
 
 public class GzP2pFragment extends BaseGzFragment implements IGzP2pView {
     private static final String TAG = "GetTrainByStation";
+    private final static List<StationsBean> EMPTY_LIST = new ArrayList<>();
     private TextInputEditText fromStation, toStation;
     private Button buttonSearch, buttonDate;
     private ListView listView;
@@ -40,8 +40,6 @@ public class GzP2pFragment extends BaseGzFragment implements IGzP2pView {
     private ITrainDetailView detailDialog;
     private List<TrainsBean> trainsBeans;
     private IGzP2pPresenter presenter;
-
-    private final static List<StationsBean> EMPTY_LIST = new ArrayList<>();
     private MyListener dateListener;
     private Calendar calendar;
 
@@ -144,21 +142,21 @@ public class GzP2pFragment extends BaseGzFragment implements IGzP2pView {
 
     @Override
     public void showError(String tip) {
-        Toast.makeText(getContext(), tip, Toast.LENGTH_SHORT).show();
+        toast(tip);
     }
 
     @Override
     public void updateDate(DataBeanP2P dataBean) {
         if (dataBean == null) {
-            Log.e(TAG, "updateDate: 没有数据" );
-            Toast.makeText(getContext(), "没有数据", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "updateDate: 没有数据");
+            toast("没有数据");
             return;
         }
         trainsBeans = dataBean.getTrains();
         List<StationsBean> stations = dataBean.getStations();
         if (stations == null) {
-            Log.e(TAG, "updateDate: " );
-            Toast.makeText(getContext(), "发生错误", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "updateDate: ");
+            toast("发生错误");
             return;
         }
         adapter.setStationsBeans(stations);

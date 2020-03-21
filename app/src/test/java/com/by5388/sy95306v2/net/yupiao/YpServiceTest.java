@@ -13,7 +13,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import retrofit2.Retrofit;
 
@@ -24,12 +23,32 @@ public class YpServiceTest {
     private YpService mSubject;
     private QueryParam mQueryParam;
 
+    /**
+     * 手动解析成相应的数据
+     *
+     * @param data 数据
+     * @return 车次+余票信息
+     */
+    private static List<SecondRemainTicketData> getRemainTicketData(String data) {
+        //正确的数据中：有14个数据
+        final int max = 14;
+        List<SecondRemainTicketData> list = new ArrayList<>();
+        String[] items = data.split(",;");
+        for (String item : items) {
+            String[] params = item.split(",");
+            if (params.length != max) {
+                continue;
+            }
+            list.add(new SecondRemainTicketData(params));
+        }
+        return list;
+    }
 
     @Before
     public void setUp() throws Exception {
         Retrofit retrofit = new YpNetTools().getRetrofit();
         mSubject = retrofit.create(YpService.class);
-        mQueryParam = new QueryParam( "饶平","深圳北", "2020-01-22");
+        mQueryParam = new QueryParam("饶平", "深圳北", "2020-01-22");
     }
 
     @Test
@@ -54,27 +73,6 @@ public class YpServiceTest {
                     System.err.println(throwable);
                     throw new Exception(throwable);
                 });
-    }
-
-    /**
-     * 手动解析成相应的数据
-     *
-     * @param data 数据
-     * @return 车次+余票信息
-     */
-    private static List<SecondRemainTicketData> getRemainTicketData(String data) {
-        //正确的数据中：有14个数据
-        final int max = 14;
-        List<SecondRemainTicketData> list = new ArrayList<>();
-        String[] items = data.split(",;");
-        for (String item : items) {
-            String[] params = item.split(",");
-            if (params.length != max) {
-                continue;
-            }
-            list.add(new SecondRemainTicketData(params));
-        }
-        return list;
     }
 
 }

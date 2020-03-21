@@ -1,7 +1,6 @@
 package com.by5388.sy95306v2.dialog;
 
 import android.content.Context;
-import androidx.appcompat.app.AlertDialog;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +15,8 @@ import com.by5388.sy95306v2.dialog.bean.FilterData;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
+
 import static android.widget.AbsListView.CHOICE_MODE_MULTIPLE;
 
 /**
@@ -28,12 +29,12 @@ public class TrainFilterDialog implements ITrainFilterView {
 
     private final Context context;
     private final AlertDialog dialog;
+    private final UpdateFilterDataCallBack callBack;
     private View mainView;
     private ListView listView;
     private List<FilterBean> beans;
     private ArrayAdapter<FilterBean> arrayAdapter;
     private List<Integer> selected;
-    private final UpdateFilterDataCallBack callBack;
 
 
     public TrainFilterDialog(Context context, UpdateFilterDataCallBack callBack) {
@@ -58,6 +59,7 @@ public class TrainFilterDialog implements ITrainFilterView {
 
 
     private void initView() {
+        // TODO: 2020/3/19 应该是直接一个 
         mainView = LayoutInflater.from(context).inflate(R.layout.dialog_filter, new LinearLayout(context), false);
         listView = mainView.findViewById(R.id.listView);
         listView.setChoiceMode(CHOICE_MODE_MULTIPLE);

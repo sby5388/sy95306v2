@@ -2,6 +2,7 @@ package com.by5388.sy95306v2.module.shenyang;
 
 import android.os.Bundle;
 
+import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.base.BaseTopFragment;
 import com.by5388.sy95306v2.bean.MyViewPager;
 import com.by5388.sy95306v2.mvp.QueryFragment;
@@ -29,7 +30,10 @@ public class ShenYangFragment extends BaseTopFragment {
         List<MyViewPager> list = new ArrayList<>();
         list.add(new MyViewPager(Station2StationFragment.newInstance(), "站站查询"));
         list.add(new MyViewPager(SyTrainNumberFragment.newInstance(), "车次查询"));
-        list.add(new MyViewPager(QueryFragment.newInstance(), "临时"));
+        final boolean release = getResources().getBoolean(R.bool.release);
+        if (release) {
+            list.add(new MyViewPager(QueryFragment.newInstance(), "临时"));
+        }
         return list;
     }
 }

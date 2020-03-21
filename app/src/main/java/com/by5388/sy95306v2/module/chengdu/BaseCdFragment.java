@@ -1,7 +1,7 @@
 package com.by5388.sy95306v2.module.chengdu;
 
-import com.by5388.sy95306v2.base.BaseFragment;
 import com.by5388.sy95306v2.MyListener;
+import com.by5388.sy95306v2.base.BaseFragment;
 
 /**
  * 成都铁路局

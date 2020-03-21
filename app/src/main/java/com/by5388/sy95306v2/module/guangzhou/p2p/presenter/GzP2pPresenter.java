@@ -19,9 +19,9 @@ public class GzP2pPresenter implements IGzP2pPresenter {
 
     private final IGzP2pView view;
     private final IGzP2pModel model;
-    private Disposable disposable;
     private final Consumer<GzResultData<DataBeanP2P>> consumer;
     private final Consumer<Throwable> throwableConsumer;
+    private Disposable disposable;
 
 
     public GzP2pPresenter(IGzP2pView view) {
@@ -34,7 +34,8 @@ public class GzP2pPresenter implements IGzP2pPresenter {
                 view.showError("没有相关的车次");
                 return;
             }
-            view.updateDate(dataBean);view.updateDate(dataBean);
+            view.updateDate(dataBean);
+            view.updateDate(dataBean);
 
         };
         this.throwableConsumer = throwable -> view.showError(throwable.getLocalizedMessage());

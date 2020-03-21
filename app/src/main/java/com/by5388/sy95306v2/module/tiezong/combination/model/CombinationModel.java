@@ -1,6 +1,5 @@
 package com.by5388.sy95306v2.module.tiezong.combination.model;
 
-import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.by5388.sy95306v2.database.DataBaseApiImpl;
@@ -18,6 +17,7 @@ import com.by5388.sy95306v2.module.tiezong.bean.yp.success.TzDataBean;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;

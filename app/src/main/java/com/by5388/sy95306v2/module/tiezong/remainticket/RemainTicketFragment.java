@@ -1,12 +1,10 @@
 package com.by5388.sy95306v2.module.tiezong.remainticket;
 
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputEditText;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
@@ -16,6 +14,7 @@ import com.by5388.sy95306v2.module.tiezong.remainticket.presenter.IRemainTicketP
 import com.by5388.sy95306v2.module.tiezong.remainticket.presenter.RemainTicketPresenter;
 import com.by5388.sy95306v2.module.tiezong.remainticket.temp.RemainTicketAdapter;
 import com.by5388.sy95306v2.module.tiezong.remainticket.view.IRemainTicketView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,16 +23,17 @@ import java.util.Objects;
 
 /**
  * 第三方余票查询
+ *
  * @author by5388  on 2018/8/13.
  */
 public class RemainTicketFragment extends BaseTzFragment implements IRemainTicketView {
     public static final String TAG = "RemainTicketFragment";
+    private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
     private TextInputEditText fromStation, toStation;
     private Button buttonSearch, buttonDate;
     private ListView listView;
     private RemainTicketAdapter adapter;
     private IRemainTicketPresenter presenter;
-    private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
     private MyListener dateListener;
     private Calendar calendar;
 
@@ -111,7 +111,7 @@ public class RemainTicketFragment extends BaseTzFragment implements IRemainTicke
 
     @Override
     public void showError(String tip) {
-        Toast.makeText(getContext(), tip, Toast.LENGTH_SHORT).show();
+        toast(tip);
         buttonSearch.setEnabled(true);
     }
 

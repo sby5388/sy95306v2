@@ -26,7 +26,6 @@ public interface IGetPassCodeService {
      * @param toStationName   目的站
      * @return 结果，可能是成功也可能是失败
      * @see #getRemainTicketData(boolean, String, String, String)
-     * @deprecated
      */
     Observable<TzResult<SuccessDataBean>> getZzCxData(
             String queryDate,

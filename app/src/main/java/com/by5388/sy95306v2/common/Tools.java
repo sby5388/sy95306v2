@@ -1,5 +1,11 @@
 package com.by5388.sy95306v2.common;
 
+import android.content.Context;
+import android.content.Intent;
+import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -133,6 +139,16 @@ public class Tools {
         stringBuilder.append(allTime)
                 .append("分");
         return stringBuilder.toString();
+    }
+
+    public static void openSetting(Context context, View v) {
+        Snackbar.make(v, "网络不可用，请打开网络", Snackbar.LENGTH_SHORT)
+                .setAction("打开设置", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        context.startActivity(new Intent("android.settings.SETTINGS"));
+                    }
+                }).show();
     }
 
 

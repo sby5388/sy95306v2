@@ -16,6 +16,7 @@
     <string name="spend_time">运行时间</string>
     <string name="end_time">到达时间</string>
     <string name="filter">过滤</string>
+    <string name="filter2">筛选</string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
     <string name="order">站序</string>
@@ -26,6 +27,7 @@
     <string name="hint_input_station">中文/拼音/首字母</string>
     <string name="bei_jing">北京</string>
     <string name="textView_loading">加载中，请稍候</string>
+    <string name="loading">加载中…</string>
     <string name="station_start">始</string>
     <string name="station_pass">过</string>
     <string name="station_end">终</string>
@@ -82,15 +84,27 @@
     <string name="expect_arrive_time">预计到达时间</string>
     <string name="wan_dian">晚点</string>
     <string name="title_shen_yang">沈阳12306</string>
-    <string name="title_tie_zhong">铁总12306</string>
+    <string name="title_tie_zong">铁总12306</string>
     <string name="title_cheng_du">成都12306</string>
     <string name="title_guang_zhou">广铁12306</string>
     <string name="title_shang_hai">上海12306</string>
     <string name="about">关于</string>
     <string name="check_updating">正在检查更新…</string>
+    <string name="check_update">更新车站列表</string>
     <string name="lastest_version">已是最新版本</string>
     <string name="bei_jing_nan">北京南</string>
     <string name="shang_hai_hong_qiao">上海虹桥</string>
+    <string name="tip_about">车次查询小工具</string>
+    <string name="label_query_by_train_code">车次查询</string>
+    <string name="label_query_by_city">站站查询</string>
+    <string name="start_time">出发时间</string>
+    <string name="setting">设置</string>
+    <string name="check_update_when_start">启动时自动检查车站列表更新</string>
+    <string name="check_update_auto_enable">自动检查已启用</string>
+    <string name="check_update_auto_disable">自动检查已关闭</string>
+    <string name="update_finish">更新完成!</string>
+    <string name="find_station_count">发现新版本，车站数量为%d个</string>
+    <string name="update_tip_simple">更新提示</string>
 
 
 </resources>

@@ -11,7 +11,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Predicate;
 import io.reactivex.internal.util.AppendOnlyLinkedArrayList;
 
 import static com.by5388.sy95306v2.module.shenyang.list.model.sort.BaseTrainNumberSort.SORT_BY_START_TIME;
@@ -33,9 +32,7 @@ public class RxJavaSortTest {
 
         final Disposable subscribe = model.getTrainNumber(date, fromStation, toStation)
                 .doOnNext(trainNumbers -> trainNumbers.sort(sort))
-                .subscribe(this::show, throwable -> {
-                    System.out.println(throwable.getLocalizedMessage());
-                });
+                .subscribe(this::show, throwable -> System.out.println(throwable.getLocalizedMessage()));
     }
 
     private void show(List<TrainNumber> trainNumbers) {
@@ -47,12 +44,7 @@ public class RxJavaSortTest {
             if (number != null) {
                 Observable.just(number)
                         .filter((AppendOnlyLinkedArrayList.NonThrowingPredicate<TrainNumber>) TrainNumber::isFirstStation)
-                        .filter(new Predicate<TrainNumber>() {
-                            @Override
-                            public boolean test(TrainNumber trainNumber) throws Exception {
-                                return trainNumber.isFirstStation();
-                            }
-                        })
+                        .filter(TrainNumber::isFirstStation)
                         .subscribe(number1 -> {
                             //todo  输出总数
                             System.out.println("-------");

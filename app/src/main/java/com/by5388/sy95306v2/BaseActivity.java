@@ -6,13 +6,16 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * @author Administrator  on 2019/9/10.
  */
 public abstract class BaseActivity extends AppCompatActivity {
+    private boolean mConnected;
     // TODO: 2019/9/10 sendBroadcast toClose App#broadrecevicer
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -30,8 +33,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             onNetStatusChange(mConnected);
         }
     };
-
-    private boolean mConnected;
     private IntentFilter mIntentFilter;
 
     @Override
@@ -65,9 +66,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             throw new RuntimeException("");
         }
         boolean isNetworkAvailable = cm.getActiveNetworkInfo() != null;
-        boolean isNetworkConnected = isNetworkAvailable &&
+        return isNetworkAvailable &&
                 cm.getActiveNetworkInfo().isConnected();
-        return isNetworkConnected;
     }
 
 
@@ -90,4 +90,12 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 网络状态发生变化时
      */
     public abstract void onNetStatusChange(boolean enable);
+
+    public void toast(String s) {
+        App.getInstance().toast(s);
+    }
+
+    public void toast(@StringRes int id) {
+        App.getInstance().toast(id);
+    }
 }

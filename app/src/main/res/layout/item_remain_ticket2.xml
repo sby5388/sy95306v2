@@ -5,11 +5,11 @@
     android:layout_height="wrap_content">
     <!--1-->
     <TextView
-        android:textColor="@color/colorAccent"
         android:id="@+id/code"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="D7515"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/fromStation"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/speedTime"

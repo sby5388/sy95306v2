@@ -1,18 +1,18 @@
 package com.by5388.sy95306v2.module.tiezong.temp.persenter;
 
-import androidx.annotation.NonNull;
 import android.util.Log;
 
-import com.by5388.sy95306v2.module.tiezong.temp.model.DetailRemainTicketModel;
-import com.by5388.sy95306v2.module.tiezong.temp.model.IDetailRemainTicketModel;
-import com.by5388.sy95306v2.module.tiezong.temp.view.IDetailRemainTicketView;
 import com.by5388.sy95306v2.module.shenyang.bean.TrainDetail;
 import com.by5388.sy95306v2.module.tiezong.bean.yp.success.SuccessDataBean;
 import com.by5388.sy95306v2.module.tiezong.bean.yp.success.TzDataBean;
+import com.by5388.sy95306v2.module.tiezong.temp.model.DetailRemainTicketModel;
+import com.by5388.sy95306v2.module.tiezong.temp.model.IDetailRemainTicketModel;
+import com.by5388.sy95306v2.module.tiezong.temp.view.IDetailRemainTicketView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -26,7 +26,10 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter {
     private static final String TAG = "DetailRemainTicket";
-    private Disposable  listDisposable;
+    /**
+     * 最大错误数
+     */
+    private static final int MAX_ERROR_COUNT = 1;
     private final Consumer<Throwable> throwableConsumer;
 
     private final Consumer<SuccessDataBean> resultConsumer;
@@ -35,10 +38,7 @@ public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter
 
     private final IDetailRemainTicketModel model;
     private final IDetailRemainTicketView view;
-    /**
-     * 最大错误数
-     */
-    private static final int MAX_ERROR_COUNT = 1;
+    private Disposable listDisposable;
 
     public DetailRemainTicketPresenter(IDetailRemainTicketView view) {
         this.view = view;
@@ -104,7 +104,7 @@ public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter
     }
 
     @Override
-    public void getTrainListByEmptyToStation(String date, String fromStation,  String trainCode) {
+    public void getTrainListByEmptyToStation(String date, String fromStation, String trainCode) {
         if (model.isErrorStationName(fromStation)) {
             view.showError(fromStation + " 不正确");
             return;
@@ -135,7 +135,7 @@ public class DetailRemainTicketPresenter implements IDetailRemainTicketPresenter
 
 
     @Override
-    public void getTrainListByEmptyFromStation(String date, String toStation,String trainCode) {
+    public void getTrainListByEmptyFromStation(String date, String toStation, String trainCode) {
         if (model.isErrorStationName(toStation)) {
             view.showError(toStation + " 不正确");
             return;

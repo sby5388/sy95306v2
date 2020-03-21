@@ -1,7 +1,5 @@
 package com.by5388.sy95306v2.combination;
 
-import androidx.annotation.NonNull;
-
 import com.by5388.sy95306v2.module.shenyang.bean.TrainDetail;
 import com.by5388.sy95306v2.module.shenyang.net.api.SyNetTools;
 import com.by5388.sy95306v2.module.shenyang.net.api.SyService;
@@ -12,15 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 /**
  * @author by5388  on 2018/8/22.
  */
 public class CombinationTest {
-    private static int count = 0;
 
     private Observable<List<TrainDetail>> getObservable(final int date, final String trainCode) {
         SyService syService = new SyNetTools().getRetrofit().create(SyService.class);
@@ -61,32 +56,7 @@ public class CombinationTest {
                 System.out.println(names.get(i));
                 newNames.add(names.get(i));
             }
-            getDetailData(newNames);
         };
-    }
-
-    class Person {
-        final String name;
-        final int number;
-
-        Person(String name) {
-            count++;
-            this.name = name;
-            this.number = count;
-        }
-
-        @Override
-        public String toString() {
-            return "Person{" +
-                    "name='" + name + '\'' +
-                    ", number=" + number +
-                    '}';
-        }
-    }
-
-    private void getDetailData(@NonNull List<String> names) {
-        Observable.fromIterable(names)
-                .flatMap((Function<String, ObservableSource<Person>>) s -> Observable.just(new Person(s))).subscribe(System.err::println);
     }
 
 }

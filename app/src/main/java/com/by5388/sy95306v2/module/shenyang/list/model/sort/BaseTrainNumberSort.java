@@ -9,7 +9,6 @@ import java.util.Comparator;
  */
 public abstract class BaseTrainNumberSort implements Comparator<TrainNumber> {
 
-    boolean isUp;
     /**
      * 按出发时间排序
      */
@@ -22,7 +21,7 @@ public abstract class BaseTrainNumberSort implements Comparator<TrainNumber> {
      * 按到达时间排序
      */
     private static final int SORT_BY_ARRIVE_TIME = 2;
-
+    boolean isUp;
 
     public static BaseTrainNumberSort getTrainNumberSort(boolean isUp, int position) {
         BaseTrainNumberSort sort;

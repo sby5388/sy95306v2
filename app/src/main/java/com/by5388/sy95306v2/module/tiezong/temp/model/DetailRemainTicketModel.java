@@ -1,6 +1,5 @@
 package com.by5388.sy95306v2.module.tiezong.temp.model;
 
-import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.by5388.sy95306v2.database.DataBaseApiImpl;
@@ -10,14 +9,15 @@ import com.by5388.sy95306v2.module.shenyang.bean.TrainDetail;
 import com.by5388.sy95306v2.module.shenyang.net.api.SyNetTools;
 import com.by5388.sy95306v2.module.shenyang.net.api.SyService;
 import com.by5388.sy95306v2.module.tiezong.api.pass.code.GetPassCodeImpl;
+import com.by5388.sy95306v2.module.tiezong.api.pass.code.IGetPassCodeService;
 import com.by5388.sy95306v2.module.tiezong.bean.TzResult;
 import com.by5388.sy95306v2.module.tiezong.bean.yp.success.SuccessDataBean;
 import com.by5388.sy95306v2.module.tiezong.bean.yp.success.TzDataBean;
-import com.by5388.sy95306v2.module.tiezong.api.pass.code.IGetPassCodeService;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;

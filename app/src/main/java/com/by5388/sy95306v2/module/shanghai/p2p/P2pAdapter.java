@@ -22,8 +22,8 @@ import java.util.Map;
 class P2pAdapter extends BaseAdapter {
     public static final String TAG = "P2pAdapter";
     private final LayoutInflater inflater;
-    private List<ShanghaiTrainP2P> trainP2PS;
     private final Map<String, String> priceCache;
+    private List<ShanghaiTrainP2P> trainP2PS;
 
     P2pAdapter(Context context, List<ShanghaiTrainP2P> trainP2PS) {
         this.inflater = LayoutInflater.from(context);

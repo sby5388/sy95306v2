@@ -1,14 +1,15 @@
 package com.by5388.sy95306v2.base;
 
-import com.google.android.material.tabs.TabLayout;
-import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.base.adapter.FragmentAdapter;
 import com.by5388.sy95306v2.bean.MyViewPager;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * 沈阳95306 查询页面：包括2个子Fragment
@@ -17,9 +18,9 @@ import java.util.List;
  */
 
 public abstract class BaseTopFragment extends BaseFragment {
+    protected FragmentAdapter adapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    protected FragmentAdapter adapter;
 
     @Override
     protected final void initData() {

@@ -1,7 +1,5 @@
 package com.by5388.sy95306v2.gz;
 
-import androidx.annotation.NonNull;
-
 import com.by5388.sy95306v2.module.guangzhou.bean.GzResultData;
 import com.by5388.sy95306v2.module.guangzhou.bean.StationInfoBean;
 import com.by5388.sy95306v2.module.guangzhou.bean.station.TrainsBean;
@@ -13,6 +11,7 @@ import org.junit.Test;
 import java.util.Formatter;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -20,6 +19,17 @@ import io.reactivex.disposables.Disposable;
  */
 public class GzNumberTest {
     private static final Formatter formatter = new Formatter(System.out);
+
+    public static void show(@NonNull TrainsBean bean) {
+        System.out.println("-----------------");
+        System.out.println(bean.getTrainNo());
+        System.out.println(bean.getSfStation() + " -- " + bean.getZdStation());
+        System.out.println(bean.getSfTime() + " -- " + bean.getZdTime());
+        for (StationInfoBean infoBean : bean.getStationInfos()) {
+            formatter.format("\t%-12s %-8s %-8s\n", infoBean.getStationName(), infoBean.getArrTime(), infoBean.getGoTime());
+            //System.out.println("\t" + infoBean.getStationName() + "\t\t\t" + infoBean.getArrTime() + "\t" + infoBean.getGoTime());
+        }
+    }
 
     @Test
     public void testNumber() {
@@ -40,17 +50,6 @@ public class GzNumberTest {
         }
         for (TrainsBean bean : beans) {
             show(bean);
-        }
-    }
-
-     public static void  show(@NonNull TrainsBean bean) {
-        System.out.println("-----------------");
-        System.out.println(bean.getTrainNo());
-        System.out.println(bean.getSfStation() + " -- " + bean.getZdStation());
-        System.out.println(bean.getSfTime() + " -- " + bean.getZdTime());
-        for (StationInfoBean infoBean : bean.getStationInfos()) {
-            formatter.format("\t%-12s %-8s %-8s\n", infoBean.getStationName(), infoBean.getArrTime(), infoBean.getGoTime());
-            //System.out.println("\t" + infoBean.getStationName() + "\t\t\t" + infoBean.getArrTime() + "\t" + infoBean.getGoTime());
         }
     }
 

@@ -3,26 +3,25 @@ package com.by5388.sy95306v2.module.shenyang.detail;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.base.BaseActivity;
+import com.by5388.sy95306v2.module.shenyang.adapter.TrainDetailListAdapter;
+import com.by5388.sy95306v2.module.shenyang.bean.TrainDetail;
 import com.by5388.sy95306v2.module.shenyang.detail.presenter.DetailPresenter;
 import com.by5388.sy95306v2.module.shenyang.detail.presenter.IDetailPresenter;
 import com.by5388.sy95306v2.module.shenyang.detail.view.IDetailView;
-import com.by5388.sy95306v2.module.shenyang.adapter.TrainDetailListAdapter;
-import com.by5388.sy95306v2.module.shenyang.bean.TrainDetail;
 import com.by5388.sy95306v2.module.shenyang.net.api.SyService;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -32,9 +31,7 @@ import butterknife.ButterKnife;
 
 public class TrainDetailActivity extends BaseActivity implements IDetailView {
     public static final String TAG = "TrainDetailActivity";
-    private TrainDetailListAdapter listAdapter;
     @BindView(R.id.textView_train_code)
-
     TextView trainCode;
     @BindView(R.id.textView_train_stations)
     TextView trainStation;
@@ -44,7 +41,7 @@ public class TrainDetailActivity extends BaseActivity implements IDetailView {
     RecyclerView recyclerView;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
-
+    private TrainDetailListAdapter listAdapter;
     private IDetailPresenter presenter;
     /**
      * 日期
@@ -128,7 +125,7 @@ public class TrainDetailActivity extends BaseActivity implements IDetailView {
 
     @Override
     public void showErrorMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        toast(message);
         finish();
     }
 
@@ -151,8 +148,4 @@ public class TrainDetailActivity extends BaseActivity implements IDetailView {
         trainDate.setText(String.valueOf(currentDate));
     }
 
-    @Override
-    protected boolean isShowActionBar() {
-        return true;
-    }
 }

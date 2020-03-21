@@ -23,11 +23,10 @@ public class CdLatePresenter implements ICdLatePresenter {
     public static final String TAG = "CdLatePresenter";
     private final ICdLateModel model;
     private final ICdLateView view;
-
-    private Disposable disposableStation, disposableDetail;
     private final Consumer<Throwable> throwableConsumer;
     private final Consumer<List<CdTrainAllNodeBean>> consumerDetail;
     private final Consumer<List<CdLateStation>> consumerStation;
+    private Disposable disposableStation, disposableDetail;
 
     public CdLatePresenter(ICdLateView view) {
         this.view = view;

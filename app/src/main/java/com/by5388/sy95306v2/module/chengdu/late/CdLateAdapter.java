@@ -1,7 +1,6 @@
 package com.by5388.sy95306v2.module.chengdu.late;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,14 @@ import com.by5388.sy95306v2.module.chengdu.bean.late.CdTrainAllNodeBean;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 /**
  * @author by5388  on 2018/8/19.
  */
 final class CdLateAdapter extends BaseAdapter {
-    private List<CdTrainAllNodeBean> beans;
     private final LayoutInflater inflater;
+    private List<CdTrainAllNodeBean> beans;
 
 
     CdLateAdapter(@NonNull Context context, @NonNull List<CdTrainAllNodeBean> beans) {

@@ -3,17 +3,17 @@ package com.by5388.sy95306v2.module.tiezong.combination;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputEditText;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.by5388.sy95306v2.App;
 import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.bean.IRemainingTicket;
+import com.by5388.sy95306v2.common.Tools;
 import com.by5388.sy95306v2.module.tiezong.BaseTzFragment;
 import com.by5388.sy95306v2.module.tiezong.combination.persenter.CombinationPresenter;
 import com.by5388.sy95306v2.module.tiezong.combination.persenter.ICombinationPresenter;
@@ -21,6 +21,7 @@ import com.by5388.sy95306v2.module.tiezong.combination.view.ICombinationView;
 import com.by5388.sy95306v2.module.tiezong.detail.TzDetailActivity;
 import com.by5388.sy95306v2.module.tiezong.remainticket.temp.RemainTicketAdapter;
 import com.by5388.sy95306v2.module.tiezong.temp.view.TzRemainTicketActivity;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,12 +33,12 @@ import java.util.Objects;
  */
 public class CombinationFragment extends BaseTzFragment implements ICombinationView {
     private static final String TAG = "CombinationFragment";
+    private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
     private List<IRemainingTicket> currentTickets;
     private TextInputEditText fromStation, toStation, trainCode;
     private Button buttonDate;
     private ListView listView;
     private RemainTicketAdapter adapter;
-    private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
     private MyListener dateListener;
     private Calendar calendar;
     private ICombinationPresenter presenter;
@@ -61,6 +62,12 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
 
     @Override
     protected void loadData() {
+        // TODO: 2020/3/17 检查网络
+        final boolean networkEnable = App.getInstance().networkEnable();
+        if (!networkEnable) {
+            Tools.openSetting(getContext(), buttonDate);
+            return;
+        }
         buttonDate.setText(getData(calendar));
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
@@ -170,7 +177,7 @@ public class CombinationFragment extends BaseTzFragment implements ICombinationV
 
     @Override
     public void showError(String tip) {
-        Toast.makeText(getContext(), tip, Toast.LENGTH_SHORT).show();
+        toast(tip);
     }
 
     @Override

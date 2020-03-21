@@ -1,10 +1,10 @@
 package com.by5388.sy95306v2.module.shanghai.p2p.model;
 
+import com.by5388.sy95306v2.module.shanghai.api.ShNetTools;
+import com.by5388.sy95306v2.module.shanghai.api.ShanghaiService;
 import com.by5388.sy95306v2.module.shanghai.bean.InfoBeanP2P;
 import com.by5388.sy95306v2.module.shanghai.bean.QueryMethod;
 import com.by5388.sy95306v2.module.shanghai.bean.ShanghaiTrainP2P;
-import com.by5388.sy95306v2.module.shanghai.api.ShNetTools;
-import com.by5388.sy95306v2.module.shanghai.api.ShanghaiService;
 
 import java.util.List;
 

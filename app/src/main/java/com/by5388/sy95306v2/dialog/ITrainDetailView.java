@@ -17,6 +17,7 @@ public interface ITrainDetailView {
      * 关闭
      */
     void dismiss();
+
     /**
      * 正在显示？
      *
@@ -32,10 +33,6 @@ public interface ITrainDetailView {
      * @return 当前对象
      */
     ITrainDetailView setData(TrainsBean trainsBean);
-
-
-
-
 
 
 }

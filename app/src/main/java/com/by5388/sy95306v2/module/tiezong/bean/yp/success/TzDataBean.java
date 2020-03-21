@@ -15,9 +15,180 @@ public class TzDataBean implements IRemainingTicket, Cloneable {
     private final static String EMPTY = "--";
     private final static String RESULT_EMPTY = "";
     private final static String NO_NUMBER = "无";
+    /**
+     * train_no : 65000D753300
+     * mStationTrainCode : D7533
+     * start_station_telecode : GGQ
+     * mStartStationName : 广州东
+     * end_station_telecode : CBQ
+     * end_station_name : 潮汕
+     * from_station_telecode : GGQ
+     * from_station_name : 广州东
+     * to_station_telecode : CBQ
+     * to_station_name : 潮汕
+     * mStartTime : 11:30
+     * mArriveTime : 14:47
+     * day_difference : 0
+     * mTrainClassName : 动车
+     * lishi : 03:17
+     * canWebBuy : N
+     * lishiValue : 197
+     * yp_info : O017950000M024950000O017953000
+     * exchange_train_flag : 0
+     * control_train_day : 20301231
+     * start_train_date : 20180817
+     * seat_feature : O3M3W3
+     * yp_ex : O0M0O0
+     * train_seat_feature : 3
+     * train_type_code : 3
+     * start_province_code : 16
+     * start_city_code : 1502
+     * end_province_code : 16
+     * end_city_code : 1515
+     * seat_types : OMO
+     * location_code : Q6
+     * from_station_no : 01
+     * to_station_no : 07
+     * control_day : 29
+     * sale_time : 1130
+     * is_support_card : 0
+     * controlled_train_flag : 0
+     * controlled_train_message : 正常车次，不受控
+     * rw_num : --软卧
+     * srrb_num : -- 动卧
+     * gg_num : --
+     * gr_num : -- 高级软卧
+     * qt_num : --
+     * rz_num : --
+     * tz_num : --
+     * wz_num : 无
+     * yb_num : --
+     * yw_num : --
+     * yz_num : --
+     * ze_num : 无
+     * zy_num : 无
+     * swz_num : --
+     */
+
+
+    private String train_no;
+    private String station_train_code;
+    private String start_station_telecode;
+    private String start_station_name;
+    private String end_station_telecode;
+    private String end_station_name;
+    private String from_station_telecode;
+    private String from_station_name;
+    private String to_station_telecode;
+    private String to_station_name;
+    private String start_time;
+    private String arrive_time;
+    private String day_difference;
+    private String train_class_name;
+    private String lishi;
+    private String canWebBuy;
+    private String lishiValue;
+    private String yp_info;
+    private String exchange_train_flag;
+    private String control_train_day;
+    private String start_train_date;
+    private String seat_feature;
+    private String yp_ex;
+    private String train_seat_feature;
+    private String train_type_code;
+    private String start_province_code;
+    private String start_city_code;
+    private String end_province_code;
+    private String end_city_code;
+    private String seat_types;
+    private String location_code;
+    private String from_station_no;
+    private String to_station_no;
+    private int control_day;
+    private String sale_time;
+    private String is_support_card;
+    private String controlled_train_flag;
+    private String controlled_train_message;
+    private String rw_num;
+    private String srrb_num;
+    private String gg_num;
+    private String gr_num;
+    private String qt_num;
+    private String rz_num;
+    private String tz_num;
+    private String wz_num;
+    private String yb_num;
+    private String yw_num;
+    private String yz_num;
+    private String ze_num;
+    private String zy_num;
+    private String swz_num;
     public TzDataBean() {
 
     }
+    /**
+     * TODO 应当实现克隆接口 Copy
+     * {@link Cloneable}
+     *
+     * @param bean 复制
+     */
+
+
+    public TzDataBean(TzDataBean bean) {
+        this.train_no = bean.train_no;
+        this.station_train_code = bean.station_train_code;
+        this.start_station_telecode = bean.start_station_telecode;
+        this.start_station_name = bean.start_station_name;
+        this.end_station_telecode = bean.end_station_telecode;
+        this.end_station_name = bean.end_station_name;
+        this.from_station_telecode = bean.from_station_telecode;
+        this.from_station_name = bean.from_station_name;
+        this.to_station_telecode = bean.to_station_telecode;
+        this.to_station_name = bean.to_station_name;
+        this.start_time = bean.start_time;
+        this.arrive_time = bean.arrive_time;
+        this.day_difference = bean.day_difference;
+        this.train_class_name = bean.train_class_name;
+        this.lishi = bean.lishi;
+        this.canWebBuy = bean.canWebBuy;
+        this.lishiValue = bean.lishiValue;
+        this.yp_info = bean.yp_info;
+        this.exchange_train_flag = bean.exchange_train_flag;
+        this.control_train_day = bean.control_train_day;
+        this.start_train_date = bean.start_train_date;
+        this.seat_feature = bean.seat_feature;
+        this.yp_ex = bean.yp_ex;
+        this.train_seat_feature = bean.train_seat_feature;
+        this.train_type_code = bean.train_type_code;
+        this.start_province_code = bean.start_province_code;
+        this.start_city_code = bean.start_city_code;
+        this.end_province_code = bean.end_province_code;
+        this.end_city_code = bean.end_city_code;
+        this.seat_types = bean.seat_types;
+        this.location_code = bean.location_code;
+        this.from_station_no = bean.from_station_no;
+        this.to_station_no = bean.to_station_no;
+        this.control_day = bean.control_day;
+        this.sale_time = bean.sale_time;
+        this.is_support_card = bean.is_support_card;
+        this.controlled_train_flag = bean.controlled_train_flag;
+        this.controlled_train_message = bean.controlled_train_message;
+        this.rw_num = bean.rw_num;
+        this.srrb_num = bean.srrb_num;
+        this.gg_num = bean.gg_num;
+        this.gr_num = bean.gr_num;
+        this.qt_num = bean.qt_num;
+        this.rz_num = bean.rz_num;
+        this.tz_num = bean.tz_num;
+        this.wz_num = bean.wz_num;
+        this.yb_num = bean.yb_num;
+        this.yw_num = bean.yw_num;
+        this.yz_num = bean.yz_num;
+        this.ze_num = bean.ze_num;
+        this.zy_num = bean.zy_num;
+        this.swz_num = bean.swz_num;
+    }
+
     @Override
     public String getCode() {
         return station_train_code;
@@ -170,115 +341,6 @@ public class TzDataBean implements IRemainingTicket, Cloneable {
                 '}';
     }
 
-    /**
-     * train_no : 65000D753300
-     * mStationTrainCode : D7533
-     * start_station_telecode : GGQ
-     * mStartStationName : 广州东
-     * end_station_telecode : CBQ
-     * end_station_name : 潮汕
-     * from_station_telecode : GGQ
-     * from_station_name : 广州东
-     * to_station_telecode : CBQ
-     * to_station_name : 潮汕
-     * mStartTime : 11:30
-     * mArriveTime : 14:47
-     * day_difference : 0
-     * mTrainClassName : 动车
-     * lishi : 03:17
-     * canWebBuy : N
-     * lishiValue : 197
-     * yp_info : O017950000M024950000O017953000
-     * exchange_train_flag : 0
-     * control_train_day : 20301231
-     * start_train_date : 20180817
-     * seat_feature : O3M3W3
-     * yp_ex : O0M0O0
-     * train_seat_feature : 3
-     * train_type_code : 3
-     * start_province_code : 16
-     * start_city_code : 1502
-     * end_province_code : 16
-     * end_city_code : 1515
-     * seat_types : OMO
-     * location_code : Q6
-     * from_station_no : 01
-     * to_station_no : 07
-     * control_day : 29
-     * sale_time : 1130
-     * is_support_card : 0
-     * controlled_train_flag : 0
-     * controlled_train_message : 正常车次，不受控
-     * rw_num : --软卧
-     * srrb_num : -- 动卧
-     * gg_num : --
-     * gr_num : -- 高级软卧
-     * qt_num : --
-     * rz_num : --
-     * tz_num : --
-     * wz_num : 无
-     * yb_num : --
-     * yw_num : --
-     * yz_num : --
-     * ze_num : 无
-     * zy_num : 无
-     * swz_num : --
-     */
-
-
-    private String train_no;
-    private String station_train_code;
-    private String start_station_telecode;
-    private String start_station_name;
-    private String end_station_telecode;
-    private String end_station_name;
-    private String from_station_telecode;
-    private String from_station_name;
-    private String to_station_telecode;
-    private String to_station_name;
-    private String start_time;
-    private String arrive_time;
-    private String day_difference;
-    private String train_class_name;
-    private String lishi;
-    private String canWebBuy;
-    private String lishiValue;
-    private String yp_info;
-    private String exchange_train_flag;
-    private String control_train_day;
-    private String start_train_date;
-    private String seat_feature;
-    private String yp_ex;
-    private String train_seat_feature;
-    private String train_type_code;
-    private String start_province_code;
-    private String start_city_code;
-    private String end_province_code;
-    private String end_city_code;
-    private String seat_types;
-    private String location_code;
-    private String from_station_no;
-    private String to_station_no;
-    private int control_day;
-    private String sale_time;
-    private String is_support_card;
-    private String controlled_train_flag;
-    private String controlled_train_message;
-    private String rw_num;
-    private String srrb_num;
-    private String gg_num;
-    private String gr_num;
-    private String qt_num;
-    private String rz_num;
-    private String tz_num;
-    private String wz_num;
-    private String yb_num;
-    private String yw_num;
-    private String yz_num;
-    private String ze_num;
-    private String zy_num;
-    private String swz_num;
-
     public String getTrain_no() {
         return train_no;
     }
@@ -430,8 +492,6 @@ public class TzDataBean implements IRemainingTicket, Cloneable {
     public void setExchange_train_flag(String exchange_train_flag) {
         this.exchange_train_flag = exchange_train_flag;
     }
-
-
 
     public String getControl_train_day() {
         return control_train_day;
@@ -697,7 +757,6 @@ public class TzDataBean implements IRemainingTicket, Cloneable {
         this.swz_num = swz_num;
     }
 
-
     @Override
     protected Object clone() throws CloneNotSupportedException {
         TzDataBean o = (TzDataBean) super.clone();
@@ -707,68 +766,5 @@ public class TzDataBean implements IRemainingTicket, Cloneable {
     @Override
     public int hashCode() {
         return super.hashCode();
-    }
-
-    /**
-     * TODO 应当实现克隆接口 Copy
-     * {@link Cloneable}
-     *
-     * @param bean 复制
-     */
-
-
-    public TzDataBean(TzDataBean bean) {
-        this.train_no = bean.train_no;
-        this.station_train_code = bean.station_train_code;
-        this.start_station_telecode = bean.start_station_telecode;
-        this.start_station_name = bean.start_station_name;
-        this.end_station_telecode = bean.end_station_telecode;
-        this.end_station_name = bean.end_station_name;
-        this.from_station_telecode = bean.from_station_telecode;
-        this.from_station_name = bean.from_station_name;
-        this.to_station_telecode = bean.to_station_telecode;
-        this.to_station_name = bean.to_station_name;
-        this.start_time = bean.start_time;
-        this.arrive_time = bean.arrive_time;
-        this.day_difference = bean.day_difference;
-        this.train_class_name = bean.train_class_name;
-        this.lishi = bean.lishi;
-        this.canWebBuy = bean.canWebBuy;
-        this.lishiValue = bean.lishiValue;
-        this.yp_info = bean.yp_info;
-        this.exchange_train_flag = bean.exchange_train_flag;
-        this.control_train_day = bean.control_train_day;
-        this.start_train_date = bean.start_train_date;
-        this.seat_feature = bean.seat_feature;
-        this.yp_ex = bean.yp_ex;
-        this.train_seat_feature = bean.train_seat_feature;
-        this.train_type_code = bean.train_type_code;
-        this.start_province_code = bean.start_province_code;
-        this.start_city_code = bean.start_city_code;
-        this.end_province_code = bean.end_province_code;
-        this.end_city_code = bean.end_city_code;
-        this.seat_types = bean.seat_types;
-        this.location_code = bean.location_code;
-        this.from_station_no = bean.from_station_no;
-        this.to_station_no = bean.to_station_no;
-        this.control_day = bean.control_day;
-        this.sale_time = bean.sale_time;
-        this.is_support_card = bean.is_support_card;
-        this.controlled_train_flag = bean.controlled_train_flag;
-        this.controlled_train_message = bean.controlled_train_message;
-        this.rw_num = bean.rw_num;
-        this.srrb_num = bean.srrb_num;
-        this.gg_num = bean.gg_num;
-        this.gr_num = bean.gr_num;
-        this.qt_num = bean.qt_num;
-        this.rz_num = bean.rz_num;
-        this.tz_num = bean.tz_num;
-        this.wz_num = bean.wz_num;
-        this.yb_num = bean.yb_num;
-        this.yw_num = bean.yw_num;
-        this.yz_num = bean.yz_num;
-        this.ze_num = bean.ze_num;
-        this.zy_num = bean.zy_num;
-        this.swz_num = bean.swz_num;
     }
 }

@@ -2,12 +2,10 @@ package com.by5388.sy95306v2.module.chengdu.yupiao;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputEditText;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.by5388.sy95306v2.MyListener;
 import com.by5388.sy95306v2.R;
@@ -17,6 +15,7 @@ import com.by5388.sy95306v2.module.chengdu.yupiao.persenter.CdRemainTicketPresen
 import com.by5388.sy95306v2.module.chengdu.yupiao.persenter.ICdRemainTicketPresenter;
 import com.by5388.sy95306v2.module.chengdu.yupiao.view.ICdRemainTicketView;
 import com.by5388.sy95306v2.module.tiezong.remainticket.temp.RemainTicketAdapter;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,13 +30,12 @@ import java.util.Objects;
  */
 public class CdRemainTicketFragment extends BaseCdFragment implements ICdRemainTicketView {
     private static final String TAG = "CdRemainTicketFragment";
+    private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
     private TextInputEditText fromStation, toStation;
     private Button buttonSearch, buttonDate;
     private ListView listView;
     private RemainTicketAdapter adapter;
     private ICdRemainTicketPresenter presenter;
-    private final static List<IRemainingTicket> EMPTY_LIST = new ArrayList<>();
-    private DatePickerDialog.OnDateSetListener dateListener;
     private Calendar calendar;
 
 
@@ -52,7 +50,7 @@ public class CdRemainTicketFragment extends BaseCdFragment implements ICdRemainT
     protected void initData() {
         presenter = new CdRemainTicketPresenter(this);
         adapter = new RemainTicketAdapter(Objects.requireNonNull(getContext()));
-        dateListener = new MyListener(this);
+        DatePickerDialog.OnDateSetListener dateListener = new MyListener(this);
         calendar = Calendar.getInstance();
     }
 
@@ -116,7 +114,7 @@ public class CdRemainTicketFragment extends BaseCdFragment implements ICdRemainT
 
     @Override
     public void showError(String tip) {
-        Toast.makeText(getContext(), tip, Toast.LENGTH_SHORT).show();
+        toast(tip);
         buttonSearch.setEnabled(true);
     }
 
@@ -134,7 +132,7 @@ public class CdRemainTicketFragment extends BaseCdFragment implements ICdRemainT
     public void updateView(int year, int month, int dayOfMonth) {
         calendar = Calendar.getInstance();
         calendar.set(year, month, dayOfMonth);
-        buttonDate.setText(String.valueOf(getData(calendar)));
+        buttonDate.setText(getData(calendar));
     }
 
     @Override

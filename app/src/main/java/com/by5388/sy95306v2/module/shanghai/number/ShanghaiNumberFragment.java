@@ -1,29 +1,30 @@
 package com.by5388.sy95306v2.module.shanghai.number;
 
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputEditText;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.module.shanghai.bean.ShanghaiTrainNumber;
 import com.by5388.sy95306v2.MyListener;
+import com.by5388.sy95306v2.R;
 import com.by5388.sy95306v2.module.shanghai.BaseShFragment;
+import com.by5388.sy95306v2.module.shanghai.bean.ShanghaiTrainNumber;
 import com.by5388.sy95306v2.module.shanghai.number.presenter.INumberPresenter;
 import com.by5388.sy95306v2.module.shanghai.number.presenter.NumberPresenter;
 import com.by5388.sy95306v2.module.shanghai.number.view.INumberView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
+
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @author by5388  on 2018/8/9.
@@ -40,6 +41,13 @@ public class ShanghaiNumberFragment extends BaseShFragment implements INumberVie
     private MyListener dateListener;
     private Calendar calendar;
 
+    public static ShanghaiNumberFragment newInstance() {
+        ShanghaiNumberFragment fragment = new ShanghaiNumberFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     protected void initView(View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
@@ -50,7 +58,6 @@ public class ShanghaiNumberFragment extends BaseShFragment implements INumberVie
         progressBar = view.findViewById(R.id.progressBar);
         trainCode = view.findViewById(R.id.textView_train_code);
     }
-
 
     private void testSearch() {
         // TODO: 2018/8/2
@@ -65,14 +72,6 @@ public class ShanghaiNumberFragment extends BaseShFragment implements INumberVie
         presenter.search(trainNo, date);
 
     }
-
-    public static ShanghaiNumberFragment newInstance() {
-        ShanghaiNumberFragment fragment = new ShanghaiNumberFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
 
     @Override
     protected void initData() {

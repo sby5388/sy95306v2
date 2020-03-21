@@ -3,7 +3,6 @@ package com.by5388.sy95306v2.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import androidx.annotation.NonNull;
 
 import com.by5388.sy95306v2.App;
 import com.by5388.sy95306v2.module.chengdu.bean.screen.ScreenStation;
@@ -12,6 +11,7 @@ import com.by5388.sy95306v2.module.shenyang.bean.Station;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 
 /**
@@ -20,11 +20,11 @@ import io.reactivex.Observable;
 
 public final class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
     public static final String TAG = "DataBaseApiImpl";
-    private MyDataBaseHelper mHelper;
     private static final int SUCCESS = 1;
     private static final int FAIL = 0;
     private static ContentValues values;
     private final String[] columns = new String[]{CommonStationTable.TableStation.STATION_NAME, CommonStationTable.TableStation.NAME_UPPER};
+    private MyDataBaseHelper mHelper;
 
     private DataBaseApiImpl() {
         //System.out.println("实例化数据库");
@@ -32,65 +32,8 @@ public final class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
         values = new ContentValues();
     }
 
-    private SQLiteDatabase getDb() {
-        return mHelper.getWritableDatabase();
-    }
-
-    private void closeDb() {
-        mHelper.getWritableDatabase().close();
-    }
-
-
     public static DataBaseApiImpl getInstance() {
         return SingletonHolder.INSTANCE;
-    }
-
-
-    @Override
-    public boolean cdStationIsEmpty() {
-        boolean isEmpty = true;
-        final SQLiteDatabase db = getDb();
-        Cursor cursor = db.rawQuery("select count(*) from " + CdStationTable.TableStation.TABLE_NAME, null);
-        if (cursor.moveToFirst()) {
-            long result = cursor.getLong(0);
-            if (result > 0) {
-                isEmpty = false;
-            }
-        }
-        cursor.close();
-        closeDb();
-        return isEmpty;
-    }
-
-    @Override
-    public List<ScreenStation> getCdScreenStations() {
-        List<ScreenStation> stationList = new ArrayList<>();
-        final SQLiteDatabase db = getDb();
-        Cursor cursor = db.rawQuery("select * from " + CdStationTable.TableStation.TABLE_NAME, null);
-        while (cursor.moveToNext()) {
-            ScreenStation station = getScreenStation(cursor);
-            stationList.add(station);
-        }
-        cursor.close();
-        closeDb();
-        return stationList;
-    }
-
-    @Override
-    public int deleteAllCdScreenStations() {
-        String deleteSql = "delete from " + CdStationTable.TableStation.TABLE_NAME;
-        final SQLiteDatabase db = getDb();
-        db.execSQL(deleteSql);
-        db.close();
-        return 0;
-    }
-
-    @Override
-    public void addCdScreenStation(ScreenStation station) {
-        ContentValues values = getValues(station);
-        final SQLiteDatabase db = getDb();
-        db.insert(CdStationTable.TableStation.TABLE_NAME, null, values);
-        db.close();
     }
 
     @NonNull
@@ -137,6 +80,61 @@ public final class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
         values.put(CdStationTable.TableStation.STATION_NAME, station.getZM());
         values.put(CdStationTable.TableStation.STATION_CODE, station.getZMLM());
         return values;
+    }
+
+    private SQLiteDatabase getDb() {
+        return mHelper.getWritableDatabase();
+    }
+
+    private void closeDb() {
+        mHelper.getWritableDatabase().close();
+    }
+
+    @Override
+    public boolean cdStationIsEmpty() {
+        boolean isEmpty = true;
+        final SQLiteDatabase db = getDb();
+        Cursor cursor = db.rawQuery("select count(*) from " + CdStationTable.TableStation.TABLE_NAME, null);
+        if (cursor.moveToFirst()) {
+            long result = cursor.getLong(0);
+            if (result > 0) {
+                isEmpty = false;
+            }
+        }
+        cursor.close();
+        closeDb();
+        return isEmpty;
+    }
+
+    @Override
+    public List<ScreenStation> getCdScreenStations() {
+        List<ScreenStation> stationList = new ArrayList<>();
+        final SQLiteDatabase db = getDb();
+        Cursor cursor = db.rawQuery("select * from " + CdStationTable.TableStation.TABLE_NAME, null);
+        while (cursor.moveToNext()) {
+            ScreenStation station = getScreenStation(cursor);
+            stationList.add(station);
+        }
+        cursor.close();
+        closeDb();
+        return stationList;
+    }
+
+    @Override
+    public int deleteAllCdScreenStations() {
+        String deleteSql = "delete from " + CdStationTable.TableStation.TABLE_NAME;
+        final SQLiteDatabase db = getDb();
+        db.execSQL(deleteSql);
+        db.close();
+        return 0;
+    }
+
+    @Override
+    public void addCdScreenStation(ScreenStation station) {
+        ContentValues values = getValues(station);
+        final SQLiteDatabase db = getDb();
+        db.insert(CdStationTable.TableStation.TABLE_NAME, null, values);
+        db.close();
     }
 
     public List<Station> getStations() {
@@ -250,10 +248,6 @@ public final class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
         return stationList;
     }
 
-    private static class SingletonHolder {
-        private static final DataBaseApiImpl INSTANCE = new DataBaseApiImpl();
-    }
-
     @Override
     public synchronized boolean isEmpty() {
         boolean empty = true;
@@ -268,5 +262,9 @@ public final class DataBaseApiImpl implements IShenYangDbApi, IChengDuDbApi {
         }
         closeDb();
         return empty;
+    }
+
+    private static class SingletonHolder {
+        private static final DataBaseApiImpl INSTANCE = new DataBaseApiImpl();
     }
 }

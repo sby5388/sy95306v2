@@ -7,6 +7,10 @@ package com.by5388.sy95306v2.module.shanghai.bean;
 public class InfoBeanP2P {
 
 
+    private String type;
+    private String trainDate;
+    private String fromStation;
+    private String toStation;
     /**
      * type : 2
      * trainDate : 2018-08-08
@@ -19,11 +23,6 @@ public class InfoBeanP2P {
         this.toStation = toStation;
         this.type = "2";
     }
-
-    private String type;
-    private String trainDate;
-    private String fromStation;
-    private String toStation;
 
     public String getType() {
         return type;

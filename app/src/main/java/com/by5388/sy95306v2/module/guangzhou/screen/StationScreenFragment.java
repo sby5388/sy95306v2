@@ -1,9 +1,6 @@
 package com.by5388.sy95306v2.module.guangzhou.screen;
 
 import android.os.Bundle;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -19,6 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * 车站大屏幕
  *
@@ -26,10 +27,6 @@ import java.util.Objects;
  */
 
 public class StationScreenFragment extends BaseGzFragment implements IScreenView {
-    private RecyclerView recyclerView;
-    private MyAdapter adapter;
-    private WebView webView;
-    //  可以增加长沙南站的
     /**
      * 数据来源：http://www.gtbyxx.com/wxg/ky/houcheng.jsp
      * jyx_station：非高铁车站，提供候车室查询（广州站、广州东站、韶关东站）
@@ -41,6 +38,10 @@ public class StationScreenFragment extends BaseGzFragment implements IScreenView
             "crh_station.jsp?code=GZN",
             "crh_station.jsp?code=SZB",
             "jyx_station.jsp?code=SGD"};
+    private RecyclerView recyclerView;
+    private MyAdapter adapter;
+    //  可以增加长沙南站的
+    private WebView webView;
 
     public static StationScreenFragment newInstance() {
         StationScreenFragment fragment = new StationScreenFragment();

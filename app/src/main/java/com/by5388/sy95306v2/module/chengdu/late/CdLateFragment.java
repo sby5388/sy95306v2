@@ -2,22 +2,20 @@ package com.by5388.sy95306v2.module.chengdu.late;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.textfield.TextInputEditText;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.by5388.sy95306v2.R;
-import com.by5388.sy95306v2.module.chengdu.bean.late.CdTrainAllNodeBean;
 import com.by5388.sy95306v2.module.chengdu.BaseCdFragment;
+import com.by5388.sy95306v2.module.chengdu.bean.late.CdTrainAllNodeBean;
 import com.by5388.sy95306v2.module.chengdu.late.persenter.CdLatePresenter;
 import com.by5388.sy95306v2.module.chengdu.late.persenter.ICdLatePresenter;
 import com.by5388.sy95306v2.module.chengdu.late.view.ICdLateView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +24,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
 
 /**
  * @author by5388  on 2018/8/19.
@@ -103,7 +103,7 @@ public class CdLateFragment extends BaseCdFragment implements ICdLateView {
 
     @Override
     public void showError(String tip) {
-        Toast.makeText(getContext(), tip, Toast.LENGTH_SHORT).show();
+        toast(tip);
     }
 
     @Override
@@ -141,7 +141,7 @@ public class CdLateFragment extends BaseCdFragment implements ICdLateView {
     @Override
     public void updateDetailData(List<CdTrainAllNodeBean> beans) {
         if (null == beans || beans.isEmpty()) {
-            Toast.makeText(getContext(), "没有数据", Toast.LENGTH_SHORT).show();
+            toast("没有数据");
             Log.d(TAG, "updateDetailData:没有数据 ");
             return;
         }

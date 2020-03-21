@@ -9,7 +9,7 @@ import java.util.List;
  * @author by5388  on 2018/8/9.
  */
 
-public interface INumberView  extends IBaseView{
+public interface INumberView extends IBaseView {
     /**
      * 刷新数据
      *
